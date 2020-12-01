@@ -1,0 +1,8 @@
+node_modules
+temp
+dist
+out
+build
+generated
+yarn-error.log
+.idea
