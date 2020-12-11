@@ -4,7 +4,7 @@
     "outDir": "dist",
     "baseUrl": ".",
     "moduleResolution": "Node",
-    "module": "ESNext",
+    "module": "CommonJS",
     "target": "ES2018",
     "sourceMap": true,
     "lib": [
