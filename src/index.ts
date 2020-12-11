@@ -15,6 +15,10 @@ function handleStopSignal(): void {
 
 async function start(): Promise<void> {
   const config = await loadConfig();
+  if (config === null) {
+    logger.error('Error loading the gateway.json|yaml configuration file.');
+    throw new Error('Error loading the gateway.json|yaml configuration file.');
+  }
 
   const numCPUs: number = Number(config.pool_size) ? Number(config.pool_size) : cpus().length;
 
@@ -24,7 +28,7 @@ async function start(): Promise<void> {
       logger.info(`Cluster master process pid: ${process.pid}`);
       logger.info(`Cluster master process nodeID: ${nodeID}`);
       logger.info(
-        `🔥 Starting GraphQL API Portal with ${numCPUs} workers on: http://${config.hostname}:${config.listen_port}`,
+        `🔥 Starting GraphQL API Portal with ${numCPUs} workers on: http://${config.hostname}:${config.listen_port}`
       );
 
       for (let i = 0; i < numCPUs; i += 1) {

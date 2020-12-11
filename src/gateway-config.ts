@@ -13,7 +13,7 @@ export function validateConfig(config: any): config is GatewayConfig {
     logger.error(
       ajv.errorsText(validate.errors, {
         dataVar: 'config',
-      }),
+      })
     );
     return false;
   }
@@ -21,21 +21,23 @@ export function validateConfig(config: any): config is GatewayConfig {
   return true;
 }
 
-export async function loadConfig(): Promise<GatewayConfig> {
+export async function loadConfig(): Promise<GatewayConfig | null> {
   // find & parse config
   const explorer = cosmiconfig('gateway', {
-    searchPlaces: [
-      'config/gateway.json',
-      'config/gateway.yaml',
-    ],
+    searchPlaces: ['config/gateway.json', 'config/gateway.yaml'],
   });
 
   const results = await explorer.search();
-  const config = results?.config;
+  if (results === null) {
+    logger.error('gateway.json|yaml cannot be found.');
+    return null;
+  }
+
+  const config = results.config;
 
   // validate with AJV
   if (!validateConfig(config)) {
-    throw new Error('Configuration file is not valid.');
+    return null;
   }
 
   return config;
