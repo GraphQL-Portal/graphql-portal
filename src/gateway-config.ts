@@ -1,9 +1,10 @@
 import { cosmiconfig } from 'cosmiconfig';
 import Ajv from 'ajv';
 import { GatewayConfig } from './types/gateway-config';
-import logger from './logger';
+import { prefixLogger } from './logger';
 
 const gatewaySchema = require('../../src/types/gateway-schema.json');
+const logger = prefixLogger('config_loader');
 
 export function validateConfig(config: any): config is GatewayConfig {
   const ajv = new Ajv();
@@ -22,6 +23,7 @@ export function validateConfig(config: any): config is GatewayConfig {
 }
 
 export async function loadConfig(): Promise<GatewayConfig | null> {
+  logger.info('Loading main configuration file.');
   // find & parse config
   const explorer = cosmiconfig('gateway', {
     searchPlaces: ['config/gateway.json', 'config/gateway.yaml'],
