@@ -6,3 +6,6 @@ build
 generated
 yarn-error.log
 .idea
+.vscode
+config
+tmp
