@@ -7,16 +7,20 @@
     "module": "ESNext",
     "target": "ES2018",
     "sourceMap": true,
-    "lib": ["esnext"],
+    "lib": [
+      "esnext"
+    ],
     "esModuleInterop": true,
     "alwaysStrict": true,
     "strictNullChecks": true,
     "noImplicitAny": true,
     "noImplicitReturns": true,
     "noImplicitThis": true,
-    "noUnusedLocals": true
+    "noUnusedLocals": true,
+    "resolveJsonModule": true
   },
   "exclude": [
-    "**/node_modules", "**/dist"
+    "node_modules",
+    "dist"
   ]
 }
