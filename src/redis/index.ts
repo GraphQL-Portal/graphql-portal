@@ -1,5 +1,7 @@
 import Redis, { Redis as IRedis } from 'ioredis';
-import { logger } from '../logger';
+import { prefixLogger } from '../logger';
+
+const logger = prefixLogger('redis');
 
 // TODO: add support for cluster & sentinel modes
 export default async function redisConnect(connectionString: string): Promise<IRedis> {

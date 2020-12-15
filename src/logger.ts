@@ -25,6 +25,13 @@ function createLogger(): winston.Logger {
 
 export function configureLogger(config: GatewayConfig): void {
   // TODO: we'll be adding other transports and formats later
+  logger.clear();
+  logger.add(
+    new transports.Console({
+      level: config.log_level,
+      format: consoleFormat,
+    })
+  );
 }
 
 export function prefixLogger(prefix: string = ''): winston.Logger {

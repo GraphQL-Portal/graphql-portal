@@ -4,7 +4,7 @@ import { GatewayConfig } from './types/gateway-config';
 import { prefixLogger } from './logger';
 
 const gatewaySchema = require('../../src/types/gateway-schema.json');
-const logger = prefixLogger('config_loader');
+const logger = prefixLogger('gateway-config');
 
 export function validateConfig(config: any): config is GatewayConfig {
   const ajv = new Ajv();

@@ -4,10 +4,12 @@ import { join } from 'path';
 import { promisify } from 'util';
 import { parse } from 'yaml';
 import { GatewayConfig } from './types/gateway-config';
-import { logger } from './logger';
+import { prefixLogger } from './logger';
 import { ApiConfig } from './types/api-config';
 import { SourceConfig } from './types/mesh-source-config';
 import { Api } from './types/api.interface';
+
+const logger = prefixLogger('apis-config');
 
 const sourceSchema = require('../../src/types/mesh-source-schema.json');
 const apiSchema = require('../../src/types/api-schema.json');

@@ -2,8 +2,10 @@ import { processConfig } from '@graphql-mesh/config';
 import { getMesh } from '@graphql-mesh/runtime';
 import { Application, Router } from 'express';
 import { graphqlHTTP } from 'express-graphql';
-import { logger } from '../logger';
+import { prefixLogger } from '../logger';
 import { Api } from '../types/api.interface';
+
+const logger = prefixLogger('router');
 
 let router: Router;
 
