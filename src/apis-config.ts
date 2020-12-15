@@ -4,7 +4,7 @@ import { join } from 'path';
 import { promisify } from 'util';
 import { parse } from 'yaml';
 import { GatewayConfig } from './types/gateway-config';
-import logger from './logger';
+import { logger } from './logger';
 import { ApiConfig } from './types/api-config';
 import { SourceConfig } from './types/mesh-source-config';
 import { Api } from './types/api.interface';
@@ -23,7 +23,7 @@ export function validateSourceConfig(source: any): source is SourceConfig {
     logger.error(
       ajv.errorsText(validate.errors, {
         dataVar: 'source',
-      }),
+      })
     );
     return false;
   }
@@ -48,7 +48,7 @@ export function validateApiConfig(api: any): api is ApiConfig {
     logger.error(
       ajv.errorsText(validate.errors, {
         dataVar: 'api',
-      }),
+      })
     );
     return false;
   }
@@ -61,22 +61,24 @@ export async function loadApis(gatewayConfig: GatewayConfig): Promise<Api[]> {
   const sourceConfigsDir = join(process.cwd(), gatewayConfig.sources_path);
 
   const fileNames = await readdir(apiConfigsDir);
-  const apis = await Promise.all(fileNames.map(async (name) => {
-    const apiPath = join(apiConfigsDir, name);
-    const file = await readFile(apiPath, 'utf8');
-    const apiConfig = parse(file);
-    if (!validateApiConfig(apiConfig)) {
-      throw new Error(`API configuration file is not valid: ${apiPath}`);
-    }
+  const apis = await Promise.all(
+    fileNames.map(async (name) => {
+      const apiPath = join(apiConfigsDir, name);
+      const file = await readFile(apiPath, 'utf8');
+      const apiConfig = parse(file);
+      if (!validateApiConfig(apiConfig)) {
+        throw new Error(`API configuration file is not valid: ${apiPath}`);
+      }
 
-    const sources = await Promise.all(
-      apiConfig.source_config_names.map((configName) => loadSourceConfig(join(sourceConfigsDir, configName))),
-    );
-    return {
-      ...apiConfig,
-      sources,
-    };
-  }));
+      const sources = await Promise.all(
+        apiConfig.source_config_names.map((configName) => loadSourceConfig(join(sourceConfigsDir, configName)))
+      );
+      return {
+        ...apiConfig,
+        sources,
+      };
+    })
+  );
 
   return apis;
 }

@@ -1,17 +1,32 @@
 import winston, { format, transports } from 'winston';
+import { GatewayConfig } from './types/gateway-config';
 
-export function prefixLogger(prefix: string = ''): winston.Logger {
-  const prefixStr: string = prefix.length > 0 ? `[${prefix}]` : '';
+const consoleFormat: winston.Logform.Format = format.combine(
+  format.timestamp(),
+  format.colorize(),
+  format.printf((info) => {
+    const prefix: string = info.prefix === undefined ? '' : `[${info.prefix}]`;
+    return `${info.timestamp} ${prefix} ${info.level}: ${info.message}`;
+  })
+);
+
+export let logger: winston.Logger = createLogger();
+
+function createLogger(): winston.Logger {
   return winston.createLogger({
-    format: format.combine(
-      format.timestamp(),
-      format.colorize(),
-      format.printf((info) => `${info.timestamp} ${prefixStr} ${info.level}: ${info.message}`)
-    ),
-    transports: [new transports.Console()],
+    transports: [
+      new transports.Console({
+        level: 'info',
+        format: consoleFormat,
+      }),
+    ],
   });
 }
 
-const logger = prefixLogger();
+export function configureLogger(config: GatewayConfig): void {
+  // TODO: we'll be adding other transports and formats later
+}
 
-export default logger;
+export function prefixLogger(prefix: string = ''): winston.Logger {
+  return logger.child({ prefix });
+}

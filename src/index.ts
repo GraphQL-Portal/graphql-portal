@@ -1,6 +1,6 @@
 import { cpus } from 'os';
 import cluster from 'cluster';
-import logger from './logger';
+import { logger } from './logger';
 import { version } from '../package.json';
 import { startServer, nodeID } from './server';
 import { loadConfig } from './gateway-config';
@@ -14,6 +14,7 @@ function handleStopSignal(): void {
 }
 
 async function start(): Promise<void> {
+  // TODO: config should be read by master and communicated to forks via RPC
   const config = await loadConfig();
   if (config === null) {
     logger.error('Error loading the gateway.json|yaml configuration file.');
