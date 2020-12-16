@@ -28,7 +28,7 @@
     "express-graphql": "^0.12.0",
     "graphql": "^15.4.0",
     "graphql-upload": "^11.0.0",
-    "ioredis": "^4.19.2",
+    "ioredis": "^4.19.4",
     "uuid": "^8.3.1",
     "winston": "^3.3.3",
     "yaml": "^1.10.0"
