@@ -19,8 +19,7 @@
     "noUnusedLocals": true,
     "resolveJsonModule": true,
     "paths": {
-      "@graphql-portal/config": ["packages/config/src/index.ts"],
-      "@graphql-portal/logger": ["packages/logger/src/index.ts"]
+      "@graphql-portal/*": ["packages/*/src/index.ts"]
     }
   },
   "references": [

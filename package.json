@@ -17,8 +17,7 @@
     "test": "jest --coverage --runInBand --detectOpenHandles"
   },
   "workspaces": [
-    "packages/config",
-    "packages/logger"
+    "packages/*"
   ],
   "dependencies": {
     "@graphql-mesh/config": "^0.11.5",
