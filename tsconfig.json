@@ -22,7 +22,12 @@
       "@graphql-portal/config": ["packages/config/src/index.ts"]
     }
   },
+  "references": [
+    {
+      "path": "packages/config"
+    }
+  ],
   "include": [
-    "src/**/*.ts"
+    "src"
   ]
 }
