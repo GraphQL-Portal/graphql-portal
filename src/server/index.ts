@@ -5,7 +5,7 @@ import { graphqlUploadExpress } from 'graphql-upload';
 import { createServer } from 'http';
 import { v4 as uuidv4 } from 'uuid';
 import redisConnect from '../redis';
-import logger from '../logger';
+import { logger } from '../logger';
 import { loadApis } from '../apis-config';
 import { GatewayConfig } from '../types/gateway-config';
 import { setRouter } from './router';
@@ -36,5 +36,5 @@ export async function startServer(gatewayConfig: GatewayConfig): Promise<void> {
 
   // TODO: web sockets support
 
-  httpServer.listen(gatewayConfig.listen_port, gatewayConfig.hostname, () => { });
+  httpServer.listen(gatewayConfig.listen_port, gatewayConfig.hostname, () => {});
 }
