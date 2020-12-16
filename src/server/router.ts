@@ -3,13 +3,13 @@ import { getMesh } from '@graphql-mesh/runtime';
 import { Application, Router } from 'express';
 import { graphqlHTTP } from 'express-graphql';
 import { prefixLogger } from '../logger';
-import { Api } from '../types/api.interface';
+import { ApiDef } from '@graphql-portal/config';
 
 const logger = prefixLogger('router');
 
 let router: Router;
 
-export async function buildRouter(apis: Api[]): Promise<Router> {
+export async function buildRouter(apis: ApiDef[]): Promise<Router> {
   const nextRouter = Router();
 
   await Promise.all(
@@ -33,7 +33,7 @@ export async function buildRouter(apis: Api[]): Promise<Router> {
   return router;
 }
 
-export async function setRouter(app: Application, apis: Api[]): Promise<void> {
+export async function setRouter(app: Application, apis: ApiDef[]): Promise<void> {
   await buildRouter(apis);
   app.use((req, res, next) => router(req, res, next));
 }

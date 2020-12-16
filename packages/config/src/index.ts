@@ -1,6 +1,6 @@
 import { cosmiconfig } from 'cosmiconfig';
 import { prefixLogger } from '../../../src/logger';
-import { Api } from './types/api.interface';
+import { ApiDef } from './types/api.interface';
 import { join } from 'path';
 import { parse } from 'yaml';
 import { readdir, readFile } from 'fs/promises';
@@ -9,9 +9,11 @@ import { GatewayConfig } from './types/gateway-config';
 import { ApiConfig } from './types/api-config';
 import { SourceConfig } from './types/mesh-source-config';
 
+export { GatewayConfig, ApiConfig, SourceConfig, ApiDef };
+
 export interface Config {
   gateway: GatewayConfig;
-  apiDefs: Api[];
+  apiDefs: ApiDef[];
 }
 
 let config: Config;
@@ -46,7 +48,7 @@ export async function loadGatewayConfig(): Promise<GatewayConfig | null> {
   return config.gateway;
 }
 
-export async function loadAPIDefs(gatewayConfig: GatewayConfig): Promise<Api[]> {
+export async function loadAPIDefs(gatewayConfig: GatewayConfig): Promise<ApiDef[]> {
   const apiConfigsDir = join(process.cwd(), gatewayConfig.apis_path);
   const sourceConfigsDir = join(process.cwd(), gatewayConfig.sources_path);
 

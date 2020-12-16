@@ -1,5 +1,5 @@
 import winston, { format, transports } from 'winston';
-import { GatewayConfig } from './types/gateway-config';
+import { GatewayConfig } from '@graphql-portal/config';
 
 const consoleFormat: winston.Logform.Format = format.combine(
   format.timestamp(),
