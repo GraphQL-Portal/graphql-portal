@@ -1,0 +1,9 @@
+{
+  "name": "@graphql-portal/config",
+  "version": "0.0.1",
+  "license": "MIT",
+  "dependencies": {
+    "ajv": "^6.12.6",
+    "cosmiconfig": "^7.0.0"
+  }
+}
