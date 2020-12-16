@@ -17,7 +17,8 @@
     "test": "jest --coverage --runInBand --detectOpenHandles"
   },
   "workspaces": [
-    "packages/config"
+    "packages/config",
+    "packages/logger"
   ],
   "dependencies": {
     "@graphql-mesh/config": "^0.11.5",
@@ -35,9 +36,9 @@
     "graphql-upload": "^11.0.0",
     "ioredis": "^4.19.4",
     "uuid": "^8.3.1",
-    "winston": "^3.3.3",
     "yaml": "^1.10.0",
-    "@graphql-portal/config": "^0.0.1"
+    "@graphql-portal/config": "^0.0.1",
+    "@graphql-portal/logger": "^0.0.1"
   },
   "devDependencies": {
     "@types/express": "^4.17.9",

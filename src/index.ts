@@ -1,6 +1,6 @@
 import { cpus } from 'os';
 import cluster from 'cluster';
-import { logger } from './logger';
+import { logger } from '@graphql-portal/logger';
 import { version } from '../package.json';
 import { startServer, nodeID } from './server';
 import { loadGatewayConfig } from '@graphql-portal/config';

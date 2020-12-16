@@ -5,7 +5,7 @@ import { graphqlUploadExpress } from 'graphql-upload';
 import { createServer } from 'http';
 import { v4 as uuidv4 } from 'uuid';
 import redisConnect from '../redis';
-import { logger } from '../logger';
+import { logger } from '@graphql-portal/logger';
 import { setRouter } from './router';
 import { GatewayConfig, loadAPIDefs } from '@graphql-portal/config';
 

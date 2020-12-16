@@ -2,7 +2,7 @@ import { processConfig } from '@graphql-mesh/config';
 import { getMesh } from '@graphql-mesh/runtime';
 import { Application, Router } from 'express';
 import { graphqlHTTP } from 'express-graphql';
-import { prefixLogger } from '../logger';
+import { prefixLogger } from '@graphql-portal/logger';
 import { ApiDef } from '@graphql-portal/config';
 
 const logger = prefixLogger('router');
