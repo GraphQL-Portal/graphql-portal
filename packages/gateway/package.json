@@ -1,0 +1,13 @@
+{
+  "name": "@graphql-portal/gateway",
+  "version": "0.0.1",
+  "license": "MIT",
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "start": "node dist/src/index"
+  },
+  "dependencies": {
+    "@graphql-portal/config": "0.0.1",
+    "express": "^4.17.1"
+  }
+}

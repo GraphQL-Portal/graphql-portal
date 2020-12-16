@@ -5,18 +5,18 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "generate-gateway-config": "json2ts -i src/types/gateway-schema.json -o ./src/types/gateway-config.ts --style.singleQuote --bannerComment \"/* eslint-disable */\"",
-    "generate-mesh-source-config": "json2ts -i src/types/mesh-source-schema.json -o ./src/types/mesh-source-config.ts --style.singleQuote --bannerComment \"/* eslint-disable */\"",
-    "generate-api-config": "json2ts -i src/types/api-schema.json -o ./src/types/api-config.ts --style.singleQuote --bannerComment \"/* eslint-disable */\"",
+    "generate-gateway-config": "json2ts -i packages/config/src/types/gateway-schema.json -o .packages/config//src/types/gateway-config.ts --style.singleQuote --bannerComment \"/* eslint-disable */\"",
+    "generate-mesh-source-config": "json2ts -i packages/config/src/types/mesh-source-schema.json -o .packages/config/src/types/mesh-source-config.ts --style.singleQuote --bannerComment \"/* eslint-disable */\"",
+    "generate-api-config": "json2ts -i packages/config/src/types/api-schema.json -o .packages/config/src/types/api-config.ts --style.singleQuote --bannerComment \"/* eslint-disable */\"",
     "generate-configs": "yarn generate-gateway-config && yarn generate-mesh-source-config && yarn generate-api-config",
     "prebuild": "rimraf dist && yarn generate-configs",
     "build": "tsc",
-    "start": "node dist/src/index",
+    "start": "yarn workspace @graphql-portal/gateway start",
     "lint": "eslint '{src,apps,libs,test}/**/*.ts' --fix",
     "test": "jest --coverage --runInBand --detectOpenHandles"
   },
   "workspaces": [
-    "packages/config"
+    "./packages/*"
   ],
   "dependencies": {
     "@graphql-mesh/config": "^0.11.5",
@@ -35,8 +35,7 @@
     "ioredis": "^4.19.4",
     "uuid": "^8.3.1",
     "winston": "^3.3.3",
-    "yaml": "^1.10.0",
-    "@graphql-portal/config": "^0.0.1"
+    "yaml": "^1.10.0"
   },
   "devDependencies": {
     "@types/express": "^4.17.9",

@@ -1,5 +1,5 @@
 import { cosmiconfig } from 'cosmiconfig';
-import { prefixLogger } from '../../../src/logger';
+// import { prefixLogger } from '../../../src/logger';
 import { ApiDef } from './types/api.interface';
 import { join } from 'path';
 import { parse } from 'yaml';
@@ -17,7 +17,7 @@ export interface Config {
 }
 
 let config: Config;
-const logger = prefixLogger('config');
+// const logger = prefixLogger('config');
 
 // JSON-Schema definitions of configuration files
 const gatewaySchema = require('./types/gateway-schema.json');
@@ -25,7 +25,7 @@ const apiDefsSchema = require('./types/api-schema.json');
 const sourceSchema = require('./types/mesh-source-schema.json');
 
 export async function loadGatewayConfig(): Promise<GatewayConfig | null> {
-  logger.info('Loading main configuration file.');
+  // logger.info('Loading main configuration file.');
   // find & parse config
   const explorer = cosmiconfig('gateway', {
     searchPlaces: ['config/gateway.json', 'config/gateway.yaml'],
@@ -33,7 +33,7 @@ export async function loadGatewayConfig(): Promise<GatewayConfig | null> {
 
   const results = await explorer.search();
   if (results === null) {
-    logger.error('gateway.json|yaml cannot be found.');
+    // logger.error('gateway.json|yaml cannot be found.');
     return null;
   }
 
@@ -81,12 +81,12 @@ export function validateGatewayConfig(config: any): config is GatewayConfig {
   const ajv = new Ajv();
   const validate = ajv.compile(gatewaySchema);
   if (!validate(config)) {
-    logger.error('GraphQL Portal configuration is not valid:');
-    logger.error(
-      ajv.errorsText(validate.errors, {
-        dataVar: 'config',
-      })
-    );
+    // logger.error('GraphQL Portal configuration is not valid:');
+    // logger.error(
+    //   ajv.errorsText(validate.errors, {
+    //     dataVar: 'config',
+    //   })
+    // );
     return false;
   }
 
@@ -97,12 +97,12 @@ export function validateSourceConfig(source: any): source is SourceConfig {
   const ajv = new Ajv();
   const validate = ajv.compile(sourceSchema);
   if (!validate(source)) {
-    logger.error('Source configuration is not valid:');
-    logger.error(
-      ajv.errorsText(validate.errors, {
-        dataVar: 'source',
-      })
-    );
+    // logger.error('Source configuration is not valid:');
+    // logger.error(
+    //   ajv.errorsText(validate.errors, {
+    //     dataVar: 'source',
+    //   })
+    // );
     return false;
   }
 
@@ -122,12 +122,12 @@ export function validateApiConfig(api: any): api is ApiConfig {
   const ajv = new Ajv();
   const validate = ajv.compile(apiDefsSchema);
   if (!validate(api)) {
-    logger.error('Source configuration is not valid:');
-    logger.error(
-      ajv.errorsText(validate.errors, {
-        dataVar: 'api',
-      })
-    );
+    // logger.error('Source configuration is not valid:');
+    // logger.error(
+    //   ajv.errorsText(validate.errors, {
+    //     dataVar: 'api',
+    //   })
+    // );
     return false;
   }
 
