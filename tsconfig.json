@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "incremental": true,
-    "outDir": "dist",
+    "outDir": "./dist",
     "baseUrl": ".",
     "moduleResolution": "Node",
     "module": "CommonJS",
