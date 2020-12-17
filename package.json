@@ -14,7 +14,8 @@
     "build": "tsc -b",
     "start": "node dist/src/index",
     "lint": "eslint '{src,apps,libs,test}/**/*.ts' --fix",
-    "test": "jest --coverage --runInBand --detectOpenHandles"
+    "test": "jest --coverage --runInBand --detectOpenHandles",
+    "prerelease": "yarn build"
   },
   "workspaces": [
     "packages/*"
