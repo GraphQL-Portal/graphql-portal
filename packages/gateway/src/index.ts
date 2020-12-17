@@ -1,7 +1,6 @@
 import { cpus } from 'os';
 import cluster from 'cluster';
 import { logger } from '@graphql-portal/logger';
-import { version } from '../package.json';
 import { startServer, nodeId } from './server';
 import { config, initConfig, loadApiDefs } from '@graphql-portal/config';
 
@@ -28,7 +27,7 @@ async function start(): Promise<void> {
 
   if (numCPUs > 1) {
     if (cluster.isMaster) {
-      logger.info(`GraphQL Portal API Gateway v${version}`);
+      logger.info(`GraphQL Portal API Gateway v${process.env.npm_package_version}`);
       logger.info(`Cluster master process pid: ${process.pid}`);
       logger.info(`Cluster master process nodeId: ${nodeId}`);
       logger.info(
