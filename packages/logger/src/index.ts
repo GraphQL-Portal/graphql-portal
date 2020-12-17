@@ -1,5 +1,4 @@
 import winston, { format, transports } from 'winston';
-import { GatewayConfig } from '@graphql-portal/config';
 
 const consoleFormat: winston.Logform.Format = format.combine(
   format.timestamp(),
@@ -23,7 +22,7 @@ function createLogger(): winston.Logger {
   });
 }
 
-export function configureLogger(config: GatewayConfig): void {
+export function configureLogger(config: { log_level: 'debug' | 'info' | 'warn' | 'error' }): void {
   // TODO: we'll be adding other transports and formats later
   logger.clear();
   logger.add(
