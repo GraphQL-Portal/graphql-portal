@@ -1,7 +1,7 @@
 {
   "extends": "../../tsconfig.json",
   "compilerOptions": {
-    "rootDir": "src",
+    "rootDir": ".",
     "outDir": "./dist",
     "baseUrl": ".",
     "resolveJsonModule": true,
@@ -10,14 +10,6 @@
     "declaration": true,
     "declarationMap": true
   },
-  "references": [
-    {
-      "path": "../types"
-    },
-    {
-      "path": "../logger"
-    }
-  ],
   "include": ["src/**/*.ts"],
   "exclude": ["node_modules", "dist"]
 }
