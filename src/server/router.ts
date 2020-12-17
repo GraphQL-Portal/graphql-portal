@@ -9,16 +9,16 @@ const logger = prefixLogger('router');
 
 let router: Router;
 
-export async function buildRouter(apis: ApiDef[]): Promise<Router> {
+export async function buildRouter(apiDefs: ApiDef[]): Promise<Router> {
   const nextRouter = Router();
 
-  if (apis?.length) {
+  if (apiDefs?.length) {
     await Promise.all(
-      apis.map(async (api) => {
+      apiDefs.map(async (api) => {
         const meshConfig = await processConfig({ sources: api.sources });
         const { schema, contextBuilder } = await getMesh(meshConfig);
 
-        logger.info(`Loaded API: ${api.endpoint}`);
+        logger.info(`Loaded API ${api.name}: ${api.endpoint}`);
         nextRouter.use(
           api.endpoint,
           graphqlHTTP(async (req) => ({
@@ -37,7 +37,7 @@ export async function buildRouter(apis: ApiDef[]): Promise<Router> {
   return router;
 }
 
-export async function setRouter(app: Application, apis: ApiDef[]): Promise<void> {
-  await buildRouter(apis);
+export async function setRouter(app: Application, apiDefs: ApiDef[]): Promise<void> {
+  await buildRouter(apiDefs);
   app.use((req, res, next) => router(req, res, next));
 }

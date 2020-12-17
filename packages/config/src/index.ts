@@ -1,12 +1,13 @@
 import { ApiDef, GatewayConfig } from '@graphql-portal/types';
 import { logger } from '@graphql-portal/logger';
 import { dashboard, initDashboard } from '@graphql-portal/dashboard';
-import { loadApiDefs as loadApiDefsFromFs } from './apis.config';
+import { loadApiDefs as loadApiDefsFromFs } from './api-defs.config';
 import { loadConfig } from './gateway.config';
 
 const config: {
   gateway: GatewayConfig;
-  apis: ApiDef[];
+  apiDefs: ApiDef[];
+  timestamp: number;
 } = {} as any;
 
 export async function initConfig() {
@@ -19,14 +20,16 @@ export async function loadApiDefs() {
   }
   initDashboard(config.gateway);
   if (config.gateway.use_dashboard_configs) {
-    const loadedApiDefs = await dashboard.loadApiDefs();
-    if (!(loadedApiDefs && loadedApiDefs.length)) {
+    const loaded = await dashboard.loadApiDefs();
+    if (!(loaded && loaded?.apiDefs?.length)) {
       logger.info('APIs were not updated');
       return;
     }
-    config.apis = loadedApiDefs;
+    config.apiDefs = loaded.apiDefs;
+    config.timestamp = +loaded.timestamp;
   } else {
-    config.apis = await loadApiDefsFromFs(config.gateway);
+    config.apiDefs = await loadApiDefsFromFs(config.gateway);
+    config.timestamp = Date.now();
   }
 }
 

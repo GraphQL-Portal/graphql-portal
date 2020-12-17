@@ -6,7 +6,7 @@ import { parse } from 'yaml';
 import { prefixLogger } from '@graphql-portal/logger';
 import { GatewayConfig, ApiConfig, SourceConfig, ApiDef, sourceSchema, apiDefsSchema } from '@graphql-portal/types';
 
-const logger = prefixLogger('apis-config');
+const logger = prefixLogger('apiDefs-config');
 
 const readdir = promisify(fs.readdir);
 const readFile = promisify(fs.readFile);
@@ -57,7 +57,7 @@ export async function loadApiDefs(gatewayConfig: GatewayConfig): Promise<ApiDef[
   const sourceConfigsDir = join(process.cwd(), gatewayConfig.sources_path);
 
   const fileNames = await readdir(apiConfigsDir);
-  const apis = await Promise.all(
+  const apiDefs = await Promise.all(
     fileNames.map(async (name) => {
       const apiPath = join(apiConfigsDir, name);
       const file = await readFile(apiPath, 'utf8');
@@ -76,5 +76,5 @@ export async function loadApiDefs(gatewayConfig: GatewayConfig): Promise<ApiDef[
     })
   );
 
-  return apis;
+  return apiDefs;
 }

@@ -23,14 +23,17 @@ export async function startServer(): Promise<void> {
   app.use(cookieParser());
   app.use(graphqlUploadExpress());
 
-  await setRouter(app, config.apis);
+  await setRouter(app, config.apiDefs);
   redis.subscribe(Channel.apiDefsUpdated);
-  redis.on('message', async (channel) => {
+  redis.on('message', async (channel, timestamp) => {
     if (channel !== Channel.apiDefsUpdated) {
       return;
     }
+    if (+timestamp && +timestamp <= config.timestamp) {
+      return;
+    }
     await loadApiDefs();
-    await setRouter(app, config.apis);
+    await setRouter(app, config.apiDefs);
   });
 
   // TODO: web sockets support
