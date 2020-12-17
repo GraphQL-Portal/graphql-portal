@@ -349,7 +349,7 @@
     "@types/lru-cache" "5.1.0"
     lru-cache "6.0.0"
 
-"@graphql-mesh/config@^0.11.5":
+"@graphql-mesh/config@^0.11.6":
   version "0.11.6"
   resolved "https://registry.yarnpkg.com/@graphql-mesh/config/-/config-0.11.6.tgz#b3e07dee9387e62f248739241bfc9abddd44497a"
   integrity sha512-jezk22Z8MpD9DA1Z+EsH8SHb2eIqB1wEnH5XNZYV4P91IlfW8ZgAPpuADgwuObF9nkqfUmAicKHLuHIfuyYi+g==
