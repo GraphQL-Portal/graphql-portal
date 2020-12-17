@@ -4,6 +4,7 @@
     "rootDir": ".",
     "outDir": "./dist",
     "baseUrl": ".",
+    "sourceMap": true,
     "resolveJsonModule": true,
     "composite": true,
     "allowJs": false,

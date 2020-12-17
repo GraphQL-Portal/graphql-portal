@@ -27,7 +27,7 @@ export default class DashboardApi {
     });
   }
 
-  async loadApiDefs(): Promise<ApiDef[] | void> {
+  async loadApiDefs(): Promise<{ apiDefs: ApiDef[]; timestamp: number } | void> {
     try {
       const {
         data: { data },
