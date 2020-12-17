@@ -7,14 +7,6 @@
     "resolveJsonModule": true,
     "composite": true
   },
-  "references": [
-    {
-      "path": "../types"
-    },
-    {
-      "path": "../logger"
-    }
-  ],
-  "include": ["src/**/*.ts"],
+  "include": ["src/**/*.ts", "src/**/*.json"],
   "exclude": ["node_modules", "dist"]
 }
