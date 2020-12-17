@@ -17,9 +17,21 @@
     "noImplicitReturns": true,
     "noImplicitThis": true,
     "noUnusedLocals": true,
-    "resolveJsonModule": true
+    "resolveJsonModule": true,
+    "paths": {
+      "@graphql-portal/*": ["packages/*/src/index.ts"]
+    }
   },
+  "references": [
+    {
+      "path": "packages/config"
+    },
+    {
+      "path": "packages/logger"
+    }
+  ],
   "include": [
-    "src/**/*.ts"
-  ]
+    "src"
+  ],
+  "exclude": ["node_modules", "dist"]
 }

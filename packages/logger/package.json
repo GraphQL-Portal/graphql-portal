@@ -1,0 +1,13 @@
+{
+  "name": "@graphql-portal/logger",
+  "version": "0.0.1",
+  "license": "MIT",
+  "main": "dist/src/index.js",
+  "scripts": {
+    "build": "tsc -b"
+  },
+  "dependencies": {
+    "winston": "^3.3.3",
+    "@graphql-portal/config": "^0.0.1"
+  }
+}

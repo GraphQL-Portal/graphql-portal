@@ -1,5 +1,5 @@
 import Redis, { Redis as IRedis } from 'ioredis';
-import { prefixLogger } from '../logger';
+import { prefixLogger } from '@graphql-portal/logger';
 
 const logger = prefixLogger('redis');
 
