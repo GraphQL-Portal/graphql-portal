@@ -22,15 +22,18 @@
   },
   "references": [
     {
+      "path": "packages/logger"
+    },
+    {
       "path": "packages/types"
     },
     {
-      "path": "packages/logger"
+      "path": "packages/dashboard"
     },
     {
       "path": "packages/config"
     }
   ],
   "include": ["src"],
-  "exclude": ["*.d.ts"]
+  "exclude": ["node_modules", "dist", "*.d.ts"]
 }

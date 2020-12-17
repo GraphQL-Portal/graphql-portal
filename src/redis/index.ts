@@ -1,18 +1,9 @@
-import Redis, { Redis as IRedis } from 'ioredis';
-import { prefixLogger } from '@graphql-portal/logger';
+import connect from './connect';
+import { ping } from './ping';
 
-const logger = prefixLogger('redis');
-
-// TODO: add support for cluster & sentinel modes
-export default async function redisConnect(connectionString: string): Promise<IRedis> {
-  const redis = new Redis(connectionString);
-  await new Promise((resolve, reject) => {
-    redis.on('error', (e) => {
-      redis.disconnect();
-      logger.error(`Couldn't connect to redis: ${connectionString}`);
-      reject(e);
-    });
-    redis.on('connect', resolve);
-  });
-  return redis;
+export default async function setupRedis(connectionString: string) {
+  const subscriber = await connect(connectionString);
+  const publisher = await connect(connectionString);
+  ping(publisher);
+  return subscriber;
 }

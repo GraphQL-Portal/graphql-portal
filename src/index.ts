@@ -2,8 +2,8 @@ import { cpus } from 'os';
 import cluster from 'cluster';
 import { logger } from '@graphql-portal/logger';
 import { version } from '../package.json';
-import { startServer, nodeID } from './server';
-import { loadGatewayConfig } from '@graphql-portal/config';
+import { startServer, nodeId } from './server';
+import { config, initConfig, loadApis } from '@graphql-portal/config';
 
 function handleStopSignal(): void {
   logger.info('Stop signal received');
@@ -15,21 +15,24 @@ function handleStopSignal(): void {
 
 async function start(): Promise<void> {
   // TODO: config should be read by master and communicated to forks via RPC
-  const config = await loadGatewayConfig();
-  if (config === null) {
-    logger.error('Error loading the gateway.json|yaml configuration file.');
+  await initConfig();
+  await loadApis();
+  if (!config.gateway) {
     throw new Error('Error loading the gateway.json|yaml configuration file.');
   }
+  if (!config.apis) {
+    throw new Error('Error loading APIs.');
+  }
 
-  const numCPUs: number = Number(config.pool_size) ? Number(config.pool_size) : cpus().length;
+  const numCPUs: number = Number(config.gateway.pool_size) ? Number(config.gateway.pool_size) : cpus().length;
 
   if (numCPUs > 1) {
     if (cluster.isMaster) {
       logger.info(`GraphQL Portal API Gateway v${version}`);
       logger.info(`Cluster master process pid: ${process.pid}`);
-      logger.info(`Cluster master process nodeID: ${nodeID}`);
+      logger.info(`Cluster master process nodeId: ${nodeId}`);
       logger.info(
-        `🔥 Starting GraphQL API Portal with ${numCPUs} workers on: http://${config.hostname}:${config.listen_port}`
+        `🔥 Starting GraphQL API Portal with ${numCPUs} workers on: http://${config.gateway.hostname}:${config.gateway.listen_port}`
       );
 
       for (let i = 0; i < numCPUs; i += 1) {
@@ -43,12 +46,14 @@ async function start(): Promise<void> {
       process.on('SIGINT', handleStopSignal);
       process.on('SIGTERM', handleStopSignal);
     } else {
-      startServer(config);
-      logger.info(`Started worker process ➜ pid: ${process.pid}, nodeID: ${nodeID}`);
+      startServer();
+      logger.info(`Started worker process ➜ pid: ${process.pid}, nodeId: ${nodeId}`);
     }
   } else {
-    startServer(config);
-    logger.info(`🔥 Started GraphQL API Portal ➜ http://${config.hostname}:${config.listen_port}, pid: ${process.pid}`);
+    startServer();
+    logger.info(
+      `🔥 Started GraphQL API Portal ➜ http://${config.gateway.hostname}:${config.gateway.listen_port}, pid: ${process.pid}`
+    );
   }
 }
 

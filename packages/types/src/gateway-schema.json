@@ -33,7 +33,7 @@
     "enable_control_api": {
       "type": "boolean"
     },
-    "control_api_config": { "$ref": "#/definitions/control_api_config"},
+    "control_api_config": { "$ref": "#/definitions/control_api_config" },
     "log_level": {
       "type": "string",
       "enum": ["debug", "info", "warn", "error"]
@@ -78,10 +78,7 @@
           "type": "integer"
         }
       },
-      "required": [
-        "hostname",
-        "port"
-      ]
+      "required": ["hostname", "port"]
     }
   }
 }

@@ -1,136 +1,33 @@
-import { cosmiconfig } from 'cosmiconfig';
-import { prefixLogger } from '@graphql-portal/logger';
-import {
-  ApiDef,
-  GatewayConfig,
-  ApiConfig,
-  SourceConfig,
-  gatewaySchema,
-  apiDefsSchema,
-  sourceSchema,
-} from '@graphql-portal/types';
-import Ajv from 'ajv';
+import { ApiDef, GatewayConfig } from '@graphql-portal/types';
+import { logger } from '@graphql-portal/logger';
+import { dashboard, initDashboard } from '@graphql-portal/dashboard';
+import { loadApis as loadApisFromFs } from './apis.config';
+import { loadConfig } from './gateway.config';
 
-export { GatewayConfig, ApiConfig, SourceConfig, ApiDef };
-
-export interface Config {
+const config: {
   gateway: GatewayConfig;
-  apiDefs: ApiDef[];
+  apis: ApiDef[];
+} = {} as any;
+
+export async function initConfig() {
+  config.gateway = (await loadConfig()) as GatewayConfig;
 }
 
-let config: Config;
-const logger = prefixLogger('config');
-
-// JSON-Schema definitions of configuration files
-
-export async function loadGatewayConfig(): Promise<GatewayConfig | null> {
-  logger.info('Loading main configuration file.');
-  // find & parse config
-  const explorer = cosmiconfig('gateway', {
-    searchPlaces: ['config/gateway.json', 'config/gateway.yaml'],
-  });
-
-  const results = await explorer.search(process.cwd());
-  if (results === null) {
-    logger.error('gateway.json|yaml cannot be found.');
-    return null;
+export async function loadApis() {
+  if (!config.gateway) {
+    return;
   }
-
-  const newConfig = results.config;
-
-  if (!validateGatewayConfig(newConfig)) {
-    return null;
+  initDashboard(config.gateway);
+  if (config.gateway.use_dashboard_configs) {
+    const loadedApis = await dashboard.loadApis();
+    if (!(loadedApis && loadedApis.length)) {
+      logger.info('APIs were not updated');
+      return;
+    }
+    config.apis = loadedApis;
+  } else {
+    config.apis = await loadApisFromFs(config.gateway);
   }
-
-  config = config === undefined ? { gateway: newConfig, apiDefs: [] } : { gateway: newConfig, apiDefs: config.apiDefs };
-
-  return config.gateway;
 }
 
-export async function loadAPIDefs(gatewayConfig: GatewayConfig): Promise<ApiDef[]> {
-  return [];
-  // const apiConfigsDir = join(process.cwd(), gatewayConfig.apis_path);
-  // const sourceConfigsDir = join(process.cwd(), gatewayConfig.sources_path);
-
-  // const fileNames = await readdir(apiConfigsDir);
-  // const apis = await Promise.all(
-  //   fileNames.map(async (name) => {
-  //     const apiPath = join(apiConfigsDir, name);
-  //     const file = await readFile(apiPath, 'utf8');
-  //     const apiConfig = parse(file);
-  //     if (!validateApiConfig(apiConfig)) {
-  //       throw new Error(`API configuration file is not valid: ${apiPath}`);
-  //     }
-
-  //     const sources = await Promise.all(
-  //       apiConfig.source_config_names.map((configName) => loadSourceConfig(join(sourceConfigsDir, configName)))
-  //     );
-  //     return {
-  //       ...apiConfig,
-  //       sources,
-  //     };
-  //   })
-  // );
-
-  // config.apiDefs = apis;
-
-  // return config.apiDefs;
-}
-
-export function validateGatewayConfig(config: any): config is GatewayConfig {
-  const ajv = new Ajv();
-  const validate = ajv.compile(gatewaySchema);
-  if (!validate(config)) {
-    logger.error('GraphQL Portal configuration is not valid:');
-    logger.error(
-      ajv.errorsText(validate.errors, {
-        dataVar: 'config',
-      })
-    );
-    return false;
-  }
-
-  return true;
-}
-
-export function validateSourceConfig(source: any): source is SourceConfig {
-  const ajv = new Ajv();
-  const validate = ajv.compile(sourceSchema);
-  if (!validate(source)) {
-    logger.error('Source configuration is not valid:');
-    logger.error(
-      ajv.errorsText(validate.errors, {
-        dataVar: 'source',
-      })
-    );
-    return false;
-  }
-
-  return true;
-}
-
-export async function loadSourceConfig(fileName: string): Promise<SourceConfig> {
-  return {} as any;
-  // const file = await readFile(fileName, 'utf8');
-  // const sourceConfig = parse(file);
-  // if (!validateSourceConfig(sourceConfig)) {
-  //   throw new Error(`Source configuration file is not valid: ${fileName}`);
-  // }
-  // return sourceConfig;
-}
-
-export function validateApiConfig(api: any): api is ApiConfig {
-  const ajv = new Ajv();
-  const validate = ajv.compile(apiDefsSchema);
-  if (!validate(api)) {
-    logger.error('Source configuration is not valid:');
-    logger.error(
-      ajv.errorsText(validate.errors, {
-        dataVar: 'api',
-      })
-    );
-    return false;
-  }
-
-  return true;
-}
+export { config };

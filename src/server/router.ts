@@ -12,22 +12,26 @@ let router: Router;
 export async function buildRouter(apis: ApiDef[]): Promise<Router> {
   const nextRouter = Router();
 
-  await Promise.all(
-    apis.map(async (api) => {
-      const meshConfig = await processConfig({ sources: api.sources });
-      const { schema, contextBuilder } = await getMesh(meshConfig);
+  if (apis?.length) {
+    await Promise.all(
+      apis.map(async (api) => {
+        const meshConfig = await processConfig({ sources: api.sources });
+        const { schema, contextBuilder } = await getMesh(meshConfig);
 
-      logger.info(`Loaded API: ${api.endpoint}`);
-      nextRouter.use(
-        api.endpoint,
-        graphqlHTTP(async (req) => ({
-          schema,
-          context: await contextBuilder(req),
-          graphiql: true,
-        }))
-      );
-    })
-  );
+        logger.info(`Loaded API: ${api.endpoint}`);
+        nextRouter.use(
+          api.endpoint,
+          graphqlHTTP(async (req) => ({
+            schema,
+            context: await contextBuilder(req),
+            graphiql: true,
+          }))
+        );
+      })
+    );
+  } else {
+    logger.info('No API loaded');
+  }
 
   router = nextRouter;
   return router;
