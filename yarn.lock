@@ -395,13 +395,23 @@
     "@graphql-tools/utils" "7.1.4"
     "@graphql-tools/wrap" "7.0.4"
 
-"@graphql-mesh/types@0.23.0", "@graphql-mesh/types@^0.23.0":
+"@graphql-mesh/types@0.23.0":
   version "0.23.0"
   resolved "https://registry.yarnpkg.com/@graphql-mesh/types/-/types-0.23.0.tgz#001076c6975bf6c48375321412f09226a7d8e2c3"
   integrity sha512-4Ucc6++CX07NKl9q9QTGxU7o6M4h7zf/3297/dW8pKvgghZLvJ4Dw8rTJSSaWZEv6VTH1nc6vAN6tF/Pz24i3g==
   dependencies:
     "@graphql-tools/delegate" "7.0.7"
     "@graphql-tools/utils" "7.1.4"
+    "@graphql-typed-document-node/core" "3.1.0"
+    fetchache "0.0.4"
+
+"@graphql-mesh/types@^0.23.1":
+  version "0.23.1"
+  resolved "https://registry.yarnpkg.com/@graphql-mesh/types/-/types-0.23.1.tgz#57efdd9bb89cc49adc82b9d14debcb6e57859a08"
+  integrity sha512-E5Am5jlZ0GA43Wjaa+xolly09wUQjCAbCxOh1/50DGSZkbJFsP1fDcpn0d7stK56uum9mFcbY7V5f5fzNCKjYQ==
+  dependencies:
+    "@graphql-tools/delegate" "7.0.7"
+    "@graphql-tools/utils" "7.1.5"
     "@graphql-typed-document-node/core" "3.1.0"
     fetchache "0.0.4"
 
@@ -570,7 +580,7 @@
     valid-url "1.0.9"
     ws "7.4.1"
 
-"@graphql-tools/utils@7.1.4", "@graphql-tools/utils@^7.0.0", "@graphql-tools/utils@^7.0.2", "@graphql-tools/utils@^7.1.2", "@graphql-tools/utils@^7.1.4":
+"@graphql-tools/utils@7.1.4":
   version "7.1.4"
   resolved "https://registry.yarnpkg.com/@graphql-tools/utils/-/utils-7.1.4.tgz#5baf27e908aa56c44ed3992f4607718a37f186a0"
   integrity sha512-4lxmstMpgHSM1ULD+1X5AcPFaizkdBubB7H9Rqr7Wh6L9bxUHBHFB3bhaFXT7FI0xE01Pt0IMsZadOIlhVTXrg==
@@ -579,7 +589,7 @@
     camel-case "4.1.2"
     tslib "~2.0.1"
 
-"@graphql-tools/utils@^7.1.5":
+"@graphql-tools/utils@7.1.5", "@graphql-tools/utils@^7.0.0", "@graphql-tools/utils@^7.0.2", "@graphql-tools/utils@^7.1.2", "@graphql-tools/utils@^7.1.4", "@graphql-tools/utils@^7.1.5":
   version "7.1.5"
   resolved "https://registry.yarnpkg.com/@graphql-tools/utils/-/utils-7.1.5.tgz#82eb9fd1d796bf9455ccf8f3d8775674a4582eb3"
   integrity sha512-utJgoKJNhAUz0i+MGF1uvz7i4fxxz1TE21c68R38Hs4kmXO6A6H5e18jwzGdjspyf3IZOS621fmN9GQPzIazHg==
