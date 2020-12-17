@@ -1,7 +1,7 @@
 import { ApiDef, GatewayConfig } from '@graphql-portal/types';
 import { logger } from '@graphql-portal/logger';
 import { dashboard, initDashboard } from '@graphql-portal/dashboard';
-import { loadApis as loadApisFromFs } from './apis.config';
+import { loadApiDefs as loadApiDefsFromFs } from './apis.config';
 import { loadConfig } from './gateway.config';
 
 const config: {
@@ -13,20 +13,20 @@ export async function initConfig() {
   config.gateway = (await loadConfig()) as GatewayConfig;
 }
 
-export async function loadApis() {
+export async function loadApiDefs() {
   if (!config.gateway) {
     return;
   }
   initDashboard(config.gateway);
   if (config.gateway.use_dashboard_configs) {
-    const loadedApis = await dashboard.loadApis();
-    if (!(loadedApis && loadedApis.length)) {
+    const loadedApiDefs = await dashboard.loadApiDefs();
+    if (!(loadedApiDefs && loadedApiDefs.length)) {
       logger.info('APIs were not updated');
       return;
     }
-    config.apis = loadedApis;
+    config.apis = loadedApiDefs;
   } else {
-    config.apis = await loadApisFromFs(config.gateway);
+    config.apis = await loadApiDefsFromFs(config.gateway);
   }
 }
 

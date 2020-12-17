@@ -10,6 +10,14 @@
     "declaration": true,
     "declarationMap": true
   },
+  "references": [
+    {
+      "path": "../logger"
+    },
+    {
+      "path": "../types"
+    }
+  ],
   "include": ["src/**/*.ts"],
   "exclude": ["node_modules", "dist"]
 }

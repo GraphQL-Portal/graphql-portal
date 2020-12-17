@@ -1,9 +1,8 @@
 import { cosmiconfig } from 'cosmiconfig';
 import Ajv from 'ajv';
-import { GatewayConfig } from '@graphql-portal/types';
+import { GatewayConfig, gatewaySchema } from '@graphql-portal/types';
 import { prefixLogger } from '@graphql-portal/logger';
 
-const gatewaySchema = require('../../../src/types/gateway-schema.json');
 const logger = prefixLogger('gateway-config');
 
 export function validateConfig(config: any): config is GatewayConfig {

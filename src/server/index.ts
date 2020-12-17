@@ -4,7 +4,7 @@ import express from 'express';
 import { graphqlUploadExpress } from 'graphql-upload';
 import { createServer } from 'http';
 import { v4 as uuidv4 } from 'uuid';
-import { config, loadApis } from '@graphql-portal/config';
+import { config, loadApiDefs } from '@graphql-portal/config';
 import { logger } from '@graphql-portal/logger';
 import setupRedis from '../redis';
 import Channel from '../redis/channel.enum';
@@ -29,7 +29,7 @@ export async function startServer(): Promise<void> {
     if (channel !== Channel.apiDefsUpdated) {
       return;
     }
-    await loadApis();
+    await loadApiDefs();
     await setRouter(app, config.apis);
   });
 

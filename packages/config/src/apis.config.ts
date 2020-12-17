@@ -4,12 +4,9 @@ import { join } from 'path';
 import { promisify } from 'util';
 import { parse } from 'yaml';
 import { prefixLogger } from '@graphql-portal/logger';
-import { GatewayConfig, ApiConfig, SourceConfig, ApiDef } from '@graphql-portal/types';
+import { GatewayConfig, ApiConfig, SourceConfig, ApiDef, sourceSchema, apiDefsSchema } from '@graphql-portal/types';
 
 const logger = prefixLogger('apis-config');
-
-const sourceSchema = require('../../../src/types/mesh-source-schema.json');
-const apiSchema = require('../../../src/types/api-schema.json');
 
 const readdir = promisify(fs.readdir);
 const readFile = promisify(fs.readFile);
@@ -41,7 +38,7 @@ export async function loadSourceConfig(fileName: string): Promise<SourceConfig> 
 
 export function validateApiConfig(api: any): api is ApiConfig {
   const ajv = new Ajv();
-  const validate = ajv.compile(apiSchema);
+  const validate = ajv.compile(apiDefsSchema);
   if (!validate(api)) {
     logger.error('Source configuration is not valid:');
     logger.error(
@@ -55,13 +52,13 @@ export function validateApiConfig(api: any): api is ApiConfig {
   return true;
 }
 
-export async function loadApis(gatewayConfig: GatewayConfig): Promise<ApiDef[]> {
+export async function loadApiDefs(gatewayConfig: GatewayConfig): Promise<ApiDef[]> {
   const apiConfigsDir = join(process.cwd(), gatewayConfig.apis_path);
   const sourceConfigsDir = join(process.cwd(), gatewayConfig.sources_path);
 
   const fileNames = await readdir(apiConfigsDir);
   const apis = await Promise.all(
-    fileNames.map(async name => {
+    fileNames.map(async (name) => {
       const apiPath = join(apiConfigsDir, name);
       const file = await readFile(apiPath, 'utf8');
       const apiConfig = parse(file);
@@ -70,7 +67,7 @@ export async function loadApis(gatewayConfig: GatewayConfig): Promise<ApiDef[]> 
       }
 
       const sources = await Promise.all(
-        apiConfig.source_config_names.map(configName => loadSourceConfig(join(sourceConfigsDir, configName)))
+        apiConfig.source_config_names.map((configName) => loadSourceConfig(join(sourceConfigsDir, configName)))
       );
       return {
         ...apiConfig,

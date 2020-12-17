@@ -27,16 +27,16 @@ export default class DashboardApi {
     });
   }
 
-  async loadApis(): Promise<ApiDef[] | void> {
+  async loadApiDefs(): Promise<ApiDef[] | void> {
     try {
       const {
         data: { data },
       } = await this.http.post(graphqlRoute, {
-        query: queries.getApis,
+        query: queries.getApiDefs,
       });
 
       logger.info('Loaded API configs from the dashboard');
-      return data?.getApis;
+      return data?.getApiDefs;
     } catch (error) {
       logger.error(`Failed to load API configs from the dashboard: ${error.message}`);
     }

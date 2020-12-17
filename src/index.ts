@@ -3,7 +3,7 @@ import cluster from 'cluster';
 import { logger } from '@graphql-portal/logger';
 import { version } from '../package.json';
 import { startServer, nodeId } from './server';
-import { config, initConfig, loadApis } from '@graphql-portal/config';
+import { config, initConfig, loadApiDefs } from '@graphql-portal/config';
 
 function handleStopSignal(): void {
   logger.info('Stop signal received');
@@ -16,7 +16,7 @@ function handleStopSignal(): void {
 async function start(): Promise<void> {
   // TODO: config should be read by master and communicated to forks via RPC
   await initConfig();
-  await loadApis();
+  await loadApiDefs();
   if (!config.gateway) {
     throw new Error('Error loading the gateway.json|yaml configuration file.');
   }

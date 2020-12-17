@@ -1,6 +1,6 @@
 export default {
-  getApis: `query {
-    getApis {
+  getApiDefs: `query {
+    getApiDefs {
       name
       endpoint
       sources {

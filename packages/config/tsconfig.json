@@ -10,6 +10,17 @@
     "declaration": true,
     "declarationMap": true
   },
+  "references": [
+    {
+      "path": "../logger"
+    },
+    {
+      "path": "../types"
+    },
+    {
+      "path": "../dashboard"
+    }
+  ],
   "include": ["src/**/*.ts"],
   "exclude": ["node_modules", "dist"]
 }
