@@ -1,0 +1,17 @@
+{
+  "name": "@graphql-portal/gateway",
+  "version": "0.0.1",
+  "license": "MIT",
+  "author": "code.store",
+  "main": "dist/src/index.js",
+  "scripts": {
+    "build": "tsc -b",
+    "start": "node dist/src/index"
+  },
+  "dependencies": {
+    "@graphql-portal/config": "^0.0.1",
+    "@graphql-portal/dashboard": "^0.0.1",
+    "@graphql-portal/logger": "^0.0.1",
+    "@graphql-portal/types": "^0.0.1"
+  }
+}

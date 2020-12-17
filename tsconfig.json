@@ -32,6 +32,9 @@
     },
     {
       "path": "packages/config"
+    },
+    {
+      "path": "packages/gateway"
     }
   ],
   "include": ["src"],
