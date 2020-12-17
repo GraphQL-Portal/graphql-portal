@@ -16,9 +16,6 @@
     },
     {
       "path": "../types"
-    },
-    {
-      "path": "../dashboard"
     }
   ],
   "include": ["src/**/*.ts"],
