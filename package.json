@@ -21,7 +21,7 @@
   ],
   "dependencies": {
     "@changesets/cli": "^2.12.0",
-    "@graphql-mesh/config": "^0.11.5",
+    "@graphql-mesh/config": "^0.11.6",
     "@graphql-mesh/graphql": "^0.10.2",
     "@graphql-mesh/runtime": "^0.10.4",
     "@graphql-mesh/types": "^0.23.0",

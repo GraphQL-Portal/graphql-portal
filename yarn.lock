@@ -328,30 +328,30 @@
     enabled "2.0.x"
     kuler "^2.0.0"
 
-"@graphql-mesh/cache-inmemory-lru@0.4.27":
-  version "0.4.27"
-  resolved "https://registry.yarnpkg.com/@graphql-mesh/cache-inmemory-lru/-/cache-inmemory-lru-0.4.27.tgz#d9be4d6514040cd544f6026d44d79999d26e689d"
-  integrity sha512-vExFrxhSWuLHTK3nuOLNQF1cJ815yO80QcCKN9GGpdF1VMPVLS2dAjY8yO87+eh4xvc0UoUfHgRUoUZQ7EvU5Q==
+"@graphql-mesh/cache-inmemory-lru@0.4.28":
+  version "0.4.28"
+  resolved "https://registry.yarnpkg.com/@graphql-mesh/cache-inmemory-lru/-/cache-inmemory-lru-0.4.28.tgz#6a21ae518eca1ba1521218fe96eae2deb8ccc54d"
+  integrity sha512-o4hXwajts13cSzlgzWLWnZYncyilHdlvHTyRkvFHZxOR15ki0vFAeglvGPcfQfFi2T0fWeMqMYDJodvu6h6BXg==
   dependencies:
-    "@graphql-mesh/types" "0.23.0"
+    "@graphql-mesh/types" "0.23.1"
     "@types/lru-cache" "5.1.0"
     lru-cache "6.0.0"
 
-"@graphql-mesh/config@^0.11.5":
-  version "0.11.5"
-  resolved "https://registry.yarnpkg.com/@graphql-mesh/config/-/config-0.11.5.tgz#4243d22c84a8f4bd9891e463a321ca05992ccd9c"
-  integrity sha512-z9WJXFceDaYW7EWSsn8oD6JnSSnYlBKfVCh62t7wNQLvNINYe4isAw9jJvExp1aVuAn5RqVnISkbZgJizJ4Q/w==
+"@graphql-mesh/config@^0.11.6":
+  version "0.11.6"
+  resolved "https://registry.yarnpkg.com/@graphql-mesh/config/-/config-0.11.6.tgz#b3e07dee9387e62f248739241bfc9abddd44497a"
+  integrity sha512-jezk22Z8MpD9DA1Z+EsH8SHb2eIqB1wEnH5XNZYV4P91IlfW8ZgAPpuADgwuObF9nkqfUmAicKHLuHIfuyYi+g==
   dependencies:
-    "@graphql-mesh/cache-inmemory-lru" "0.4.27"
-    "@graphql-mesh/merger-stitching" "0.7.5"
-    "@graphql-mesh/runtime" "0.10.5"
-    "@graphql-mesh/types" "0.23.0"
+    "@graphql-mesh/cache-inmemory-lru" "0.4.28"
+    "@graphql-mesh/merger-stitching" "0.7.6"
+    "@graphql-mesh/runtime" "0.10.6"
+    "@graphql-mesh/types" "0.23.1"
     "@graphql-mesh/utils" "0.8.1"
     "@graphql-tools/code-file-loader" "6.2.6"
     "@graphql-tools/graphql-file-loader" "6.2.6"
     "@graphql-tools/load" "6.2.5"
     "@graphql-tools/merge" "6.2.6"
-    "@graphql-tools/utils" "7.1.4"
+    "@graphql-tools/utils" "7.1.5"
     ajv "6.12.6"
     cosmiconfig "7.0.0"
     graphql-subscriptions "1.1.0"
@@ -369,39 +369,49 @@
     "@graphql-tools/wrap" "7.0.4"
     fetchache "0.0.4"
 
-"@graphql-mesh/merger-stitching@0.7.5":
-  version "0.7.5"
-  resolved "https://registry.yarnpkg.com/@graphql-mesh/merger-stitching/-/merger-stitching-0.7.5.tgz#2c4c32a33579ad2a7c801a8664ceb361540f9419"
-  integrity sha512-MWQtYU6v6uW14ewtg2sKOcO2D8bFRdPl4NFkFBSxIpbvCQYPX5fg6YF3n3+3k1MFUYDJB1QEOphprA9rLcYvjQ==
+"@graphql-mesh/merger-stitching@0.7.6":
+  version "0.7.6"
+  resolved "https://registry.yarnpkg.com/@graphql-mesh/merger-stitching/-/merger-stitching-0.7.6.tgz#b085c5ad2e396db3226f60a335dd77034ed29b39"
+  integrity sha512-hqhNK5FXPd50YMOe2d9rgLb9lUe/8e7sac/AlUarodsQ7njnlqgB5/YpfgSyMb48t/hLpdbRh4mTJu/ScpbonQ==
   dependencies:
-    "@graphql-mesh/types" "0.23.0"
+    "@graphql-mesh/types" "0.23.1"
     "@graphql-mesh/utils" "0.8.1"
     "@graphql-tools/schema" "7.1.2"
     "@graphql-tools/stitch" "7.1.4"
-    "@graphql-tools/utils" "7.1.4"
+    "@graphql-tools/utils" "7.1.5"
     "@graphql-tools/wrap" "7.0.4"
     fetchache "0.0.4"
 
-"@graphql-mesh/runtime@0.10.5", "@graphql-mesh/runtime@^0.10.4":
-  version "0.10.5"
-  resolved "https://registry.yarnpkg.com/@graphql-mesh/runtime/-/runtime-0.10.5.tgz#6fe72bbdb5e8427764a0e85367563b613f454085"
-  integrity sha512-tiy9Mg+lV17PkmM56q0Xzrbk2y2yL5Ldf+2A+pe3bmHm1AcKWtKpTtW0TBci5r29bkO4pAQvFuCgHCccfX6UeA==
+"@graphql-mesh/runtime@0.10.6", "@graphql-mesh/runtime@^0.10.4":
+  version "0.10.6"
+  resolved "https://registry.yarnpkg.com/@graphql-mesh/runtime/-/runtime-0.10.6.tgz#4f0b13c32c9cc66d995439941e5125130514c6d2"
+  integrity sha512-QJJkHHplAm/fYjFMfemDS4IvEMvmdiuM/gi6b6NI16qOY0jd3jyfwvbKW2BXajsMSZtKW7btD6ZYYx1g5wdoKw==
   dependencies:
-    "@graphql-mesh/types" "0.23.0"
+    "@graphql-mesh/types" "0.23.1"
     "@graphql-mesh/utils" "0.8.1"
     "@graphql-tools/delegate" "7.0.7"
     "@graphql-tools/resolvers-composition" "6.2.5"
     "@graphql-tools/schema" "7.1.2"
-    "@graphql-tools/utils" "7.1.4"
+    "@graphql-tools/utils" "7.1.5"
     "@graphql-tools/wrap" "7.0.4"
 
-"@graphql-mesh/types@0.23.0", "@graphql-mesh/types@^0.23.0":
+"@graphql-mesh/types@0.23.0":
   version "0.23.0"
   resolved "https://registry.yarnpkg.com/@graphql-mesh/types/-/types-0.23.0.tgz#001076c6975bf6c48375321412f09226a7d8e2c3"
   integrity sha512-4Ucc6++CX07NKl9q9QTGxU7o6M4h7zf/3297/dW8pKvgghZLvJ4Dw8rTJSSaWZEv6VTH1nc6vAN6tF/Pz24i3g==
   dependencies:
     "@graphql-tools/delegate" "7.0.7"
     "@graphql-tools/utils" "7.1.4"
+    "@graphql-typed-document-node/core" "3.1.0"
+    fetchache "0.0.4"
+
+"@graphql-mesh/types@0.23.1", "@graphql-mesh/types@^0.23.0":
+  version "0.23.1"
+  resolved "https://registry.yarnpkg.com/@graphql-mesh/types/-/types-0.23.1.tgz#57efdd9bb89cc49adc82b9d14debcb6e57859a08"
+  integrity sha512-E5Am5jlZ0GA43Wjaa+xolly09wUQjCAbCxOh1/50DGSZkbJFsP1fDcpn0d7stK56uum9mFcbY7V5f5fzNCKjYQ==
+  dependencies:
+    "@graphql-tools/delegate" "7.0.7"
+    "@graphql-tools/utils" "7.1.5"
     "@graphql-typed-document-node/core" "3.1.0"
     fetchache "0.0.4"
 
@@ -570,7 +580,7 @@
     valid-url "1.0.9"
     ws "7.4.1"
 
-"@graphql-tools/utils@7.1.4", "@graphql-tools/utils@^7.0.0", "@graphql-tools/utils@^7.0.2", "@graphql-tools/utils@^7.1.2", "@graphql-tools/utils@^7.1.4":
+"@graphql-tools/utils@7.1.4":
   version "7.1.4"
   resolved "https://registry.yarnpkg.com/@graphql-tools/utils/-/utils-7.1.4.tgz#5baf27e908aa56c44ed3992f4607718a37f186a0"
   integrity sha512-4lxmstMpgHSM1ULD+1X5AcPFaizkdBubB7H9Rqr7Wh6L9bxUHBHFB3bhaFXT7FI0xE01Pt0IMsZadOIlhVTXrg==
@@ -579,7 +589,7 @@
     camel-case "4.1.2"
     tslib "~2.0.1"
 
-"@graphql-tools/utils@^7.1.5":
+"@graphql-tools/utils@7.1.5", "@graphql-tools/utils@^7.0.0", "@graphql-tools/utils@^7.0.2", "@graphql-tools/utils@^7.1.2", "@graphql-tools/utils@^7.1.4", "@graphql-tools/utils@^7.1.5":
   version "7.1.5"
   resolved "https://registry.yarnpkg.com/@graphql-tools/utils/-/utils-7.1.5.tgz#82eb9fd1d796bf9455ccf8f3d8775674a4582eb3"
   integrity sha512-utJgoKJNhAUz0i+MGF1uvz7i4fxxz1TE21c68R38Hs4kmXO6A6H5e18jwzGdjspyf3IZOS621fmN9GQPzIazHg==
