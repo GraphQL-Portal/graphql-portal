@@ -1,5 +1,5 @@
 {
-  "name": "@graphql-portal/logger",
+  "name": "@graphql-portal/types",
   "version": "0.0.1",
   "license": "MIT",
   "main": "dist/src/index.js",
@@ -7,6 +7,7 @@
     "build": "tsc -b"
   },
   "dependencies": {
-    "winston": "^3.3.3"
+    "ajv": "^6.12.6",
+    "cosmiconfig": "^7.0.0"
   }
 }

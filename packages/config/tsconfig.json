@@ -10,6 +10,14 @@
     "declaration": true,
     "declarationMap": true
   },
-  "include": ["src/**/*.ts", "src/types/*.json"],
-  "exclude": ["node_modules", "./dist", "**/*.d.ts"]
+  "references": [
+    {
+      "path": "../types"
+    },
+    {
+      "path": "../logger"
+    }
+  ],
+  "include": ["src/**/*.ts"],
+  "exclude": ["node_modules", "dist"]
 }

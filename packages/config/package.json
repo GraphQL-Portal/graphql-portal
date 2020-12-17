@@ -8,6 +8,8 @@
   },
   "dependencies": {
     "ajv": "^6.12.6",
-    "cosmiconfig": "^7.0.0"
+    "cosmiconfig": "^7.0.0",
+    "@graphql-portal/types": "^0.0.1",
+    "@graphql-portal/logger": "^0.0.1"
   }
 }

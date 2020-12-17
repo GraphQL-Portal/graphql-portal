@@ -1,16 +1,15 @@
 import { cosmiconfig } from 'cosmiconfig';
 import { prefixLogger } from '@graphql-portal/logger';
-import { ApiDef } from './types/api.interface';
-import { join } from 'path';
-import { parse } from 'yaml';
-import { readdir, readFile } from 'fs/promises';
+import {
+  ApiDef,
+  GatewayConfig,
+  ApiConfig,
+  SourceConfig,
+  gatewaySchema,
+  apiDefsSchema,
+  sourceSchema,
+} from '@graphql-portal/types';
 import Ajv from 'ajv';
-import { GatewayConfig } from './types/gateway-config';
-import { ApiConfig } from './types/api-config';
-import { SourceConfig } from './types/mesh-source-config';
-import * as gatewaySchema from './types/gateway-schema.json';
-import * as apiDefsSchema from './types/api-schema.json';
-import * as sourceSchema from './types/mesh-source-schema.json';
 
 export { GatewayConfig, ApiConfig, SourceConfig, ApiDef };
 
@@ -49,32 +48,33 @@ export async function loadGatewayConfig(): Promise<GatewayConfig | null> {
 }
 
 export async function loadAPIDefs(gatewayConfig: GatewayConfig): Promise<ApiDef[]> {
-  const apiConfigsDir = join(process.cwd(), gatewayConfig.apis_path);
-  const sourceConfigsDir = join(process.cwd(), gatewayConfig.sources_path);
+  return [];
+  // const apiConfigsDir = join(process.cwd(), gatewayConfig.apis_path);
+  // const sourceConfigsDir = join(process.cwd(), gatewayConfig.sources_path);
 
-  const fileNames = await readdir(apiConfigsDir);
-  const apis = await Promise.all(
-    fileNames.map(async (name) => {
-      const apiPath = join(apiConfigsDir, name);
-      const file = await readFile(apiPath, 'utf8');
-      const apiConfig = parse(file);
-      if (!validateApiConfig(apiConfig)) {
-        throw new Error(`API configuration file is not valid: ${apiPath}`);
-      }
+  // const fileNames = await readdir(apiConfigsDir);
+  // const apis = await Promise.all(
+  //   fileNames.map(async (name) => {
+  //     const apiPath = join(apiConfigsDir, name);
+  //     const file = await readFile(apiPath, 'utf8');
+  //     const apiConfig = parse(file);
+  //     if (!validateApiConfig(apiConfig)) {
+  //       throw new Error(`API configuration file is not valid: ${apiPath}`);
+  //     }
 
-      const sources = await Promise.all(
-        apiConfig.source_config_names.map((configName) => loadSourceConfig(join(sourceConfigsDir, configName)))
-      );
-      return {
-        ...apiConfig,
-        sources,
-      };
-    })
-  );
+  //     const sources = await Promise.all(
+  //       apiConfig.source_config_names.map((configName) => loadSourceConfig(join(sourceConfigsDir, configName)))
+  //     );
+  //     return {
+  //       ...apiConfig,
+  //       sources,
+  //     };
+  //   })
+  // );
 
-  config.apiDefs = apis;
+  // config.apiDefs = apis;
 
-  return config.apiDefs;
+  // return config.apiDefs;
 }
 
 export function validateGatewayConfig(config: any): config is GatewayConfig {
@@ -110,12 +110,13 @@ export function validateSourceConfig(source: any): source is SourceConfig {
 }
 
 export async function loadSourceConfig(fileName: string): Promise<SourceConfig> {
-  const file = await readFile(fileName, 'utf8');
-  const sourceConfig = parse(file);
-  if (!validateSourceConfig(sourceConfig)) {
-    throw new Error(`Source configuration file is not valid: ${fileName}`);
-  }
-  return sourceConfig;
+  return {} as any;
+  // const file = await readFile(fileName, 'utf8');
+  // const sourceConfig = parse(file);
+  // if (!validateSourceConfig(sourceConfig)) {
+  //   throw new Error(`Source configuration file is not valid: ${fileName}`);
+  // }
+  // return sourceConfig;
 }
 
 export function validateApiConfig(api: any): api is ApiConfig {
