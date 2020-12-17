@@ -20,10 +20,13 @@
     "packages/*"
   ],
   "dependencies": {
+    "@changesets/cli": "^2.12.0",
     "@graphql-mesh/config": "^0.11.5",
     "@graphql-mesh/graphql": "^0.10.2",
     "@graphql-mesh/runtime": "^0.10.4",
     "@graphql-mesh/types": "^0.23.0",
+    "@graphql-portal/config": "^0.0.1",
+    "@graphql-portal/logger": "^0.0.1",
     "@types/cookie-parser": "^1.4.2",
     "@types/graphql-upload": "^8.0.4",
     "ajv": "^6.12.6",
