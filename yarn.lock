@@ -370,7 +370,7 @@
     lodash "4.17.20"
     param-case "3.0.4"
 
-"@graphql-mesh/graphql@^0.10.2":
+"@graphql-mesh/graphql@^0.10.3":
   version "0.10.3"
   resolved "https://registry.yarnpkg.com/@graphql-mesh/graphql/-/graphql-0.10.3.tgz#7d06b2a5745ca82a23557f5f377e6e554c749ac8"
   integrity sha512-tOgAebla5BEf325QGN/GFMmvm5rTkJRnjeWZm1eJ1yzCZkvIXXEiBBLDECblyGsTsZ4UUkHapefwc7bkXcL+0w==
