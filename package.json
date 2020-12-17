@@ -15,7 +15,8 @@
     "start": "yarn workspace @graphql-portal/gateway start",
     "lint": "eslint '{src,apps,libs,test}/**/*.ts' --fix",
     "test": "jest --coverage --runInBand --detectOpenHandles",
-    "prerelease": "yarn build"
+    "prerelease": "yarn build",
+    "release": "changeset publish"
   },
   "workspaces": [
     "packages/*"
