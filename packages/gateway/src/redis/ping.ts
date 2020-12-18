@@ -1,7 +1,7 @@
+import { config } from '@graphql-portal/config';
+import { Channel } from '@graphql-portal/types';
 import { Redis } from 'ioredis';
 import { nodeId } from '../server';
-import Channel from './channel.enum';
-import { config } from '@graphql-portal/config';
 
 export async function ping(redis: Redis): Promise<void> {
   setInterval(() => {
