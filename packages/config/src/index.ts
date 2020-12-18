@@ -1,7 +1,7 @@
 import { ApiDef, GatewayConfig } from '@graphql-portal/types';
 import { logger } from '@graphql-portal/logger';
 import { dashboard, initDashboard } from '@graphql-portal/dashboard';
-import { loadApiDefs as loadApiDefsFromFs } from './api-defs.config';
+import { loadApiDefs as loadApiDefsFromFs } from './api-def.config';
 import { loadConfig } from './gateway.config';
 
 const config: {
