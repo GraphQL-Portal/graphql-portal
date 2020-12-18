@@ -407,7 +407,7 @@
     "@graphql-tools/utils" "7.1.5"
     "@graphql-tools/wrap" "7.0.4"
 
-"@graphql-mesh/types@0.23.1", "@graphql-mesh/types@^0.23.0":
+"@graphql-mesh/types@0.23.1", "@graphql-mesh/types@^0.23.1":
   version "0.23.1"
   resolved "https://registry.yarnpkg.com/@graphql-mesh/types/-/types-0.23.1.tgz#57efdd9bb89cc49adc82b9d14debcb6e57859a08"
   integrity sha512-E5Am5jlZ0GA43Wjaa+xolly09wUQjCAbCxOh1/50DGSZkbJFsP1fDcpn0d7stK56uum9mFcbY7V5f5fzNCKjYQ==
