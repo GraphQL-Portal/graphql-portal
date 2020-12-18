@@ -2,7 +2,7 @@ name: Release
 
 on:
   push:
-    branches: 
+    branches:
       - main
 
 jobs:
@@ -31,3 +31,4 @@ jobs:
           title: 'Upcoming Release Changes'
         env:
             NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
