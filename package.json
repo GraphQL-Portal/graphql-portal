@@ -1,6 +1,6 @@
 {
   "name": "graphql-portal",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "author": "code.store",
   "license": "MIT",
   "private": true,
@@ -10,7 +10,9 @@
     "generate-mesh-source-config": "json2ts -i packages/types/src/mesh-source-schema.json -o ./packages/types/src/mesh-source-config.ts --style.singleQuote --bannerComment \"/* eslint-disable */\"",
     "generate-api-def-config": "json2ts -i packages/types/src/api-def-schema.json -o ./packages/types/src/api-def-config.ts --style.singleQuote --bannerComment \"/* eslint-disable */\"",
     "generate-configs": "yarn generate-gateway-config && yarn generate-mesh-source-config && yarn generate-api-def-config",
-    "prebuild": "rimraf dist ./packages/config/dist ./packages/types/dist ./packages/dashboard/dist ./packages/logger/dist && yarn generate-configs",
+    "clear-dist": "rimraf dist ./packages/config/dist ./packages/types/dist ./packages/dashboard/dist ./packages/logger/dist",
+    "mesh-source-sync": "ts-node ./packages/types/src/mesh-source-sync.ts && prettier --write ./packages/types/src/mesh-source-schema.json",
+    "prebuild": "yarn clear-dist && yarn mesh-source-sync && yarn generate-configs",
     "build": "tsc -b",
     "start": "yarn workspace @graphql-portal/gateway start",
     "lint": "eslint '{src,apps,libs,test}/**/*.ts' --fix",
