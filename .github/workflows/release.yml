@@ -15,7 +15,7 @@ jobs:
           fetch-depth: 0
 
       - name: Setup Node@14.x
-        uses: actions/setup-node@vmaster
+        uses: actions/setup-node@master
         with:
           node-version: 14
           registry-url: 'https://registry.npmjs.org'
