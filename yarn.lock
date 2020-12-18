@@ -394,7 +394,7 @@
     "@graphql-tools/wrap" "7.0.4"
     fetchache "0.0.4"
 
-"@graphql-mesh/runtime@0.10.6", "@graphql-mesh/runtime@^0.10.4":
+"@graphql-mesh/runtime@0.10.6", "@graphql-mesh/runtime@^0.10.6":
   version "0.10.6"
   resolved "https://registry.yarnpkg.com/@graphql-mesh/runtime/-/runtime-0.10.6.tgz#4f0b13c32c9cc66d995439941e5125130514c6d2"
   integrity sha512-QJJkHHplAm/fYjFMfemDS4IvEMvmdiuM/gi6b6NI16qOY0jd3jyfwvbKW2BXajsMSZtKW7btD6ZYYx1g5wdoKw==
