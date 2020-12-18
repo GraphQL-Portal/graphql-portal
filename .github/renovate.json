@@ -1,0 +1,13 @@
+{
+  "extends": [
+    "config:base"
+  ],
+  "requiredStatusChecks": null,
+  "automerge": true,
+  "major": {
+    "automerge": false
+  },
+  "labels": ["dependencies"],
+  "rangeStrategy": "bump",
+  "prHourlyLimit": 10
+}
