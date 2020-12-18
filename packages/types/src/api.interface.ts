@@ -1,6 +1,6 @@
-import { Source } from '@graphql-mesh/types/config';
-import { ApiConfig } from './api-config';
+import { SourceConfig } from './mesh-source-config';
+import { ApiDefConfig } from './api-def-config';
 
-export interface ApiDef extends ApiConfig {
-  sources: Source[];
+export interface ApiDef extends ApiDefConfig {
+  sources: SourceConfig[];
 }

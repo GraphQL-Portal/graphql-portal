@@ -29,7 +29,6 @@ export interface Handler {
   soap?: SoapHandler;
   thrift?: ThriftHandler;
   tuql?: TuqlHandler;
-  [k: string]: unknown;
 }
 export interface FhirHandler {
   endpoint?: string;

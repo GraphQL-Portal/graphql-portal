@@ -1,9 +1,9 @@
 import { processConfig } from '@graphql-mesh/config';
 import { getMesh } from '@graphql-mesh/runtime';
-import { Application, Router } from 'express';
-import { graphqlHTTP } from 'express-graphql';
 import { prefixLogger } from '@graphql-portal/logger';
 import { ApiDef } from '@graphql-portal/types';
+import { Application, Router } from 'express';
+import { graphqlHTTP } from 'express-graphql';
 
 const logger = prefixLogger('router');
 
@@ -14,13 +14,13 @@ export async function buildRouter(apiDefs: ApiDef[]): Promise<Router> {
 
   if (apiDefs?.length) {
     await Promise.all(
-      apiDefs.map(async (api) => {
-        const meshConfig = await processConfig({ sources: api.sources });
+      apiDefs.map(async (apiDef) => {
+        const meshConfig = await processConfig({ sources: apiDef.sources });
         const { schema, contextBuilder } = await getMesh(meshConfig);
 
-        logger.info(`Loaded API ${api.name}: ${api.endpoint}`);
+        logger.info(`Loaded API ${apiDef.name}: ${apiDef.endpoint}`);
         nextRouter.use(
-          api.endpoint,
+          apiDef.endpoint,
           graphqlHTTP(async (req) => ({
             schema,
             context: await contextBuilder(req),

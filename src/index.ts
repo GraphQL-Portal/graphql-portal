@@ -1,9 +1,9 @@
-import { cpus } from 'os';
-import cluster from 'cluster';
-import { logger } from '@graphql-portal/logger';
-import { version } from '../package.json';
-import { startServer, nodeId } from './server';
 import { config, initConfig, loadApiDefs } from '@graphql-portal/config';
+import { logger } from '@graphql-portal/logger';
+import cluster from 'cluster';
+import { cpus } from 'os';
+import { version } from '../package.json';
+import { nodeId, startServer } from './server';
 
 function handleStopSignal(): void {
   logger.info('Stop signal received');

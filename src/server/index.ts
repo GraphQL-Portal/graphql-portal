@@ -1,13 +1,13 @@
+import { config, loadApiDefs } from '@graphql-portal/config';
+import { logger } from '@graphql-portal/logger';
+import { Channel } from '@graphql-portal/types';
 import bodyParser from 'body-parser';
 import cookieParser from 'cookie-parser';
 import express from 'express';
 import { graphqlUploadExpress } from 'graphql-upload';
 import { createServer } from 'http';
 import { v4 as uuidv4 } from 'uuid';
-import { config, loadApiDefs } from '@graphql-portal/config';
-import { logger } from '@graphql-portal/logger';
 import setupRedis from '../redis';
-import Channel from '../redis/channel.enum';
 import { setRouter } from './router';
 
 export const nodeId: string = uuidv4();

@@ -312,7 +312,7 @@
       }
     },
     "Handler": {
-      "additionalProperties": true,
+      "additionalProperties": false,
       "type": "object",
       "title": "Handler",
       "properties": {
@@ -2000,8 +2000,5 @@
       "description": "List of transforms to apply to the current API source, before unifying it with the rest of the sources"
     }
   },
-  "required": [
-    "name",
-    "handler"
-  ]
+  "required": ["name", "handler"]
 }

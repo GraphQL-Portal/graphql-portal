@@ -3,4 +3,4 @@ enum Channel {
   ping = 'ping',
 }
 
-export default Channel;
+export { Channel };

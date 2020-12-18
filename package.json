@@ -8,8 +8,8 @@
   "scripts": {
     "generate-gateway-config": "json2ts -i packages/types/src/gateway-schema.json -o ./packages/types/src/gateway-config.ts --style.singleQuote --bannerComment \"/* eslint-disable */\"",
     "generate-mesh-source-config": "json2ts -i packages/types/src/mesh-source-schema.json -o ./packages/types/src/mesh-source-config.ts --style.singleQuote --bannerComment \"/* eslint-disable */\"",
-    "generate-api-config": "json2ts -i packages/types/src/api-schema.json -o ./packages/types/src/api-config.ts --style.singleQuote --bannerComment \"/* eslint-disable */\"",
-    "generate-configs": "yarn generate-gateway-config && yarn generate-mesh-source-config && yarn generate-api-config",
+    "generate-api-def-config": "json2ts -i packages/types/src/api-def-schema.json -o ./packages/types/src/api-def-config.ts --style.singleQuote --bannerComment \"/* eslint-disable */\"",
+    "generate-configs": "yarn generate-gateway-config && yarn generate-mesh-source-config && yarn generate-api-def-config",
     "prebuild": "rimraf dist ./packages/config/dist ./packages/types/dist ./packages/dashboard/dist ./packages/logger/dist && yarn generate-configs",
     "build": "tsc -b",
     "start": "node dist/src/index",

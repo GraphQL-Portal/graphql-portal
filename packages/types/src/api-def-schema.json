@@ -1,8 +1,8 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "ApiConfig",
+  "title": "ApiDefConfig",
   "type": "object",
-  "additionalProperties": false,
+  "additionalProperties": true,
   "properties": {
     "name": {
       "type": "string"
@@ -19,9 +19,5 @@
       }
     }
   },
-  "required": [
-    "name",
-    "endpoint",
-    "source_config_names"
-  ]
+  "required": ["name", "endpoint"]
 }
