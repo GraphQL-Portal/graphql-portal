@@ -1,0 +1,33 @@
+name: Release
+
+on:
+  push:
+    branches: 
+      - main
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@master
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node@14.x
+        uses: actions/setup-node@vmaster
+        with:
+          node-version: 14
+          registry-url: 'https://registry.npmjs.org'
+
+      - name: Install dependencies
+        run: yarn install && yarn build
+
+      - name: Create Release Pull Request
+        uses: changesets/action@master
+        with:
+          publish: yarn release
+          commit: 'chore(release): update monorepo packages versions'
+          title: 'Upcoming Release Changes'
+        env:
+            NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
