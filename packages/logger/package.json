@@ -8,5 +8,8 @@
   },
   "dependencies": {
     "winston": "^3.3.3"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }

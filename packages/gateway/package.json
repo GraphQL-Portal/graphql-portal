@@ -1,6 +1,6 @@
 {
   "name": "@graphql-portal/gateway",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "license": "MIT",
   "author": "code.store",
   "main": "dist/src/index.js",
@@ -9,10 +9,10 @@
     "start": "node dist/src/index"
   },
   "dependencies": {
-    "@graphql-portal/config": "^0.0.1",
-    "@graphql-portal/dashboard": "^0.0.1",
+    "@graphql-portal/config": "^0.1.0",
+    "@graphql-portal/dashboard": "^0.0.2",
     "@graphql-portal/logger": "^0.0.1",
-    "@graphql-portal/types": "^0.0.1",
+    "@graphql-portal/types": "^0.1.0",
     "ioredis": "^4.19.4",
     "uuid": "^8.3.2",
     "express": "^4.17.1",
@@ -31,5 +31,8 @@
     "cookie-parser": "^1.4.5",
     "@types/cookie-parser": "^1.4.2",
     "@types/graphql-upload": "^8.0.4"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }
