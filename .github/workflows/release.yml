@@ -20,6 +20,19 @@ jobs:
           node-version: 14
           registry-url: 'https://registry.npmjs.org'
 
+      - name: Get Yarn cache
+        id: yarn-cache-dir-path
+        run: echo "::set-output name=dir::$(yarn cache dir)"
+
+      - name: Yarn cache
+        uses: actions/cache@v2
+        id: yarn-cache # use this to check for `cache-hit` (`steps.yarn-cache.outputs.cache-hit != 'true'`)
+        with:
+          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
+          key: ${{ runner.os }}-14-yarn-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-14-yarn-
+
       - name: Install dependencies
         run: yarn install && yarn build
 
