@@ -19,9 +19,6 @@ async function start(): Promise<void> {
   if (!config.gateway) {
     throw new Error('Error loading the gateway.json|yaml configuration file.');
   }
-  if (!config.apiDefs) {
-    throw new Error('Error loading APIs.');
-  }
 
   const numCPUs: number = Number(config.gateway.pool_size) ? Number(config.gateway.pool_size) : cpus().length;
 

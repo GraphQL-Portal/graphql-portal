@@ -18,8 +18,8 @@ export async function loadApiDefs() {
   if (!config.gateway) {
     return;
   }
-  initDashboard(config.gateway);
   if (config.gateway.use_dashboard_configs) {
+    initDashboard(config.gateway);
     const loaded = await dashboard.loadApiDefs();
     if (!(loaded && loaded?.apiDefs?.length)) {
       logger.info('APIs were not updated');

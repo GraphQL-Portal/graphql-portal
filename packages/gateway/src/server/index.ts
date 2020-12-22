@@ -13,9 +13,6 @@ import { setRouter } from './router';
 export const nodeId: string = uuidv4();
 
 export async function startServer(): Promise<void> {
-  const redis = await setupRedis(config.gateway.redis_connection_string);
-  logger.info('Redis connected');
-
   const app = express();
   const httpServer = createServer(app);
 
@@ -24,17 +21,22 @@ export async function startServer(): Promise<void> {
   app.use(graphqlUploadExpress());
 
   await setRouter(app, config.apiDefs);
-  redis.subscribe(Channel.apiDefsUpdated);
-  redis.on('message', async (channel, timestamp) => {
-    if (channel !== Channel.apiDefsUpdated) {
-      return;
-    }
-    if (+timestamp && +timestamp <= config.timestamp) {
-      return;
-    }
-    await loadApiDefs();
-    await setRouter(app, config.apiDefs);
-  });
+  if (config.gateway.use_dashboard_configs) {
+    const redis = await setupRedis(config.gateway.redis_connection_string);
+    logger.info('Redis connected');
+
+    redis.subscribe(Channel.apiDefsUpdated);
+    redis.on('message', async (channel, timestamp) => {
+      if (channel !== Channel.apiDefsUpdated) {
+        return;
+      }
+      if (+timestamp && +timestamp <= config.timestamp) {
+        return;
+      }
+      await loadApiDefs();
+      await setRouter(app, config.apiDefs);
+    });
+  }
 
   // TODO: web sockets support
 

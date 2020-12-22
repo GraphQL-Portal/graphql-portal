@@ -3,6 +3,7 @@ out
 build
 generated
 /config
+packages/gateway/config
 
 # Temporary files
 tmp
