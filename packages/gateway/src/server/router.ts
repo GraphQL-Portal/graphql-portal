@@ -14,14 +14,14 @@ export async function buildRouter(apiDefs: ApiDef[]): Promise<Router> {
 
   if (apiDefs?.length) {
     await Promise.all(
-      apiDefs.map(async (apiDef) => {
+      apiDefs.map(async apiDef => {
         const meshConfig = await processConfig({ sources: apiDef.sources });
         const { schema, contextBuilder } = await getMesh(meshConfig);
 
         logger.info(`Loaded API ${apiDef.name}: ${apiDef.endpoint}`);
         nextRouter.use(
           apiDef.endpoint,
-          graphqlHTTP(async (req) => ({
+          graphqlHTTP(async req => ({
             schema,
             context: await contextBuilder(req),
             graphiql: true,
@@ -30,7 +30,7 @@ export async function buildRouter(apiDefs: ApiDef[]): Promise<Router> {
       })
     );
   } else {
-    logger.info('No API loaded');
+    logger.warn('No API loaded');
   }
 
   router = nextRouter;
