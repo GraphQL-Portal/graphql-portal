@@ -1,7 +1,7 @@
 {
   "extends": [
     "config:base",
-    "schedule:weekend"
+    "schedule:weekends"
   ],
   "automerge": true,
   "major": {
