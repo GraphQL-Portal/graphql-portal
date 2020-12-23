@@ -1,5 +1,11 @@
 # @graphql-portal/config
 
+## 0.1.2
+
+### Patch Changes
+
+- f97eb9a: fixed config loading, added tests
+
 ## 0.1.1
 
 ### Patch Changes
