@@ -21,6 +21,7 @@ export async function startServer(): Promise<void> {
   app.use(graphqlUploadExpress());
 
   await setRouter(app, config.apiDefs);
+
   if (config.gateway.use_dashboard_configs) {
     const redis = await setupRedis(config.gateway.redis_connection_string);
     logger.info('Redis connected');
