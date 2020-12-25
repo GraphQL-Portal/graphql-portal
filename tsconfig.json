@@ -37,6 +37,5 @@
       "path": "packages/gateway"
     }
   ],
-  "include": ["src"],
   "exclude": ["node_modules", "dist", "*.d.ts"]
 }

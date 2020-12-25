@@ -9,7 +9,11 @@
     "composite": true,
     "allowJs": false,
     "declaration": true,
-    "declarationMap": true
+    "declarationMap": true,
+    "paths": {
+      "@graphql-portal/config": ["../config/src/index.ts"],
+      "@graphql-portal/types": ["../types/src/index.ts"]
+    }
   },
   "references": [
     {
