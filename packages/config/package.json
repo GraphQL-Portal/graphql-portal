@@ -7,10 +7,11 @@
     "build": "tsc -b"
   },
   "dependencies": {
+    "@graphql-portal/logger": "^0.0.1",
+    "@graphql-portal/types": "^0.2.0",
     "ajv": "^7.0.1",
     "cosmiconfig": "^7.0.0",
-    "@graphql-portal/types": "^0.2.0",
-    "@graphql-portal/logger": "^0.0.1"
+    "find-yarn-workspace-root": "^2.0.0"
   },
   "publishConfig": {
     "access": "public"

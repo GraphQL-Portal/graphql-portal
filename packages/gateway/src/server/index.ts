@@ -10,6 +10,11 @@ import { v4 as uuidv4 } from 'uuid';
 import setupRedis from '../redis';
 import { setRouter } from './router';
 
+export type ForwardHeaders = Record<string, string>;
+export interface Context {
+  forwardHeaders: ForwardHeaders;
+}
+
 export const nodeId: string = uuidv4();
 
 export async function startServer(): Promise<void> {
