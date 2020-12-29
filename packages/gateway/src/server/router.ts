@@ -5,7 +5,7 @@ import { ApiDef } from '@graphql-portal/types';
 import { Application, Request, Router } from 'express';
 import { graphqlHTTP } from 'express-graphql';
 import { loadCustomMiddlewares, RequestMiddleware } from '../middlewares';
-import IpBlackListMW from '../middlewares/mw_ip_blacklist';
+import ipBlackListMW from '../middlewares/mw_ip_blacklist';
 
 const logger = prefixLogger('router');
 
@@ -17,14 +17,6 @@ export async function buildRouter(apiDefs: ApiDef[]): Promise<Router> {
   if (apiDefs?.length) {
     await Promise.all(
       apiDefs.map(async apiDef => {
-        const mw_ipBlackList = new IpBlackListMW();
-        mw_ipBlackList.processConfig(apiDef);
-
-        const meshConfig = await processConfig({ sources: apiDef.sources });
-        const { schema, contextBuilder } = await getMesh(meshConfig);
-
-        logger.info(`Loaded API ${apiDef.name}: ${apiDef.endpoint}`);
-
         // prepare request context
         nextRouter.use(function(req, res, next) {
           req.context = {
@@ -35,14 +27,18 @@ export async function buildRouter(apiDefs: ApiDef[]): Promise<Router> {
         });
 
         // apply built-in middlewares (ip whitelist/blacklist, rate limiting, analytics, etc)
-        nextRouter.use(apiDef.endpoint, mw_ipBlackList.getMiddleware());
+        nextRouter.use(apiDef.endpoint, ipBlackListMW(apiDef));
 
         // apply custom middlewares
         const customMWs: RequestMiddleware[] = await loadCustomMiddlewares();
         customMWs.map(mw => {
-          mw.processConfig(apiDef);
-          nextRouter.use(apiDef.endpoint, mw.getMiddleware());
+          nextRouter.use(apiDef.endpoint, mw(apiDef));
         });
+
+        const meshConfig = await processConfig({ sources: apiDef.sources });
+        const { schema, contextBuilder } = await getMesh(meshConfig);
+
+        logger.info(`Loaded API ${apiDef.name}: ${apiDef.endpoint}`);
 
         // mesh middleware
         nextRouter.use(

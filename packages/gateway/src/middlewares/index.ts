@@ -4,10 +4,24 @@ import { config } from '@graphql-portal/config';
 import findWorkspaceRoot from 'find-yarn-workspace-root';
 import path from 'path';
 import { readdir } from 'fs/promises';
+import { logger } from '@graphql-portal/logger';
 
 export interface RequestMiddleware {
-  processConfig(apiDef: ApiDef): void;
-  getMiddleware(): RequestHandler;
+  (apiDef: ApiDef): RequestHandler;
+}
+
+export function prepareForwardedHeader(header: string, apiDef: ApiDef): void {
+  logger.info('prepareForwardedHeader %s', header);
+  apiDef.sources.forEach(source => {
+    if (source.handler.graphql) {
+      const graphql = source.handler.graphql;
+
+      if (graphql.operationHeaders === undefined) {
+        graphql.operationHeaders = {};
+      }
+      graphql.operationHeaders[header] = `{context.${header}}`;
+    }
+  });
 }
 
 export async function loadCustomMiddlewares(): Promise<RequestMiddleware[]> {
@@ -26,9 +40,7 @@ export async function loadCustomMiddlewares(): Promise<RequestMiddleware[]> {
       .map(async name => {
         const mwPath = path.join(mwDirPath, name);
         const mw = await import(mwPath);
-        if (mw.default) {
-          return new mw.default();
-        }
+        return mw.default;
       })
   );
 }
