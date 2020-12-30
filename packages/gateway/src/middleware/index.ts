@@ -3,7 +3,7 @@ import { RequestHandler } from 'express';
 import { config } from '@graphql-portal/config';
 import findWorkspaceRoot from 'find-yarn-workspace-root';
 import path from 'path';
-import { readdir } from 'fs/promises';
+import { promises as fs } from 'fs';
 import { logger } from '@graphql-portal/logger';
 
 export interface RequestMiddleware {
@@ -33,7 +33,7 @@ export async function loadCustomMiddlewares(): Promise<RequestMiddleware[]> {
     findWorkspaceRoot(process.cwd()) === null ? process.cwd() : (findWorkspaceRoot(process.cwd()) as string);
   const mwDirPath: string = path.join(workspaceRoot, config.gateway.middleware_path);
 
-  const mwFileNames = await readdir(mwDirPath);
+  const mwFileNames = await fs.readdir(mwDirPath);
   return await Promise.all(
     mwFileNames
       .filter(name => /.js$/.test(name))

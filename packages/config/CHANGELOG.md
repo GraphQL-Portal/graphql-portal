@@ -1,5 +1,16 @@
 # @graphql-portal/config
 
+## 0.2.0
+
+### Minor Changes
+
+- support federated schema
+
+### Patch Changes
+
+- Updated dependencies [undefined]
+  - @graphql-portal/types@0.3.0
+
 ## 0.1.2
 
 ### Patch Changes

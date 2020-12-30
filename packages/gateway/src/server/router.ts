@@ -35,7 +35,7 @@ export async function buildRouter(apiDefs: ApiDef[]): Promise<Router> {
           nextRouter.use(apiDef.endpoint, mw(apiDef));
         });
 
-        const meshConfig = await processConfig({ sources: apiDef.sources });
+        const meshConfig = await processConfig({ sources: apiDef.sources, ...apiDef.mesh });
         const { schema, contextBuilder } = await getMesh(meshConfig);
 
         logger.info(`Loaded API ${apiDef.name}: ${apiDef.endpoint}`);
@@ -52,7 +52,7 @@ export async function buildRouter(apiDefs: ApiDef[]): Promise<Router> {
             return {
               schema,
               context,
-              graphiql: true,
+            graphiql: { headerEditorEnabled: true },
             };
           })
         );

@@ -64,7 +64,7 @@ export async function loadApiDefs(gatewayConfig: GatewayConfig): Promise<ApiDef[
 
   const fileNames = await readdir(apiConfigsDir);
   const apiDefs = await Promise.all(
-    fileNames.map(async (name) => {
+    fileNames.map(async name => {
       const apiPath = join(apiConfigsDir, name);
       const file = await readFile(apiPath, 'utf8');
       const apiConfig = parse(file);
@@ -76,11 +76,12 @@ export async function loadApiDefs(gatewayConfig: GatewayConfig): Promise<ApiDef[
       }
 
       const sources = await Promise.all(
-        apiConfig.source_config_names.map((configName) => loadSourceConfig(join(sourceConfigsDir, configName)))
+        apiConfig.source_config_names.map(configName => loadSourceConfig(join(sourceConfigsDir, configName)))
       );
       return {
         ...apiConfig,
         sources,
+        mesh: apiConfig.mesh || {},
       };
     })
   );
