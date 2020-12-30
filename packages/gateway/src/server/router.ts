@@ -4,8 +4,8 @@ import { prefixLogger } from '@graphql-portal/logger';
 import { ApiDef } from '@graphql-portal/types';
 import { Application, Request, Router } from 'express';
 import { graphqlHTTP } from 'express-graphql';
-import { loadCustomMiddlewares, RequestMiddleware } from '../middleware';
-import ipBlackListMW from '../middleware/mw_ip_blacklist';
+import { prepareRequestContext } from '../middleware';
+import { defaultMiddlewares, loadCustomMiddlewares } from '../middleware';
 
 const logger = prefixLogger('router');
 
@@ -16,22 +16,10 @@ export async function buildRouter(apiDefs: ApiDef[]): Promise<Router> {
 
   if (apiDefs?.length) {
     await Promise.all(
-      apiDefs.map(async apiDef => {
-        // prepare request context
-        nextRouter.use(function(req, res, next) {
-          req.context = {
-            forwardHeaders: {},
-          };
-
-          next();
-        });
-
-        // apply built-in middleware (ip whitelist/blacklist, rate limiting, analytics, etc)
-        nextRouter.use(apiDef.endpoint, ipBlackListMW(apiDef));
-
-        // apply custom middleware
-        const customMWs: RequestMiddleware[] = await loadCustomMiddlewares();
-        customMWs.map(mw => {
+      apiDefs.map(async (apiDef) => {
+        nextRouter.use(prepareRequestContext);
+        const customMiddlewares = await loadCustomMiddlewares();
+        [...defaultMiddlewares, ...customMiddlewares].map((mw) => {
           nextRouter.use(apiDef.endpoint, mw(apiDef));
         });
 
@@ -52,7 +40,7 @@ export async function buildRouter(apiDefs: ApiDef[]): Promise<Router> {
             return {
               schema,
               context,
-            graphiql: { headerEditorEnabled: true },
+              graphiql: { headerEditorEnabled: true },
             };
           })
         );
