@@ -5,7 +5,7 @@ import { promises as fs } from 'fs';
 import { RequestMiddleware } from '.';
 
 export async function loadCustomMiddlewares(): Promise<RequestMiddleware[]> {
-  if (config.gateway.middleware_path === '') {
+  if (!config.gateway.middleware_path) {
     return [];
   }
 

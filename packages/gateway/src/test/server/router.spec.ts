@@ -12,6 +12,11 @@ jest.mock('@graphql-portal/logger', () => ({
     warn: jest.fn(),
   }),
 }));
+jest.mock('@graphql-portal/config', () => ({
+  config: {
+    gateway: {},
+  },
+}));
 jest.mock('@graphql-mesh/config', () => ({
   processConfig: jest.fn(),
 }));
@@ -42,7 +47,7 @@ describe('Server', () => {
       it('should use mesh for api endpoint', async () => {
         const result = await buildRouter([apiDef]);
 
-        expect(result.stack?.[0]?.regexp?.toString()).toMatch(apiDef.endpoint);
+        expect(result.stack.find(layer => layer.regexp.test(apiDef.endpoint))).toBeDefined;
         expect(processConfig).toHaveBeenCalledTimes(1);
         expect(getMesh).toHaveBeenCalledTimes(1);
         expect(graphqlHTTP).toHaveBeenCalledTimes(1);
