@@ -8,7 +8,7 @@ import { graphqlUploadExpress } from 'graphql-upload';
 import { createServer } from 'http';
 import { v4 as uuidv4 } from 'uuid';
 import setupRedis from '../redis';
-import { setRouter } from './router';
+import { setRouter, updateApi } from './router';
 
 export type ForwardHeaders = Record<string, string>;
 export interface Context {
@@ -43,6 +43,12 @@ export async function startServer(): Promise<void> {
       await setRouter(app, config.apiDefs);
     });
   }
+  config.apiDefs.forEach(apiDef => {
+    if (!apiDef.schema_polling_interval) {
+      return;
+    }
+    setInterval(() => updateApi(apiDef), apiDef.schema_polling_interval);
+  })
 
   // TODO: web sockets support
 

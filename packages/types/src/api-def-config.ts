@@ -4,6 +4,7 @@ export interface ApiDefConfig {
   name: string;
   endpoint: string;
   source_config_names?: string[];
+  schema_polling_interval?: number;
   mesh?: {
     serve?: ServeConfig;
     require?: string[];

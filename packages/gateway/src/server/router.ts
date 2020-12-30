@@ -69,14 +69,16 @@ async function buildApi(toRouter: Router, apiDef: ApiDef, mesh?: IMesh) {
 }
 
 async function getMeshForApiDef(apiDef: ApiDef, mesh?: IMesh) {
+  if (mesh) {
+    return mesh;
+  }
   const meshConfig = await processConfig({ sources: apiDef.sources, ...apiDef.mesh });
   return getMesh(meshConfig);
 }
 
 export async function updateApi(apiDef: ApiDef): Promise<void> {
   const mesh = await getMeshForApiDef(apiDef);
-  const diffs = diff(mesh.schema, apiDef.schema!);
-  if (!diffs.length) {
+  if (!diff(mesh.schema, apiDef.schema!).length) {
     return;
   }
   logger.info(`API ${apiDef.name} schema changed, updating: ${apiDef.endpoint}`);
