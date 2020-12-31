@@ -29,7 +29,7 @@ export async function buildRouter(apiDefs: ApiDef[]): Promise<Router> {
   nextRouter.use(prepareRequestContext);
 
   if (apiDefs?.length) {
-    await Promise.all(apiDefs.map(apiDef => buildApi(nextRouter, apiDef)));
+    await Promise.all(apiDefs.map((apiDef) => buildApi(nextRouter, apiDef)));
   } else {
     logger.warn('No APIs loaded. Configuration is empty?');
   }
@@ -41,7 +41,7 @@ export async function buildRouter(apiDefs: ApiDef[]): Promise<Router> {
 async function buildApi(toRouter: Router, apiDef: ApiDef, mesh?: IMesh) {
   if (!mesh) {
     const customMiddlewares = await loadCustomMiddlewares();
-    [...defaultMiddlewares, ...customMiddlewares].map(mw => {
+    [...defaultMiddlewares, ...customMiddlewares].map((mw) => {
       toRouter.use(apiDef.endpoint, mw(apiDef));
     });
   }
@@ -79,6 +79,7 @@ async function getMeshForApiDef(apiDef: ApiDef, mesh?: IMesh) {
 export async function updateApi(apiDef: ApiDef): Promise<void> {
   const mesh = await getMeshForApiDef(apiDef);
   if (!diff(mesh.schema, apiDef.schema!).length) {
+    logger.debug(`API ${apiDef.name} schema was not changed`);
     return;
   }
   logger.info(`API ${apiDef.name} schema changed, updating: ${apiDef.endpoint}`);
@@ -87,7 +88,7 @@ export async function updateApi(apiDef: ApiDef): Promise<void> {
   await buildApi(routerWithNewApi, apiDef, mesh);
 
   const oldLayerIndex = router.stack.findIndex(
-    layer => layer.name === 'graphqlMiddleware' && layer.regexp.test(apiDef.endpoint)
+    (layer) => layer.name === 'graphqlMiddleware' && layer.regexp.test(apiDef.endpoint)
   );
   router.stack.splice(oldLayerIndex, 1, routerWithNewApi.stack[0]);
 }

@@ -29,14 +29,23 @@
     "use_dashboard_configs": {
       "type": "boolean"
     },
-    "dashboard_config": { "$ref": "#/definitions/dashboard_config" },
+    "dashboard_config": {
+      "$ref": "#/definitions/dashboard_config"
+    },
     "enable_control_api": {
       "type": "boolean"
     },
-    "control_api_config": { "$ref": "#/definitions/control_api_config" },
+    "control_api_config": {
+      "$ref": "#/definitions/control_api_config"
+    },
     "log_level": {
       "type": "string",
-      "enum": ["debug", "info", "warn", "error"]
+      "enum": [
+        "debug",
+        "info",
+        "warn",
+        "error"
+      ]
     },
     "redis_connection_string": {
       "type": "string"
@@ -64,21 +73,20 @@
           "type": "string"
         }
       },
-      "required": ["connection_string"]
+      "required": [
+        "connection_string"
+      ]
     },
     "control_api_config": {
       "type": "object",
       "description": "Used to specify GraphQL Portal Control API settings",
       "additionalProperties": false,
       "properties": {
-        "hostname": {
-          "type": "string"
-        },
-        "port": {
-          "type": "integer"
+        "endpoint": {
+          "type": "string",
+          "pattern": "^/"
         }
-      },
-      "required": ["hostname", "port"]
+      }
     }
   }
 }

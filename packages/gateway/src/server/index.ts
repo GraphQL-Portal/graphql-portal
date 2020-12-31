@@ -8,6 +8,7 @@ import { graphqlUploadExpress } from 'graphql-upload';
 import { createServer } from 'http';
 import { v4 as uuidv4 } from 'uuid';
 import setupRedis from '../redis';
+import setupControlApi from './control-api';
 import { setRouter, updateApi } from './router';
 
 export type ForwardHeaders = Record<string, string>;
@@ -43,12 +44,18 @@ export async function startServer(): Promise<void> {
       await setRouter(app, config.apiDefs);
     });
   }
-  config.apiDefs.forEach(apiDef => {
+
+  config.apiDefs.forEach((apiDef) => {
     if (!apiDef.schema_polling_interval) {
       return;
     }
     setInterval(() => updateApi(apiDef), apiDef.schema_polling_interval);
-  })
+  });
+
+  const apiDefsToControlApi = config.apiDefs.filter((apiDef) => apiDef.schema_updates_through_control_api);
+  if (apiDefsToControlApi.length) {
+    await setupControlApi(app, apiDefsToControlApi);
+  }
 
   // TODO: web sockets support
 

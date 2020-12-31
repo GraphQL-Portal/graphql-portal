@@ -1,5 +1,17 @@
 # @graphql-portal/config
 
+## 0.3.0
+
+### Minor Changes
+
+- update apis by polling and ping
+
+### Patch Changes
+
+- Updated dependencies [undefined]
+  - @graphql-portal/logger@0.1.0
+  - @graphql-portal/types@0.4.0
+
 ## 0.2.0
 
 ### Minor Changes

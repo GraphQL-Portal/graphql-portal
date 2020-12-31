@@ -25,6 +25,5 @@ export interface DashboardConfig {
  * Used to specify GraphQL Portal Control API settings
  */
 export interface ControlApiConfig {
-  hostname: string;
-  port: number;
+  endpoint?: string;
 }

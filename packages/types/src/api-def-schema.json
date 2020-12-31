@@ -9,39 +9,23 @@
       "type": "object",
       "title": "Cache",
       "properties": {
-        "file": {
-          "$ref": "#/definitions/FileCacheConfig"
-        },
-        "inmemoryLRU": {
-          "$ref": "#/definitions/InMemoryLRUConfig"
-        },
-        "localforage": {
-          "$ref": "#/definitions/LocalforageConfig"
-        },
-        "redis": {
-          "$ref": "#/definitions/RedisConfig"
-        }
+        "file": { "$ref": "#/definitions/FileCacheConfig" },
+        "inmemoryLRU": { "$ref": "#/definitions/InMemoryLRUConfig" },
+        "localforage": { "$ref": "#/definitions/LocalforageConfig" },
+        "redis": { "$ref": "#/definitions/RedisConfig" }
       }
     },
     "FileCacheConfig": {
       "additionalProperties": false,
       "type": "object",
       "title": "FileCacheConfig",
-      "properties": {
-        "path": {
-          "type": "string"
-        }
-      }
+      "properties": { "path": { "type": "string" } }
     },
     "InMemoryLRUConfig": {
       "additionalProperties": false,
       "type": "object",
       "title": "InMemoryLRUConfig",
-      "properties": {
-        "max": {
-          "type": "integer"
-        }
-      }
+      "properties": { "max": { "type": "integer" } }
     },
     "LocalforageConfig": {
       "additionalProperties": false,
@@ -52,48 +36,24 @@
           "type": "array",
           "items": {
             "type": "string",
-            "enum": [
-              "WEBSQL",
-              "INDEXEDDB",
-              "LOCALSTORAGE"
-            ],
+            "enum": ["WEBSQL", "INDEXEDDB", "LOCALSTORAGE"],
             "description": "Allowed values: WEBSQL, INDEXEDDB, LOCALSTORAGE"
           },
           "additionalItems": false,
           "description": "Allowed values: WEBSQL, INDEXEDDB, LOCALSTORAGE"
         },
-        "name": {
-          "type": "string"
-        },
-        "version": {
-          "type": "number"
-        },
-        "size": {
-          "type": "integer"
-        },
-        "storeName": {
-          "type": "string"
-        },
-        "description": {
-          "type": "string"
-        }
+        "name": { "type": "string" },
+        "version": { "type": "number" },
+        "size": { "type": "integer" },
+        "storeName": { "type": "string" },
+        "description": { "type": "string" }
       }
     },
     "RedisConfig": {
       "additionalProperties": false,
       "type": "object",
       "title": "RedisConfig",
-      "properties": {
-        "host": {
-          "type": "string"
-        },
-        "port": {
-          "type": "integer"
-        },
-        "password": {
-          "type": "string"
-        }
-      }
+      "properties": { "host": { "type": "string" }, "port": { "type": "integer" }, "password": { "type": "string" } }
     },
     "ServeConfig": {
       "additionalProperties": false,
@@ -102,52 +62,27 @@
       "properties": {
         "fork": {
           "description": "Spawn multiple server instances as node clusters (default: `1`) (Any of: Int, Boolean)",
-          "anyOf": [
-            {
-              "type": "integer"
-            },
-            {
-              "type": "boolean"
-            }
-          ]
+          "anyOf": [{ "type": "integer" }, { "type": "boolean" }]
         },
         "port": {
           "description": "TCP Port to listen (default: `3000`) (Any of: Int, String)",
-          "anyOf": [
-            {
-              "type": "integer"
-            },
-            {
-              "type": "string"
-            }
-          ]
+          "anyOf": [{ "type": "integer" }, { "type": "string" }]
         },
         "exampleQuery": {
           "type": "string",
           "description": "Provide an example query or queries for GraphQL Playground"
         },
-        "cors": {
-          "$ref": "#/definitions/CorsConfig"
-        },
+        "cors": { "$ref": "#/definitions/CorsConfig" },
         "handlers": {
           "type": "array",
           "items": {
             "description": "Any of: WebhookHandler, ExpressHandler",
-            "anyOf": [
-              {
-                "$ref": "#/definitions/WebhookHandler"
-              },
-              {
-                "$ref": "#/definitions/ExpressHandler"
-              }
-            ]
+            "anyOf": [{ "$ref": "#/definitions/WebhookHandler" }, { "$ref": "#/definitions/ExpressHandler" }]
           },
           "additionalItems": false,
           "description": "Any of: WebhookHandler, ExpressHandler"
         },
-        "staticFiles": {
-          "type": "string"
-        }
+        "staticFiles": { "type": "string" }
       }
     },
     "CorsConfig": {
@@ -155,43 +90,13 @@
       "type": "object",
       "title": "CorsConfig",
       "properties": {
-        "origin": {
-          "anyOf": [
-            {
-              "type": "object",
-              "additionalProperties": true
-            },
-            {
-              "type": "string"
-            }
-          ]
-        },
-        "allowedHeaders": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "additionalItems": false
-        },
-        "exposedHeaders": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "additionalItems": false
-        },
-        "credentials": {
-          "type": "boolean"
-        },
-        "maxAge": {
-          "type": "integer"
-        },
-        "preflightContinue": {
-          "type": "boolean"
-        },
-        "optionsSuccessStatus": {
-          "type": "integer"
-        }
+        "origin": { "anyOf": [{ "type": "object", "additionalProperties": true }, { "type": "string" }] },
+        "allowedHeaders": { "type": "array", "items": { "type": "string" }, "additionalItems": false },
+        "exposedHeaders": { "type": "array", "items": { "type": "string" }, "additionalItems": false },
+        "credentials": { "type": "boolean" },
+        "maxAge": { "type": "integer" },
+        "preflightContinue": { "type": "boolean" },
+        "optionsSuccessStatus": { "type": "integer" }
       }
     },
     "ExpressHandler": {
@@ -199,47 +104,26 @@
       "type": "object",
       "title": "ExpressHandler",
       "properties": {
-        "path": {
-          "type": "string"
-        },
-        "handler": {
-          "type": "string"
-        },
+        "path": { "type": "string" },
+        "handler": { "type": "string" },
         "method": {
           "type": "string",
-          "enum": [
-            "GET",
-            "POST",
-            "DELETE",
-            "PATCH"
-          ],
+          "enum": ["GET", "POST", "DELETE", "PATCH"],
           "description": "Allowed values: GET, POST, DELETE, PATCH"
         }
       },
-      "required": [
-        "path",
-        "handler"
-      ]
+      "required": ["path", "handler"]
     },
     "WebhookHandler": {
       "additionalProperties": false,
       "type": "object",
       "title": "WebhookHandler",
       "properties": {
-        "path": {
-          "type": "string"
-        },
-        "pubsubTopic": {
-          "type": "string"
-        },
-        "payload": {
-          "type": "string"
-        }
+        "path": { "type": "string" },
+        "pubsubTopic": { "type": "string" },
+        "payload": { "type": "string" }
       },
-      "required": [
-        "path",
-        "pubsubTopic"
-      ]
+      "required": ["path", "pubsubTopic"]
     },
     "Source": {
       "additionalProperties": false,
@@ -256,17 +140,12 @@
         },
         "transforms": {
           "type": "array",
-          "items": {
-            "$ref": "#/definitions/Transform"
-          },
+          "items": { "$ref": "#/definitions/Transform" },
           "additionalItems": false,
           "description": "List of transforms to apply to the current API source, before unifying it with the rest of the sources"
         }
       },
-      "required": [
-        "name",
-        "handler"
-      ]
+      "required": ["name", "handler"]
     },
     "Transform": {
       "additionalProperties": true,
@@ -275,9 +154,7 @@
       "properties": {
         "cache": {
           "type": "array",
-          "items": {
-            "$ref": "#/definitions/CacheTransformConfig"
-          },
+          "items": { "$ref": "#/definitions/CacheTransformConfig" },
           "additionalItems": false,
           "description": "Transformer to apply caching for your data sources"
         },
@@ -285,41 +162,23 @@
           "$ref": "#/definitions/EncapsulateTransformObject",
           "description": "Transformer to apply encapsulation to the API source, by creating a field for it under the root query"
         },
-        "federation": {
-          "$ref": "#/definitions/FederationTransform"
-        },
-        "filterSchema": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "additionalItems": false
-        },
-        "mock": {
-          "$ref": "#/definitions/MockingConfig",
-          "description": "Mock configuration for your source"
-        },
+        "federation": { "$ref": "#/definitions/FederationTransform" },
+        "filterSchema": { "type": "array", "items": { "type": "string" }, "additionalItems": false },
+        "mock": { "$ref": "#/definitions/MockingConfig", "description": "Mock configuration for your source" },
         "namingConvention": {
           "$ref": "#/definitions/NamingConventionTransformConfig",
           "description": "Transformer to apply naming convention to GraphQL Types"
         },
-        "prefix": {
-          "$ref": "#/definitions/PrefixTransformConfig",
-          "description": "Prefix transform"
-        },
+        "prefix": { "$ref": "#/definitions/PrefixTransformConfig", "description": "Prefix transform" },
         "rename": {
           "type": "array",
-          "items": {
-            "$ref": "#/definitions/RenameTransformObject"
-          },
+          "items": { "$ref": "#/definitions/RenameTransformObject" },
           "additionalItems": false,
           "description": "Transformer to apply rename of a GraphQL type"
         },
         "resolversComposition": {
           "type": "array",
-          "items": {
-            "$ref": "#/definitions/ResolversCompositionTransformObject"
-          },
+          "items": { "$ref": "#/definitions/ResolversCompositionTransformObject" },
           "additionalItems": false,
           "description": "Transformer to apply composition to resolvers"
         },
@@ -328,44 +187,27 @@
           "description": "Configuration for Snapshot extension"
         }
       },
-      "required": [
-        "encapsulate"
-      ]
+      "required": ["encapsulate"]
     },
     "Handler": {
       "additionalProperties": true,
       "type": "object",
       "title": "Handler",
       "properties": {
-        "fhir": {
-          "$ref": "#/definitions/FhirHandler"
-        },
+        "fhir": { "$ref": "#/definitions/FhirHandler" },
         "graphql": {
           "$ref": "#/definitions/GraphQLHandler",
           "description": "Handler for remote/local/third-party GraphQL schema"
         },
-        "grpc": {
-          "$ref": "#/definitions/GrpcHandler",
-          "description": "Handler for gRPC and Protobuf schemas"
-        },
+        "grpc": { "$ref": "#/definitions/GrpcHandler", "description": "Handler for gRPC and Protobuf schemas" },
         "jsonSchema": {
           "$ref": "#/definitions/JsonSchemaHandler",
           "description": "Handler for JSON Schema specification. Source could be a local json file, or a url to it."
         },
-        "mongoose": {
-          "$ref": "#/definitions/MongooseHandler"
-        },
-        "mysql": {
-          "$ref": "#/definitions/MySQLHandler"
-        },
-        "neo4j": {
-          "$ref": "#/definitions/Neo4jHandler",
-          "description": "Handler for Neo4j"
-        },
-        "odata": {
-          "$ref": "#/definitions/ODataHandler",
-          "description": "Handler for OData"
-        },
+        "mongoose": { "$ref": "#/definitions/MongooseHandler" },
+        "mysql": { "$ref": "#/definitions/MySQLHandler" },
+        "neo4j": { "$ref": "#/definitions/Neo4jHandler", "description": "Handler for Neo4j" },
+        "odata": { "$ref": "#/definitions/ODataHandler", "description": "Handler for OData" },
         "openapi": {
           "$ref": "#/definitions/OpenapiHandler",
           "description": "Handler for Swagger / OpenAPI 2/3 specification. Source could be a local json/swagger file, or a url to it."
@@ -374,18 +216,9 @@
           "$ref": "#/definitions/PostGraphileHandler",
           "description": "Handler for Postgres database, based on `postgraphile`"
         },
-        "soap": {
-          "$ref": "#/definitions/SoapHandler",
-          "description": "Handler for SOAP"
-        },
-        "thrift": {
-          "$ref": "#/definitions/ThriftHandler",
-          "description": "Handler for OData"
-        },
-        "tuql": {
-          "$ref": "#/definitions/TuqlHandler",
-          "description": "Handler for SQLite database, based on `tuql`"
-        }
+        "soap": { "$ref": "#/definitions/SoapHandler", "description": "Handler for SOAP" },
+        "thrift": { "$ref": "#/definitions/ThriftHandler", "description": "Handler for OData" },
+        "tuql": { "$ref": "#/definitions/TuqlHandler", "description": "Handler for SQLite database, based on `tuql`" }
       }
     },
     "AdditionalStitchingResolverObject": {
@@ -393,106 +226,47 @@
       "type": "object",
       "title": "AdditionalStitchingResolverObject",
       "properties": {
-        "type": {
-          "type": "string"
-        },
-        "field": {
-          "type": "string"
-        },
-        "requiredSelectionSet": {
-          "type": "string"
-        },
-        "targetSource": {
-          "type": "string"
-        },
-        "targetMethod": {
-          "type": "string"
-        },
-        "args": {
-          "type": "object",
-          "properties": {}
-        },
-        "returnData": {
-          "type": "string"
-        },
-        "resultSelectedFields": {
-          "type": "object",
-          "properties": {}
-        },
-        "resultSelectionSet": {
-          "type": "string"
-        },
-        "resultDepth": {
-          "type": "integer"
-        }
+        "type": { "type": "string" },
+        "field": { "type": "string" },
+        "requiredSelectionSet": { "type": "string" },
+        "targetSource": { "type": "string" },
+        "targetMethod": { "type": "string" },
+        "args": { "type": "object", "properties": {} },
+        "returnData": { "type": "string" },
+        "resultSelectedFields": { "type": "object", "properties": {} },
+        "resultSelectionSet": { "type": "string" },
+        "resultDepth": { "type": "integer" }
       },
-      "required": [
-        "type",
-        "field",
-        "targetSource",
-        "targetMethod"
-      ]
+      "required": ["type", "field", "targetSource", "targetMethod"]
     },
     "AdditionalSubscriptionObject": {
       "additionalProperties": false,
       "type": "object",
       "title": "AdditionalSubscriptionObject",
       "properties": {
-        "type": {
-          "type": "string"
-        },
-        "field": {
-          "type": "string"
-        },
-        "pubsubTopic": {
-          "type": "string"
-        },
-        "returnData": {
-          "type": "string"
-        },
-        "filterBy": {
-          "type": "string"
-        }
+        "type": { "type": "string" },
+        "field": { "type": "string" },
+        "pubsubTopic": { "type": "string" },
+        "returnData": { "type": "string" },
+        "filterBy": { "type": "string" }
       },
-      "required": [
-        "type",
-        "field",
-        "pubsubTopic"
-      ]
+      "required": ["type", "field", "pubsubTopic"]
     },
     "PubSubConfig": {
       "additionalProperties": false,
       "type": "object",
       "title": "PubSubConfig",
       "properties": {
-        "name": {
-          "type": "string"
-        },
-        "config": {
-          "anyOf": [
-            {
-              "type": "object",
-              "additionalProperties": true
-            },
-            {
-              "type": "string"
-            }
-          ]
-        }
+        "name": { "type": "string" },
+        "config": { "anyOf": [{ "type": "object", "additionalProperties": true }, { "type": "string" }] }
       },
-      "required": [
-        "name"
-      ]
+      "required": ["name"]
     },
     "FhirHandler": {
       "additionalProperties": false,
       "type": "object",
       "title": "FhirHandler",
-      "properties": {
-        "endpoint": {
-          "type": "string"
-        }
-      }
+      "properties": { "endpoint": { "type": "string" } }
     },
     "GraphQLHandler": {
       "additionalProperties": false,
@@ -513,16 +287,10 @@
           "properties": {},
           "description": "JSON object representing the Headers to add to the runtime of the API calls only for operation during runtime"
         },
-        "useGETForQueries": {
-          "type": "boolean",
-          "description": "Use HTTP GET for Query operations"
-        },
+        "useGETForQueries": { "type": "boolean", "description": "Use HTTP GET for Query operations" },
         "method": {
           "type": "string",
-          "enum": [
-            "GET",
-            "POST"
-          ],
+          "enum": ["GET", "POST"],
           "description": "HTTP method used for GraphQL operations (Allowed values: GET, POST)"
         },
         "useSSEForSubscription": {
@@ -530,58 +298,29 @@
           "description": "Use Server Sent Events instead of WebSocket for Subscriptions"
         },
         "customFetch": {
-          "anyOf": [
-            {
-              "type": "object",
-              "additionalProperties": true
-            },
-            {
-              "type": "string"
-            }
-          ],
+          "anyOf": [{ "type": "object", "additionalProperties": true }, { "type": "string" }],
           "description": "Path to a custom W3 Compatible Fetch Implementation"
         },
-        "webSocketImpl": {
-          "type": "string",
-          "description": "Path to a custom W3 Compatible WebSocket Implementation"
-        },
+        "webSocketImpl": { "type": "string", "description": "Path to a custom W3 Compatible WebSocket Implementation" },
         "introspection": {
           "type": "string",
           "description": "Path to the introspection\nYou can seperately give schema introspection"
         },
         "cacheIntrospection": {
           "description": "Cache Introspection (Any of: GraphQLIntrospectionCachingOptions, Boolean)",
-          "anyOf": [
-            {
-              "$ref": "#/definitions/GraphQLIntrospectionCachingOptions"
-            },
-            {
-              "type": "boolean"
-            }
-          ]
+          "anyOf": [{ "$ref": "#/definitions/GraphQLIntrospectionCachingOptions" }, { "type": "boolean" }]
         },
-        "multipart": {
-          "type": "boolean",
-          "description": "Enable multipart/formdata in order to support file uploads"
-        }
+        "multipart": { "type": "boolean", "description": "Enable multipart/formdata in order to support file uploads" }
       },
-      "required": [
-        "endpoint"
-      ]
+      "required": ["endpoint"]
     },
     "GraphQLIntrospectionCachingOptions": {
       "additionalProperties": false,
       "type": "object",
       "title": "GraphQLIntrospectionCachingOptions",
       "properties": {
-        "ttl": {
-          "type": "integer",
-          "description": "Time to live of introspection cache"
-        },
-        "path": {
-          "type": "string",
-          "description": "Path to Introspection JSON File"
-        }
+        "ttl": { "type": "integer", "description": "Time to live of introspection cache" },
+        "path": { "type": "string", "description": "Path to Introspection JSON File" }
       }
     },
     "GrpcHandler": {
@@ -589,99 +328,44 @@
       "type": "object",
       "title": "GrpcHandler",
       "properties": {
-        "endpoint": {
-          "type": "string",
-          "description": "gRPC Endpoint"
-        },
+        "endpoint": { "type": "string", "description": "gRPC Endpoint" },
         "protoFilePath": {
           "description": "gRPC Proto file that contains your protobuf schema (Any of: ProtoFilePath, String)",
-          "anyOf": [
-            {
-              "$ref": "#/definitions/ProtoFilePath"
-            },
-            {
-              "type": "string"
-            }
-          ]
+          "anyOf": [{ "$ref": "#/definitions/ProtoFilePath" }, { "type": "string" }]
         },
-        "serviceName": {
-          "type": "string",
-          "description": "Your base service name\nUsed for naming only"
-        },
-        "packageName": {
-          "type": "string",
-          "description": "Your base package name\nUsed for naming only"
-        },
-        "requestTimeout": {
-          "type": "integer",
-          "description": "Request timeout in milliseconds\nDefault: 200000"
-        },
-        "credentialsSsl": {
-          "$ref": "#/definitions/GrpcCredentialsSsl",
-          "description": "SSL Credentials"
-        },
-        "useHTTPS": {
-          "type": "boolean",
-          "description": "Use https instead of http for gRPC connection"
-        },
-        "metaData": {
-          "type": "object",
-          "properties": {},
-          "description": "MetaData"
-        }
+        "serviceName": { "type": "string", "description": "Your base service name\nUsed for naming only" },
+        "packageName": { "type": "string", "description": "Your base package name\nUsed for naming only" },
+        "requestTimeout": { "type": "integer", "description": "Request timeout in milliseconds\nDefault: 200000" },
+        "credentialsSsl": { "$ref": "#/definitions/GrpcCredentialsSsl", "description": "SSL Credentials" },
+        "useHTTPS": { "type": "boolean", "description": "Use https instead of http for gRPC connection" },
+        "metaData": { "type": "object", "properties": {}, "description": "MetaData" }
       },
-      "required": [
-        "endpoint",
-        "protoFilePath"
-      ]
+      "required": ["endpoint", "protoFilePath"]
     },
     "LoadOptions": {
       "additionalProperties": false,
       "type": "object",
       "title": "LoadOptions",
       "properties": {
-        "defaults": {
-          "type": "boolean"
-        },
-        "includeDirs": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "additionalItems": false
-        }
+        "defaults": { "type": "boolean" },
+        "includeDirs": { "type": "array", "items": { "type": "string" }, "additionalItems": false }
       }
     },
     "ProtoFilePath": {
       "additionalProperties": false,
       "type": "object",
       "title": "ProtoFilePath",
-      "properties": {
-        "file": {
-          "type": "string"
-        },
-        "load": {
-          "$ref": "#/definitions/LoadOptions"
-        }
-      },
-      "required": [
-        "file"
-      ]
+      "properties": { "file": { "type": "string" }, "load": { "$ref": "#/definitions/LoadOptions" } },
+      "required": ["file"]
     },
     "GrpcCredentialsSsl": {
       "additionalProperties": false,
       "type": "object",
       "title": "GrpcCredentialsSsl",
       "properties": {
-        "rootCA": {
-          "type": "string"
-        },
-        "certChain": {
-          "type": "string"
-        },
-        "privateKey": {
-          "type": "string"
-        }
+        "rootCA": { "type": "string" },
+        "certChain": { "type": "string" },
+        "privateKey": { "type": "string" }
       }
     },
     "JsonSchemaHandler": {
@@ -689,165 +373,59 @@
       "type": "object",
       "title": "JsonSchemaHandler",
       "properties": {
-        "baseUrl": {
-          "type": "string"
-        },
-        "operationHeaders": {
-          "type": "object",
-          "properties": {}
-        },
-        "schemaHeaders": {
-          "type": "object",
-          "properties": {}
-        },
+        "baseUrl": { "type": "string" },
+        "operationHeaders": { "type": "object", "properties": {} },
+        "schemaHeaders": { "type": "object", "properties": {} },
         "operations": {
           "type": "array",
-          "items": {
-            "$ref": "#/definitions/JsonSchemaOperation"
-          },
+          "items": { "$ref": "#/definitions/JsonSchemaOperation" },
           "additionalItems": false
         },
-        "disableTimestampScalar": {
-          "type": "boolean"
-        },
-        "baseSchema": {
-          "anyOf": [
-            {
-              "type": "object",
-              "additionalProperties": true
-            },
-            {
-              "type": "string"
-            }
-          ]
-        }
+        "disableTimestampScalar": { "type": "boolean" },
+        "baseSchema": { "anyOf": [{ "type": "object", "additionalProperties": true }, { "type": "string" }] }
       },
-      "required": [
-        "baseUrl",
-        "operations"
-      ]
+      "required": ["baseUrl", "operations"]
     },
     "JsonSchemaOperation": {
       "additionalProperties": false,
       "type": "object",
       "title": "JsonSchemaOperation",
       "properties": {
-        "field": {
-          "type": "string"
-        },
-        "path": {
-          "type": "string"
-        },
-        "pubsubTopic": {
-          "type": "string"
-        },
-        "description": {
-          "type": "string"
-        },
+        "field": { "type": "string" },
+        "path": { "type": "string" },
+        "pubsubTopic": { "type": "string" },
+        "description": { "type": "string" },
         "type": {
           "type": "string",
-          "enum": [
-            "Query",
-            "Mutation",
-            "Subscription"
-          ],
+          "enum": ["Query", "Mutation", "Subscription"],
           "description": "Allowed values: Query, Mutation, Subscription"
         },
         "method": {
           "type": "string",
-          "enum": [
-            "GET",
-            "DELETE",
-            "POST",
-            "PUT",
-            "PATCH"
-          ],
+          "enum": ["GET", "DELETE", "POST", "PUT", "PATCH"],
           "description": "Allowed values: GET, DELETE, POST, PUT, PATCH"
         },
-        "requestSchema": {
-          "anyOf": [
-            {
-              "type": "object",
-              "additionalProperties": true
-            },
-            {
-              "type": "string"
-            }
-          ]
-        },
-        "requestSample": {
-          "anyOf": [
-            {
-              "type": "object",
-              "additionalProperties": true
-            },
-            {
-              "type": "string"
-            }
-          ]
-        },
-        "requestTypeName": {
-          "type": "string"
-        },
-        "responseSample": {
-          "anyOf": [
-            {
-              "type": "object",
-              "additionalProperties": true
-            },
-            {
-              "type": "string"
-            }
-          ]
-        },
-        "responseSchema": {
-          "anyOf": [
-            {
-              "type": "object",
-              "additionalProperties": true
-            },
-            {
-              "type": "string"
-            }
-          ]
-        },
-        "responseTypeName": {
-          "type": "string"
-        },
-        "argTypeMap": {
-          "type": "object",
-          "properties": {}
-        },
-        "headers": {
-          "type": "object",
-          "properties": {}
-        }
+        "requestSchema": { "anyOf": [{ "type": "object", "additionalProperties": true }, { "type": "string" }] },
+        "requestSample": { "anyOf": [{ "type": "object", "additionalProperties": true }, { "type": "string" }] },
+        "requestTypeName": { "type": "string" },
+        "responseSample": { "anyOf": [{ "type": "object", "additionalProperties": true }, { "type": "string" }] },
+        "responseSchema": { "anyOf": [{ "type": "object", "additionalProperties": true }, { "type": "string" }] },
+        "responseTypeName": { "type": "string" },
+        "argTypeMap": { "type": "object", "properties": {} },
+        "headers": { "type": "object", "properties": {} }
       },
-      "required": [
-        "field",
-        "type"
-      ]
+      "required": ["field", "type"]
     },
     "MongooseHandler": {
       "additionalProperties": false,
       "type": "object",
       "title": "MongooseHandler",
       "properties": {
-        "connectionString": {
-          "type": "string"
-        },
-        "models": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/MongooseModel"
-          },
-          "additionalItems": false
-        },
+        "connectionString": { "type": "string" },
+        "models": { "type": "array", "items": { "$ref": "#/definitions/MongooseModel" }, "additionalItems": false },
         "discriminators": {
           "type": "array",
-          "items": {
-            "$ref": "#/definitions/MongooseModel"
-          },
+          "items": { "$ref": "#/definitions/MongooseModel" },
           "additionalItems": false
         }
       }
@@ -857,41 +435,22 @@
       "type": "object",
       "title": "MongooseModel",
       "properties": {
-        "name": {
-          "type": "string"
-        },
-        "path": {
-          "type": "string"
-        },
-        "options": {
-          "$ref": "#/definitions/ComposeWithMongooseOpts"
-        }
+        "name": { "type": "string" },
+        "path": { "type": "string" },
+        "options": { "$ref": "#/definitions/ComposeWithMongooseOpts" }
       },
-      "required": [
-        "name",
-        "path"
-      ]
+      "required": ["name", "path"]
     },
     "ComposeWithMongooseOpts": {
       "additionalProperties": false,
       "type": "object",
       "title": "ComposeWithMongooseOpts",
       "properties": {
-        "name": {
-          "type": "string"
-        },
-        "description": {
-          "type": "string"
-        },
-        "fields": {
-          "$ref": "#/definitions/ComposeWithMongooseFieldsOpts"
-        },
-        "inputType": {
-          "$ref": "#/definitions/ComposeMongooseInputType"
-        },
-        "resolvers": {
-          "$ref": "#/definitions/TypeConverterResolversOpts"
-        }
+        "name": { "type": "string" },
+        "description": { "type": "string" },
+        "fields": { "$ref": "#/definitions/ComposeWithMongooseFieldsOpts" },
+        "inputType": { "$ref": "#/definitions/ComposeMongooseInputType" },
+        "resolvers": { "$ref": "#/definitions/TypeConverterResolversOpts" }
       }
     },
     "ComposeMongooseInputType": {
@@ -899,18 +458,10 @@
       "type": "object",
       "title": "ComposeMongooseInputType",
       "properties": {
-        "name": {
-          "type": "string"
-        },
-        "description": {
-          "type": "string"
-        },
-        "fields": {
-          "$ref": "#/definitions/ComposeWithMongooseFieldsOpts"
-        },
-        "resolvers": {
-          "$ref": "#/definitions/TypeConverterResolversOpts"
-        }
+        "name": { "type": "string" },
+        "description": { "type": "string" },
+        "fields": { "$ref": "#/definitions/ComposeWithMongooseFieldsOpts" },
+        "resolvers": { "$ref": "#/definitions/TypeConverterResolversOpts" }
       }
     },
     "ComposeWithMongooseFieldsOpts": {
@@ -918,27 +469,9 @@
       "type": "object",
       "title": "ComposeWithMongooseFieldsOpts",
       "properties": {
-        "only": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "additionalItems": false
-        },
-        "remove": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "additionalItems": false
-        },
-        "required": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "additionalItems": false
-        }
+        "only": { "type": "array", "items": { "type": "string" }, "additionalItems": false },
+        "remove": { "type": "array", "items": { "type": "string" }, "additionalItems": false },
+        "required": { "type": "array", "items": { "type": "string" }, "additionalItems": false }
       }
     },
     "TypeConverterResolversOpts": {
@@ -948,169 +481,63 @@
       "properties": {
         "findById": {
           "description": "Any of: Boolean, ComposeWithMongooseResolverOpts",
-          "anyOf": [
-            {
-              "type": "boolean"
-            },
-            {
-              "$ref": "#/definitions/ComposeWithMongooseResolverOpts"
-            }
-          ]
+          "anyOf": [{ "type": "boolean" }, { "$ref": "#/definitions/ComposeWithMongooseResolverOpts" }]
         },
         "findByIds": {
           "description": "Any of: Boolean, ComposeWithMongooseResolverOpts",
-          "anyOf": [
-            {
-              "type": "boolean"
-            },
-            {
-              "$ref": "#/definitions/ComposeWithMongooseResolverOpts"
-            }
-          ]
+          "anyOf": [{ "type": "boolean" }, { "$ref": "#/definitions/ComposeWithMongooseResolverOpts" }]
         },
         "findOne": {
           "description": "Any of: Boolean, ComposeWithMongooseResolverOpts",
-          "anyOf": [
-            {
-              "type": "boolean"
-            },
-            {
-              "$ref": "#/definitions/ComposeWithMongooseResolverOpts"
-            }
-          ]
+          "anyOf": [{ "type": "boolean" }, { "$ref": "#/definitions/ComposeWithMongooseResolverOpts" }]
         },
         "findMany": {
           "description": "Any of: Boolean, ComposeWithMongooseResolverOpts",
-          "anyOf": [
-            {
-              "type": "boolean"
-            },
-            {
-              "$ref": "#/definitions/ComposeWithMongooseResolverOpts"
-            }
-          ]
+          "anyOf": [{ "type": "boolean" }, { "$ref": "#/definitions/ComposeWithMongooseResolverOpts" }]
         },
         "updateById": {
           "description": "Any of: Boolean, ComposeWithMongooseResolverOpts",
-          "anyOf": [
-            {
-              "type": "boolean"
-            },
-            {
-              "$ref": "#/definitions/ComposeWithMongooseResolverOpts"
-            }
-          ]
+          "anyOf": [{ "type": "boolean" }, { "$ref": "#/definitions/ComposeWithMongooseResolverOpts" }]
         },
         "updateOne": {
           "description": "Any of: Boolean, ComposeWithMongooseResolverOpts",
-          "anyOf": [
-            {
-              "type": "boolean"
-            },
-            {
-              "$ref": "#/definitions/ComposeWithMongooseResolverOpts"
-            }
-          ]
+          "anyOf": [{ "type": "boolean" }, { "$ref": "#/definitions/ComposeWithMongooseResolverOpts" }]
         },
         "updateMany": {
           "description": "Any of: Boolean, ComposeWithMongooseResolverOpts",
-          "anyOf": [
-            {
-              "type": "boolean"
-            },
-            {
-              "$ref": "#/definitions/ComposeWithMongooseResolverOpts"
-            }
-          ]
+          "anyOf": [{ "type": "boolean" }, { "$ref": "#/definitions/ComposeWithMongooseResolverOpts" }]
         },
         "removeById": {
           "description": "Any of: Boolean, ComposeWithMongooseResolverOpts",
-          "anyOf": [
-            {
-              "type": "boolean"
-            },
-            {
-              "$ref": "#/definitions/ComposeWithMongooseResolverOpts"
-            }
-          ]
+          "anyOf": [{ "type": "boolean" }, { "$ref": "#/definitions/ComposeWithMongooseResolverOpts" }]
         },
         "removeOne": {
           "description": "Any of: Boolean, ComposeWithMongooseResolverOpts",
-          "anyOf": [
-            {
-              "type": "boolean"
-            },
-            {
-              "$ref": "#/definitions/ComposeWithMongooseResolverOpts"
-            }
-          ]
+          "anyOf": [{ "type": "boolean" }, { "$ref": "#/definitions/ComposeWithMongooseResolverOpts" }]
         },
         "removeMany": {
           "description": "Any of: Boolean, ComposeWithMongooseResolverOpts",
-          "anyOf": [
-            {
-              "type": "boolean"
-            },
-            {
-              "$ref": "#/definitions/ComposeWithMongooseResolverOpts"
-            }
-          ]
+          "anyOf": [{ "type": "boolean" }, { "$ref": "#/definitions/ComposeWithMongooseResolverOpts" }]
         },
         "createOne": {
           "description": "Any of: Boolean, ComposeWithMongooseResolverOpts",
-          "anyOf": [
-            {
-              "type": "boolean"
-            },
-            {
-              "$ref": "#/definitions/ComposeWithMongooseResolverOpts"
-            }
-          ]
+          "anyOf": [{ "type": "boolean" }, { "$ref": "#/definitions/ComposeWithMongooseResolverOpts" }]
         },
         "createMany": {
           "description": "Any of: Boolean, ComposeWithMongooseResolverOpts",
-          "anyOf": [
-            {
-              "type": "boolean"
-            },
-            {
-              "$ref": "#/definitions/ComposeWithMongooseResolverOpts"
-            }
-          ]
+          "anyOf": [{ "type": "boolean" }, { "$ref": "#/definitions/ComposeWithMongooseResolverOpts" }]
         },
         "count": {
           "description": "Any of: Boolean, ComposeWithMongooseResolverOpts",
-          "anyOf": [
-            {
-              "type": "boolean"
-            },
-            {
-              "$ref": "#/definitions/ComposeWithMongooseResolverOpts"
-            }
-          ]
+          "anyOf": [{ "type": "boolean" }, { "$ref": "#/definitions/ComposeWithMongooseResolverOpts" }]
         },
         "connection": {
           "description": "Any of: Boolean, JSON",
-          "anyOf": [
-            {
-              "type": "boolean"
-            },
-            {
-              "type": "object",
-              "properties": {}
-            }
-          ]
+          "anyOf": [{ "type": "boolean" }, { "type": "object", "properties": {} }]
         },
         "pagination": {
           "description": "Any of: Boolean, PaginationResolverOpts",
-          "anyOf": [
-            {
-              "type": "boolean"
-            },
-            {
-              "$ref": "#/definitions/PaginationResolverOpts"
-            }
-          ]
+          "anyOf": [{ "type": "boolean" }, { "$ref": "#/definitions/PaginationResolverOpts" }]
         }
       }
     },
@@ -1119,21 +546,11 @@
       "type": "object",
       "title": "ComposeWithMongooseResolverOpts",
       "properties": {
-        "filter": {
-          "$ref": "#/definitions/FilterHelperArgsOpts"
-        },
-        "sort": {
-          "$ref": "#/definitions/SortHelperArgsOpts"
-        },
-        "limit": {
-          "$ref": "#/definitions/LimitHelperArgsOpts"
-        },
-        "record": {
-          "$ref": "#/definitions/RecordHelperArgsOpts"
-        },
-        "skip": {
-          "type": "boolean"
-        }
+        "filter": { "$ref": "#/definitions/FilterHelperArgsOpts" },
+        "sort": { "$ref": "#/definitions/SortHelperArgsOpts" },
+        "limit": { "$ref": "#/definitions/LimitHelperArgsOpts" },
+        "record": { "$ref": "#/definitions/RecordHelperArgsOpts" },
+        "skip": { "type": "boolean" }
       }
     },
     "FilterHelperArgsOpts": {
@@ -1141,130 +558,58 @@
       "type": "object",
       "title": "FilterHelperArgsOpts",
       "properties": {
-        "filterTypeName": {
-          "type": "string"
-        },
-        "isRequired": {
-          "type": "boolean"
-        },
-        "onlyIndexed": {
-          "type": "boolean"
-        },
-        "requiredFields": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "additionalItems": false
-        },
+        "filterTypeName": { "type": "string" },
+        "isRequired": { "type": "boolean" },
+        "onlyIndexed": { "type": "boolean" },
+        "requiredFields": { "type": "array", "items": { "type": "string" }, "additionalItems": false },
         "operators": {
           "description": "Any of: Boolean, JSON",
-          "anyOf": [
-            {
-              "type": "boolean"
-            },
-            {
-              "type": "object",
-              "properties": {}
-            }
-          ]
+          "anyOf": [{ "type": "boolean" }, { "type": "object", "properties": {} }]
         },
-        "removeFields": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "additionalItems": false
-        }
+        "removeFields": { "type": "array", "items": { "type": "string" }, "additionalItems": false }
       }
     },
     "SortHelperArgsOpts": {
       "additionalProperties": false,
       "type": "object",
       "title": "SortHelperArgsOpts",
-      "properties": {
-        "sortTypeName": {
-          "type": "string"
-        }
-      }
+      "properties": { "sortTypeName": { "type": "string" } }
     },
     "LimitHelperArgsOpts": {
       "additionalProperties": false,
       "type": "object",
       "title": "LimitHelperArgsOpts",
-      "properties": {
-        "defaultValue": {
-          "type": "integer"
-        }
-      }
+      "properties": { "defaultValue": { "type": "integer" } }
     },
     "RecordHelperArgsOpts": {
       "additionalProperties": false,
       "type": "object",
       "title": "RecordHelperArgsOpts",
       "properties": {
-        "recordTypeName": {
-          "type": "string"
-        },
-        "isRequired": {
-          "type": "boolean"
-        },
-        "removeFields": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "additionalItems": false
-        },
-        "requiredFields": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "additionalItems": false
-        }
+        "recordTypeName": { "type": "string" },
+        "isRequired": { "type": "boolean" },
+        "removeFields": { "type": "array", "items": { "type": "string" }, "additionalItems": false },
+        "requiredFields": { "type": "array", "items": { "type": "string" }, "additionalItems": false }
       }
     },
     "PaginationResolverOpts": {
       "additionalProperties": false,
       "type": "object",
       "title": "PaginationResolverOpts",
-      "properties": {
-        "perPage": {
-          "type": "integer"
-        }
-      }
+      "properties": { "perPage": { "type": "integer" } }
     },
     "MySQLHandler": {
       "additionalProperties": false,
       "type": "object",
       "title": "MySQLHandler",
       "properties": {
-        "host": {
-          "type": "string"
-        },
-        "port": {
-          "type": "integer"
-        },
-        "user": {
-          "type": "string"
-        },
-        "password": {
-          "type": "string"
-        },
-        "database": {
-          "type": "string"
-        },
+        "host": { "type": "string" },
+        "port": { "type": "integer" },
+        "user": { "type": "string" },
+        "password": { "type": "string" },
+        "database": { "type": "string" },
         "pool": {
-          "anyOf": [
-            {
-              "type": "object",
-              "additionalProperties": true
-            },
-            {
-              "type": "string"
-            }
-          ],
+          "anyOf": [{ "type": "object", "additionalProperties": true }, { "type": "string" }],
           "description": "Use existing `Pool` instance\nFormat: modulePath#exportName"
         }
       }
@@ -1274,72 +619,35 @@
       "type": "object",
       "title": "Neo4jHandler",
       "properties": {
-        "url": {
-          "type": "string",
-          "description": "URL for the Neo4j Instance e.g. neo4j://localhost"
-        },
-        "username": {
-          "type": "string",
-          "description": "Username for basic authentication"
-        },
-        "password": {
-          "type": "string",
-          "description": "Password for basic authentication"
-        },
+        "url": { "type": "string", "description": "URL for the Neo4j Instance e.g. neo4j://localhost" },
+        "username": { "type": "string", "description": "Username for basic authentication" },
+        "password": { "type": "string", "description": "Password for basic authentication" },
         "alwaysIncludeRelationships": {
           "type": "boolean",
           "description": "Specifies whether relationships should always be included in the type definitions as [relationship](https://grandstack.io/docs/neo4j-graphql-js.html#relationship-types) types, even if the relationships do not have properties."
         },
-        "database": {
-          "type": "string",
-          "description": "Specifies database name"
-        },
-        "typeDefs": {
-          "type": "string",
-          "description": "Provide GraphQL Type Definitions instead of inferring"
-        },
+        "database": { "type": "string", "description": "Specifies database name" },
+        "typeDefs": { "type": "string", "description": "Provide GraphQL Type Definitions instead of inferring" },
         "cacheIntrospection": {
           "description": "Cache Introspection (Any of: Neo4jIntrospectionCachingOptions, Boolean)",
-          "anyOf": [
-            {
-              "$ref": "#/definitions/Neo4jIntrospectionCachingOptions"
-            },
-            {
-              "type": "boolean"
-            }
-          ]
+          "anyOf": [{ "$ref": "#/definitions/Neo4jIntrospectionCachingOptions" }, { "type": "boolean" }]
         }
       },
-      "required": [
-        "url",
-        "username",
-        "password"
-      ]
+      "required": ["url", "username", "password"]
     },
     "Neo4jIntrospectionCachingOptions": {
       "additionalProperties": false,
       "type": "object",
       "title": "Neo4jIntrospectionCachingOptions",
-      "properties": {
-        "ttl": {
-          "type": "integer",
-          "description": "Time to live of introspection cache"
-        }
-      }
+      "properties": { "ttl": { "type": "integer", "description": "Time to live of introspection cache" } }
     },
     "ODataHandler": {
       "additionalProperties": false,
       "type": "object",
       "title": "ODataHandler",
       "properties": {
-        "baseUrl": {
-          "type": "string",
-          "description": "Base URL for OData API"
-        },
-        "metadata": {
-          "type": "string",
-          "description": "Custom $metadata File or URL"
-        },
+        "baseUrl": { "type": "string", "description": "Base URL for OData API" },
+        "metadata": { "type": "string", "description": "Custom $metadata File or URL" },
         "operationHeaders": {
           "type": "object",
           "properties": {},
@@ -1352,10 +660,7 @@
         },
         "batch": {
           "type": "string",
-          "enum": [
-            "multipart",
-            "json"
-          ],
+          "enum": ["multipart", "json"],
           "description": "Enable batching (Allowed values: multipart, json)"
         },
         "expandNavProps": {
@@ -1363,9 +668,7 @@
           "description": "Use $expand for navigation props instead of seperate HTTP requests (Default: false)"
         }
       },
-      "required": [
-        "baseUrl"
-      ]
+      "required": ["baseUrl"]
     },
     "OpenapiHandler": {
       "additionalProperties": false,
@@ -1378,10 +681,7 @@
         },
         "sourceFormat": {
           "type": "string",
-          "enum": [
-            "json",
-            "yaml"
-          ],
+          "enum": ["json", "yaml"],
           "description": "Format of the source file (Allowed values: json, yaml)"
         },
         "operationHeaders": {
@@ -1404,15 +704,7 @@
           "description": "JSON object representing the query search parameters to add to the API calls"
         },
         "customFetch": {
-          "anyOf": [
-            {
-              "type": "object",
-              "additionalProperties": true
-            },
-            {
-              "type": "string"
-            }
-          ],
+          "anyOf": [{ "type": "object", "additionalProperties": true }, { "type": "string" }],
           "description": "W3 Compatible Fetch Implementation"
         },
         "includeHttpDetails": {
@@ -1424,70 +716,40 @@
           "description": "Auto-generate a 'limit' argument for all fields that return lists of objects, including ones produced by links"
         }
       },
-      "required": [
-        "source"
-      ]
+      "required": ["source"]
     },
     "PostGraphileHandler": {
       "additionalProperties": false,
       "type": "object",
       "title": "PostGraphileHandler",
       "properties": {
-        "connectionString": {
-          "type": "string",
-          "description": "A connection string to your Postgres database"
-        },
+        "connectionString": { "type": "string", "description": "A connection string to your Postgres database" },
         "schemaName": {
           "type": "array",
-          "items": {
-            "type": "string"
-          },
+          "items": { "type": "string" },
           "additionalItems": false,
           "description": "An array of strings which specifies the PostgreSQL schemas that PostGraphile will use to create a GraphQL schema. The default schema is the public schema."
         },
-        "pool": {
-          "type": "object",
-          "properties": {},
-          "description": "Connection Pool settings"
-        },
+        "pool": { "type": "object", "properties": {}, "description": "Connection Pool settings" },
         "appendPlugins": {
           "type": "array",
-          "items": {
-            "type": "string"
-          },
+          "items": { "type": "string" },
           "additionalItems": false,
           "description": "Extra Postgraphile Plugins to append"
         },
         "skipPlugins": {
           "type": "array",
-          "items": {
-            "type": "string"
-          },
+          "items": { "type": "string" },
           "additionalItems": false,
           "description": "Postgraphile Plugins to skip (e.g. \"graphile-build#NodePlugin\")"
         },
         "options": {
           "description": "Extra Postgraphile options that will be added to the postgraphile constructor. It can either be an object or a string pointing to the object's path (e.g. \"./my-config#options\"). See the [postgraphile docs](https://www.graphile.org/postgraphile/usage-library/) for more information. (Any of: JSON, String)",
-          "anyOf": [
-            {
-              "type": "object",
-              "properties": {}
-            },
-            {
-              "type": "string"
-            }
-          ]
+          "anyOf": [{ "type": "object", "properties": {} }, { "type": "string" }]
         },
         "cacheIntrospection": {
           "description": "Cache Introspection (Any of: GraphQLIntrospectionCachingOptions, Boolean)",
-          "anyOf": [
-            {
-              "$ref": "#/definitions/GraphQLIntrospectionCachingOptions"
-            },
-            {
-              "type": "boolean"
-            }
-          ]
+          "anyOf": [{ "$ref": "#/definitions/GraphQLIntrospectionCachingOptions" }, { "type": "boolean" }]
         }
       }
     },
@@ -1496,10 +758,7 @@
       "type": "object",
       "title": "SoapHandler",
       "properties": {
-        "wsdl": {
-          "type": "string",
-          "description": "A url to your WSDL"
-        },
+        "wsdl": { "type": "string", "description": "A url to your WSDL" },
         "basicAuth": {
           "$ref": "#/definitions/SoapSecurityBasicAuthConfig",
           "description": "Basic Authentication Configuration\nIncluding username and password fields"
@@ -1509,58 +768,29 @@
           "description": "SSL Certificate Based Authentication Configuration\nIncluding public key, private key and password fields"
         }
       },
-      "required": [
-        "wsdl"
-      ]
+      "required": ["wsdl"]
     },
     "SoapSecurityBasicAuthConfig": {
       "additionalProperties": false,
       "type": "object",
       "title": "SoapSecurityBasicAuthConfig",
       "properties": {
-        "username": {
-          "type": "string",
-          "description": "Username for Basic Authentication"
-        },
-        "password": {
-          "type": "string",
-          "description": "Password for Basic Authentication"
-        }
+        "username": { "type": "string", "description": "Username for Basic Authentication" },
+        "password": { "type": "string", "description": "Password for Basic Authentication" }
       },
-      "required": [
-        "username",
-        "password"
-      ]
+      "required": ["username", "password"]
     },
     "SoapSecurityCertificateConfig": {
       "additionalProperties": false,
       "type": "object",
       "title": "SoapSecurityCertificateConfig",
       "properties": {
-        "publicKey": {
-          "type": "string",
-          "description": "Your public key"
-        },
-        "privateKey": {
-          "type": "string",
-          "description": "Your private key"
-        },
-        "password": {
-          "type": "string",
-          "description": "Password"
-        },
-        "publicKeyPath": {
-          "type": "string",
-          "description": "Path to the file or URL contains your public key"
-        },
-        "privateKeyPath": {
-          "type": "string",
-          "description": "Path to the file or URL contains your private key"
-        },
-        "passwordPath": {
-          "type": "string",
-          "description": "Path to the file or URL contains your password"
-        }
+        "publicKey": { "type": "string", "description": "Your public key" },
+        "privateKey": { "type": "string", "description": "Your private key" },
+        "password": { "type": "string", "description": "Password" },
+        "publicKeyPath": { "type": "string", "description": "Path to the file or URL contains your public key" },
+        "privateKeyPath": { "type": "string", "description": "Path to the file or URL contains your private key" },
+        "passwordPath": { "type": "string", "description": "Path to the file or URL contains your password" }
       }
     },
     "ThriftHandler": {
@@ -1568,14 +798,8 @@
       "type": "object",
       "title": "ThriftHandler",
       "properties": {
-        "hostName": {
-          "type": "string",
-          "description": "The name of the host to connect to."
-        },
-        "port": {
-          "type": "integer",
-          "description": "The port number to attach to on the host."
-        },
+        "hostName": { "type": "string", "description": "The name of the host to connect to." },
+        "port": { "type": "integer", "description": "The port number to attach to on the host." },
         "path": {
           "type": "string",
           "description": "The path on which the Thrift service is listening. Defaults to '/thrift'."
@@ -1586,17 +810,10 @@
         },
         "protocol": {
           "type": "string",
-          "enum": [
-            "binary",
-            "compact",
-            "json"
-          ],
+          "enum": ["binary", "compact", "json"],
           "description": "Name of the Thrift protocol type to use. Defaults to 'binary'. (Allowed values: binary, compact, json)"
         },
-        "serviceName": {
-          "type": "string",
-          "description": "The name of your service. Used for logging."
-        },
+        "serviceName": { "type": "string", "description": "The name of your service. Used for logging." },
         "operationHeaders": {
           "type": "object",
           "properties": {},
@@ -1607,17 +824,9 @@
           "properties": {},
           "description": "If you are using a remote URL endpoint to fetch your schema, you can set headers for the HTTP request to fetch your schema."
         },
-        "idl": {
-          "type": "string",
-          "description": "Path to IDL file"
-        }
+        "idl": { "type": "string", "description": "Path to IDL file" }
       },
-      "required": [
-        "hostName",
-        "port",
-        "serviceName",
-        "idl"
-      ]
+      "required": ["hostName", "port", "serviceName", "idl"]
     },
     "CacheTransformConfig": {
       "additionalProperties": false,
@@ -1632,14 +841,9 @@
           "type": "string",
           "description": "Cache key to use to store your resolvers responses.\nThe defualt is: {typeName}-{fieldName}-{argsHash}-{fieldNamesHash}\n\nAvailable variables:\n- {args.argName} - use resolver argument\n- {typeName} - use name of the type\n- {fieldName} - use name of the field\n- {argsHash} - a hash based on the 'args' object\n- {fieldNamesHash} - a hash based on the field names selected by the client\n- {info} - the GraphQLResolveInfo of the resolver\n\nAvailable interpolations:\n- {format|date} - returns the current date with a specific format"
         },
-        "invalidate": {
-          "$ref": "#/definitions/CacheInvalidateConfig",
-          "description": "Invalidation rules"
-        }
+        "invalidate": { "$ref": "#/definitions/CacheInvalidateConfig", "description": "Invalidation rules" }
       },
-      "required": [
-        "field"
-      ]
+      "required": ["field"]
     },
     "CacheInvalidateConfig": {
       "additionalProperties": false,
@@ -1648,9 +852,7 @@
       "properties": {
         "effectingOperations": {
           "type": "array",
-          "items": {
-            "$ref": "#/definitions/CacheEffectingOperationConfig"
-          },
+          "items": { "$ref": "#/definitions/CacheEffectingOperationConfig" },
           "additionalItems": false,
           "description": "Invalidate the cache when a specific operation is done without an error"
         },
@@ -1674,9 +876,7 @@
           "description": "Cache key to invalidate on sucessful resolver (no error), see `cacheKey` for list of available options in this field."
         }
       },
-      "required": [
-        "operation"
-      ]
+      "required": ["operation"]
     },
     "EncapsulateTransformObject": {
       "additionalProperties": false,
@@ -1698,15 +898,9 @@
       "type": "object",
       "title": "EncapsulateTransformApplyTo",
       "properties": {
-        "query": {
-          "type": "boolean"
-        },
-        "mutation": {
-          "type": "boolean"
-        },
-        "subscription": {
-          "type": "boolean"
-        }
+        "query": { "type": "boolean" },
+        "mutation": { "type": "boolean" },
+        "subscription": { "type": "boolean" }
       }
     },
     "FederationTransform": {
@@ -1716,9 +910,7 @@
       "properties": {
         "types": {
           "type": "array",
-          "items": {
-            "$ref": "#/definitions/FederationTransformType"
-          },
+          "items": { "$ref": "#/definitions/FederationTransformType" },
           "additionalItems": false
         }
       }
@@ -1727,50 +919,20 @@
       "additionalProperties": false,
       "type": "object",
       "title": "FederationTransformType",
-      "properties": {
-        "name": {
-          "type": "string"
-        },
-        "config": {
-          "$ref": "#/definitions/FederationObjectConfig"
-        }
-      },
-      "required": [
-        "name"
-      ]
+      "properties": { "name": { "type": "string" }, "config": { "$ref": "#/definitions/FederationObjectConfig" } },
+      "required": ["name"]
     },
     "FederationObjectConfig": {
       "additionalProperties": false,
       "type": "object",
       "title": "FederationObjectConfig",
       "properties": {
-        "keyFields": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "additionalItems": false
-        },
-        "extend": {
-          "type": "boolean"
-        },
-        "fields": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/FederationField"
-          },
-          "additionalItems": false
-        },
+        "keyFields": { "type": "array", "items": { "type": "string" }, "additionalItems": false },
+        "extend": { "type": "boolean" },
+        "fields": { "type": "array", "items": { "$ref": "#/definitions/FederationField" }, "additionalItems": false },
         "resolveReference": {
           "description": "Any of: String, ResolveReferenceObject",
-          "anyOf": [
-            {
-              "type": "string"
-            },
-            {
-              "$ref": "#/definitions/ResolveReferenceObject"
-            }
-          ]
+          "anyOf": [{ "type": "string" }, { "$ref": "#/definitions/ResolveReferenceObject" }]
         }
       }
     },
@@ -1779,67 +941,31 @@
       "type": "object",
       "title": "ResolveReferenceObject",
       "properties": {
-        "targetSource": {
-          "type": "string"
-        },
-        "targetMethod": {
-          "type": "string"
-        },
-        "args": {
-          "type": "object",
-          "properties": {}
-        },
-        "returnData": {
-          "type": "string"
-        },
-        "resultSelectedFields": {
-          "type": "object",
-          "properties": {}
-        },
-        "resultSelectionSet": {
-          "type": "string"
-        },
-        "resultDepth": {
-          "type": "integer"
-        }
+        "targetSource": { "type": "string" },
+        "targetMethod": { "type": "string" },
+        "args": { "type": "object", "properties": {} },
+        "returnData": { "type": "string" },
+        "resultSelectedFields": { "type": "object", "properties": {} },
+        "resultSelectionSet": { "type": "string" },
+        "resultDepth": { "type": "integer" }
       },
-      "required": [
-        "targetSource",
-        "targetMethod",
-        "args"
-      ]
+      "required": ["targetSource", "targetMethod", "args"]
     },
     "FederationField": {
       "additionalProperties": false,
       "type": "object",
       "title": "FederationField",
-      "properties": {
-        "name": {
-          "type": "string"
-        },
-        "config": {
-          "$ref": "#/definitions/FederationFieldConfig"
-        }
-      },
-      "required": [
-        "name",
-        "config"
-      ]
+      "properties": { "name": { "type": "string" }, "config": { "$ref": "#/definitions/FederationFieldConfig" } },
+      "required": ["name", "config"]
     },
     "FederationFieldConfig": {
       "additionalProperties": false,
       "type": "object",
       "title": "FederationFieldConfig",
       "properties": {
-        "external": {
-          "type": "boolean"
-        },
-        "provides": {
-          "type": "string"
-        },
-        "required": {
-          "type": "string"
-        }
+        "external": { "type": "boolean" },
+        "provides": { "type": "string" },
+        "required": { "type": "string" }
       }
     },
     "MockingConfig": {
@@ -1857,9 +983,7 @@
         },
         "mocks": {
           "type": "array",
-          "items": {
-            "$ref": "#/definitions/MockingFieldConfig"
-          },
+          "items": { "$ref": "#/definitions/MockingFieldConfig" },
           "additionalItems": false,
           "description": "Mock configurations"
         }
@@ -1870,10 +994,7 @@
       "type": "object",
       "title": "MockingFieldConfig",
       "properties": {
-        "apply": {
-          "type": "string",
-          "description": "Resolver path\nExample: User.firstName"
-        },
+        "apply": { "type": "string", "description": "Resolver path\nExample: User.firstName" },
         "if": {
           "type": "boolean",
           "description": "If this expression is truthy, mocking would be enabled\nYou can use environment variables expression, for example: `${MOCKING_ENABLED}`"
@@ -1887,9 +1008,7 @@
           "description": "Custom mocking\nIt can be a module or json file.\nBoth \"moduleName#exportName\" or only \"moduleName\" would work"
         }
       },
-      "required": [
-        "apply"
-      ]
+      "required": ["apply"]
     },
     "NamingConventionTransformConfig": {
       "additionalProperties": false,
@@ -1966,16 +1085,11 @@
         },
         "ignore": {
           "type": "array",
-          "items": {
-            "type": "string"
-          },
+          "items": { "type": "string" },
           "additionalItems": false,
           "description": "List of ignored types"
         },
-        "includeRootOperations": {
-          "type": "boolean",
-          "description": "Changes root types and changes the field names"
-        }
+        "includeRootOperations": { "type": "boolean", "description": "Changes root types and changes the field names" }
       }
     },
     "RenameTransformObject": {
@@ -1983,65 +1097,31 @@
       "type": "object",
       "title": "RenameTransformObject",
       "properties": {
-        "from": {
-          "$ref": "#/definitions/RenameConfig"
-        },
-        "to": {
-          "$ref": "#/definitions/RenameConfig"
-        },
-        "useRegExpForTypes": {
-          "type": "boolean",
-          "description": "Use Regular Expression for type names"
-        },
-        "useRegExpForFields": {
-          "type": "boolean",
-          "description": "Use Regular Expression for field names"
-        }
+        "from": { "$ref": "#/definitions/RenameConfig" },
+        "to": { "$ref": "#/definitions/RenameConfig" },
+        "useRegExpForTypes": { "type": "boolean", "description": "Use Regular Expression for type names" },
+        "useRegExpForFields": { "type": "boolean", "description": "Use Regular Expression for field names" }
       },
-      "required": [
-        "from",
-        "to"
-      ]
+      "required": ["from", "to"]
     },
     "RenameConfig": {
       "additionalProperties": false,
       "type": "object",
       "title": "RenameConfig",
-      "properties": {
-        "type": {
-          "type": "string"
-        },
-        "field": {
-          "type": "string"
-        }
-      }
+      "properties": { "type": { "type": "string" }, "field": { "type": "string" } }
     },
     "ResolversCompositionTransformObject": {
       "additionalProperties": false,
       "type": "object",
       "title": "ResolversCompositionTransformObject",
       "properties": {
-        "resolver": {
-          "type": "string",
-          "description": "The GraphQL Resolver path\nExample: Query.users"
-        },
+        "resolver": { "type": "string", "description": "The GraphQL Resolver path\nExample: Query.users" },
         "composer": {
-          "anyOf": [
-            {
-              "type": "object",
-              "additionalProperties": true
-            },
-            {
-              "type": "string"
-            }
-          ],
+          "anyOf": [{ "type": "object", "additionalProperties": true }, { "type": "string" }],
           "description": "Path to the composer function\nExample: ./src/auth.js#authComposer"
         }
       },
-      "required": [
-        "resolver",
-        "composer"
-      ]
+      "required": ["resolver", "composer"]
     },
     "SnapshotTransformConfig": {
       "additionalProperties": false,
@@ -2050,42 +1130,24 @@
       "properties": {
         "if": {
           "description": "Expression for when to activate this extension.\nValue can be a valid JS expression string or a boolean (Any of: String, Boolean)",
-          "anyOf": [
-            {
-              "type": "string"
-            },
-            {
-              "type": "boolean"
-            }
-          ]
+          "anyOf": [{ "type": "string" }, { "type": "boolean" }]
         },
         "apply": {
           "type": "array",
-          "items": {
-            "type": "string"
-          },
+          "items": { "type": "string" },
           "additionalItems": false,
           "description": "Resolver to be applied\nFor example;\n  apply:\n      - Query.* <- * will apply this extension to all fields of Query type\n      - Mutation.someMutationButProbablyYouWontNeedIt"
         },
-        "outputDir": {
-          "type": "string",
-          "description": "Path to the directory of the generated snapshot files"
-        }
+        "outputDir": { "type": "string", "description": "Path to the directory of the generated snapshot files" }
       },
-      "required": [
-        "apply",
-        "outputDir"
-      ]
+      "required": ["apply", "outputDir"]
     },
     "TuqlHandler": {
       "additionalProperties": false,
       "type": "object",
       "title": "TuqlHandler",
       "properties": {
-        "db": {
-          "type": "string",
-          "description": "Pointer to your SQLite database"
-        },
+        "db": { "type": "string", "description": "Pointer to your SQLite database" },
         "infile": {
           "type": "string",
           "description": "Path to the SQL Dump file if you want to build a in-memory database"
@@ -2094,50 +1156,26 @@
     }
   },
   "properties": {
-    "name": {
-      "type": "string"
-    },
-    "endpoint": {
-      "type": "string",
-      "pattern": "^/"
-    },
-    "source_config_names": {
-      "type": "array",
-      "items": {
-        "type": "string",
-        "pattern": "\\.(yaml|json)$"
-      }
-    },
-    "schema_polling_interval": {
-      "type": "integer"
-    },
+    "name": { "type": "string" },
+    "endpoint": { "type": "string", "pattern": "^/" },
+    "source_config_names": { "type": "array", "items": { "type": "string", "pattern": "\\.(yaml|json)$" } },
+    "schema_polling_interval": { "type": "integer" },
+    "schema_updates_through_control_api": { "type": "boolean" },
     "mesh": {
       "type": "object",
       "additionalProperties": false,
       "properties": {
-        "serve": {
-          "$ref": "#/definitions/ServeConfig"
-        },
-        "require": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "additionalItems": false
-        },
+        "serve": { "$ref": "#/definitions/ServeConfig" },
+        "require": { "type": "array", "items": { "type": "string" }, "additionalItems": false },
         "sources": {
           "type": "array",
-          "items": {
-            "$ref": "#/definitions/Source"
-          },
+          "items": { "$ref": "#/definitions/Source" },
           "additionalItems": false,
           "description": "Defines the list of your external data sources for your API mesh"
         },
         "transforms": {
           "type": "array",
-          "items": {
-            "$ref": "#/definitions/Transform"
-          },
+          "items": { "$ref": "#/definitions/Transform" },
           "additionalItems": false,
           "description": "Transform to apply to the unified mesh schema"
         },
@@ -2150,44 +1188,22 @@
           "items": {
             "description": "Any of: String, AdditionalStitchingResolverObject, AdditionalSubscriptionObject",
             "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "$ref": "#/definitions/AdditionalStitchingResolverObject"
-              },
-              {
-                "$ref": "#/definitions/AdditionalSubscriptionObject"
-              }
+              { "type": "string" },
+              { "$ref": "#/definitions/AdditionalStitchingResolverObject" },
+              { "$ref": "#/definitions/AdditionalSubscriptionObject" }
             ]
           },
           "additionalItems": false,
           "description": "Additional resolvers, or resolvers overrides you wish to add to the schema mesh (Any of: String, AdditionalStitchingResolverObject, AdditionalSubscriptionObject)"
         },
-        "cache": {
-          "$ref": "#/definitions/Cache",
-          "description": "Backend cache"
-        },
-        "merger": {
-          "type": "string",
-          "description": "Merge method"
-        },
+        "cache": { "$ref": "#/definitions/Cache", "description": "Backend cache" },
+        "merger": { "type": "string", "description": "Merge method" },
         "pubsub": {
           "description": "PubSub Implementation (Any of: String, PubSubConfig)",
-          "anyOf": [
-            {
-              "type": "string"
-            },
-            {
-              "$ref": "#/definitions/PubSubConfig"
-            }
-          ]
+          "anyOf": [{ "type": "string" }, { "$ref": "#/definitions/PubSubConfig" }]
         }
       }
     }
   },
-  "required": [
-    "name",
-    "endpoint"
-  ]
+  "required": ["name", "endpoint"]
 }
