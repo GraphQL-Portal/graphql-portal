@@ -15,7 +15,7 @@ export async function buildRouter(apiDefs: ApiDef[]): Promise<Router> {
   if (apiDefs?.length) {
     await Promise.all(
       apiDefs.map(async apiDef => {
-        const meshConfig = await processConfig({ sources: apiDef.sources });
+        const meshConfig = await processConfig({ sources: apiDef.sources, ...apiDef.mesh });
         const { schema, contextBuilder } = await getMesh(meshConfig);
 
         logger.info(`Loaded API ${apiDef.name}: ${apiDef.endpoint}`);
@@ -24,7 +24,7 @@ export async function buildRouter(apiDefs: ApiDef[]): Promise<Router> {
           graphqlHTTP(async req => ({
             schema,
             context: await contextBuilder(req),
-            graphiql: true,
+            graphiql: { headerEditorEnabled: true },
           }))
         );
       })

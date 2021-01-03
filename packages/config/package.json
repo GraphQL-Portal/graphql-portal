@@ -1,6 +1,6 @@
 {
   "name": "@graphql-portal/config",
-  "version": "0.1.2",
+  "version": "0.2.0",
   "license": "MIT",
   "main": "dist/src/index.js",
   "scripts": {
@@ -9,7 +9,7 @@
   "dependencies": {
     "ajv": "^7.0.1",
     "cosmiconfig": "^7.0.0",
-    "@graphql-portal/types": "^0.2.0",
+    "@graphql-portal/types": "^0.3.0",
     "@graphql-portal/logger": "^0.0.1"
   },
   "publishConfig": {
