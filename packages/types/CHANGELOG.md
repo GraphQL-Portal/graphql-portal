@@ -1,5 +1,11 @@
 # @graphql-portal/types
 
+## 0.4.0
+
+### Minor Changes
+
+- update apis by polling and ping
+
 ## 0.3.0
 
 ### Minor Changes

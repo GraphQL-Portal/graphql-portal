@@ -1,6 +1,7 @@
 import winston, { format, transports } from 'winston';
 
 const consoleFormat: winston.Logform.Format = format.combine(
+  format.splat(),
   format.timestamp(),
   format.colorize(),
   format.printf((info) => {

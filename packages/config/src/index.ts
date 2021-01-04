@@ -18,6 +18,7 @@ export async function loadApiDefs() {
   if (!config.gateway) {
     return;
   }
+
   if (config.gateway.use_dashboard_configs) {
     initDashboard(config.gateway);
     const loaded = await dashboard.loadApiDefs();

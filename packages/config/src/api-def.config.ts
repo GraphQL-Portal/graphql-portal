@@ -11,6 +11,7 @@ import {
   validateSourceConfig,
   validateApiDefConfig,
 } from '@graphql-portal/types';
+import findWorkspaceRoot from 'find-yarn-workspace-root';
 
 const logger = prefixLogger('apiDefs-config');
 
@@ -51,8 +52,15 @@ export function apiDefConfigGuard(apiDef: any): apiDef is ApiDefConfig {
 }
 
 export async function loadApiDefs(gatewayConfig: GatewayConfig): Promise<ApiDef[]> {
-  const apiConfigsDir = join(process.cwd(), gatewayConfig.apis_path);
-  const sourceConfigsDir = join(process.cwd(), gatewayConfig.sources_path);
+  if (gatewayConfig.apis_path === '' || gatewayConfig.sources_path === '') {
+    logger.warn('"apis_path" and "sources_path" cannot be empty, skipping loading of API Definitions.');
+    return [];
+  }
+
+  const workspaceRoot: string =
+    findWorkspaceRoot(process.cwd()) === null ? process.cwd() : (findWorkspaceRoot(process.cwd()) as string);
+  const apiConfigsDir = join(workspaceRoot, gatewayConfig.apis_path);
+  const sourceConfigsDir = join(workspaceRoot, gatewayConfig.sources_path);
 
   const fileNames = await readdir(apiConfigsDir);
   const apiDefs = await Promise.all(
