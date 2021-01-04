@@ -52,7 +52,7 @@ jest.mock('../../server/router', () => ({
 }));
 jest.mock('@graphql-portal/config', () => ({
   config: {
-    apiDefs: 1,
+    apiDefs: [],
     gateway: {
       use_dashboard_configs: true,
       redis_connection_string: 'redis',
