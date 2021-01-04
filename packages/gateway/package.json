@@ -4,6 +4,11 @@
   "license": "MIT",
   "author": "code.store",
   "main": "dist/src/index.js",
+  "bin": {
+    "portal": "dist/src/bin.js",
+    "gql-portal": "dist/src/bin.js",
+    "graphql-portal": "dist/src/bin.js"
+  },
   "scripts": {
     "build": "tsc -b",
     "start": "node dist/src/index"
