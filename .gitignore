@@ -4,7 +4,6 @@ build
 generated
 /config
 packages/gateway/config
-packages/gateway/src/middleware/custom
 
 # Temporary files
 tmp
