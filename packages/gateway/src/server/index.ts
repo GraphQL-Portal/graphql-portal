@@ -10,6 +10,7 @@ import { v4 as uuidv4 } from 'uuid';
 import setupRedis from '../redis';
 import setupControlApi from './control-api';
 import { setRouter, updateApi } from './router';
+import cluster from 'cluster';
 
 export type ForwardHeaders = Record<string, string>;
 export interface Context {
@@ -30,7 +31,7 @@ export async function startServer(): Promise<void> {
 
   if (config.gateway.use_dashboard_configs) {
     const redis = await setupRedis(config.gateway.redis_connection_string);
-    logger.info('Redis connected');
+    logger.info('Connected to Redis at ➜ %s', config.gateway.redis_connection_string);
 
     redis.subscribe(Channel.apiDefsUpdated);
     redis.on('message', async (channel, timestamp) => {
@@ -57,7 +58,19 @@ export async function startServer(): Promise<void> {
     await setupControlApi(app, apiDefsToControlApi);
   }
 
+  if (config.apiDefs.length === 0) {
+    logger.warn('Server is going to start with 0 API definitions and will not proxy anything...');
+  }
+
   // TODO: web sockets support
 
   httpServer.listen(config.gateway.listen_port, config.gateway.hostname, () => {});
+
+  if (cluster.isMaster) {
+    logger.info(
+      `🔥 Started GraphQL API Portal ➜ http://${config.gateway.hostname}:${config.gateway.listen_port}, pid: ${process.pid}`
+    );
+  } else {
+    logger.info(`🐥 Started worker process ➜ pid: ${process.pid}, nodeId: ${nodeId}`);
+  }
 }

@@ -31,7 +31,7 @@ export async function buildRouter(apiDefs: ApiDef[]): Promise<Router> {
   if (apiDefs?.length) {
     await Promise.all(apiDefs.map((apiDef) => buildApi(nextRouter, apiDef)));
   } else {
-    logger.warn('No APIs loaded. Configuration is empty?');
+    logger.warn('No APIs were loaded. Probably, the configuration is empty?');
   }
 
   router = nextRouter;

@@ -21,7 +21,7 @@ export default class DashboardApi {
     }
 
     this.dashboardUrl = gatewayConfig.dashboard_config?.connection_string;
-    logger.info(`Dashboard url: ${this.dashboardUrl}`);
+    logger.info(`Dashboard url ➜ ${this.dashboardUrl}`);
     this.http = axios.create({
       baseURL: this.dashboardUrl,
     });
