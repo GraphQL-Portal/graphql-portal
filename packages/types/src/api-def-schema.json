@@ -1160,7 +1160,10 @@
     "endpoint": { "type": "string", "pattern": "^/" },
     "source_config_names": { "type": "array", "items": { "type": "string", "pattern": "\\.(yaml|json)$" } },
     "schema_polling_interval": { "type": "integer" },
-    "schema_updates_through_control_api": { "type": "boolean" },
+    "schema_updates_through_control_api": { "type": "boolean", "default": false },
+    "enable_ip_filtering": { "type": "boolean" },
+    "allow_ips": { "type": "array", "items": { "type": "string" } },
+    "deny_ips": { "type": "array", "items": { "type": "string" } },
     "mesh": {
       "type": "object",
       "additionalProperties": false,

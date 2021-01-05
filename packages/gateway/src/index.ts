@@ -15,11 +15,12 @@ function handleStopSignal(): void {
 async function start(): Promise<void> {
   // TODO: config should be read by master and communicated to forks via RPC
   await initConfig();
-  configureLogger(config.gateway);
-  await loadApiDefs();
   if (!config.gateway) {
     throw new Error('Error loading the gateway.json|yaml configuration file.');
   }
+
+  configureLogger(config.gateway);
+  await loadApiDefs();
 
   const numCPUs: number = Number(config.gateway.pool_size) ? Number(config.gateway.pool_size) : cpus().length;
 
