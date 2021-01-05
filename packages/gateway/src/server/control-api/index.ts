@@ -1,11 +1,11 @@
 import { config } from '@graphql-portal/config';
 import { prefixLogger } from '@graphql-portal/logger';
 import { ApiDef } from '@graphql-portal/types';
+import { makeExecutableSchema } from '@graphql-tools/schema';
 import { Express } from 'express';
 import { graphqlHTTP } from 'express-graphql';
-import resolvers from './resolvers';
 import { readFileSync } from 'fs';
-import { makeExecutableSchema } from '@graphql-tools/schema';
+import resolvers from './resolvers';
 
 const logger = prefixLogger('control-api');
 

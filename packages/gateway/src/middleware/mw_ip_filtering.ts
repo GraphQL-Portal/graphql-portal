@@ -7,6 +7,8 @@ import { inRange, isIP } from 'range_check';
 
 type Strategy = 'allow' | 'deny' | 'none';
 
+const logger = prefixLogger('mw_ip_blacklist');
+
 const getMiddleware: RequestMiddleware = function (apiDef: ApiDef): RequestHandler {
   // skipping if disabled
   if (apiDef.enable_ip_filtering !== true) {
@@ -15,7 +17,6 @@ const getMiddleware: RequestMiddleware = function (apiDef: ApiDef): RequestHandl
 
   let ips: string[] = [];
   let strategy: Strategy = 'none';
-  const logger = prefixLogger('mw_ip_blacklist');
   const ipValidator = function (ip: string): boolean {
     if (!isIP(ip)) {
       logger.warn('Incorrect IP: "%s". Skipping...', ip);
@@ -24,19 +25,19 @@ const getMiddleware: RequestMiddleware = function (apiDef: ApiDef): RequestHandl
     return true;
   };
 
-  if (apiDef.allow_ips && apiDef.allow_ips.length > 0) {
+  if (apiDef.allow_ips?.length) {
     strategy = 'allow';
     ips = apiDef.allow_ips.filter(ipValidator);
     logger.info('Enabling requests from the following IPs: %s', ips);
   }
 
-  if (apiDef.deny_ips && apiDef.deny_ips.length > 0 && strategy != 'allow') {
+  if (apiDef.deny_ips?.length && strategy != 'allow') {
     strategy = 'deny';
     ips = apiDef.deny_ips.filter(ipValidator);
     logger.info('Denying requests from the following IPs: %s', ips);
   }
 
-  if (ips.length === 0 || strategy === 'none') {
+  if (!ips.length || strategy === 'none') {
     logger.warn('IP filtering is enabled but no valid IPs were found in the configuration. Skipping...');
     return (req, res, next) => next();
   }

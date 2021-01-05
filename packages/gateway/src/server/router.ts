@@ -1,13 +1,12 @@
+import { diff } from '@graphql-inspector/core';
 import { processConfig } from '@graphql-mesh/config';
 import { getMesh } from '@graphql-mesh/runtime';
 import { prefixLogger } from '@graphql-portal/logger';
 import { ApiDef } from '@graphql-portal/types';
 import { Application, Request, Router } from 'express';
 import { graphqlHTTP } from 'express-graphql';
-import { prepareRequestContext } from '../middleware';
-import { defaultMiddlewares, loadCustomMiddlewares } from '../middleware';
 import { GraphQLSchema } from 'graphql';
-import { diff } from '@graphql-inspector/core';
+import { defaultMiddlewares, loadCustomMiddlewares, prepareRequestContext } from '../middleware';
 
 interface IMesh {
   schema: GraphQLSchema;
