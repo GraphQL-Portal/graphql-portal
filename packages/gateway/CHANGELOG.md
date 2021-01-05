@@ -1,5 +1,16 @@
 # @graphql-portal/gateway
 
+## 0.4.0
+
+### Minor Changes
+
+- env vars in config, executable gateway
+
+### Patch Changes
+
+- Updated dependencies [undefined]
+  - @graphql-portal/config@0.4.0
+
 ## 0.3.0
 
 ### Minor Changes

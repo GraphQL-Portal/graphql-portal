@@ -1,5 +1,11 @@
 # @graphql-portal/config
 
+## 0.4.0
+
+### Minor Changes
+
+- env vars in config, executable gateway
+
 ## 0.3.0
 
 ### Minor Changes

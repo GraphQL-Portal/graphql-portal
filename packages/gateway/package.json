@@ -1,6 +1,6 @@
 {
   "name": "@graphql-portal/gateway",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "license": "MIT",
   "author": "code.store",
   "main": "dist/src/index.js",
@@ -22,7 +22,7 @@
     "@graphql-mesh/transform-federation": "^0.4.32",
     "@graphql-mesh/transform-resolvers-composition": "^0.7.8",
     "@graphql-mesh/types": "^0.24.0",
-    "@graphql-portal/config": "^0.3.0",
+    "@graphql-portal/config": "^0.4.0",
     "@graphql-portal/dashboard": "^0.0.5",
     "@graphql-portal/logger": "^0.1.0",
     "@graphql-portal/types": "^0.4.0",
