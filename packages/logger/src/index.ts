@@ -10,8 +10,6 @@ const consoleFormat: winston.Logform.Format = format.combine(
   })
 );
 
-export let logger: winston.Logger = createLogger();
-
 function createLogger(): winston.Logger {
   return winston.createLogger({
     transports: [
@@ -22,6 +20,8 @@ function createLogger(): winston.Logger {
     ],
   });
 }
+
+export let logger: winston.Logger = createLogger();
 
 export function configureLogger(config: { log_level: 'debug' | 'info' | 'warn' | 'error' }): void {
   // TODO: we'll be adding other transports and formats later

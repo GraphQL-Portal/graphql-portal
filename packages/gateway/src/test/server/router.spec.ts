@@ -10,6 +10,7 @@ jest.mock('@graphql-portal/logger', () => ({
   prefixLogger: jest.fn().mockReturnValue({
     info: jest.fn(),
     warn: jest.fn(),
+    debug: jest.fn(),
   }),
 }));
 jest.mock('@graphql-portal/config', () => ({
@@ -47,7 +48,7 @@ describe('Server', () => {
       it('should use mesh for api endpoint', async () => {
         const result = await buildRouter([apiDef]);
 
-        expect(result.stack.find(layer => layer.regexp.test(apiDef.endpoint))).toBeDefined;
+        expect(result.stack.find((layer) => layer.regexp.test(apiDef.endpoint))).toBeDefined;
         expect(processConfig).toHaveBeenCalledTimes(1);
         expect(getMesh).toHaveBeenCalledTimes(1);
         expect(graphqlHTTP).toHaveBeenCalledTimes(1);
@@ -63,9 +64,7 @@ describe('Server', () => {
       it('should set a callable route', async () => {
         await setRouter(app, [apiDef]);
 
-        const response = await supertest(app)
-          .post(apiDef.endpoint)
-          .expect(200);
+        const response = await supertest(app).post(apiDef.endpoint).expect(200);
         expect(response.text).toBe('response');
       });
     });
