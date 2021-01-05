@@ -45,13 +45,9 @@ async function start(): Promise<void> {
       process.on('SIGTERM', handleStopSignal);
     } else {
       startServer();
-      logger.info(`Started worker process ➜ pid: ${process.pid}, nodeId: ${nodeId}`);
     }
   } else {
     startServer();
-    logger.info(
-      `🔥 Started GraphQL API Portal ➜ http://${config.gateway.hostname}:${config.gateway.listen_port}, pid: ${process.pid}`
-    );
   }
 }
 

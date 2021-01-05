@@ -21,7 +21,7 @@ export default class DashboardApi {
     }
 
     this.dashboardUrl = gatewayConfig.dashboard_config?.connection_string;
-    logger.info(`Dashboard url: ${this.dashboardUrl}`);
+    logger.info(`Dashboard url ➜ ${this.dashboardUrl}`);
     this.http = axios.create({
       baseURL: this.dashboardUrl,
     });
@@ -35,7 +35,7 @@ export default class DashboardApi {
         query: queries.getApiDefs,
       });
 
-      logger.info('Loaded API configs from the dashboard');
+      logger.debug('Loaded API definitions from the dashboard');
       return data?.getApiDefs;
     } catch (error) {
       logger.error(`Failed to load API configs from the dashboard: ${error.message}`);

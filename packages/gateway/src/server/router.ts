@@ -28,9 +28,10 @@ export async function buildRouter(apiDefs: ApiDef[]): Promise<Router> {
   nextRouter.use(prepareRequestContext);
 
   if (apiDefs?.length) {
+    logger.info('Loaded %s API Definitions, preparing the endpoints for them.', apiDefs.length);
     await Promise.all(apiDefs.map((apiDef) => buildApi(nextRouter, apiDef)));
   } else {
-    logger.warn('No APIs loaded. Configuration is empty?');
+    logger.warn('No APIs were loaded as the configuration is empty.');
   }
 
   router = nextRouter;
@@ -48,7 +49,7 @@ async function buildApi(toRouter: Router, apiDef: ApiDef, mesh?: IMesh) {
   const { schema, contextBuilder } = await getMeshForApiDef(apiDef, mesh);
   apiDef.schema = schema;
 
-  logger.info(`Loaded API ${apiDef.name}: ${apiDef.endpoint}`);
+  logger.info(`Loaded API ${apiDef.name} ➜ ${apiDef.endpoint}`);
 
   toRouter.use(
     apiDef.endpoint,
@@ -81,7 +82,7 @@ export async function updateApi(apiDef: ApiDef): Promise<void> {
     logger.debug(`API ${apiDef.name} schema was not changed`);
     return;
   }
-  logger.info(`API ${apiDef.name} schema changed, updating: ${apiDef.endpoint}`);
+  logger.info(`API ${apiDef.name} schema changed, updating the endpoint: ${apiDef.endpoint}`);
 
   const routerWithNewApi = Router();
   await buildApi(routerWithNewApi, apiDef, mesh);
