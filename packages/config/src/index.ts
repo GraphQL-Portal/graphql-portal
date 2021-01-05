@@ -3,6 +3,7 @@ import { logger } from '@graphql-portal/logger';
 import { dashboard, initDashboard } from '@graphql-portal/dashboard';
 import { loadApiDefs as loadApiDefsFromFs } from './api-def.config';
 import { loadConfig } from './gateway.config';
+import useEnv from './use-env';
 
 const config: {
   gateway: GatewayConfig;
@@ -12,6 +13,7 @@ const config: {
 
 export async function initConfig() {
   config.gateway = (await loadConfig()) as GatewayConfig;
+  useEnv(config.gateway);
 }
 
 export async function loadApiDefs() {
@@ -31,6 +33,7 @@ export async function loadApiDefs() {
   } else {
     config.apiDefs = await loadApiDefsFromFs(config.gateway);
     config.timestamp = Date.now();
+    useEnv(config.apiDefs);
   }
 }
 
