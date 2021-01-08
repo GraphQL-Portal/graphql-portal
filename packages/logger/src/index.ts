@@ -10,6 +10,8 @@ const consoleFormat: winston.Logform.Format = format.combine(
   })
 );
 
+const jsonFormat: winston.Logform.Format = format.combine(format.splat(), format.timestamp(), format.json());
+
 function createLogger(): winston.Logger {
   return winston.createLogger({
     transports: [
@@ -23,13 +25,16 @@ function createLogger(): winston.Logger {
 
 export let logger: winston.Logger = createLogger();
 
-export function configureLogger(config: { log_level: 'debug' | 'info' | 'warn' | 'error' }): void {
-  // TODO: we'll be adding other transports and formats later
+export function configureLogger(config: {
+  log_level: 'debug' | 'info' | 'warn' | 'error';
+  log_format?: 'json' | 'text';
+}): void {
   logger.clear();
+
   logger.add(
     new transports.Console({
       level: config.log_level,
-      format: consoleFormat,
+      format: config?.log_format === 'json' ? jsonFormat : consoleFormat,
     })
   );
 }

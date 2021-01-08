@@ -12,6 +12,7 @@ export interface GatewayConfig {
   dashboard_config?: DashboardConfig;
   enable_control_api: boolean;
   control_api_config?: ControlApiConfig;
+  log_format?: 'text' | 'json';
   log_level: 'debug' | 'info' | 'warn' | 'error';
   redis_connection_string: string;
 }
