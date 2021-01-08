@@ -38,6 +38,14 @@
     "control_api_config": {
       "$ref": "#/definitions/control_api_config"
     },
+    "log_format": {
+      "type": "string",
+      "enum": [
+        "text",
+        "json"
+      ],
+      "default": "text"
+    },
     "log_level": {
       "type": "string",
       "enum": [
