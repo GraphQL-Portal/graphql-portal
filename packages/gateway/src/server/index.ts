@@ -6,18 +6,18 @@ import cookieParser from 'cookie-parser';
 import express from 'express';
 import { graphqlUploadExpress } from 'graphql-upload';
 import { createServer } from 'http';
-import { v4 as uuidv4 } from 'uuid';
 import setupRedis from '../redis';
 import setupControlApi from './control-api';
 import { setRouter, updateApi } from './router';
 import cluster from 'cluster';
+import { customAlphabet } from 'nanoid';
 
 export type ForwardHeaders = Record<string, string>;
 export interface Context {
   forwardHeaders: ForwardHeaders;
 }
 
-export const nodeId: string = uuidv4();
+export const nodeId: string = customAlphabet('0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz-', 11)();
 
 export async function startServer(): Promise<void> {
   const app = express();
@@ -68,7 +68,7 @@ export async function startServer(): Promise<void> {
 
   if (cluster.isMaster) {
     logger.info(
-      `🔥 Started GraphQL API Portal ➜ http://${config.gateway.hostname}:${config.gateway.listen_port}, pid: ${process.pid}`
+      `🔥 Started GraphQL API Portal ➜ http://${config.gateway.hostname}:${config.gateway.listen_port}, pid: ${process.pid}, nodeID: ${nodeId}`
     );
   } else {
     logger.info(`🐥 Started worker process ➜ pid: ${process.pid}, nodeId: ${nodeId}`);
