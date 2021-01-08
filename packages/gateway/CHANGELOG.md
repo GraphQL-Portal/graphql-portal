@@ -1,5 +1,19 @@
 # @graphql-portal/gateway
 
+## 0.5.0
+
+### Minor Changes
+
+- 4bbb4d7: Add hostname to ping request
+
+### Patch Changes
+
+- Updated dependencies [e4c1915]
+  - @graphql-portal/logger@0.2.0
+  - @graphql-portal/types@0.5.0
+  - @graphql-portal/config@0.4.1
+  - @graphql-portal/dashboard@0.0.6
+
 ## 0.4.0
 
 ### Minor Changes
