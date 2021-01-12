@@ -3,7 +3,7 @@ import { processConfig } from '@graphql-mesh/config';
 import { getMesh } from '@graphql-mesh/runtime';
 import { prefixLogger } from '@graphql-portal/logger';
 import { ApiDef } from '@graphql-portal/types';
-import { Application, Request, Router } from 'express';
+import { Application, Request, RequestHandler, Router } from 'express';
 import { graphqlHTTP } from 'express-graphql';
 import { GraphQLSchema } from 'graphql';
 import { defaultMiddlewares, loadCustomMiddlewares, prepareRequestContext } from '../middleware';
@@ -43,7 +43,17 @@ async function buildApi(toRouter: Router, apiDef: ApiDef, mesh?: IMesh) {
   if (!mesh) {
     const customMiddlewares = await loadCustomMiddlewares();
     [...defaultMiddlewares, ...customMiddlewares].map((mw) => {
-      toRouter.use(apiDef.endpoint, mw(apiDef));
+      const handler = mw(apiDef);
+      const wrappedHandler: RequestHandler = async (req, res, next) => {
+        try {
+          await handler(req, res, next);
+        } catch (error) {
+          const { message } = error;
+          logger.error(`Unhandled error at ${handler.name}: ${message}`);
+          res.status(500).end(JSON.stringify({ message }));
+        }
+      };
+      toRouter.use(apiDef.endpoint, wrappedHandler);
     });
   }
 
