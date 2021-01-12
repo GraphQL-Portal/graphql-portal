@@ -1,5 +1,6 @@
 import { prefixLogger } from '@graphql-portal/logger';
 import { ApiDef } from '@graphql-portal/types';
+import { registerHandlers, spreadMessageToWorkers } from '../../../ipc/utils';
 import { updateApi as updateApiInRouter } from '../../router';
 
 const logger = prefixLogger('Query.updateApi');
@@ -15,7 +16,14 @@ export default async function updateApi(
     return false;
   }
 
-  logger.debug(`Updating API ${apiDef.name}: ${apiDef.endpoint}`);
-  await updateApiInRouter(apiDef);
+  spreadMessageToWorkers({ event: 'updateApi', data: apiDef });
   return true;
 }
+
+let updating = false;
+registerHandlers('updateApi', async ({ data: apiDef }: { data: ApiDef }) => {
+  if (updating) return;
+  updating = true;
+  await updateApiInRouter(apiDef);
+  updating = false;
+});

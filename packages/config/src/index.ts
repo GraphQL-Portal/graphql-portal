@@ -1,19 +1,22 @@
-import { ApiDef, GatewayConfig } from '@graphql-portal/types';
-import { prefixLogger } from '@graphql-portal/logger';
 import { dashboard, initDashboard } from '@graphql-portal/dashboard';
+import { prefixLogger } from '@graphql-portal/logger';
+import { ApiDef, GatewayConfig } from '@graphql-portal/types';
+import { customAlphabet } from 'nanoid';
 import { loadApiDefs as loadApiDefsFromFs } from './api-def.config';
 import { loadConfig } from './gateway.config';
 import useEnv from './use-env';
 
 const logger = prefixLogger('config');
 
-const config: {
+let config: {
+  nodeId: string;
   gateway: GatewayConfig;
   apiDefs: ApiDef[];
   timestamp: number;
 } = {} as any;
 
 export async function initConfig() {
+  config.nodeId = customAlphabet('0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz-', 11)();
   config.gateway = (await loadConfig()) as GatewayConfig;
   useEnv(config.gateway);
 }

@@ -1,16 +1,24 @@
 import winston, { format, transports } from 'winston';
 
+const labelPid = { label: `pid: ${process.pid}` };
+
 const consoleFormat: winston.Logform.Format = format.combine(
   format.splat(),
+  format.label(labelPid),
   format.timestamp(),
   format.colorize(),
   format.printf((info) => {
     const prefix: string = info.prefix === undefined ? '' : `[${info.prefix}]`;
-    return `${info.timestamp} ${prefix} ${info.level}: ${info.message}`;
+    return `${info.timestamp} ${info.label} ${prefix} ${info.level}: ${info.message}`;
   })
 );
 
-const jsonFormat: winston.Logform.Format = format.combine(format.splat(), format.timestamp(), format.json());
+const jsonFormat: winston.Logform.Format = format.combine(
+  format.splat(),
+  format.label(labelPid),
+  format.timestamp(),
+  format.json()
+);
 
 function createLogger(): winston.Logger {
   return winston.createLogger({

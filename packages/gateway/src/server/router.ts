@@ -16,6 +16,7 @@ interface IMesh {
 const logger = prefixLogger('router');
 
 let router: Router;
+const apiSchema: { [apiName: string]: GraphQLSchema } = {};
 
 export async function setRouter(app: Application, apiDefs: ApiDef[]): Promise<void> {
   await buildRouter(apiDefs);
@@ -46,8 +47,13 @@ async function buildApi(toRouter: Router, apiDef: ApiDef, mesh?: IMesh) {
     });
   }
 
-  const { schema, contextBuilder } = await getMeshForApiDef(apiDef, mesh);
-  apiDef.schema = schema;
+  mesh = await getMeshForApiDef(apiDef, mesh);
+  if (!mesh) {
+    logger.error(`Could not get schema for API, enpoint ${apiDef.endpoint} won't be added to the router`);
+    return;
+  }
+  const { schema, contextBuilder } = mesh;
+  apiSchema[apiDef.name] = schema;
 
   logger.info(`Loaded API ${apiDef.name} ➜ ${apiDef.endpoint}`);
 
@@ -68,17 +74,32 @@ async function buildApi(toRouter: Router, apiDef: ApiDef, mesh?: IMesh) {
   );
 }
 
-async function getMeshForApiDef(apiDef: ApiDef, mesh?: IMesh) {
+async function getMeshForApiDef(apiDef: ApiDef, mesh?: IMesh, retry = 5): Promise<IMesh | undefined> {
   if (mesh) {
     return mesh;
   }
-  const meshConfig = await processConfig({ sources: apiDef.sources, ...apiDef.mesh });
-  return getMesh(meshConfig);
+  try {
+    const meshConfig = await processConfig({ sources: apiDef.sources, ...apiDef.mesh });
+    mesh = await getMesh(meshConfig);
+  } catch (error) {
+    logger.error(error);
+    if (retry) {
+      logger.warn('Failed to load schema, retrying after 5 seconds...');
+      await new Promise((resolve) => setTimeout(resolve, 5000));
+      return getMeshForApiDef(apiDef, mesh, retry - 1);
+    }
+  }
+  return mesh;
 }
 
 export async function updateApi(apiDef: ApiDef): Promise<void> {
+  logger.debug(`Updating API ${apiDef.name}: ${apiDef.endpoint}`);
   const mesh = await getMeshForApiDef(apiDef);
-  if (!diff(mesh.schema, apiDef.schema!).length) {
+  if (!mesh) {
+    logger.error(`Could not get schema for API, enpoint ${apiDef.endpoint} won't be updated in the router`);
+    return;
+  }
+  if (apiSchema[apiDef.name] && !diff(mesh.schema, apiSchema[apiDef.name]!).length) {
     logger.debug(`API ${apiDef.name} schema was not changed`);
     return;
   }
