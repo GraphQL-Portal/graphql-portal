@@ -1,5 +1,20 @@
 # @graphql-portal/gateway
 
+## 0.6.0
+
+### Minor Changes
+
+- 069fb8e: multicore optimization
+
+### Patch Changes
+
+- 25bdeca: handle errors from custom MWs
+- Updated dependencies [069fb8e]
+  - @graphql-portal/config@0.5.0
+  - @graphql-portal/logger@0.3.0
+  - @graphql-portal/types@0.6.0
+  - @graphql-portal/dashboard@0.0.7
+
 ## 0.5.0
 
 ### Minor Changes
