@@ -2,52 +2,55 @@ import { config, initConfig, loadApiDefs } from '@graphql-portal/config';
 import { configureLogger, logger } from '@graphql-portal/logger';
 import cluster from 'cluster';
 import { cpus } from 'os';
-import { nodeId, startServer } from './server';
+import { applyRegisteredHandlers, registerWorkerHandler, spreadMessageToWorkers } from './ipc/utils';
+import { startServer } from './server';
 
 function handleStopSignal(): void {
   logger.info('Stop signal received');
-  // close connections to Redis
-  // deregister from dashboard
-  // TODO: allow more graceful shutdown and error logging
   process.exit(0);
 }
 
 async function start(): Promise<void> {
-  // TODO: config should be read by master and communicated to forks via RPC
-  await initConfig();
-  if (!config.gateway) {
-    throw new Error('Error loading the gateway.json|yaml configuration file.');
-  }
-
-  configureLogger(config.gateway);
-  await loadApiDefs();
-
-  const numCPUs: number = Number(config.gateway.pool_size) ? Number(config.gateway.pool_size) : cpus().length;
-
-  if (numCPUs > 1) {
-    if (cluster.isMaster) {
-      logger.info(`GraphQL Portal API Gateway v${process.env.npm_package_version}`);
-      logger.info(`Cluster master process pid: ${process.pid}`);
-      logger.info(`Cluster master process nodeId: ${nodeId}`);
-      logger.info(
-        `🔥 Starting GraphQL API Portal with ${numCPUs} workers on: http://${config.gateway.hostname}:${config.gateway.listen_port}`
-      );
-
-      for (let i = 0; i < numCPUs; i += 1) {
-        cluster.fork();
-      }
-
-      cluster.on('exit', (worker) => {
-        logger.warn(`worker ${worker.process.pid} died`);
-      });
-
-      process.on('SIGINT', handleStopSignal);
-      process.on('SIGTERM', handleStopSignal);
-    } else {
-      startServer();
+  if (cluster.isMaster) {
+    await initConfig();
+    if (!config.gateway) {
+      throw new Error('Error loading the gateway.json|yaml configuration file.');
     }
+
+    configureLogger(config.gateway);
+    await loadApiDefs();
+
+    const numCPUs: number = Number(config.gateway.pool_size) ? Number(config.gateway.pool_size) : cpus().length;
+
+    logger.info(`GraphQL Portal API Gateway v${process.env.npm_package_version}`);
+    logger.info(
+      `🔥 Starting GraphQL API Portal with ${numCPUs} workers on: http://${config.gateway.hostname}:${config.gateway.listen_port}`
+    );
+
+    for (let i = 0; i < numCPUs; i += 1) {
+      cluster.fork();
+    }
+
+    cluster.on('exit', (worker) => {
+      logger.warn(`worker ${worker.process.pid} died`);
+      cluster.fork();
+    });
+
+    process.on('SIGINT', handleStopSignal);
+    process.on('SIGTERM', handleStopSignal);
+
+    spreadMessageToWorkers({ event: 'config', data: config });
+    applyRegisteredHandlers();
   } else {
-    startServer();
+    await new Promise((resolve) => {
+      registerWorkerHandler('config', (message) => {
+        (config as any) = message.data;
+        resolve(config);
+      });
+    });
+    configureLogger(config.gateway);
+    applyRegisteredHandlers();
+    await startServer();
   }
 }
 
