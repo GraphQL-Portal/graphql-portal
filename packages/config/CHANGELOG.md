@@ -1,5 +1,17 @@
 # @graphql-portal/config
 
+## 0.5.0
+
+### Minor Changes
+
+- 069fb8e: multicore optimization
+
+### Patch Changes
+
+- Updated dependencies [069fb8e]
+  - @graphql-portal/logger@0.3.0
+  - @graphql-portal/types@0.6.0
+
 ## 0.4.1
 
 ### Patch Changes

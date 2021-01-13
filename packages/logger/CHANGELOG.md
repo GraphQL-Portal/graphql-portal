@@ -1,5 +1,11 @@
 # @graphql-portal/logger
 
+## 0.3.0
+
+### Minor Changes
+
+- 069fb8e: multicore optimization
+
 ## 0.2.0
 
 ### Minor Changes

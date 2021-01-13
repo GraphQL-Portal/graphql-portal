@@ -1,5 +1,11 @@
 # @graphql-portal/types
 
+## 0.6.0
+
+### Minor Changes
+
+- 069fb8e: multicore optimization
+
 ## 0.5.0
 
 ### Minor Changes
