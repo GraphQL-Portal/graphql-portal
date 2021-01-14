@@ -1,10 +1,8 @@
-import { ErrorRequestHandler, RequestHandler } from 'express';
-import { RequestWithId } from 'src/interfaces';
+import { RequestHandler } from 'express';
+import { RequestWithId } from '../interfaces';
 import { metricEmitter, MetricsChannels } from '../metric';
 
-let error: Error | null = null;
-
-export const responseSent: RequestHandler = (req: RequestWithId, res, next) => {
+export const logResponse: RequestHandler = (req: RequestWithId, res, next) => {
   const oldWrite = res.write.bind(res);
   const oldEnd = res.end.bind(res);
 
@@ -24,14 +22,8 @@ export const responseSent: RequestHandler = (req: RequestWithId, res, next) => {
     const buffer = Buffer.concat(chunks);
     const contentLength = buffer.byteLength;
     const responseBody = buffer.toString('utf8');
-    metricEmitter.emit(MetricsChannels.SENT_RESPONSE, req.id, responseBody, contentLength, error);
-    error = null;
+    metricEmitter.emit(MetricsChannels.SENT_RESPONSE, req.id, responseBody, contentLength);
   });
 
   next();
-};
-
-export const setError: ErrorRequestHandler = (err, req, res, next) => {
-  error = err;
-  next(err);
 };

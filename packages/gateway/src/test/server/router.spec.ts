@@ -5,6 +5,7 @@ import { graphqlHTTP } from 'express-graphql';
 import express from 'express';
 import { ApiDef } from '@graphql-portal/types';
 import supertest from 'supertest';
+import subscribeOnRequestMetrics from '../../metric/emitter';
 
 jest.mock('@graphql-portal/logger', () => ({
   prefixLogger: jest.fn().mockReturnValue({
@@ -22,12 +23,22 @@ jest.mock('@graphql-mesh/config', () => ({
   processConfig: jest.fn(),
 }));
 jest.mock('@graphql-mesh/runtime', () => ({
-  getMesh: jest.fn().mockReturnValue({ schema: 'schema', contextBuilder: 'contextBuilder' }),
+  getMesh: jest.fn().mockReturnValue({
+    schema: 'schema',
+    contextBuilder: 'contextBuilder',
+  }),
 }));
 jest.mock('express-graphql', () => ({
   graphqlHTTP: jest.fn().mockReturnValue((req: any, res: express.Response) => {
     res.end('response');
   }),
+}));
+jest.mock('../../metric/emitter', () => ({
+  __esModule: true,
+  default: jest.fn(),
+  metricEmitter: {
+    emit: jest.fn(),
+  },
 }));
 
 describe('Server', () => {
@@ -52,6 +63,7 @@ describe('Server', () => {
         expect(processConfig).toHaveBeenCalledTimes(1);
         expect(getMesh).toHaveBeenCalledTimes(1);
         expect(graphqlHTTP).toHaveBeenCalledTimes(1);
+        expect(subscribeOnRequestMetrics).toBeCalledTimes(1);
       });
     });
 

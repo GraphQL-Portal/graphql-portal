@@ -3,7 +3,7 @@ import { incrementBytesIn, incrementBytesOut } from '../utils/byte.tool';
 
 const collectBytes: RequestHandler = (req, res, next) => {
   req.on('data', (buffer: Buffer) => incrementBytesIn(Number(buffer.byteLength)));
-  res.on('finish', () => incrementBytesOut(Number((res.get('content-length')))));
+  res.on('finish', () => incrementBytesOut(Number(res.get('content-length'))));
   next();
 };
 

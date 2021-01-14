@@ -7,6 +7,7 @@ const defaultMiddlewares: RequestMiddleware[] = [assignRequestId, collectBytes, 
 export * from './forward-headers';
 export * from './load-custom-middlewares';
 export * from './request-middleware.interface';
-export * from './response-sent';
+export * from './log-response';
+export * from './log-response-error';
 
 export { defaultMiddlewares };

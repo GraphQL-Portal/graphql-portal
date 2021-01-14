@@ -1,7 +1,7 @@
 import { prefixLogger } from '@graphql-portal/logger';
 import { config } from '@graphql-portal/config';
 import { connections as ConnectionTool } from '../server/index';
-import redisConnect from '../redis/connect';
+import { getRedisClient } from '../redis';
 import * as ByteTool from '../utils/byte.tool';
 import { serializer } from './utils';
 import MetricsChannels from './channels.enum';
@@ -9,19 +9,17 @@ import MetricsChannels from './channels.enum';
 const logger = prefixLogger('network-metric-recorder');
 const networkLogInterval = 1000;
 
-const startPeriodicMetricsRecording = async (redisConnectionString: string): Promise<void> => {
-  const redis = await redisConnect(redisConnectionString);
+let interval: NodeJS.Timeout;
+
+const startPeriodicMetricsRecording = async (): Promise<void> => {
+  if (interval) clearInterval(interval);
+
+  const redis = await getRedisClient();
   logger.info('Starting recording network metrics');
 
-  let isRecording = false;
-
   const hitRecord = async () => {
-    if (isRecording) return;
-
     const connections = await ConnectionTool.get();
     if (!connections) return;
-
-    isRecording = true;
 
     const data = {
       nodeId: config.nodeId,
@@ -37,11 +35,9 @@ const startPeriodicMetricsRecording = async (redisConnectionString: string): Pro
     } catch (error) {
       logger.error(`Couldn't write to ${MetricsChannels.NETWORK}: \n${error.toString()}`);
     }
-
-    isRecording = false;
   };
 
-  setInterval(hitRecord, networkLogInterval);
+  interval = setInterval(hitRecord, networkLogInterval);
 };
 
 export default startPeriodicMetricsRecording;

@@ -5,6 +5,7 @@ enum MetricsChannelsEnum {
   RESOLVER_DONE = 'resolver-done',
   SENT_RESPONSE = 'sent-response',
   GOT_REQUEST = 'got-request',
+  GOT_ERROR = 'got-error',
   REQUEST_IDS = 'request-ids',
 }
 

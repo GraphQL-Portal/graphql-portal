@@ -1,6 +1,6 @@
 import { RequestHandler } from 'express';
 import uuid from 'uuid';
-import { RequestWithId } from 'src/interfaces';
+import { RequestWithId } from '../interfaces';
 import { metricEmitter, MetricsChannels } from '../metric';
 
 const assignRequestId: RequestHandler = (req: RequestWithId, res, next) => {

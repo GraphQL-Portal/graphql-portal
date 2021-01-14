@@ -1,7 +1,7 @@
 import { EventEmitter } from 'events';
 import { prefixLogger } from '@graphql-portal/logger';
 import { config } from '@graphql-portal/config';
-import redisConnect from '../redis/connect';
+import { getRedisClient } from '../redis';
 import { MeshPubSub, ResolverData } from '@graphql-mesh/types';
 import { serializer, transformResolverData } from './utils';
 import MetricsChannels from './channels.enum';
@@ -9,17 +9,18 @@ import MetricsChannels from './channels.enum';
 const logger = prefixLogger('metric-emitter');
 export const metricEmitter = new EventEmitter();
 
-const subscribe = async (redisConnectionString: string, pubsub: MeshPubSub): Promise<void> => {
-  const redis = await redisConnect(redisConnectionString);
+const subscribe = async (pubsub: MeshPubSub): Promise<void> => {
+  const redis = await getRedisClient();
 
-  const pushWithErrorHandle = (key: string, ...args: any[]): Promise<number | void> => {
-    return redis.lpush(key, ...args).catch((error) => {
+  const lpush = (key: string, ...args: any[]): Promise<number | void> => {
+    return redis.lpush(key, ...args).catch((error: Error) => {
       logger.error(`Failed to write request data. \n Error: ${error} \n Data: ${args}`);
     });
   };
 
   metricEmitter.on(MetricsChannels.GOT_REQUEST, async (id: string, { query, userAgent, ip, request }) => {
-    await pushWithErrorHandle(
+    await lpush(MetricsChannels.REQUEST_IDS, id);
+    await lpush(
       id,
       serializer(
         {
@@ -37,14 +38,14 @@ const subscribe = async (redisConnectionString: string, pubsub: MeshPubSub): Pro
   });
 
   metricEmitter.on(MetricsChannels.RESOLVER_CALLED, async (resolverData: ResolverData) => {
-    await pushWithErrorHandle(
+    await lpush(
       resolverData.context.requestId,
       serializer(transformResolverData(MetricsChannels.RESOLVER_CALLED, resolverData))
     );
   });
 
   metricEmitter.on(MetricsChannels.RESOLVER_DONE, async (resolverData: ResolverData, result: any) => {
-    await pushWithErrorHandle(
+    await lpush(
       resolverData.context.requestId,
       serializer({
         ...transformResolverData(MetricsChannels.RESOLVER_DONE, resolverData),
@@ -54,7 +55,7 @@ const subscribe = async (redisConnectionString: string, pubsub: MeshPubSub): Pro
   });
 
   metricEmitter.on(MetricsChannels.RESOLVER_ERROR, async (resolverData: ResolverData, error: Error) => {
-    await pushWithErrorHandle(
+    await lpush(
       resolverData.context.requestId,
       serializer({
         ...transformResolverData(MetricsChannels.RESOLVER_ERROR, resolverData),
@@ -65,20 +66,29 @@ const subscribe = async (redisConnectionString: string, pubsub: MeshPubSub): Pro
 
   metricEmitter.on(
     MetricsChannels.SENT_RESPONSE,
-    async (id: string, rawResponseBody: string, contentLength: number, error: Error) => {
-      await pushWithErrorHandle(MetricsChannels.REQUEST_IDS, id);
-      await pushWithErrorHandle(
+    async (id: string, rawResponseBody: string, contentLength: number) => {
+      await lpush(
         id,
         serializer({
           event: MetricsChannels.SENT_RESPONSE,
           rawResponseBody,
           contentLength,
-          error,
           date: Date.now(),
         })
       );
     }
   );
+
+  metricEmitter.on(MetricsChannels.GOT_ERROR, async (id: string, error: Error) => {
+    await lpush(
+      id,
+      serializer({
+        event: MetricsChannels.GOT_ERROR,
+        error,
+        date: Date.now(),
+      })
+    );
+  });
 
   await pubsub.subscribe('resolverCalled', ({ resolverData }) => {
     metricEmitter.emit(MetricsChannels.RESOLVER_CALLED, resolverData);

@@ -11,7 +11,7 @@ import setupRedis from '../redis';
 import { startPeriodicMetricsRecording } from '../metric';
 import setupControlApi from './control-api';
 import { setRouter, updateApi } from './router';
-import { responseSent, setError } from 'src/middleware';
+import { logResponse, logResponseError } from '../middleware';
 
 export type ForwardHeaders = Record<string, string>;
 export interface Context {
@@ -26,12 +26,12 @@ export async function startServer(): Promise<void> {
   const app = express();
   const httpServer = createServer(app);
 
-  connections.get = async () => promisify(httpServer.getConnections.bind(httpServer))();
+  connections.get = promisify(httpServer.getConnections.bind(httpServer));
 
   app.use(bodyParser.json());
   app.use(cookieParser());
   app.use(graphqlUploadExpress());
-  app.use(responseSent);
+  app.use(logResponse);
 
   const apiDefsToControlApi = config.apiDefs.filter((apiDef) => apiDef.schema_updates_through_control_api);
   if (apiDefsToControlApi.length) {
@@ -40,7 +40,7 @@ export async function startServer(): Promise<void> {
 
   await setRouter(app, config.apiDefs);
 
-  app.use(setError);
+  app.use(logResponseError);
 
   if (config.gateway.use_dashboard_configs) {
     const redis = await setupRedis(config.gateway.redis_connection_string);
@@ -73,7 +73,7 @@ export async function startServer(): Promise<void> {
 
   httpServer.listen(config.gateway.listen_port, config.gateway.hostname, () => {});
 
-  await startPeriodicMetricsRecording(config.gateway.redis_connection_string);
+  await startPeriodicMetricsRecording();
 
   logger.info(`🐥 Started server in the worker process`);
 }

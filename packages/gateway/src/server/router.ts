@@ -2,15 +2,14 @@ import { diff } from '@graphql-inspector/core';
 import { processConfig } from '@graphql-mesh/config';
 import { MeshPubSub } from '@graphql-mesh/types';
 import { getMesh } from '@graphql-mesh/runtime';
-import { config } from '@graphql-portal/config';
 import { prefixLogger } from '@graphql-portal/logger';
 import { ApiDef } from '@graphql-portal/types';
-import { Application, Request, RequestHandler, Router } from 'express';
+import { Application, RequestHandler, Router } from 'express';
 import { graphqlHTTP } from 'express-graphql';
 import { GraphQLSchema } from 'graphql';
 import { defaultMiddlewares, loadCustomMiddlewares, prepareRequestContext } from '../middleware';
 import { subscribeOnRequestMetrics } from '../metric';
-import { RequestWithId } from 'src/interfaces';
+import { RequestWithId } from '../interfaces';
 
 interface IMesh {
   schema: GraphQLSchema;
@@ -70,7 +69,7 @@ async function buildApi(toRouter: Router, apiDef: ApiDef, mesh?: IMesh) {
   const { schema, contextBuilder, pubsub } = mesh;
   apiSchema[apiDef.name] = schema;
 
-  await subscribeOnRequestMetrics(config.gateway.redis_connection_string, pubsub);
+  await subscribeOnRequestMetrics(pubsub);
 
   logger.info(`Loaded API ${apiDef.name} ➜ ${apiDef.endpoint}`);
 
