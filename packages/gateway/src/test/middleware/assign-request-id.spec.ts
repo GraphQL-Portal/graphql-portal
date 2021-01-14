@@ -1,18 +1,15 @@
 import { NextFunction, Request, Response } from 'express';
 import assignRequestId from '../../middleware/assign-request-id';
-import * as metricService from '../../metric';
+import { metricEmitter, MetricsChannels } from '../../metric';
 
 jest.mock('uuid', () => ({
   v4: () => 'requestId',
 }));
 
-jest.mock('../../metric', () => ({
+jest.mock('../../metric/emitter', () => ({
   metricEmitter: {
     on: jest.fn(),
     emit: jest.fn(),
-  },
-  MetricsChannels: {
-    GOT_REQUEST: 'GOT_REQUEST',
   },
 }));
 
@@ -41,8 +38,8 @@ describe('Assign reequest id MW', () => {
     expressMw(mockRequest as Request, mockResponse as Response, nextFunction);
     expect(nextFunction).toBeCalled();
     expect((mockRequest as any).id).toBe('requestId');
-    expect(metricService.metricEmitter.emit).toBeCalledTimes(1);
-    expect(metricService.metricEmitter.emit).toBeCalledWith(metricService.MetricsChannels.GOT_REQUEST, 'requestId', {
+    expect(metricEmitter.emit).toBeCalledTimes(1);
+    expect(metricEmitter.emit).toBeCalledWith(MetricsChannels.GOT_REQUEST, 'requestId', {
       query: mockRequest.body,
       userAgent: mockRequest?.headers?.['user-agent'],
       ip: mockRequest.ip,
