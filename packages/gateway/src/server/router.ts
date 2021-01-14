@@ -1,15 +1,20 @@
 import { diff } from '@graphql-inspector/core';
 import { processConfig } from '@graphql-mesh/config';
+import { MeshPubSub } from '@graphql-mesh/types';
 import { getMesh } from '@graphql-mesh/runtime';
+import { config } from '@graphql-portal/config';
 import { prefixLogger } from '@graphql-portal/logger';
 import { ApiDef } from '@graphql-portal/types';
-import { Application, Request, Router } from 'express';
+import { Application, Router } from 'express';
 import { graphqlHTTP } from 'express-graphql';
 import { GraphQLSchema } from 'graphql';
 import { defaultMiddlewares, loadCustomMiddlewares, prepareRequestContext } from '../middleware';
+import { subscribeOnRequestMetrics } from '../metric';
+import { RequestWithId } from 'src/interfaces';
 
 interface IMesh {
   schema: GraphQLSchema;
+  pubsub: MeshPubSub;
   contextBuilder: (initialContextValue?: any) => Promise<Record<string, any>>;
 }
 
@@ -46,17 +51,19 @@ async function buildApi(toRouter: Router, apiDef: ApiDef, mesh?: IMesh) {
     });
   }
 
-  const { schema, contextBuilder } = await getMeshForApiDef(apiDef, mesh);
+  const { schema, contextBuilder, pubsub } = await getMeshForApiDef(apiDef, mesh);
   apiDef.schema = schema;
+
+  await subscribeOnRequestMetrics(config.gateway.redis_connection_string, pubsub);
 
   logger.info(`Loaded API ${apiDef.name} ➜ ${apiDef.endpoint}`);
 
   toRouter.use(
     apiDef.endpoint,
-    graphqlHTTP(async (req: Request) => {
-      const forwardHeaders = req.context === undefined ? {} : req.context.forwardHeaders;
+    graphqlHTTP(async (req: RequestWithId) => {
       const context = await contextBuilder({
-        ...forwardHeaders,
+        forwardHeaders: req?.context?.forwardHeaders || {},
+        requestId: req.id,
       });
 
       return {
