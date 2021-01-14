@@ -12,11 +12,10 @@ export const metricEmitter = new EventEmitter();
 const subscribe = async (pubsub: MeshPubSub): Promise<void> => {
   const redis = await getRedisClient();
 
-  const lpush = (key: string, ...args: any[]): Promise<number | void> => {
-    return redis.lpush(key, ...args).catch((error: Error) => {
+  const lpush = (key: string, ...args: any[]): Promise<number | void> =>
+    redis.lpush(key, ...args).catch((error: Error) => {
       logger.error(`Failed to write request data. \n Error: ${error} \n Data: ${args}`);
     });
-  };
 
   metricEmitter.on(MetricsChannels.GOT_REQUEST, async (id: string, { query, userAgent, ip, request }) => {
     await lpush(MetricsChannels.REQUEST_IDS, id);
@@ -37,58 +36,55 @@ const subscribe = async (pubsub: MeshPubSub): Promise<void> => {
     );
   });
 
-  metricEmitter.on(MetricsChannels.RESOLVER_CALLED, async (resolverData: ResolverData) => {
-    await lpush(
+  metricEmitter.on(MetricsChannels.RESOLVER_CALLED, (resolverData: ResolverData) =>
+    lpush(
       resolverData.context.requestId,
       serializer(transformResolverData(MetricsChannels.RESOLVER_CALLED, resolverData))
-    );
-  });
+    )
+  );
 
-  metricEmitter.on(MetricsChannels.RESOLVER_DONE, async (resolverData: ResolverData, result: any) => {
-    await lpush(
+  metricEmitter.on(MetricsChannels.RESOLVER_DONE, (resolverData: ResolverData, result: any) =>
+    lpush(
       resolverData.context.requestId,
       serializer({
         ...transformResolverData(MetricsChannels.RESOLVER_DONE, resolverData),
         result,
       })
-    );
-  });
+    )
+  );
 
-  metricEmitter.on(MetricsChannels.RESOLVER_ERROR, async (resolverData: ResolverData, error: Error) => {
-    await lpush(
+  metricEmitter.on(MetricsChannels.RESOLVER_ERROR, (resolverData: ResolverData, error: Error) =>
+    lpush(
       resolverData.context.requestId,
       serializer({
         ...transformResolverData(MetricsChannels.RESOLVER_ERROR, resolverData),
         error,
       })
-    );
-  });
-
-  metricEmitter.on(
-    MetricsChannels.SENT_RESPONSE,
-    async (id: string, rawResponseBody: string, contentLength: number) => {
-      await lpush(
-        id,
-        serializer({
-          event: MetricsChannels.SENT_RESPONSE,
-          rawResponseBody,
-          contentLength,
-          date: Date.now(),
-        })
-      );
-    }
+    )
   );
 
-  metricEmitter.on(MetricsChannels.GOT_ERROR, async (id: string, error: Error) => {
-    await lpush(
+  metricEmitter.on(MetricsChannels.SENT_RESPONSE, (id: string, rawResponseBody: string, contentLength: number) =>
+    lpush(
+      id,
+      serializer({
+        event: MetricsChannels.SENT_RESPONSE,
+        rawResponseBody,
+        contentLength,
+        date: Date.now(),
+      })
+    )
+  );
+
+  metricEmitter.on(MetricsChannels.GOT_ERROR, (id: string, error: Error) =>
+    lpush(
       id,
       serializer({
         event: MetricsChannels.GOT_ERROR,
         error,
         date: Date.now(),
       })
-    );
-  });
+    )
+  );
 
   await pubsub.subscribe('resolverCalled', ({ resolverData }) => {
     metricEmitter.emit(MetricsChannels.RESOLVER_CALLED, resolverData);
