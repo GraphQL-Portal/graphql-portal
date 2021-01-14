@@ -1,8 +1,8 @@
 import { EventEmitter } from 'events';
 import { Pipeline } from 'ioredis';
 import { prefixLogger } from '@graphql-portal/logger';
+import { config } from '@graphql-portal/config';
 import redisConnect from '../redis/connect';
-import { nodeId } from '../server/index';
 import { MeshPubSub, ResolverData } from '@graphql-mesh/types';
 import { serializer, transformResolverData } from './utils';
 import MetricsChannels from './channels.enum';
@@ -20,7 +20,7 @@ const subscribe = async (redisConnectionString: string, pubsub: MeshPubSub): Pro
       serializer(
         {
           event: MetricsChannels.GOT_REQUEST,
-          nodeId,
+          nodeId: config.nodeId,
           query,
           userAgent,
           ip,

@@ -67,7 +67,7 @@ async function buildApi(toRouter: Router, apiDef: ApiDef, mesh?: IMesh) {
     logger.error(`Could not get schema for API, enpoint ${apiDef.endpoint} won't be added to the router`);
     return;
   }
-  const { schema, contextBuilder } = mesh;
+  const { schema, contextBuilder, pubsub } = mesh;
   apiSchema[apiDef.name] = schema;
 
   await subscribeOnRequestMetrics(config.gateway.redis_connection_string, pubsub);

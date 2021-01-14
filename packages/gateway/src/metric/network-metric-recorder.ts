@@ -1,5 +1,6 @@
 import { prefixLogger } from '@graphql-portal/logger';
-import { connections as ConnectionTool, nodeId } from '../server/index';
+import { config } from '@graphql-portal/config';
+import { connections as ConnectionTool } from '../server/index';
 import redisConnect from '../redis/connect';
 import * as ByteTool from '../utils/byte.tool';
 import { serializer } from './utils';
@@ -23,7 +24,7 @@ const startPeriodicMetricsRecording = async (redisConnectionString: string): Pro
     isRecording = true;
 
     const data = {
-      nodeId,
+      nodeId: config.nodeId,
       network: {
         connections,
         ...ByteTool.getBytesInAndOut(),

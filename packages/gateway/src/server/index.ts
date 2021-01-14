@@ -1,3 +1,4 @@
+import { promisify } from 'util';
 import { config, loadApiDefs } from '@graphql-portal/config';
 import { logger } from '@graphql-portal/logger';
 import { Channel } from '@graphql-portal/types';
@@ -10,8 +11,7 @@ import setupRedis from '../redis';
 import { startPeriodicMetricsRecording } from '../metric';
 import setupControlApi from './control-api';
 import { setRouter, updateApi } from './router';
-import cluster from 'cluster';
-import { customAlphabet } from 'nanoid';
+import { responseSent, setError } from 'src/middleware';
 
 export type ForwardHeaders = Record<string, string>;
 export interface Context {
