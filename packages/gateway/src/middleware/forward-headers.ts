@@ -5,6 +5,7 @@ import { prefixLogger } from '@graphql-portal/logger';
 const prepareRequestContext: RequestHandler = function prepareRequestContext(req, res, next) {
   req.context = {
     forwardHeaders: {},
+    requestId: req.id,
   };
 
   next();

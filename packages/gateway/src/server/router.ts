@@ -4,12 +4,11 @@ import { MeshPubSub } from '@graphql-mesh/types';
 import { getMesh } from '@graphql-mesh/runtime';
 import { prefixLogger } from '@graphql-portal/logger';
 import { ApiDef } from '@graphql-portal/types';
-import { Application, RequestHandler, Router } from 'express';
+import { Application, Request, RequestHandler, Router } from 'express';
 import { graphqlHTTP } from 'express-graphql';
 import { GraphQLSchema } from 'graphql';
 import { defaultMiddlewares, loadCustomMiddlewares, prepareRequestContext } from '../middleware';
 import { subscribeOnRequestMetrics } from '../metric';
-import { RequestWithId } from '../interfaces';
 
 interface IMesh {
   schema: GraphQLSchema;
@@ -75,7 +74,7 @@ async function buildApi(toRouter: Router, apiDef: ApiDef, mesh?: IMesh) {
 
   toRouter.use(
     apiDef.endpoint,
-    graphqlHTTP(async (req: RequestWithId) => {
+    graphqlHTTP(async (req: Request) => {
       const context = await contextBuilder({
         forwardHeaders: req?.context?.forwardHeaders || {},
         requestId: req.id,

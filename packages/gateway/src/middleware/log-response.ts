@@ -1,8 +1,7 @@
 import { RequestHandler } from 'express';
-import { RequestWithId } from '../interfaces';
 import { metricEmitter, MetricsChannels } from '../metric';
 
-export const logResponse: RequestHandler = (req: RequestWithId, res, next) => {
+export const logResponse: RequestHandler = (req, res, next) => {
   const oldWrite = res.write.bind(res);
   const oldEnd = res.end.bind(res);
 

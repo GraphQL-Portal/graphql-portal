@@ -16,6 +16,7 @@ import { logResponse, logResponseError } from '../middleware';
 export type ForwardHeaders = Record<string, string>;
 export interface Context {
   forwardHeaders: ForwardHeaders;
+  requestId: string,
 }
 
 export const connections = {
