@@ -11,16 +11,12 @@ import { startPeriodicMetricsRecording } from '../metric';
 import setupControlApi from './control-api';
 import { setRouter, updateApi } from './router';
 import cluster from 'cluster';
-import { promisify } from 'util';
 import { customAlphabet } from 'nanoid';
-import { responseSent, setError } from '../middleware';
 
 export type ForwardHeaders = Record<string, string>;
 export interface Context {
   forwardHeaders: ForwardHeaders;
 }
-
-export const nodeId: string = customAlphabet('0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz-', 11)();
 
 export const connections = {
   get: async () => 0,
@@ -36,6 +32,11 @@ export async function startServer(): Promise<void> {
   app.use(cookieParser());
   app.use(graphqlUploadExpress());
   app.use(responseSent);
+
+  const apiDefsToControlApi = config.apiDefs.filter((apiDef) => apiDef.schema_updates_through_control_api);
+  if (apiDefsToControlApi.length) {
+    setupControlApi(app, apiDefsToControlApi);
+  }
 
   await setRouter(app, config.apiDefs);
 
@@ -65,26 +66,14 @@ export async function startServer(): Promise<void> {
     setInterval(() => updateApi(apiDef), apiDef.schema_polling_interval);
   });
 
-  const apiDefsToControlApi = config.apiDefs.filter((apiDef) => apiDef.schema_updates_through_control_api);
-  if (apiDefsToControlApi.length) {
-    await setupControlApi(app, apiDefsToControlApi);
-  }
-
   if (config.apiDefs.length === 0) {
     logger.warn('Server is going to start with 0 API definitions and will not proxy anything...');
   }
-
   // TODO: web sockets support
 
   httpServer.listen(config.gateway.listen_port, config.gateway.hostname, () => {});
 
   await startPeriodicMetricsRecording(config.gateway.redis_connection_string);
 
-  if (cluster.isMaster) {
-    logger.info(
-      `🔥 Started GraphQL API Portal ➜ http://${config.gateway.hostname}:${config.gateway.listen_port}, pid: ${process.pid}, nodeID: ${nodeId}`
-    );
-  } else {
-    logger.info(`🐥 Started worker process ➜ pid: ${process.pid}, nodeId: ${nodeId}`);
-  }
+  logger.info(`🐥 Started server in the worker process`);
 }
