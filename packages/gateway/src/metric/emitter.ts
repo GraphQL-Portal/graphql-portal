@@ -1,22 +1,21 @@
 import { EventEmitter } from 'events';
 import { prefixLogger } from '@graphql-portal/logger';
 import { config } from '@graphql-portal/config';
-import { getRedisClient } from '../redis';
+import { redis } from '../redis';
 import { MeshPubSub, ResolverData } from '@graphql-mesh/types';
 import { serializer, transformResolverData } from './utils';
 import MetricsChannels from './channels.enum';
+import PubSubEventsEnum from './pubsub-events.enum';
 
 const logger = prefixLogger('metric-emitter');
 export const metricEmitter = new EventEmitter();
 
+const lpush = (key: string, ...args: any[]): Promise<number | void> =>
+  redis.lpush(key, ...args).catch((error: Error) => {
+    logger.error(`Failed to write request data. \n Error: ${error} \n Data: ${args}`);
+  });
+
 const subscribe = async (pubsub: MeshPubSub): Promise<void> => {
-  const redis = await getRedisClient();
-
-  const lpush = (key: string, ...args: any[]): Promise<number | void> =>
-    redis.lpush(key, ...args).catch((error: Error) => {
-      logger.error(`Failed to write request data. \n Error: ${error} \n Data: ${args}`);
-    });
-
   metricEmitter.on(MetricsChannels.GOT_REQUEST, async (id: string, { query, userAgent, ip, request }) => {
     await lpush(MetricsChannels.REQUEST_IDS, id);
     await lpush(
@@ -86,13 +85,13 @@ const subscribe = async (pubsub: MeshPubSub): Promise<void> => {
     )
   );
 
-  await pubsub.subscribe('resolverCalled', ({ resolverData }) => {
+  await pubsub.subscribe(PubSubEventsEnum.RESOLVER_CALLED, ({ resolverData }) => {
     metricEmitter.emit(MetricsChannels.RESOLVER_CALLED, resolverData);
   });
-  await pubsub.subscribe('resolverDone', ({ resolverData, result }) => {
+  await pubsub.subscribe(PubSubEventsEnum.RESOLVER_DONE, ({ resolverData, result }) => {
     metricEmitter.emit(MetricsChannels.RESOLVER_DONE, resolverData, result);
   });
-  await pubsub.subscribe('resolverError', ({ resolverData, error }) => {
+  await pubsub.subscribe(PubSubEventsEnum.RESOLVER_ERROR, ({ resolverData, error }) => {
     metricEmitter.emit(MetricsChannels.RESOLVER_ERROR, resolverData, error);
   });
 };
