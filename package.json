@@ -10,7 +10,7 @@
     "generate-mesh-source-config": "json2ts -i packages/types/src/mesh-source-schema.json -o ./packages/types/src/mesh-source-config.ts --style.singleQuote --bannerComment \"/* eslint-disable */\"",
     "generate-api-def-config": "json2ts -i packages/types/src/api-def-schema.json -o ./packages/types/src/api-def-config.ts --style.singleQuote --bannerComment \"/* eslint-disable */\"",
     "generate-configs": "yarn generate-gateway-config && yarn generate-mesh-source-config && yarn generate-api-def-config",
-    "clear-dist": "rimraf dist ./packages/config/dist ./packages/gateway/dist ./packages/types/dist ./packages/dashboard/dist ./packages/logger/dist",
+    "clear-dist": "rm -rf dist ./packages/config/dist ./packages/gateway/dist ./packages/types/dist ./packages/dashboard/dist ./packages/logger/dist",
     "copy-graphql-files": "copyfiles -u 5 packages/gateway/src/server/control-api/*.gql packages/gateway/dist/src/server/control-api/",
     "mesh-config-sync": "ts-node ./packages/types/src/mesh-config-sync.ts && prettier --write ./packages/types/src/mesh-source-schema.json ./packages/types/src/api-def-schema.json",
     "prebuild": "yarn clear-dist && yarn mesh-config-sync && yarn generate-configs",
@@ -26,9 +26,9 @@
     "packages/*"
   ],
   "dependencies": {
-    "@changesets/cli": "2.12.0"
   },
   "devDependencies": {
+    "@changesets/cli": "2.12.0",
     "@types/jest": "26.0.19",
     "@typescript-eslint/eslint-plugin": "4.11.1",
     "@typescript-eslint/parser": "4.11.1",
@@ -44,7 +44,6 @@
     "json-schema-to-typescript": "10.0.3",
     "lint-staged": "10.5.3",
     "prettier": "2.2.1",
-    "rimraf": "3.0.2",
     "ts-jest": "26.4.4",
     "ts-node": "9.1.1",
     "typescript": "4.1.3"
