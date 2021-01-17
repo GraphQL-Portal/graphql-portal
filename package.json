@@ -26,7 +26,7 @@
     "packages/*"
   ],
   "dependencies": {
-    "@changesets/cli": "2.12.0"
+    "@changesets/cli": "2.13.0"
   },
   "devDependencies": {
     "@types/jest": "26.0.20",
