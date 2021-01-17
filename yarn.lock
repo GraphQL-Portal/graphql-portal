@@ -657,13 +657,13 @@
     lodash "4.17.20"
     param-case "3.0.4"
 
-"@graphql-mesh/graphql@^0.11.0":
-  version "0.11.2"
-  resolved "https://registry.yarnpkg.com/@graphql-mesh/graphql/-/graphql-0.11.2.tgz#9f68919d05b220d95d3830f9316d440f314ccfbb"
-  integrity sha512-pLFju9fnoN+BEnQZXuDnuIy4tbJcC0SKrpMsT/j2Za3/IMznMJTDsr7aPm3KrJwR7Jn3IJSYipCWqil4TPh6pA==
+"@graphql-mesh/graphql@^0.13.0":
+  version "0.13.1"
+  resolved "https://registry.yarnpkg.com/@graphql-mesh/graphql/-/graphql-0.13.1.tgz#c0032563b9cebcf8a8420211ebeb72c3350f4cc1"
+  integrity sha512-N6BxDuKGGmj/cL2SnAnejxdKr3gbM1+HYZwu5BJ9q4GBE1mGwNrg1xRoS2nn/FrgZRQWBywpYzN2g3Acckyw7g==
   dependencies:
-    "@graphql-mesh/types" "0.24.0"
-    "@graphql-mesh/utils" "0.8.2"
+    "@graphql-mesh/types" "0.27.0"
+    "@graphql-mesh/utils" "0.8.3"
     "@graphql-tools/url-loader" "6.7.1"
     "@graphql-tools/wrap" "7.0.5"
     fetchache "0.0.4"
@@ -759,17 +759,7 @@
     "@graphql-typed-document-node/core" "3.1.0"
     fetchache "0.0.4"
 
-"@graphql-mesh/types@0.24.0":
-  version "0.24.0"
-  resolved "https://registry.yarnpkg.com/@graphql-mesh/types/-/types-0.24.0.tgz#cc93cd1247fb73086123c6a71a371a2ae7940628"
-  integrity sha512-H7fKQ9iCqIe+uekJyUCr7Nea7tugkA3F59GND7/H+4WehEbPALEAziuZLaEIkFCo///fGzwKi5sCJiYyUVznEw==
-  dependencies:
-    "@graphql-tools/delegate" "7.0.8"
-    "@graphql-tools/utils" "7.2.3"
-    "@graphql-typed-document-node/core" "3.1.0"
-    fetchache "0.0.4"
-
-"@graphql-mesh/types@^0.27.0":
+"@graphql-mesh/types@0.27.0", "@graphql-mesh/types@^0.27.0":
   version "0.27.0"
   resolved "https://registry.yarnpkg.com/@graphql-mesh/types/-/types-0.27.0.tgz#fe8dfea3f163966a9c3c67a7c67e47115f716923"
   integrity sha512-rQwH6fgUIg3XzJQrZl7RCYOYLimN99aEbPKfJwtSQwmF68STJ+p7CUBs0kmgO5KT8icyOfQbHPYauhbbYzKPKQ==
@@ -810,6 +800,22 @@
     is-url "1.2.4"
     js-yaml "3.14.1"
     object-hash "2.0.3"
+
+"@graphql-mesh/utils@0.8.3":
+  version "0.8.3"
+  resolved "https://registry.yarnpkg.com/@graphql-mesh/utils/-/utils-0.8.3.tgz#7ddd70f056c3620cdf3bd37f471e986bbd367b19"
+  integrity sha512-aYL/dvaDCQOrg0N/LhqpLoj3HmkMYY3UvdVSYTlhPaL6dkPq18P92s+Nqhr9vw5Hfy0ZITz7XGDk4u1U9NVUKQ==
+  dependencies:
+    "@ardatan/string-interpolation" "1.2.8"
+    "@graphql-tools/delegate" "7.0.8"
+    "@graphql-tools/utils" "7.2.3"
+    "@graphql-typed-document-node/core" "3.1.0"
+    date-fns "2.16.1"
+    fetchache "0.0.4"
+    fs-extra "9.0.1"
+    is-url "1.2.4"
+    js-yaml "4.0.0"
+    object-hash "2.1.1"
 
 "@graphql-tools/batch-delegate@^7.0.0":
   version "7.0.1"
@@ -2108,6 +2114,11 @@ argparse@^1.0.7:
   integrity sha512-o5Roy6tNG4SL/FOkCAN6RzjiakZS25RLYFrcMttJqbdd8BWrnA+fGz57iN5Pb06pvBGvl5gQ0B48dJlslXvoTg==
   dependencies:
     sprintf-js "~1.0.2"
+
+argparse@^2.0.1:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/argparse/-/argparse-2.0.1.tgz#246f50f3ca78a3240f6c997e8a9bd1eac49e4b38"
+  integrity sha512-8+9WqebbFzpX9OR+Wa6O29asIogeRMzcGtAINdpMHHyAg10f05aSFVBbcEqGf/PXw1EjAZ+q2/bEBg3DvurK3Q==
 
 arr-diff@^4.0.0:
   version "4.0.0"
@@ -5267,6 +5278,13 @@ js-yaml@3.14.1, js-yaml@^3.13.0, js-yaml@^3.13.1, js-yaml@^3.6.1:
     argparse "^1.0.7"
     esprima "^4.0.0"
 
+js-yaml@4.0.0:
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/js-yaml/-/js-yaml-4.0.0.tgz#f426bc0ff4b4051926cd588c71113183409a121f"
+  integrity sha512-pqon0s+4ScYUvX30wxQi3PogGFAlUyH0awepWvwkj4jD4v+ova3RiYw8bmA6x2rDrEaj8i/oWKoRxpVNW+Re8Q==
+  dependencies:
+    argparse "^2.0.1"
+
 jsbn@~0.1.0:
   version "0.1.1"
   resolved "https://registry.yarnpkg.com/jsbn/-/jsbn-0.1.1.tgz#a5e654c2e5a2deb5f201d96cefbca80c0ef2f513"
@@ -6092,6 +6110,11 @@ object-hash@2.0.3:
   version "2.0.3"
   resolved "https://registry.yarnpkg.com/object-hash/-/object-hash-2.0.3.tgz#d12db044e03cd2ca3d77c0570d87225b02e1e6ea"
   integrity sha512-JPKn0GMu+Fa3zt3Bmr66JhokJU5BaNBIh4ZeTlaCBzrBsOeXzwcKKAK1tbLiPKgvwmPXsDvvLHoWh5Bm7ofIYg==
+
+object-hash@2.1.1:
+  version "2.1.1"
+  resolved "https://registry.yarnpkg.com/object-hash/-/object-hash-2.1.1.tgz#9447d0279b4fcf80cff3259bf66a1dc73afabe09"
+  integrity sha512-VOJmgmS+7wvXf8CjbQmimtCnEx3IAoLxI3fp2fbWehxrWBcAQFbk+vcwb6vzR0VZv/eNCJ/27j151ZTwqW/JeQ==
 
 object-inspect@^1.8.0:
   version "1.9.0"
