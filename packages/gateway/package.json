@@ -50,6 +50,6 @@
     "@types/request-ip": "0.0.35",
     "@types/supertest": "2.0.10",
     "ioredis-mock": "5.2.0",
-    "supertest": "6.0.1"
+    "supertest": "6.1.1"
   }
 }
