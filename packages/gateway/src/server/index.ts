@@ -19,7 +19,7 @@ export async function startServer(): Promise<void> {
   const app = express();
   const httpServer = createServer(app);
 
-  app.use(bodyParser.json());
+  app.use(bodyParser.json({ limit: '10mb' }));
   app.use(cookieParser());
   app.use(graphqlUploadExpress());
 
@@ -28,7 +28,7 @@ export async function startServer(): Promise<void> {
     setupControlApi(app, apiDefsToControlApi);
   }
 
-  await setRouter(app, config.apiDefs);
+  setRouter(app, config.apiDefs);
 
   if (config.gateway.use_dashboard_configs) {
     const redis = await setupRedis(config.gateway.redis_connection_string);

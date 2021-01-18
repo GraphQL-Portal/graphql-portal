@@ -9,6 +9,10 @@ export interface ApiDefConfig {
   enable_ip_filtering?: boolean;
   allow_ips?: string[];
   deny_ips?: string[];
+  /**
+   * Argument of the bytes package's method parse https://www.npmjs.com/package/bytes
+   */
+  request_size_limit?: string | number;
   mesh?: {
     serve?: ServeConfig;
     require?: string[];

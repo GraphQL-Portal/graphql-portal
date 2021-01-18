@@ -1164,6 +1164,10 @@
     "enable_ip_filtering": { "type": "boolean" },
     "allow_ips": { "type": "array", "items": { "type": "string" } },
     "deny_ips": { "type": "array", "items": { "type": "string" } },
+    "request_size_limit": {
+      "oneOf": [{ "type": "string" }, { "type": "number" }],
+      "description": "Argument of the bytes package's method parse https://www.npmjs.com/package/bytes"
+    },
     "mesh": {
       "type": "object",
       "additionalProperties": false,

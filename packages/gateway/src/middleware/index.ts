@@ -1,7 +1,8 @@
 import { RequestMiddleware } from './request-middleware.interface';
-import mw_ip_filtering from './mw_ip_filtering';
+import ipFiltering from './ip-filtering';
+import requestSizeLimit from './request-size-limit';
 
-const defaultMiddlewares: RequestMiddleware[] = [mw_ip_filtering];
+const defaultMiddlewares: RequestMiddleware[] = [ipFiltering, requestSizeLimit];
 export * from './forward-headers';
 export * from './load-custom-middlewares';
 export * from './request-middleware.interface';
