@@ -1,3 +1,4 @@
+import { promisify } from 'util';
 import { config, loadApiDefs } from '@graphql-portal/config';
 import { logger } from '@graphql-portal/logger';
 import { Channel } from '@graphql-portal/types';
@@ -7,21 +8,31 @@ import express from 'express';
 import { graphqlUploadExpress } from 'graphql-upload';
 import { createServer } from 'http';
 import setupRedis from '../redis';
+import { startPeriodicMetricsRecording } from '../metric';
 import setupControlApi from './control-api';
 import { setRouter, updateApi } from './router';
+import { logResponse, logResponseError } from '../middleware';
 
 export type ForwardHeaders = Record<string, string>;
 export interface Context {
   forwardHeaders: ForwardHeaders;
+  requestId: string;
 }
+
+export const connections = {
+  get: async () => 0,
+};
 
 export async function startServer(): Promise<void> {
   const app = express();
   const httpServer = createServer(app);
 
+  connections.get = promisify(httpServer.getConnections.bind(httpServer));
+
   app.use(bodyParser.json({ limit: '10mb' }));
   app.use(cookieParser());
   app.use(graphqlUploadExpress());
+  app.use(logResponse);
 
   const apiDefsToControlApi = config.apiDefs.filter((apiDef) => apiDef.schema_updates_through_control_api);
   if (apiDefsToControlApi.length) {
@@ -30,22 +41,22 @@ export async function startServer(): Promise<void> {
 
   setRouter(app, config.apiDefs);
 
-  if (config.gateway.use_dashboard_configs) {
-    const redis = await setupRedis(config.gateway.redis_connection_string);
-    logger.info('Connected to Redis at ➜ %s', config.gateway.redis_connection_string);
+  app.use(logResponseError);
 
-    redis.subscribe(Channel.apiDefsUpdated);
-    redis.on('message', async (channel, timestamp) => {
-      if (channel !== Channel.apiDefsUpdated) {
-        return;
-      }
-      if (+timestamp && +timestamp <= config.timestamp) {
-        return;
-      }
-      await loadApiDefs();
-      await setRouter(app, config.apiDefs);
-    });
-  }
+  const redis = await setupRedis(config.gateway.redis_connection_string);
+  logger.info('Connected to Redis at ➜ %s', config.gateway.redis_connection_string);
+
+  redis.subscribe(Channel.apiDefsUpdated);
+  redis.on('message', async (channel, timestamp) => {
+    if (channel !== Channel.apiDefsUpdated) {
+      return;
+    }
+    if (+timestamp && +timestamp <= config.timestamp) {
+      return;
+    }
+    await loadApiDefs();
+    await setRouter(app, config.apiDefs);
+  });
 
   config.apiDefs.forEach((apiDef) => {
     if (!apiDef.schema_polling_interval) {
@@ -60,6 +71,8 @@ export async function startServer(): Promise<void> {
   // TODO: web sockets support
 
   httpServer.listen(config.gateway.listen_port, config.gateway.hostname, () => {});
+
+  startPeriodicMetricsRecording();
 
   logger.info(`🐥 Started server in the worker process`);
 }
