@@ -20,7 +20,7 @@ async function start(): Promise<void> {
 
     logger.info(`GraphQL Portal API Gateway v${process.env.npm_package_version}`);
     logger.info(
-      `🔥 Starting GraphQL API Portal with ${numCPUs} workers on: http://${config.gateway.hostname}:${config.gateway.listen_port}`
+      `🔥 Starting GraphQL API Portal with ${numCPUs} worker(s) on: http://${config.gateway.hostname}:${config.gateway.listen_port}, nodeID: ${config.nodeId}`
     );
 
     cluster.on('fork', (worker) => {

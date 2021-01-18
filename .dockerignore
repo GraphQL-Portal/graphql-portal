@@ -1,0 +1,8 @@
+**/node_modules
+**/dist
+.github
+.vscode
+config
+.config
+.npm
+coverage
