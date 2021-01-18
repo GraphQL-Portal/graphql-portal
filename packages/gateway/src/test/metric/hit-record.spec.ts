@@ -29,8 +29,8 @@ describe('hitRecord', () => {
     const spyGetConnections = jest.spyOn(connectionsTool, 'get').mockResolvedValue(connections);
 
     const date = 1;
-    const olDateNow = Date.now;
-    const newDateNow = jest.fn(() => date);
+    const olDateNow: () => number  = Date.now;
+    const newDateNow: () => number = jest.fn(() => date);
     Date.now = newDateNow;
     await hitRecord();
     Date.now = olDateNow;
@@ -52,7 +52,7 @@ describe('hitRecord', () => {
       })
     );
   });
-  it('should return in server does not have opened connections', async () => {
+  it('should return if server does not have opened connections', async () => {
     const connections = 0;
     const spyGetConnections = jest.spyOn(connectionsTool, 'get').mockResolvedValue(connections);
 

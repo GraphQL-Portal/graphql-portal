@@ -1,7 +1,7 @@
 import { prefixLogger } from '@graphql-portal/logger';
 import hitRecord from './hit-record';
 
-const logger = prefixLogger('network-metric-recorder');
+const logger = prefixLogger('analytics:network-metric-recorder');
 const networkLogInterval = 1000;
 
 let interval: NodeJS.Timeout;

@@ -6,7 +6,7 @@ import * as ByteTool from '../utils/byte.tool';
 import MetricsChannels from './channels.enum';
 import { serializer } from './utils';
 
-const logger = prefixLogger('hit-record');
+const logger = prefixLogger('analytics:hit-record');
 
 const hitRecord = async () => {
   const connections = await ConnectionTool.get();

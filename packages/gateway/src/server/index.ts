@@ -16,7 +16,7 @@ import { logResponse, logResponseError } from '../middleware';
 export type ForwardHeaders = Record<string, string>;
 export interface Context {
   forwardHeaders: ForwardHeaders;
-  requestId: string,
+  requestId: string;
 }
 
 export const connections = {
@@ -43,22 +43,20 @@ export async function startServer(): Promise<void> {
 
   app.use(logResponseError);
 
-  if (config.gateway.use_dashboard_configs) {
-    const redis = await setupRedis(config.gateway.redis_connection_string);
-    logger.info('Connected to Redis at ➜ %s', config.gateway.redis_connection_string);
+  const redis = await setupRedis(config.gateway.redis_connection_string);
+  logger.info('Connected to Redis at ➜ %s', config.gateway.redis_connection_string);
 
-    redis.subscribe(Channel.apiDefsUpdated);
-    redis.on('message', async (channel, timestamp) => {
-      if (channel !== Channel.apiDefsUpdated) {
-        return;
-      }
-      if (+timestamp && +timestamp <= config.timestamp) {
-        return;
-      }
-      await loadApiDefs();
-      await setRouter(app, config.apiDefs);
-    });
-  }
+  redis.subscribe(Channel.apiDefsUpdated);
+  redis.on('message', async (channel, timestamp) => {
+    if (channel !== Channel.apiDefsUpdated) {
+      return;
+    }
+    if (+timestamp && +timestamp <= config.timestamp) {
+      return;
+    }
+    await loadApiDefs();
+    await setRouter(app, config.apiDefs);
+  });
 
   config.apiDefs.forEach((apiDef) => {
     if (!apiDef.schema_polling_interval) {

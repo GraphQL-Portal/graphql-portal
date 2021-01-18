@@ -7,7 +7,7 @@ import { serializer, transformResolverData } from './utils';
 import MetricsChannels from './channels.enum';
 import PubSubEventsEnum from './pubsub-events.enum';
 
-const logger = prefixLogger('metric-emitter');
+const logger = prefixLogger('analytics:metric-emitter');
 export const metricEmitter = new EventEmitter();
 
 const lpush = (key: string, ...args: any[]): Promise<number | void> =>
