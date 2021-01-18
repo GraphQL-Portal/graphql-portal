@@ -1,5 +1,12 @@
 # @graphql-portal/gateway
 
+## 0.7.0
+
+### Minor Changes
+
+- 8289cc8: Add Dockerfile
+- dc27048: Metrics
+
 ## 0.6.0
 
 ### Minor Changes
