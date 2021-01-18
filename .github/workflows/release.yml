@@ -50,6 +50,7 @@ jobs:
   dockerhub:
     name: Dockerhub
     runs-on: ubuntu-latest
+    needs: release
     steps:
       -
         name: Set up QEMU
