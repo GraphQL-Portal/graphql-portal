@@ -12,4 +12,5 @@ export default async function setupRedis(connectionString: string) {
 
   logger.info('Connected to Redis at ➜ %s', connectionString);
   ping(redis);
+  return redisSubscriber;
 }

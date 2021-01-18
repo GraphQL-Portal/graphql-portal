@@ -1,3 +1,4 @@
+import { CostData } from 'src/middleware/graphql-rate-limit/request-cost.tool';
 import { Context } from '../server';
 
 declare global {
@@ -5,6 +6,7 @@ declare global {
     export interface Request {
       context: Context;
       id: string;
+      costData: CostData;
     }
   }
 }

@@ -1168,6 +1168,15 @@
       "oneOf": [{ "type": "string" }, { "type": "number" }],
       "description": "Argument of the bytes package's method parse https://www.npmjs.com/package/bytes"
     },
+    "depth_limit": { "type": "integer", "minimum": 1, "description": "Maximum GraphQL query depth" },
+    "request_complexity_limit": { "type": "integer", "minimum": 1, "description": "Maximum complexity for a request" },
+    "rate_limit": {
+      "type": "object",
+      "description": "Allowed queries summary complexity for a user in a period of time",
+      "properties": { "complexity": { "type": "integer", "minimum": 1 }, "per": { "type": "integer", "minimum": 1 } },
+      "required": ["complexity", "per"],
+      "additionalProperties": false
+    },
     "mesh": {
       "type": "object",
       "additionalProperties": false,

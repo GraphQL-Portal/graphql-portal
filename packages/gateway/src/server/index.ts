@@ -9,7 +9,7 @@ import { createServer } from 'http';
 import { promisify } from 'util';
 import { startPeriodicMetricsRecording } from '../metric';
 import { logResponse, logResponseError } from '../middleware';
-import setupRedis, { redisSubscriber } from '../redis';
+import setupRedis from '../redis';
 import setupControlApi from './control-api';
 import { setRouter, updateApi } from './router';
 
@@ -24,7 +24,7 @@ export const connections = {
 };
 
 export async function startServer(): Promise<void> {
-  await setupRedis(config.gateway.redis_connection_string);
+  const redisSubscriber = await setupRedis(config.gateway.redis_connection_string);
 
   const app = express();
   const httpServer = createServer(app);

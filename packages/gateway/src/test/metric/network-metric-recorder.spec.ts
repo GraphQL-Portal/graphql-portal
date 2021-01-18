@@ -8,12 +8,6 @@ jest.mock('../../metric/hit-record', () => ({
   default: jest.fn(),
 }));
 
-jest.mock('@graphql-portal/logger', () => ({
-  prefixLogger: () => ({
-    info: jest.fn,
-  }),
-}));
-
 describe('startPeriodicMetricsRecording', () => {
   it('should push data to redis every second', () => {
     startPeriodicMetricsRecording();
