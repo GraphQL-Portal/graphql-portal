@@ -13,10 +13,6 @@ function handleStopSignal(): void {
 async function start(): Promise<void> {
   if (cluster.isMaster) {
     await initConfig();
-    if (!config.gateway) {
-      throw new Error('Error loading the gateway.json|yaml configuration file.');
-    }
-
     configureLogger(config.gateway);
     await loadApiDefs();
 
@@ -26,6 +22,11 @@ async function start(): Promise<void> {
     logger.info(
       `🔥 Starting GraphQL API Portal with ${numCPUs} workers on: http://${config.gateway.hostname}:${config.gateway.listen_port}`
     );
+
+    cluster.on('fork', (worker) => {
+      logger.info(`forked worker ${worker.process.pid}`);
+      spreadMessageToWorkers({ event: 'config', data: config });
+    });
 
     for (let i = 0; i < numCPUs; i += 1) {
       cluster.fork();
@@ -39,7 +40,6 @@ async function start(): Promise<void> {
     process.on('SIGINT', handleStopSignal);
     process.on('SIGTERM', handleStopSignal);
 
-    spreadMessageToWorkers({ event: 'config', data: config });
     applyRegisteredHandlers();
   } else {
     await new Promise((resolve) => {
