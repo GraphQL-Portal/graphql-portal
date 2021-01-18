@@ -18,9 +18,9 @@ describe('Log response MW', () => {
 
   beforeEach(() => {
     mockResponse = {
-      on: jest.fn().mockImplementation(),
-      write: jest.fn().mockImplementation(),
-      end: jest.fn().mockImplementation(),
+      on: jest.fn(),
+      write: jest.fn(),
+      end: jest.fn(),
     };
   });
 
@@ -36,12 +36,7 @@ describe('Log response MW', () => {
     (mockResponse as any).write(buffer, () => {
       (mockResponse as any).end();
       expect(metricEmitter.emit).toBeCalledTimes(1);
-      expect(metricEmitter.emit).toBeCalledWith(
-        MetricsChannels.SENT_RESPONSE,
-        mockRequest.id,
-        body,
-        buffer.byteLength
-      );
+      expect(metricEmitter.emit).toBeCalledWith(MetricsChannels.SENT_RESPONSE, mockRequest.id, body, buffer.byteLength);
     });
   });
 });

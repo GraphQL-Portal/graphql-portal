@@ -1,14 +1,14 @@
 import { diff } from '@graphql-inspector/core';
 import { processConfig } from '@graphql-mesh/config';
-import { MeshPubSub } from '@graphql-mesh/types';
 import { getMesh } from '@graphql-mesh/runtime';
+import { MeshPubSub } from '@graphql-mesh/types';
 import { prefixLogger } from '@graphql-portal/logger';
 import { ApiDef } from '@graphql-portal/types';
 import { Application, Request, RequestHandler, Router } from 'express';
 import { graphqlHTTP } from 'express-graphql';
 import { GraphQLSchema } from 'graphql';
+import { subscribeToRequestMetrics } from '../metric';
 import { defaultMiddlewares, loadCustomMiddlewares, prepareRequestContext } from '../middleware';
-import { subscribeOnRequestMetrics } from '../metric';
 
 interface IMesh {
   schema: GraphQLSchema;
@@ -33,7 +33,7 @@ export async function buildRouter(apiDefs: ApiDef[]): Promise<Router> {
 
   if (apiDefs?.length) {
     logger.info('Loaded %s API Definitions, preparing the endpoints for them.', apiDefs.length);
-    await Promise.all(apiDefs.map((apiDef) => buildApi(nextRouter, apiDef)));
+    await Promise.all(apiDefs.map(apiDef => buildApi(nextRouter, apiDef)));
   } else {
     logger.warn('No APIs were loaded as the configuration is empty.');
   }
@@ -45,7 +45,7 @@ export async function buildRouter(apiDefs: ApiDef[]): Promise<Router> {
 async function buildApi(toRouter: Router, apiDef: ApiDef, mesh?: IMesh) {
   if (!mesh) {
     const customMiddlewares = await loadCustomMiddlewares();
-    [...defaultMiddlewares, ...customMiddlewares].map((mw) => {
+    [...defaultMiddlewares, ...customMiddlewares].map(mw => {
       const handler = mw(apiDef);
       const wrappedHandler: RequestHandler = async (req, res, next) => {
         try {
@@ -68,7 +68,7 @@ async function buildApi(toRouter: Router, apiDef: ApiDef, mesh?: IMesh) {
   const { schema, contextBuilder, pubsub } = mesh;
   apiSchema[apiDef.name] = schema;
 
-  await subscribeOnRequestMetrics(pubsub);
+  await subscribeToRequestMetrics(pubsub);
 
   logger.info(`Loaded API ${apiDef.name} ➜ ${apiDef.endpoint}`);
 
@@ -100,7 +100,7 @@ async function getMeshForApiDef(apiDef: ApiDef, mesh?: IMesh, retry = 5): Promis
     logger.error(error);
     if (retry) {
       logger.warn('Failed to load schema, retrying after 5 seconds...');
-      await new Promise((resolve) => setTimeout(resolve, 5000));
+      await new Promise(resolve => setTimeout(resolve, 5000));
       return getMeshForApiDef(apiDef, mesh, retry - 1);
     }
   }
@@ -124,7 +124,7 @@ export async function updateApi(apiDef: ApiDef): Promise<void> {
   await buildApi(routerWithNewApi, apiDef, mesh);
 
   const oldLayerIndex = router.stack.findIndex(
-    (layer) => layer.name === 'graphqlMiddleware' && layer.regexp.test(apiDef.endpoint)
+    layer => layer.name === 'graphqlMiddleware' && layer.regexp.test(apiDef.endpoint)
   );
   router.stack.splice(oldLayerIndex, 1, routerWithNewApi.stack[0]);
 }

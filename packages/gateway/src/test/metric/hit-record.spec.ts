@@ -1,9 +1,9 @@
-import hitRecord from '../../metric/hit-record';
-import * as ByteTool from '../../utils/byte.tool';
-import { connections as connectionsTool } from '../../server';
-import { redis } from '../../redis';
-import { serializer } from '../../metric/utils';
 import MetricsChannelsEnum from '../../metric/channels.enum';
+import hitRecord from '../../metric/hit-record';
+import { serializer } from '../../metric/utils';
+import { redis } from '../../redis';
+import { connections as connectionsTool } from '../../server';
+import * as ByteTool from '../../utils/byte.tool';
 
 jest.mock('@graphql-portal/config', () => ({
   config: {
@@ -29,17 +29,14 @@ describe('hitRecord', () => {
     const spyGetConnections = jest.spyOn(connectionsTool, 'get').mockResolvedValue(connections);
 
     const date = 1;
-    const olDateNow: () => number  = Date.now;
-    const newDateNow: () => number = jest.fn(() => date);
-    Date.now = newDateNow;
+    const spiedDateNow = jest.spyOn(Date, 'now').mockReturnValue(date);
     await hitRecord();
-    Date.now = olDateNow;
 
     expect(spyGetConnections).toBeCalledTimes(1);
     expect(spyGetBytesInAndOut).toBeCalledTimes(1);
     expect(spyReset).toBeCalledTimes(1);
     expect(redis.lpush).toBeCalledTimes(1);
-    expect(newDateNow).toBeCalledTimes(1);
+    expect(spiedDateNow).toBeCalledTimes(1);
     expect(redis.lpush).toBeCalledWith(
       MetricsChannelsEnum.NETWORK,
       serializer({
@@ -51,7 +48,10 @@ describe('hitRecord', () => {
         date,
       })
     );
+
+    spiedDateNow.mockRestore();
   });
+
   it('should return if server does not have opened connections', async () => {
     const connections = 0;
     const spyGetConnections = jest.spyOn(connectionsTool, 'get').mockResolvedValue(connections);

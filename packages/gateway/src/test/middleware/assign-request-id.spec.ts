@@ -27,7 +27,7 @@ describe('Assign reequest id MW', () => {
       },
     };
     mockResponse = {
-      on: jest.fn().mockImplementation(),
+      on: jest.fn(),
     };
   });
 
@@ -37,7 +37,7 @@ describe('Assign reequest id MW', () => {
 
     expressMw(mockRequest as Request, mockResponse as Response, nextFunction);
     expect(nextFunction).toBeCalled();
-    expect((mockRequest as any).id).toBe('requestId');
+    expect(mockRequest.id).toBe('requestId');
     expect(metricEmitter.emit).toBeCalledTimes(1);
     expect(metricEmitter.emit).toBeCalledWith(MetricsChannels.GOT_REQUEST, 'requestId', {
       query: mockRequest.body,

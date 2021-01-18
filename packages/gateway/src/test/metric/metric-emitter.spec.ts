@@ -1,7 +1,7 @@
-import { subscribeOnRequestMetrics } from '../../metric';
 import { EventEmitter } from 'events';
-import PubSubEventsEnum from '../../metric/pubsub-events.enum';
+import { subscribeToRequestMetrics } from '../../metric';
 import MetricsChannelsEnum from '../../metric/channels.enum';
+import PubSubEventsEnum from '../../metric/pubsub-events.enum';
 
 jest.mock('@graphql-portal/config', () => ({
   config: {
@@ -24,7 +24,7 @@ jest.mock('events', () => {
 });
 
 describe('hitRecord', () => {
-  let emitter: any;
+  let emitter: EventEmitter;
 
   beforeAll(() => {
     emitter = new EventEmitter();
@@ -33,7 +33,7 @@ describe('hitRecord', () => {
   it('should subcsribe on pubsub events', async () => {
     const subscribe = jest.fn();
 
-    await subscribeOnRequestMetrics({ subscribe } as any);
+    await subscribeToRequestMetrics({ subscribe } as any);
 
     expect(emitter.on).toBeCalledTimes(6);
     expect(emitter.on).toBeCalledTimes(6);

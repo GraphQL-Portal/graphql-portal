@@ -8,10 +8,10 @@ describe('Collect bytes MW', () => {
 
   beforeEach(() => {
     mockRequest = {
-      on: jest.fn().mockImplementation(),
+      on: jest.fn(),
     };
     mockResponse = {
-      on: jest.fn().mockImplementation(),
+      on: jest.fn(),
     };
   });
 

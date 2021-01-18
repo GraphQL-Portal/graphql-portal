@@ -14,6 +14,7 @@ describe('startPeriodicMetricsRecording', () => {
     jest.advanceTimersByTime(5000);
     expect(hitRecord).toBeCalledTimes(5);
   });
+
   it('second call clears interval and starts writing again', () => {
     startPeriodicMetricsRecording();
     jest.advanceTimersByTime(5000);
