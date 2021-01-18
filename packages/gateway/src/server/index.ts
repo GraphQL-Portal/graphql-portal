@@ -1,4 +1,3 @@
-import { promisify } from 'util';
 import { config, loadApiDefs } from '@graphql-portal/config';
 import { logger } from '@graphql-portal/logger';
 import { Channel } from '@graphql-portal/types';
@@ -7,11 +6,12 @@ import cookieParser from 'cookie-parser';
 import express from 'express';
 import { graphqlUploadExpress } from 'graphql-upload';
 import { createServer } from 'http';
-import setupRedis from '../redis';
+import { promisify } from 'util';
 import { startPeriodicMetricsRecording } from '../metric';
+import { logResponse, logResponseError } from '../middleware';
+import setupRedis, { redisSubscriber } from '../redis';
 import setupControlApi from './control-api';
 import { setRouter, updateApi } from './router';
-import { logResponse, logResponseError } from '../middleware';
 
 export type ForwardHeaders = Record<string, string>;
 export interface Context {
@@ -24,6 +24,8 @@ export const connections = {
 };
 
 export async function startServer(): Promise<void> {
+  await setupRedis(config.gateway.redis_connection_string);
+
   const app = express();
   const httpServer = createServer(app);
 
@@ -43,11 +45,8 @@ export async function startServer(): Promise<void> {
 
   app.use(logResponseError);
 
-  const redis = await setupRedis(config.gateway.redis_connection_string);
-  logger.info('Connected to Redis at ➜ %s', config.gateway.redis_connection_string);
-
-  redis.subscribe(Channel.apiDefsUpdated);
-  redis.on('message', async (channel, timestamp) => {
+  redisSubscriber.subscribe(Channel.apiDefsUpdated);
+  redisSubscriber.on('message', async (channel, timestamp) => {
     if (channel !== Channel.apiDefsUpdated) {
       return;
     }
