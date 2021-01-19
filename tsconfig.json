@@ -35,6 +35,9 @@
     },
     {
       "path": "packages/gateway"
+    },
+    {
+      "path": "packages/datasource"
     }
   ],
   "exclude": ["node_modules", "dist", "*.d.ts"]
