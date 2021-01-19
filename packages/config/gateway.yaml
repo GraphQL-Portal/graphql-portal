@@ -1,0 +1,13 @@
+hostname: "localhost"
+listen_port: 3000
+pool_size: 1
+secret: "12345"
+apis_path: "packages/config/apidefs"
+sources_path: "packages/config/datasources"
+middleware_path: ""
+redis_connection_string: "localhost:6379"
+use_dashboard_configs: false
+dashboard_config:
+  connection_string: "localhost:3030"
+enable_control_api: false
+log_level: "info"
