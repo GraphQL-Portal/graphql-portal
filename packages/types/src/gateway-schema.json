@@ -57,6 +57,17 @@
     },
     "redis_connection_string": {
       "type": "string"
+    },
+    "request_size_limit": {
+      "oneOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "number"
+        }
+      ],
+      "description": "Argument of the bytes package's method parse https://www.npmjs.com/package/bytes"
     }
   },
   "required": [

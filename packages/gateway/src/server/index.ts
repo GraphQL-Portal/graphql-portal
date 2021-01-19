@@ -31,7 +31,7 @@ export async function startServer(): Promise<void> {
 
   connections.get = promisify(httpServer.getConnections.bind(httpServer));
 
-  app.use(bodyParser.json({ limit: '10mb' }));
+  app.use(bodyParser.json({ limit: config.gateway.request_size_limit || '10mb' }));
   app.use(cookieParser());
   app.use(graphqlUploadExpress());
   app.use(logResponse);

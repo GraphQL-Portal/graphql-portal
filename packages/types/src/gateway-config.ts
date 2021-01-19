@@ -15,6 +15,10 @@ export interface GatewayConfig {
   log_format?: 'text' | 'json';
   log_level: 'debug' | 'info' | 'warn' | 'error';
   redis_connection_string: string;
+  /**
+   * Argument of the bytes package's method parse https://www.npmjs.com/package/bytes
+   */
+  request_size_limit?: string | number;
 }
 /**
  * Used to specify GraphQL Portal Dashboard connection settings
