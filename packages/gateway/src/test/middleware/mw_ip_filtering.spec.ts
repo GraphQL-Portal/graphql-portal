@@ -1,14 +1,6 @@
 import { ApiDef } from '@graphql-portal/types';
 import { NextFunction, Request, Response } from 'express';
-import mw_ip_filtering from '../../middleware/mw_ip_filtering';
-
-jest.mock('@graphql-portal/logger', () => ({
-  prefixLogger: jest.fn().mockReturnValue({
-    info: jest.fn(),
-    warn: jest.fn(),
-    debug: jest.fn(),
-  }),
-}));
+import mw_ip_filtering from '../../middleware/ip-filtering';
 
 describe('IP Filtering MW', () => {
   let mockRequest: Partial<Request>;

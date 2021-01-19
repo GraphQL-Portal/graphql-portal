@@ -9,7 +9,6 @@ import { Redis } from 'ioredis';
 let app: { use: jest.SpyInstance };
 let server: { listen: jest.SpyInstance; getConnections: jest.SpyInstance };
 
-jest.mock('@graphql-portal/logger');
 jest.mock('express', () =>
   jest.fn(() => {
     app = { use: jest.fn() };
