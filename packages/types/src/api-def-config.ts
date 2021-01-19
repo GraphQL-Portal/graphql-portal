@@ -28,6 +28,7 @@ export interface ApiDefConfig {
     complexity: number;
     per: number;
   };
+  authentication?: string;
   mesh?: {
     serve?: ServeConfig;
     require?: string[];
