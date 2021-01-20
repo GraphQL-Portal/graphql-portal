@@ -1,5 +1,12 @@
 # @graphql-portal/types
 
+## 0.7.0
+
+### Minor Changes
+
+- d61e610: metric interfaces moved to types package
+- 1c86dc9: request size and complexity rate limiting
+
 ## 0.6.0
 
 ### Minor Changes
