@@ -9,6 +9,25 @@ export interface ApiDefConfig {
   enable_ip_filtering?: boolean;
   allow_ips?: string[];
   deny_ips?: string[];
+  /**
+   * Argument of the bytes package's method parse https://www.npmjs.com/package/bytes
+   */
+  request_size_limit?: string | number;
+  /**
+   * Maximum GraphQL query depth
+   */
+  depth_limit?: number;
+  /**
+   * Maximum complexity for a request
+   */
+  request_complexity_limit?: number;
+  /**
+   * Allowed queries summary complexity for a user in a period of time
+   */
+  rate_limit?: {
+    complexity: number;
+    per: number;
+  };
   mesh?: {
     serve?: ServeConfig;
     require?: string[];

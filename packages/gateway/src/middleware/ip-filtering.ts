@@ -7,7 +7,7 @@ import { inRange, isIP } from 'range_check';
 
 type Strategy = 'allow' | 'deny' | 'none';
 
-const logger = prefixLogger('mw_ip_blacklist');
+const logger = prefixLogger('ip-filtering');
 
 const getMiddleware: RequestMiddleware = function (apiDef: ApiDef): RequestHandler {
   // skipping if disabled

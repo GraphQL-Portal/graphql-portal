@@ -1,19 +1,13 @@
-import { buildRouter, setRouter } from '../../server/router';
 import { processConfig } from '@graphql-mesh/config';
 import { getMesh } from '@graphql-mesh/runtime';
-import { graphqlHTTP } from 'express-graphql';
-import express from 'express';
 import { ApiDef } from '@graphql-portal/types';
+import express from 'express';
+import { graphqlHTTP } from 'express-graphql';
+import { GraphQLSchema } from 'graphql';
 import supertest from 'supertest';
 import subscribeToRequestMetrics from '../../metric/emitter';
+import { buildRouter, setRouter } from '../../server/router';
 
-jest.mock('@graphql-portal/logger', () => ({
-  prefixLogger: jest.fn().mockReturnValue({
-    info: jest.fn(),
-    warn: jest.fn(),
-    debug: jest.fn(),
-  }),
-}));
 jest.mock('@graphql-portal/config', () => ({
   config: {
     gateway: {},
@@ -23,10 +17,10 @@ jest.mock('@graphql-mesh/config', () => ({
   processConfig: jest.fn(),
 }));
 jest.mock('@graphql-mesh/runtime', () => ({
-  getMesh: jest.fn().mockReturnValue({
-    schema: 'schema',
+  getMesh: jest.fn().mockImplementation(() => ({
+    schema: new GraphQLSchema({}),
     contextBuilder: 'contextBuilder',
-  }),
+  })),
 }));
 jest.mock('express-graphql', () => ({
   graphqlHTTP: jest.fn().mockReturnValue((req: any, res: express.Response) => {
@@ -78,6 +72,7 @@ describe('Server', () => {
 
         const response = await supertest(app)
           .post(apiDef.endpoint)
+          .send({ query: '{a}' })
           .expect(200);
         expect(response.text).toBe('response');
       });

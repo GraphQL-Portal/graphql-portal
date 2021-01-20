@@ -19,7 +19,7 @@ interface IMesh {
 const logger = prefixLogger('router');
 
 let router: Router;
-const apiSchema: { [apiName: string]: GraphQLSchema } = {};
+export const apiSchema: { [apiName: string]: GraphQLSchema } = {};
 
 export async function setRouter(app: Application, apiDefs: ApiDef[]): Promise<void> {
   await buildRouter(apiDefs);
