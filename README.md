@@ -18,7 +18,7 @@ with new ones exposing GraphQL APIs, but also for those who already have GraphQL
 that will bring more control and visibility to their APIs.
 
 It is open source by choice, relies on existing open source tools by design, is extendable, scalable and configurable.
-It can either be installed on-premises, or be used as a [SaaS Gateway](https://www.graphql-portal.com/) (coming soon).
+It can either be installed on-premises, or be used as a [SaaS Gateway](https://www.graphql-portal.com/) (_coming soon_).
 
 Key facts and features:
 * it is open source but is also available in a SaaS version (coming soon)
@@ -33,12 +33,14 @@ Key facts and features:
 ## Table of contents
 
 * [How it works](#how-it-works)
-* [Getting started](#getting-started)
+* [Quick Start](#quick-start)
 * [Installation](#installation)
+  * [Prerequisites](#prerequisites)
   * [Docker Compose](#docker-compose)
   * [Standalone Docker containers](#standalone-docker-containers)
-  * [Standalone Gateway without Docker](#standalone-gateway-without-docker)
+  * [Standalone Gateway with Yarn/NPM](#standalone-gateway-with-yarnnpm)
   * [Standalone Dashboard without Docker](#standalone-dashboard-without-docker)
+* [Configuration](#configuration)
 * [Use cases](#use-cases)
 * [License compatibility](#license-compatibility)
 
@@ -77,6 +79,12 @@ See below for other installation methods.
 
 ## Installation
 
+### Prerequisites
+
+Unless installed via docker compose, you will need:
+* Redis – required by Gateway and Dashboard
+* MongoDB - required by Dashboard only
+
 ### Docker Compose
 
 Check out [our dedicated repository](https://github.com:code-store-platform/graphql-portal-docker) with docker compose files and examples of the configuration:
@@ -100,20 +108,35 @@ You may download a sample config:
 curl -s -o ./gateway.yaml https://raw.githubusercontent.com/code-store-platform/graphql-portal-docker/main/basic.gateway.yaml
 ```
 
-Once that is done, you can now launch the Gateway in a standalone mode:
+Once that is done, you can now launch the Gateway in a standalone mode (you may have to specify a Redis connection 
+string relevant to your local environment):
 ```shell
 docker run --name graphql-gateway \
   -p 3000:3000 \
-  -v $(pwd)/gateway.yaml:/opt/graphql-portal/config/gateway.yaml
+  -e REDIS="redis://localhost:6379" \
+  -v $(pwd)/gateway.yaml:/opt/graphql-portal/config/gateway.yaml \
   gqlportal/gateway:latest
 ```
 
+Install and launch Dashboard:
+```shell
+docker pull gqlportal/dashboard:latest
 
-### Standalone Gateway without Docker
+# Modify the connection strings depending on your environment
+docker run --name graphql-dashboard \
+  -e REDIS_CONNECTION_STRING="redis://localhost:6379" \
+  -e MONGODB_CONNECTION_STRING="mongodb://localhost:27017" \
+  -e DASHBOARD_PORT=3030 \
+  -e NODE_ENV=production \
+  -p 3030:3030 \
+  gqlportal/dashboard:latest
+```
 
-The Gateway can be installed either via npm/yarn, or by pulling this repository and then building the source codes.
+You now should be able to open the configuration dashboard by going to http://localhost:3030 in your browser.
 
-#### Install via Yarn/NPM
+### Standalone Gateway with Yarn/NPM
+
+The Gateway can also be installed either via npm/yarn, or by pulling this repository and then building the source codes.
 
 The package `@graphql-portal/gateway` provides a CLI command `graphql-portal` which will start the server.
 However, in order for the server to start correctly, we should first create (or download) a configuration file. By 
@@ -124,26 +147,96 @@ from our [examples repository here](https://github.com/code-store-platform/graph
 
 ```shell
 # create directories for configuration
-mkdir -p /opt/graphql-portal/config
-
-cd /opt/graphql-portal
+mkdir -p /opt/graphql-portal/config && cd /opt/graphql-portal
 
 # download a basic configuration file
 curl -s -o ./config/gateway.yaml https://raw.githubusercontent.com/code-store-platform/graphql-portal-docker/main/basic.gateway.yaml
 ```
 
-Now that the configuration is in place, we can install and launch the gateway.
-
+Now that the configuration is in place, we can install and launch the gateway:
 ```shell
 # install the gateway and go to the directory with configuration
 yarn global add @graphql-portal/gateway
-cd /opt/graphql-portal
 
 # @graphql-portal/gateway package provides a CLI command graphql-portal
-graphql-portal
+# we will also need a Redis connection string in order to launch the gateway
+env REDIS="redis://localhost:6379" NODE_ENV=production graphql-portal
 ```
 
+You should now see the output of the server without any errors. 
+[Read more about the configuration of the gateway here.](#configuration)
+
 ### Standalone Dashboard without Docker
+
+At the moment, GraphQL Portal Dashboard consists from the following components:
+* Backend (NestJS)
+* Frontend (React),
+
+and requires the following dependencies:
+* MongoDB
+* connection to Redis – same Redis used by Gateway.
+
+It is not distributed via Yarn/NPM and can be installed locally by pulling and building the source code from the repository:
+```shell
+mkdir /opt/graphql-portal-dashboard
+git clone https://github.com/code-store-platform/graphql-portal-dashboard /opt/graphql-portal-dashboard
+
+cd /opt/graphql-portal-dashboard
+
+# the following two steps can take some time
+yarn install --frozen-lockfile
+yarn build
+```
+
+We'll have to edit the configuration file before launching the server. To do that, open the configuration file for 
+_production_ environment:
+```shell
+vim packages/backend/config/env/production.json
+```
+```json
+{
+  "application": {
+    "env": "production",
+    "useSwaggerUi": false,
+    "port": "@@DASHBOARD_PORT",
+    "graphQL": {
+      "playground": false,
+      "debug": false
+    },
+    "logLevel": "log"
+  },
+  "db": {
+    "redis": {
+      "connectionString": "@@REDIS_CONNECTION_STRING"
+    },
+    "mongodb": {
+      "connectionString": "@@MONGODB_CONNECTION_STRING"
+    }
+  }
+}
+```
+
+In that file, we have 3 main configuration variables which we have to specify:
+* port – it is a port on which the dashboard application is going to be available;
+* redis:connectionString – self-explicative, connection string for Redis
+* mongodb:connectionString – connection string for Mongo.
+
+Now, we have two choices: either we can pass these values as environment variables, or we can put them directly in the file.
+In our current case, we will pass them as environment variables. Read more about [the configuration of the Gateway and
+Dashboard here](#configuration).
+
+We can now launch the server:
+```shell
+# replace the following values with those relevant to your environment
+DASHBOARD_PORT=8080 \
+REDIS_CONNECTION_STRING="redis://localhost:6379" \
+MONGODB_CONNECTION_STRING="mongodb://localhost:27017" \
+NODE_ENV=production yarn start:prod
+```
+
+Once the server is launched, you can open the dashboard by going to http://localhost:8080.
+
+## Configuration
 
 _Coming soon_
 
