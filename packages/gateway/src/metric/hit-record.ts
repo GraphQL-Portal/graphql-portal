@@ -1,9 +1,9 @@
 import { config } from '@graphql-portal/config';
+import { MetricsChannels } from '@graphql-portal/types';
 import { prefixLogger } from '@graphql-portal/logger';
 import { redis } from '../redis';
 import { connections as ConnectionTool } from '../server/index';
 import * as ByteTool from '../utils/byte.tool';
-import MetricsChannels from './channels.enum';
 import { serializer } from './utils';
 
 const logger = prefixLogger('analytics:hit-record');
