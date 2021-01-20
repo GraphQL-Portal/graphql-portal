@@ -23,7 +23,8 @@
     "release": "changeset publish"
   },
   "workspaces": [
-    "packages/*"
+    "packages/*",
+    "packages/datasource/*"
   ],
   "dependencies": {
   },

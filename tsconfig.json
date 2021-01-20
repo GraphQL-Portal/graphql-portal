@@ -17,7 +17,7 @@
     "noUnusedLocals": true,
     "resolveJsonModule": true,
     "paths": {
-      "@graphql-portal/*": ["packages/*/src/index.ts"]
+      "@graphql-portal/*": ["packages/*/src/index.ts", "packages/datasource/*/src/index.ts"]
     }
   },
   "references": [
@@ -35,9 +35,6 @@
     },
     {
       "path": "packages/gateway"
-    },
-    {
-      "path": "packages/datasource"
     }
   ],
   "exclude": ["node_modules", "dist", "*.d.ts"]
