@@ -1,6 +1,6 @@
 import { ResolverData } from '@graphql-mesh/types';
 import { Path } from 'graphql/jsutils/Path';
-import MetricsChannels from './channels.enum';
+import { MetricsChannels } from '@graphql-portal/types';
 
 export const reducePath = (path: Path | undefined, result = ''): string | null => {
   if (!path) return null;
