@@ -16,6 +16,6 @@ const defaultMiddlewares: RequestMiddleware[] = [
 export * from './forward-headers';
 export * from './load-custom-middlewares';
 export * from './log-response';
-export * from './log-response-error';
+export * from './handle-error';
 export * from './request-middleware.interface';
 export { defaultMiddlewares };
