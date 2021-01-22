@@ -1,5 +1,0 @@
-name: Contentful
-handler:
-  "@graphql-portal/contentful":
-    endpoint: http://localhost:8000/___graphql
-    token: dJGNDIGNIANG0NQ0)QGN!#)GJ13GNJ10-
