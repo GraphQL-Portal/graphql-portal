@@ -10,6 +10,6 @@ sourceConfig.definitions = { ...definitions, ...sources }  as any;
 
 fs.writeFileSync(`${__dirname}/mesh-source-schema.json`, JSON.stringify(sourceConfig));
 
-apiDefConfig.definitions = definitions as any;
+apiDefConfig.definitions = { ...definitions, ...sources }  as any;
 apiDefConfig.properties.mesh.properties = properties as any;
 fs.writeFileSync(`${__dirname}/api-def-schema.json`, JSON.stringify(apiDefConfig));

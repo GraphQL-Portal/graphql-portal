@@ -1155,6 +1155,28 @@
           "description": "Path to the SQL Dump file if you want to build a in-memory database"
         }
       }
+    },
+    "ContentfulHandler": {
+      "additionalProperties": false,
+      "type": "object",
+      "title": "ContentfulHandler",
+      "properties": {
+        "token": { "type": "string", "description": "Authentication token" },
+        "endpoint": { "type": "string", "description": "A endpoint of your Contentful GraphQL API" }
+      },
+      "required": ["token", "endpoint"]
+    },
+    "SlackHandler": {
+      "additionalProperties": false,
+      "type": "object",
+      "title": "SlackHandler",
+      "properties": {
+        "token": {
+          "type": "string",
+          "description": "Token, which can be obtained here: https://api.slack.com/authentication"
+        }
+      },
+      "required": ["token"]
     }
   },
   "properties": {
