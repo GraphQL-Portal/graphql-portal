@@ -1,0 +1,15 @@
+{
+  "name": "@graphql-portal/slack",
+  "version": "0.0.1",
+  "license": "MIT",
+  "main": "dist/src/index.js",
+  "scripts": {
+    "build": "tsc -b"
+  },
+  "dependencies": {
+    "@graphql-mesh/openapi": "^0.10.11"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

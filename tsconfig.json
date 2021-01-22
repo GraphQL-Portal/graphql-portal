@@ -35,6 +35,15 @@
     },
     {
       "path": "packages/gateway"
+    },
+    {
+      "path": "packages/datasource"
+    },
+    {
+      "path": "packages/datasource/contentful"
+    },
+    {
+      "path": "packages/datasource/slack"
     }
   ],
   "exclude": ["node_modules", "dist", "*.d.ts"]
