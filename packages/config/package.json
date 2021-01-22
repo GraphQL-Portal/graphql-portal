@@ -7,6 +7,8 @@
     "build": "tsc -b"
   },
   "dependencies": {
+    "@graphql-portal/contentful": "^0.0.1",
+    "@graphql-portal/slack": "^0.0.1",
     "@graphql-portal/logger": "^0.3.0",
     "@graphql-portal/types": "^0.7.0",
     "ajv": "^7.0.1",
