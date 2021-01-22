@@ -75,7 +75,8 @@ docker-compose -f docker-compose.yml up
 
 This will launch the Gateway, Dashboard, as well as Redis and MongoDB.
 
-See below for other installation methods.
+Where to go from here? We would suggest creating some APIs and playing with the data connectors.
+[Read more about that here.](#configuration)
 
 ## Installation
 
