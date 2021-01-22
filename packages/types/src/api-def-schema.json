@@ -218,7 +218,9 @@
         },
         "soap": { "$ref": "#/definitions/SoapHandler", "description": "Handler for SOAP" },
         "thrift": { "$ref": "#/definitions/ThriftHandler", "description": "Handler for OData" },
-        "tuql": { "$ref": "#/definitions/TuqlHandler", "description": "Handler for SQLite database, based on `tuql`" }
+        "tuql": { "$ref": "#/definitions/TuqlHandler", "description": "Handler for SQLite database, based on `tuql`" },
+        "ContentfulHandler": { "$ref": "#/definitions/ContentfulHandler" },
+        "SlackHandler": { "$ref": "#/definitions/SlackHandler" }
       }
     },
     "AdditionalStitchingResolverObject": {
