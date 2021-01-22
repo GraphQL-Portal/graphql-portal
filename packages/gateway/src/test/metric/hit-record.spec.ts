@@ -1,4 +1,4 @@
-import MetricsChannelsEnum from '../../metric/channels.enum';
+import { MetricsChannels } from '@graphql-portal/types';
 import hitRecord from '../../metric/hit-record';
 import { serializer } from '../../metric/utils';
 import { redis } from '../../redis';
@@ -38,7 +38,7 @@ describe('hitRecord', () => {
     expect(redis.lpush).toBeCalledTimes(1);
     expect(spiedDateNow).toBeCalledTimes(1);
     expect(redis.lpush).toBeCalledWith(
-      MetricsChannelsEnum.NETWORK,
+      MetricsChannels.NETWORK,
       serializer({
         nodeId: 'nodeId',
         network: {

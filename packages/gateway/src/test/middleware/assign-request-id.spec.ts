@@ -1,6 +1,7 @@
+import { MetricsChannels } from '@graphql-portal/types';
 import { NextFunction, Request, Response } from 'express';
 import assignRequestId from '../../middleware/assign-request-id';
-import { metricEmitter, MetricsChannels } from '../../metric';
+import { metricEmitter } from '../../metric';
 
 jest.mock('uuid', () => ({
   v4: () => 'requestId',

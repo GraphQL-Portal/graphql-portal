@@ -1,6 +1,7 @@
 import { RequestHandler } from 'express';
 import uuid from 'uuid';
-import { metricEmitter, MetricsChannels } from '../metric';
+import { MetricsChannels } from '@graphql-portal/types';
+import { metricEmitter } from '../metric';
 
 const assignRequestId: RequestHandler = (req, res, next) => {
   req.id = uuid.v4();
