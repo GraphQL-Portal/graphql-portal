@@ -1,13 +1,10 @@
 {
-  "name": "@graphql-portal/contentful",
+  "name": "@graphql-portal/datasource",
   "version": "0.0.1",
   "license": "MIT",
-  "main": "dist/src/index.js",
+  "main": "dist/index.js",
   "scripts": {
     "build": "tsc -b"
-  },
-  "dependencies": {
-    "@graphql-mesh/graphql": "^0.13.0"
   },
   "publishConfig": {
     "access": "public"

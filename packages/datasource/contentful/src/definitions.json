@@ -1,0 +1,18 @@
+{
+  "ContentfulHandler": {
+    "additionalProperties": false,
+    "type": "object",
+    "title": "ContentfulHandler",
+    "properties": {
+      "token": {
+        "type": "string",
+        "description": "Authentication token"
+      },
+      "endpoint": {
+        "type": "string",
+        "description": "A endpoint of your Contentful GraphQL API"
+      }
+    },
+    "required": ["token", "endpoint"]
+  }
+}
