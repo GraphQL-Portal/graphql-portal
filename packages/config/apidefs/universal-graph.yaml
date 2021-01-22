@@ -1,5 +1,0 @@
-name: Universal Graph
-endpoint: /graphql
-source_config_names:
-  - covid.yaml
-  - contentful.yaml
