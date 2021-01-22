@@ -1,7 +1,7 @@
 import { definitions, properties } from '@graphql-mesh/types/config-schema.json';
 import sourceConfig from './mesh-source-schema.json';
 import apiDefConfig from './api-def-schema.json';
-import sources from '@graphql-portal/datasource';
+import sources from '@graphql-portal/datasources';
 import fs from 'fs';
 
 const dataSourceProperties = Object.keys(sources).map((source: string) => ({ [source]: { "$ref": `#/definitions/${source}` } }));

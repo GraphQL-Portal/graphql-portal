@@ -24,7 +24,7 @@
   },
   "workspaces": [
     "packages/*",
-    "packages/datasource/*"
+    "packages/datasources/*"
   ],
   "dependencies": {
   },
