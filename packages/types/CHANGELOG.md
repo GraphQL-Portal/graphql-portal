@@ -1,5 +1,11 @@
 # @graphql-portal/types
 
+## 0.8.0
+
+### Minor Changes
+
+- 94540a2: added custom datasources;
+
 ## 0.7.0
 
 ### Minor Changes
