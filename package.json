@@ -29,7 +29,7 @@
   "dependencies": {
   },
   "devDependencies": {
-    "@changesets/cli": "2.13.0",
+    "@changesets/cli": "2.13.1",
     "@types/jest": "26.0.20",
     "@typescript-eslint/eslint-plugin": "4.13.0",
     "@typescript-eslint/parser": "4.13.0",
