@@ -1,5 +1,14 @@
 # @graphql-portal/gateway
 
+## 0.8.1
+
+### Patch Changes
+
+- Updated dependencies [94540a2]
+  - @graphql-portal/types@0.8.0
+  - @graphql-portal/config@0.5.2
+  - @graphql-portal/dashboard@0.0.9
+
 ## 0.8.0
 
 ### Minor Changes

@@ -1,5 +1,15 @@
 # @graphql-portal/config
 
+## 0.5.2
+
+### Patch Changes
+
+- 94540a2: added custom datasources;
+- Updated dependencies [94540a2]
+  - @graphql-portal/types@0.8.0
+  - @graphql-portal/contentful@0.0.2
+  - @graphql-portal/slack@0.0.2
+
 ## 0.5.1
 
 ### Patch Changes
