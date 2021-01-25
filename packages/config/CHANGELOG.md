@@ -1,5 +1,12 @@
 # @graphql-portal/config
 
+## 0.5.3
+
+### Patch Changes
+
+- Updated dependencies [9138fda]
+  - @graphql-portal/types@0.9.0
+
 ## 0.5.2
 
 ### Patch Changes
