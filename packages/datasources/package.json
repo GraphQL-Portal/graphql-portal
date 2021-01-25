@@ -8,5 +8,6 @@
   },
   "publishConfig": {
     "access": "public"
-  }
+  },
+  "keywords": ["graphql", "gateway", "dashboard", "graphql-gateway"]
 }
