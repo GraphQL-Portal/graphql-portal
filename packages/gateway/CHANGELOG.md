@@ -1,5 +1,29 @@
 # @graphql-portal/gateway
 
+## 0.8.1
+
+### Patch Changes
+
+- Updated dependencies [94540a2]
+  - @graphql-portal/types@0.8.0
+  - @graphql-portal/config@0.5.2
+  - @graphql-portal/dashboard@0.0.9
+
+## 0.8.0
+
+### Minor Changes
+
+- 1c86dc9: request size and complexity rate limiting
+
+### Patch Changes
+
+- d61e610: metric interfaces moved to types package
+- Updated dependencies [d61e610]
+- Updated dependencies [1c86dc9]
+  - @graphql-portal/types@0.7.0
+  - @graphql-portal/config@0.5.1
+  - @graphql-portal/dashboard@0.0.8
+
 ## 0.7.0
 
 ### Minor Changes

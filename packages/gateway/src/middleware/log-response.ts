@@ -1,5 +1,6 @@
 import { RequestHandler } from 'express';
-import { metricEmitter, MetricsChannels } from '../metric';
+import { MetricsChannels } from '@graphql-portal/types';
+import { metricEmitter } from '../metric';
 
 export const logResponse: RequestHandler = (req, res, next) => {
   const oldWrite = res.write.bind(res);

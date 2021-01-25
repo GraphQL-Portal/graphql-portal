@@ -17,7 +17,7 @@
     "noUnusedLocals": true,
     "resolveJsonModule": true,
     "paths": {
-      "@graphql-portal/*": ["packages/*/src/index.ts"]
+      "@graphql-portal/*": ["packages/*/src/index.ts", "packages/datasources/*/src/index.ts"]
     }
   },
   "references": [
@@ -35,6 +35,15 @@
     },
     {
       "path": "packages/gateway"
+    },
+    {
+      "path": "packages/datasources"
+    },
+    {
+      "path": "packages/datasources/contentful"
+    },
+    {
+      "path": "packages/datasources/slack"
     }
   ],
   "exclude": ["node_modules", "dist", "*.d.ts"]

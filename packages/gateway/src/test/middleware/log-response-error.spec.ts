@@ -1,5 +1,6 @@
 import { NextFunction, Response } from 'express';
-import { metricEmitter, MetricsChannels } from '../../metric';
+import { MetricsChannels } from '@graphql-portal/types';
+import { metricEmitter } from '../../metric';
 import { logResponseError } from '../../middleware';
 
 jest.mock('../../metric/emitter', () => ({

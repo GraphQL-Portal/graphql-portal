@@ -1,15 +1,13 @@
 {
-  "name": "@graphql-portal/dashboard",
-  "version": "0.0.9",
+  "name": "@graphql-portal/contentful",
+  "version": "0.0.2",
   "license": "MIT",
   "main": "dist/src/index.js",
   "scripts": {
     "build": "tsc -b"
   },
   "dependencies": {
-    "@graphql-portal/logger": "^0.3.0",
-    "@graphql-portal/types": "^0.8.0",
-    "axios": "^0.21.1"
+    "@graphql-mesh/graphql": "^0.13.0"
   },
   "publishConfig": {
     "access": "public"

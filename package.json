@@ -23,17 +23,18 @@
     "release": "changeset publish"
   },
   "workspaces": [
-    "packages/*"
+    "packages/*",
+    "packages/datasources/*"
   ],
   "dependencies": {
   },
   "devDependencies": {
-    "@changesets/cli": "2.13.0",
+    "@changesets/cli": "2.13.1",
     "@types/jest": "26.0.20",
-    "@typescript-eslint/eslint-plugin": "4.13.0",
-    "@typescript-eslint/parser": "4.13.0",
+    "@typescript-eslint/eslint-plugin": "4.14.0",
+    "@typescript-eslint/parser": "4.14.0",
     "copyfiles": "2.4.1",
-    "eslint-config-prettier": "7.1.0",
+    "eslint-config-prettier": "7.2.0",
     "eslint-config-standard": "16.0.2",
     "eslint-plugin-import": "2.22.1",
     "eslint-plugin-node": "11.1.0",
@@ -41,7 +42,7 @@
     "husky": "5.0.6",
     "jest": "26.6.3",
     "jest-runner-eslint": "0.10.0",
-    "json-schema-to-typescript": "10.1.2",
+    "json-schema-to-typescript": "10.1.3",
     "lint-staged": "10.5.3",
     "prettier": "2.2.1",
     "ts-jest": "26.4.4",

@@ -1,5 +1,18 @@
 # @graphql-portal/types
 
+## 0.8.0
+
+### Minor Changes
+
+- 94540a2: added custom datasources;
+
+## 0.7.0
+
+### Minor Changes
+
+- d61e610: metric interfaces moved to types package
+- 1c86dc9: request size and complexity rate limiting
+
 ## 0.6.0
 
 ### Minor Changes

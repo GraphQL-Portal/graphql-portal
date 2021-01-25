@@ -4,8 +4,7 @@ import { config } from '@graphql-portal/config';
 import { redis } from '../redis';
 import { MeshPubSub, ResolverData } from '@graphql-mesh/types';
 import { serializer, transformResolverData } from './utils';
-import MetricsChannels from './channels.enum';
-import PubSubEventsEnum from './pubsub-events.enum';
+import { MetricsChannels, PubSubEvents } from '@graphql-portal/types';
 
 const logger = prefixLogger('analytics:metric-emitter');
 export const metricEmitter = new EventEmitter();
@@ -85,13 +84,13 @@ const subscribe = async (pubsub: MeshPubSub): Promise<void> => {
     )
   );
 
-  await pubsub.subscribe(PubSubEventsEnum.RESOLVER_CALLED, ({ resolverData }) => {
+  await pubsub.subscribe(PubSubEvents.RESOLVER_CALLED, ({ resolverData }) => {
     metricEmitter.emit(MetricsChannels.RESOLVER_CALLED, resolverData);
   });
-  await pubsub.subscribe(PubSubEventsEnum.RESOLVER_DONE, ({ resolverData, result }) => {
+  await pubsub.subscribe(PubSubEvents.RESOLVER_DONE, ({ resolverData, result }) => {
     metricEmitter.emit(MetricsChannels.RESOLVER_DONE, resolverData, result);
   });
-  await pubsub.subscribe(PubSubEventsEnum.RESOLVER_ERROR, ({ resolverData, error }) => {
+  await pubsub.subscribe(PubSubEvents.RESOLVER_ERROR, ({ resolverData, error }) => {
     metricEmitter.emit(MetricsChannels.RESOLVER_ERROR, resolverData, error);
   });
 };

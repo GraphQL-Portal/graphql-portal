@@ -1,4 +1,4 @@
-enum MetricsChannelsEnum {
+enum MetricsChannels {
   NETWORK = 'network-metrics',
   RESOLVER_CALLED = 'resolver-called',
   RESOLVER_ERROR = 'resolver-error',
@@ -9,4 +9,10 @@ enum MetricsChannelsEnum {
   REQUEST_IDS = 'request-ids',
 }
 
-export default MetricsChannelsEnum;
+enum PubSubEvents {
+  RESOLVER_CALLED = 'resolverCalled',
+  RESOLVER_DONE = 'resolverDone',
+  RESOLVER_ERROR = 'resolverError',
+}
+
+export { MetricsChannels, PubSubEvents };
