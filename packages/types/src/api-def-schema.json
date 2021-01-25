@@ -2171,7 +2171,23 @@
       "additionalProperties": false
     },
     "authentication": {
-      "type": "string"
+      "type": "object",
+      "properties": {
+        "auth_header_name": {
+          "type": "string",
+          "default": "authorization"
+        },
+        "auth_tokens": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "auth_tokens"
+      ],
+      "additionalProperties": false
     },
     "mesh": {
       "type": "object",
