@@ -1,5 +1,18 @@
 # @graphql-portal/gateway
 
+## 0.9.0
+
+### Minor Changes
+
+- 9138fda: api authentication key
+
+### Patch Changes
+
+- Updated dependencies [9138fda]
+  - @graphql-portal/types@0.9.0
+  - @graphql-portal/config@0.5.3
+  - @graphql-portal/dashboard@0.0.10
+
 ## 0.8.1
 
 ### Patch Changes
