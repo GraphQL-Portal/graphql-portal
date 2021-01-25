@@ -8,3 +8,7 @@
 Configurable and distributed GraphQL Gateway based on GraphQL Mesh and built with :heart: by code.store
 
 [Read our documentation here](https://github.com/code-store-platform/graphql-portal#graphql-portal-gateway)
+
+## License
+
+[MIT](https://github.com/code-store-platform/graphql-portal/blob/main/LICENSE)

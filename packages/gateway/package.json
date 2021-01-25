@@ -13,6 +13,7 @@
     "build": "tsc -b",
     "start": "node dist/src/index"
   },
+  "keywords": ["graphql", "gateway", "dashboard", "graphql-gateway"],
   "dependencies": {
     "@graphql-inspector/core": "^2.3.0",
     "@graphql-mesh/config": "^0.11.6",
