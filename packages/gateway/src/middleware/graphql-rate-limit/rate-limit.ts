@@ -27,9 +27,9 @@ const rateLimitMiddleware = (apiDef: ApiDef): RequestHandler => {
   logger.debug(`max cost: ${maxCost}`);
   logger.debug(`rate: ${costRate} per ${costRatePer} second(s)`);
 
-  const sendError = (res: Response, error: Error, status = 400): void => {
-    res.status(status);
-    res.json(error);
+  const throwError = (error: Error, statusCode = 400): void => {
+    error.statusCode = statusCode;
+    throw error;
   };
 
   const requestCostTool = new RequestCostTool(costRatePer);
@@ -51,7 +51,7 @@ const rateLimitMiddleware = (apiDef: ApiDef): RequestHandler => {
     };
     depthLimit(maxDepth, {}, setDepth)(validationContext);
     if (Number.isNaN(depth)) {
-      return sendError(res, new GraphQLError(`The query exceeds maximum operation depth of ${maxDepth}`));
+      return throwError(new GraphQLError(`The query exceeds maximum operation depth of ${maxDepth}`));
     }
     logger.debug(`request ${req.id} from ${req.ip}: depth ${depth}`);
 
@@ -62,7 +62,7 @@ const rateLimitMiddleware = (apiDef: ApiDef): RequestHandler => {
     visit(query, visitWithTypeInfo(typeInfo, visitor as Visitor<any>));
     const { cost } = visitor;
     if (cost > maxCost) {
-      return sendError(res, new GraphQLError(`The query exceeds maximum complexity of ${maxCost}`));
+      return throwError(new GraphQLError(`The query exceeds maximum complexity of ${maxCost}`));
     }
     logger.debug(`request ${req.id} from ${req.ip}: cost ${cost}`);
 
@@ -71,8 +71,7 @@ const rateLimitMiddleware = (apiDef: ApiDef): RequestHandler => {
     }
     const totalCost = (await requestCostTool.getTotalCost(req)) + cost;
     if (totalCost > costRate) {
-      return sendError(
-        res,
+      return throwError(
         new GraphQLError(`Too many requests. Exceeded complexity limit of ${costRate} per ${costRatePer} seconds`),
         429
       );
