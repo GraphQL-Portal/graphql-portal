@@ -28,6 +28,10 @@ export interface ApiDefConfig {
     complexity: number;
     per: number;
   };
+  authentication?: {
+    auth_header_name?: string;
+    auth_tokens: string[];
+  };
   mesh?: {
     serve?: ServeConfig;
     require?: string[];
@@ -132,6 +136,8 @@ export interface Handler {
   soap?: SoapHandler;
   thrift?: ThriftHandler;
   tuql?: TuqlHandler;
+  ContentfulHandler?: ContentfulHandler;
+  SlackHandler?: SlackHandler;
   [k: string]: unknown;
 }
 export interface FhirHandler {
@@ -745,6 +751,22 @@ export interface TuqlHandler {
    * Path to the SQL Dump file if you want to build a in-memory database
    */
   infile?: string;
+}
+export interface ContentfulHandler {
+  /**
+   * Authentication token
+   */
+  token: string;
+  /**
+   * A endpoint of your Contentful GraphQL API
+   */
+  endpoint: string;
+}
+export interface SlackHandler {
+  /**
+   * Token, which can be obtained here: https://api.slack.com/authentication
+   */
+  token: string;
 }
 export interface Transform {
   /**

@@ -1,16 +1,15 @@
 {
-  "name": "@graphql-portal/types",
-  "version": "0.9.0",
+  "name": "@graphql-portal/slack",
+  "version": "0.0.2",
   "license": "MIT",
   "main": "dist/src/index.js",
   "scripts": {
     "build": "tsc -b"
   },
   "dependencies": {
-    "ajv": "^6.12.6"
+    "@graphql-mesh/openapi": "^0.12.0"
   },
   "publishConfig": {
     "access": "public"
-  },
-  "keywords": ["graphql", "gateway", "dashboard", "graphql-gateway"]
+  }
 }
