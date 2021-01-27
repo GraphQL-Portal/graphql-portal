@@ -1,6 +1,6 @@
 {
   "name": "@graphql-portal/gateway",
-  "version": "0.9.0",
+  "version": "0.9.1",
   "license": "MIT",
   "author": "code.store",
   "main": "dist/src/index.js",
@@ -13,7 +13,12 @@
     "build": "tsc -b",
     "start": "node dist/src/index"
   },
-  "keywords": ["graphql", "gateway", "dashboard", "graphql-gateway"],
+  "keywords": [
+    "graphql",
+    "gateway",
+    "dashboard",
+    "graphql-gateway"
+  ],
   "dependencies": {
     "@graphql-inspector/core": "^2.3.0",
     "@graphql-mesh/config": "^0.11.6",
