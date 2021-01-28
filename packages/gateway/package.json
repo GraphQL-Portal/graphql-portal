@@ -61,5 +61,13 @@
     "@types/supertest": "2.0.10",
     "ioredis-mock": "5.2.0",
     "supertest": "6.1.1"
+  },
+  "homepage": "https://github.com/graphql-portal/graphql-portal#readme",
+  "bugs": {
+    "url": "https://github.com/graphql-portal/graphql-portal/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/graphql-portal/graphql-portal.git"
   }
 }
