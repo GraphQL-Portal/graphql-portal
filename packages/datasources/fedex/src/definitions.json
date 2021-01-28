@@ -1,7 +1,7 @@
 {
-  "SlackHandler": {
+  "FedexHandler": {
     "additionalProperties": false,
     "type": "object",
-    "title": "SlackHandler"
+    "title": "FedexHandler"
   }
 }

@@ -31,6 +31,11 @@ export interface Handler {
   tuql?: TuqlHandler;
   ContentfulHandler?: ContentfulHandler;
   SlackHandler?: SlackHandler;
+  StripeHandler?: StripeHandler;
+  WeatherbitHandler?: WeatherbitHandler;
+  CrunchbaseHandler?: CrunchbaseHandler;
+  FedexHandler?: FedexHandler;
+  TwitterHandler?: TwitterHandler;
   [k: string]: unknown;
 }
 export interface FhirHandler {
@@ -655,12 +660,12 @@ export interface ContentfulHandler {
    */
   endpoint: string;
 }
-export interface SlackHandler {
-  /**
-   * Token, which can be obtained here: https://api.slack.com/authentication
-   */
-  token: string;
-}
+export interface SlackHandler {}
+export interface StripeHandler {}
+export interface WeatherbitHandler {}
+export interface CrunchbaseHandler {}
+export interface FedexHandler {}
+export interface TwitterHandler {}
 export interface Transform {
   /**
    * Transformer to apply caching for your data sources

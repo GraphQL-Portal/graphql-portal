@@ -1,10 +1,10 @@
 import { GetMeshSourceOptions, YamlConfig } from '@graphql-mesh/types';
 const OpenAPIHandler = require('@graphql-mesh/openapi');
 
-const OPENAPI_SPECIFICATION: string = 'https://api.slack.com/specs/openapi/v2/slack_web.json';
-const BASE_URL: string = 'https://slack.com/api';
+const OPENAPI_SPECIFICATION: string = 'https://api.twitter.com/labs/2/openapi.json';
+const BASE_URL: string = 'https://developer.twitter.com/"';
 
-export default class SlackHandler extends OpenAPIHandler {
+export default class TwitterHandler extends OpenAPIHandler {
   constructor({ name, config, cache }: GetMeshSourceOptions<YamlConfig.OpenapiHandler>) {
     config.source = OPENAPI_SPECIFICATION;
     config.baseUrl = BASE_URL;
