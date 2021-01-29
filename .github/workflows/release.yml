@@ -9,6 +9,7 @@ jobs:
   release:
     name: Release
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     steps:
       - name: Checkout Repo
         uses: actions/checkout@master
@@ -50,6 +51,7 @@ jobs:
   dockerhub:
     name: Dockerhub
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     needs: release
     steps:
       -
