@@ -9,7 +9,6 @@ import { Redis } from 'ioredis';
 let app: { use: jest.SpyInstance };
 let server: { listen: jest.SpyInstance; getConnections: jest.SpyInstance };
 
-jest.mock('@graphql-portal/logger');
 jest.mock('express', () =>
   jest.fn(() => {
     app = { use: jest.fn() };
@@ -83,7 +82,7 @@ describe('Server', () => {
     it('should setup express server and subscribe to api defs updates', async () => {
       await startServer();
 
-      expect(app.use).toHaveBeenCalledTimes(5);
+      expect(app.use).toHaveBeenCalledTimes(4);
       expect(setRouter).toHaveBeenCalledWith(app, config.apiDefs);
       expect(setupRedis).toHaveBeenCalledWith(config.gateway.redis_connection_string);
       expect(redis.subscribe).toHaveBeenCalledWith(Channel.apiDefsUpdated);

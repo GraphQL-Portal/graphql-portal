@@ -1,6 +1,5 @@
-import MetricsChannels from './channels.enum';
+import { MetricsChannels, PubSubEvents } from '@graphql-portal/types';
 import subscribeToRequestMetrics, { metricEmitter } from './emitter';
 import startPeriodicMetricsRecording from './network-metric-recorder';
-import PubSubEvents from './pubsub-events.enum';
 
 export { startPeriodicMetricsRecording, subscribeToRequestMetrics, MetricsChannels, PubSubEvents, metricEmitter };

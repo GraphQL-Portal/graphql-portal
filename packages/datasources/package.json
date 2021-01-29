@@ -1,0 +1,13 @@
+{
+  "name": "@graphql-portal/datasources",
+  "version": "0.0.2",
+  "license": "MIT",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc -b"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "keywords": ["graphql", "gateway", "dashboard", "graphql-gateway"]
+}

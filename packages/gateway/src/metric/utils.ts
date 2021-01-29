@@ -1,6 +1,6 @@
 import { ResolverData } from '@graphql-mesh/types';
 import { Path } from 'graphql/jsutils/Path';
-import MetricsChannels from './channels.enum';
+import { MetricsChannels } from '@graphql-portal/types';
 
 export const reducePath = (path: Path | undefined, result = ''): string | null => {
   if (!path) return null;
@@ -16,13 +16,15 @@ export const serializer = (data: any, doNotLogkeys: string[] = ['_']): string =>
   });
 };
 
-export const transformResolverData = (event: MetricsChannels, { info, args }: ResolverData) => {
+export const getSourceName = ({ info }: ResolverData): string | undefined => {
+  return (info?.returnType as any)?.extensions?.federation?.serviceName;
+};
+
+export const transformResolverData = (event: MetricsChannels, data: ResolverData) => {
   return {
     event,
-    info,
-    args,
-    path: reducePath(info?.path),
-    source: (info?.returnType as any)?.extensions?.federation?.serviceName,
+    path: reducePath(data.info?.path),
+    source: getSourceName(data),
     date: Date.now(),
   };
 };

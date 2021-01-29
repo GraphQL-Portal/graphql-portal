@@ -1,12 +1,16 @@
+import { logger } from '@graphql-portal/logger';
 import IORedis from 'ioredis';
 import connect from './connect';
 import { ping } from './ping';
 
+export let redisSubscriber: IORedis.Redis;
 export let redis: IORedis.Redis;
 
 export default async function setupRedis(connectionString: string) {
+  redisSubscriber = await connect(connectionString);
   redis = await connect(connectionString);
-  const publisher = await connect(connectionString);
-  ping(publisher);
-  return redis;
+
+  logger.info('Connected to Redis at ➜ %s', connectionString);
+  ping(redis);
+  return redisSubscriber;
 }
