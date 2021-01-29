@@ -1,9 +1,9 @@
 # GraphQL Portal Gateway
 
-[![GraphQL Portal](https://raw.githubusercontent.com/code-store-platform/graphql-portal-docker/main/graphql-portal.gif)](https://www.graphql-portal.com/)
+[![GraphQL Portal](https://raw.githubusercontent.com/graphql-portal/graphql-portal-docker/main/graphql-portal.gif)](https://www.graphql-portal.com/)
 
 [![npm version](https://img.shields.io/npm/v/@graphql-portal/gateway?color=green)](https://www.npmjs.com/package/@graphql-portal/gateway)
-![Test](https://github.com/code-store-platform/graphql-portal/workflows/Test/badge.svg)
+![Test](https://github.com/graphql-portal/graphql-portal/workflows/Test/badge.svg)
 [![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fcode-store-platform%2Fgraphql-portal.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2Fcode-store-platform%2Fgraphql-portal?ref=badge_shield)
 [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg)](https://github.com/prettier/prettier)
 [![from Paris with Love](https://img.shields.io/badge/from%20Paris%20with-%F0%9F%A4%8D-red)](https://shields.io/)
@@ -65,9 +65,9 @@ Once installed and configured, the Gateway allows you to:
 
 ## Quick Start
 
-TL;DR? The quickest way to launch GraphQL Portal (with Gateway and Dashboard) locally, is to use our [Docker Compose file](https://github.com:code-store-platform/graphql-portal-docker):
+TL;DR? The quickest way to launch GraphQL Portal (with Gateway and Dashboard) locally, is to use our [Docker Compose file](https://github.com:graphql-portal/graphql-portal-docker):
 ```shell
-git clone git@github.com:code-store-platform/graphql-portal-docker.git
+git clone git@github.com:graphql-portal/graphql-portal-docker.git
 cd graphql-portal-docker
 
 docker-compose -f docker-compose.yml up
@@ -88,9 +88,9 @@ Unless installed via docker compose, you will need:
 
 ### Docker Compose
 
-Check out [our dedicated repository](https://github.com:code-store-platform/graphql-portal-docker) with docker compose files and examples of the configuration:
+Check out [our dedicated repository](https://github.com:graphql-portal/graphql-portal-docker) with docker compose files and examples of the configuration:
 ```shell
-git clone git@github.com:code-store-platform/graphql-portal-docker.git
+git clone git@github.com:graphql-portal/graphql-portal-docker.git
 cd graphql-portal-docker
 
 docker-compose -f docker-compose.yml up
@@ -106,7 +106,7 @@ docker pull gqlportal/gateway:latest
 Now that you have Docker image locally, you will need to prepare a basic configuration file.
 You may download a sample config:
 ```shell
-curl -s -o ./gateway.yaml https://raw.githubusercontent.com/code-store-platform/graphql-portal-docker/main/basic.gateway.yaml
+curl -s -o ./gateway.yaml https://raw.githubusercontent.com/graphql-portal/graphql-portal-docker/main/basic.gateway.yaml
 ```
 
 Once that is done, you can now launch the Gateway in a standalone mode (you may have to specify a Redis connection 
@@ -143,15 +143,15 @@ The package `@graphql-portal/gateway` provides a CLI command `graphql-portal` wh
 However, in order for the server to start correctly, we should first create (or download) a configuration file. By 
 default, GraphQL Portal will search for a configuration in `./config/gateway.json|yaml` file. That's why, prior to 
 launching the gateway, you may want to create a directory and place a config file into it. You can use a [basic configuration
-file](https://raw.githubusercontent.com/code-store-platform/graphql-portal-docker/main/basic.gateway.yaml) 
-from our [examples repository here](https://github.com/code-store-platform/graphql-portal-docker).
+file](https://raw.githubusercontent.com/graphql-portal/graphql-portal-docker/main/basic.gateway.yaml) 
+from our [examples repository here](https://github.com/graphql-portal/graphql-portal-docker).
 
 ```shell
 # create directories for configuration
 mkdir -p /opt/graphql-portal/config && cd /opt/graphql-portal
 
 # download a basic configuration file
-curl -s -o ./config/gateway.yaml https://raw.githubusercontent.com/code-store-platform/graphql-portal-docker/main/basic.gateway.yaml
+curl -s -o ./config/gateway.yaml https://raw.githubusercontent.com/graphql-portal/graphql-portal-docker/main/basic.gateway.yaml
 ```
 
 Now that the configuration is in place, we can install and launch the gateway:
@@ -180,7 +180,7 @@ and requires the following dependencies:
 It is not distributed via Yarn/NPM and can be installed locally by pulling and building the source code from the repository:
 ```shell
 mkdir /opt/graphql-portal-dashboard
-git clone https://github.com/code-store-platform/graphql-portal-dashboard /opt/graphql-portal-dashboard
+git clone https://github.com/graphql-portal/graphql-portal-dashboard /opt/graphql-portal-dashboard
 
 cd /opt/graphql-portal-dashboard
 
