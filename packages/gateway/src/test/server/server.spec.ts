@@ -82,7 +82,7 @@ describe('Server', () => {
     it('should setup express server and subscribe to api defs updates', async () => {
       await startServer();
 
-      expect(app.use).toHaveBeenCalledTimes(5);
+      expect(app.use).toHaveBeenCalledTimes(4);
       expect(setRouter).toHaveBeenCalledWith(app, config.apiDefs);
       expect(setupRedis).toHaveBeenCalledWith(config.gateway.redis_connection_string);
       expect(redis.subscribe).toHaveBeenCalledWith(Channel.apiDefsUpdated);

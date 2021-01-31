@@ -1,5 +1,11 @@
 # @graphql-portal/gateway
 
+## 0.9.1
+
+### Patch Changes
+
+- f7fbe6b: handle error mw added
+
 ## 0.9.0
 
 ### Minor Changes

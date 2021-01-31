@@ -9,4 +9,8 @@ declare global {
       costData: CostData;
     }
   }
+  interface Error {
+    statusCode?: number;
+    handlerName?: string;
+  }
 }

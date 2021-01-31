@@ -9,6 +9,7 @@ jobs:
   release:
     name: Release
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     steps:
       - name: Checkout Repo
         uses: actions/checkout@master
@@ -50,6 +51,7 @@ jobs:
   dockerhub:
     name: Dockerhub
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     needs: release
     steps:
       -
@@ -80,8 +82,8 @@ jobs:
           tags: |
             gqlportal/gateway:latest
             gqlportal/gateway:0.x
-            ghcr.io/code-store-platform/graphql-portal-gateway:latest
-            ghcr.io/code-store-platform/graphql-portal-gateway:0.x
+            ghcr.io/graphql-portal/graphql-portal-gateway:latest
+            ghcr.io/graphql-portal/graphql-portal-gateway:0.x
       -
         name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}

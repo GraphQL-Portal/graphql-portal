@@ -8,7 +8,7 @@ import { graphqlUploadExpress } from 'graphql-upload';
 import { createServer } from 'http';
 import { promisify } from 'util';
 import { startPeriodicMetricsRecording } from '../metric';
-import { logResponse, logResponseError } from '../middleware';
+import { logResponse } from '../middleware';
 import setupRedis from '../redis';
 import setupControlApi from './control-api';
 import { setRouter, updateApi } from './router';
@@ -42,8 +42,6 @@ export async function startServer(): Promise<void> {
   }
 
   setRouter(app, config.apiDefs);
-
-  app.use(logResponseError);
 
   redisSubscriber.subscribe(Channel.apiDefsUpdated);
   redisSubscriber.on('message', async (channel, timestamp) => {

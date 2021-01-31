@@ -12,6 +12,7 @@ jobs:
   build:
     name: Test
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     steps:
       - name: Checkout Master
         uses: actions/checkout@v2
