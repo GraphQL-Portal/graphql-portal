@@ -5,7 +5,7 @@ sidebar_label: Motivation
 slug: /
 ---
 <p align="center">
-    <img src="https://raw.githubusercontent.com/graphql-portal/graphql-portal-docker/main/graphql-portal.gif" />
+    <img alt="GraphQL Portal Logo animation" src="https://raw.githubusercontent.com/graphql-portal/graphql-portal-docker/main/graphql-portal.gif" />
 </p>
 
 The GraphQL Community and Ecosystem are growing rapidly, and the goal of GraphQL Portal is to bring an API Gateway that
