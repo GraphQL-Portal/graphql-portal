@@ -1,14 +1,14 @@
 name: Documentation Website Deployment
 on:
   push:
-    branches:
-      - master
     paths:
       - 'docs-website/**'
+  workflow_dispatch:
 
 jobs:
   deploy-website:
     name: Deploy Documentation site
+    if: github.ref == 'refs/heads/main'
     timeout-minutes: 15
     runs-on: ubuntu-latest
     steps:
