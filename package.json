@@ -20,7 +20,9 @@
     "lint": "eslint '{src,apps,libs,test}/**/*.ts' --fix",
     "test": "jest --coverage",
     "prerelease": "yarn build",
-    "release": "changeset publish"
+    "release": "changeset publish",
+    "docs:build": "cd docs-website && yarn build",
+    "docs:deploy": "cd docs-website && yarn deploy"
   },
   "workspaces": [
     "packages/*",
