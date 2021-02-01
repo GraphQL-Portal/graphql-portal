@@ -78,7 +78,17 @@
           "additionalItems": false,
           "description": "Any of: WebhookHandler, ExpressHandler"
         },
-        "staticFiles": { "type": "string" }
+        "staticFiles": { "type": "string" },
+        "playground": { "type": "boolean", "description": "Show playground" },
+        "maxFileSize": {
+          "type": "integer",
+          "description": "Maximum File Size for GraphQL Upload (default: '100000000')"
+        },
+        "maxFiles": { "type": "integer", "description": "Maximum number of files for GraphQL Upload (default: '10')" },
+        "maxRequestBodySize": {
+          "description": "Controls the maximum request body size. If this is a number, then the value specifies the number of bytes; if it is a string, the value is passed to the bytes library for parsing. Defaults to '100kb'. (Any of: Int, String)",
+          "anyOf": [{ "type": "integer" }, { "type": "string" }]
+        }
       }
     },
     "CorsConfig": {
@@ -158,6 +168,7 @@
           "$ref": "#/definitions/EncapsulateTransformObject",
           "description": "Transformer to apply encapsulation to the API source, by creating a field for it under the root query"
         },
+        "extend": { "$ref": "#/definitions/ExtendTransform" },
         "federation": { "$ref": "#/definitions/FederationTransform" },
         "filterSchema": { "type": "array", "items": { "type": "string" }, "additionalItems": false },
         "mock": { "$ref": "#/definitions/MockingConfig", "description": "Mock configuration for your source" },
@@ -182,8 +193,7 @@
           "$ref": "#/definitions/SnapshotTransformConfig",
           "description": "Configuration for Snapshot extension"
         }
-      },
-      "required": ["encapsulate"]
+      }
     },
     "Handler": {
       "additionalProperties": true,
@@ -276,9 +286,8 @@
           "description": "A url or file path to your remote GraphQL endpoint.\nIf you provide a path to a code file(js or ts),\nother options will be ignored and the schema exported from the file will be used directly."
         },
         "schemaHeaders": {
-          "type": "object",
-          "properties": {},
-          "description": "JSON object representing the Headers to add to the runtime of the API calls only for schema introspection"
+          "anyOf": [{ "type": "object", "additionalProperties": true }, { "type": "string" }],
+          "description": "JSON object representing the Headers to add to the runtime of the API calls only for schema introspection\nYou can also provide `.js` or `.ts` file path that exports schemaHeaders as an object"
         },
         "operationHeaders": {
           "type": "object",
@@ -308,7 +317,8 @@
           "description": "Cache Introspection (Any of: GraphQLIntrospectionCachingOptions, Boolean)",
           "anyOf": [{ "$ref": "#/definitions/GraphQLIntrospectionCachingOptions" }, { "type": "boolean" }]
         },
-        "multipart": { "type": "boolean", "description": "Enable multipart/formdata in order to support file uploads" }
+        "multipart": { "type": "boolean", "description": "Enable multipart/formdata in order to support file uploads" },
+        "batch": { "type": "boolean", "description": "Batch requests" }
       },
       "required": ["endpoint"]
     },
@@ -331,14 +341,22 @@
           "description": "gRPC Proto file that contains your protobuf schema (Any of: ProtoFilePath, String)",
           "anyOf": [{ "$ref": "#/definitions/ProtoFilePath" }, { "type": "string" }]
         },
+        "descriptorSetFilePath": {
+          "description": "Use a binary-encoded or JSON file descriptor set file (Any of: ProtoFilePath, String)",
+          "anyOf": [{ "$ref": "#/definitions/ProtoFilePath" }, { "type": "string" }]
+        },
         "serviceName": { "type": "string", "description": "Your base service name\nUsed for naming only" },
         "packageName": { "type": "string", "description": "Your base package name\nUsed for naming only" },
         "requestTimeout": { "type": "integer", "description": "Request timeout in milliseconds\nDefault: 200000" },
         "credentialsSsl": { "$ref": "#/definitions/GrpcCredentialsSsl", "description": "SSL Credentials" },
         "useHTTPS": { "type": "boolean", "description": "Use https instead of http for gRPC connection" },
-        "metaData": { "type": "object", "properties": {}, "description": "MetaData" }
+        "metaData": { "type": "object", "properties": {}, "description": "MetaData" },
+        "useReflection": {
+          "type": "boolean",
+          "description": "Use gRPC reflection to automatically gather the connection"
+        }
       },
-      "required": ["endpoint", "protoFilePath"]
+      "required": ["endpoint"]
     },
     "LoadOptions": {
       "additionalProperties": false,
@@ -712,9 +730,34 @@
         "addLimitArgument": {
           "type": "boolean",
           "description": "Auto-generate a 'limit' argument for all fields that return lists of objects, including ones produced by links"
+        },
+        "genericPayloadArgName": {
+          "type": "boolean",
+          "description": "Set argument name for mutation payload to 'requestBody'. If false, name defaults to camelCased pathname"
+        },
+        "selectQueryOrMutationField": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/SelectQueryOrMutationFieldConfig" },
+          "additionalItems": false,
+          "description": "Allows to explicitly override the default operation (Query or Mutation) for any OAS operation"
         }
       },
       "required": ["source"]
+    },
+    "SelectQueryOrMutationFieldConfig": {
+      "additionalProperties": false,
+      "type": "object",
+      "title": "SelectQueryOrMutationFieldConfig",
+      "properties": {
+        "title": { "type": "string", "description": "OAS Title" },
+        "path": { "type": "string", "description": "Operation Path" },
+        "type": {
+          "type": "string",
+          "enum": ["Query", "Mutation"],
+          "description": "Target Root Type for this operation (Allowed values: Query, Mutation)"
+        },
+        "method": { "type": "string", "description": "Which method is used for this operation" }
+      }
     },
     "PostGraphileHandler": {
       "additionalProperties": false,
@@ -728,7 +771,10 @@
           "additionalItems": false,
           "description": "An array of strings which specifies the PostgreSQL schemas that PostGraphile will use to create a GraphQL schema. The default schema is the public schema."
         },
-        "pool": { "type": "object", "properties": {}, "description": "Connection Pool settings" },
+        "pool": {
+          "anyOf": [{ "type": "object", "additionalProperties": true }, { "type": "string" }],
+          "description": "Connection Pool instance or settings or you can provide the path of a code file that exports any of those"
+        },
         "appendPlugins": {
           "type": "array",
           "items": { "type": "string" },
@@ -899,6 +945,15 @@
         "query": { "type": "boolean" },
         "mutation": { "type": "boolean" },
         "subscription": { "type": "boolean" }
+      }
+    },
+    "ExtendTransform": {
+      "additionalProperties": false,
+      "type": "object",
+      "title": "ExtendTransform",
+      "properties": {
+        "typeDefs": { "anyOf": [{ "type": "object", "additionalProperties": true }, { "type": "string" }] },
+        "resolvers": { "anyOf": [{ "type": "object", "additionalProperties": true }, { "type": "string" }] }
       }
     },
     "FederationTransform": {
@@ -1136,7 +1191,11 @@
           "additionalItems": false,
           "description": "Resolver to be applied\nFor example;\n  apply:\n      - Query.* <- * will apply this extension to all fields of Query type\n      - Mutation.someMutationButProbablyYouWontNeedIt"
         },
-        "outputDir": { "type": "string", "description": "Path to the directory of the generated snapshot files" }
+        "outputDir": { "type": "string", "description": "Path to the directory of the generated snapshot files" },
+        "respectSelectionSet": {
+          "type": "boolean",
+          "description": "Take snapshots by respecting the requested selection set.\nThis might be needed for the handlers like Postgraphile or OData that rely on the incoming GraphQL operation."
+        }
       },
       "required": ["apply", "outputDir"]
     },

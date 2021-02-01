@@ -48,10 +48,13 @@ export interface GraphQLHandler {
   endpoint: string;
   /**
    * JSON object representing the Headers to add to the runtime of the API calls only for schema introspection
+   * You can also provide `.js` or `.ts` file path that exports schemaHeaders as an object
    */
-  schemaHeaders?: {
-    [k: string]: unknown;
-  };
+  schemaHeaders?:
+    | {
+        [k: string]: unknown;
+      }
+    | string;
   /**
    * JSON object representing the Headers to add to the runtime of the API calls only for operation during runtime
    */
@@ -95,6 +98,10 @@ export interface GraphQLHandler {
    * Enable multipart/formdata in order to support file uploads
    */
   multipart?: boolean;
+  /**
+   * Batch requests
+   */
+  batch?: boolean;
 }
 export interface GraphQLIntrospectionCachingOptions {
   /**
@@ -117,7 +124,11 @@ export interface GrpcHandler {
   /**
    * gRPC Proto file that contains your protobuf schema (Any of: ProtoFilePath, String)
    */
-  protoFilePath: ProtoFilePath | string;
+  protoFilePath?: ProtoFilePath | string;
+  /**
+   * Use a binary-encoded or JSON file descriptor set file (Any of: ProtoFilePath, String)
+   */
+  descriptorSetFilePath?: ProtoFilePath | string;
   /**
    * Your base service name
    * Used for naming only
@@ -144,6 +155,10 @@ export interface GrpcHandler {
   metaData?: {
     [k: string]: unknown;
   };
+  /**
+   * Use gRPC reflection to automatically gather the connection
+   */
+  useReflection?: boolean;
 }
 export interface ProtoFilePath {
   file: string;
@@ -492,6 +507,32 @@ export interface OpenapiHandler {
    * Auto-generate a 'limit' argument for all fields that return lists of objects, including ones produced by links
    */
   addLimitArgument?: boolean;
+  /**
+   * Set argument name for mutation payload to 'requestBody'. If false, name defaults to camelCased pathname
+   */
+  genericPayloadArgName?: boolean;
+  /**
+   * Allows to explicitly override the default operation (Query or Mutation) for any OAS operation
+   */
+  selectQueryOrMutationField?: SelectQueryOrMutationFieldConfig[];
+}
+export interface SelectQueryOrMutationFieldConfig {
+  /**
+   * OAS Title
+   */
+  title?: string;
+  /**
+   * Operation Path
+   */
+  path?: string;
+  /**
+   * Target Root Type for this operation (Allowed values: Query, Mutation)
+   */
+  type?: 'Query' | 'Mutation';
+  /**
+   * Which method is used for this operation
+   */
+  method?: string;
 }
 /**
  * Handler for Postgres database, based on `postgraphile`
@@ -506,11 +547,13 @@ export interface PostGraphileHandler {
    */
   schemaName?: string[];
   /**
-   * Connection Pool settings
+   * Connection Pool instance or settings or you can provide the path of a code file that exports any of those
    */
-  pool?: {
-    [k: string]: unknown;
-  };
+  pool?:
+    | {
+        [k: string]: unknown;
+      }
+    | string;
   /**
    * Extra Postgraphile Plugins to append
    */
@@ -666,7 +709,8 @@ export interface Transform {
    * Transformer to apply caching for your data sources
    */
   cache?: CacheTransformConfig[];
-  encapsulate: EncapsulateTransformObject;
+  encapsulate?: EncapsulateTransformObject;
+  extend?: ExtendTransform;
   federation?: FederationTransform;
   filterSchema?: string[];
   mock?: MockingConfig;
@@ -746,6 +790,18 @@ export interface EncapsulateTransformApplyTo {
   query?: boolean;
   mutation?: boolean;
   subscription?: boolean;
+}
+export interface ExtendTransform {
+  typeDefs?:
+    | {
+        [k: string]: unknown;
+      }
+    | string;
+  resolvers?:
+    | {
+        [k: string]: unknown;
+      }
+    | string;
 }
 export interface FederationTransform {
   types?: FederationTransformType[];
@@ -956,4 +1012,9 @@ export interface SnapshotTransformConfig {
    * Path to the directory of the generated snapshot files
    */
   outputDir: string;
+  /**
+   * Take snapshots by respecting the requested selection set.
+   * This might be needed for the handlers like Postgraphile or OData that rely on the incoming GraphQL operation.
+   */
+  respectSelectionSet?: boolean;
 }

@@ -4,12 +4,14 @@ import apiDefConfig from './api-def-schema.json';
 import sources from '@graphql-portal/datasources';
 import fs from 'fs';
 
-const dataSourceProperties = Object.keys(sources).map((source: string) => ({ [source]: { "$ref": `#/definitions/${source}` } }));
+const dataSourceProperties = Object.keys(sources).map((source: string) => ({
+  [source]: { $ref: `#/definitions/${source}` },
+}));
 definitions.Handler.properties = Object.assign({}, definitions.Handler.properties, ...dataSourceProperties);
-sourceConfig.definitions = { ...definitions, ...sources }  as any;
+sourceConfig.definitions = { ...definitions, ...sources } as any;
 
 fs.writeFileSync(`${__dirname}/mesh-source-schema.json`, JSON.stringify(sourceConfig));
 
-apiDefConfig.definitions = { ...definitions, ...sources }  as any;
+apiDefConfig.definitions = { ...definitions, ...sources } as any;
 apiDefConfig.properties.mesh.properties = properties as any;
 fs.writeFileSync(`${__dirname}/api-def-schema.json`, JSON.stringify(apiDefConfig));
