@@ -42,6 +42,12 @@ jobs:
       - name: Build docs
         run: yarn docs:build
 
+      - name: Configure Git Credentials
+        run: |
+          git config --global user.email "${{github.actor}}@users.noreply.github.com"
+          git config --global user.name "${{github.actor}}"
+          echo "machine github.com login ${{github.actor}} password ${{secrets.GITHUB_TOKEN}}" > ~/.netrc
+
       - name: Deploy docs
         run: yarn docs:deploy
         env:
