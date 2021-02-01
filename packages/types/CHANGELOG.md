@@ -1,5 +1,15 @@
 # @graphql-portal/types
 
+## 0.10.0
+
+### Minor Changes
+
+- 81e86d9: Updating types due to updates in @graphql-mesh/config
+
+### Patch Changes
+
+- 81e86d9: update dependencies
+
 ## 0.9.0
 
 ### Minor Changes

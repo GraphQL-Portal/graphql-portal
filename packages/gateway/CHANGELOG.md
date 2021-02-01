@@ -1,5 +1,16 @@
 # @graphql-portal/gateway
 
+## 0.9.2
+
+### Patch Changes
+
+- 81e86d9: update dependencies
+- Updated dependencies [81e86d9]
+- Updated dependencies [81e86d9]
+  - @graphql-portal/types@0.10.0
+  - @graphql-portal/config@0.5.4
+  - @graphql-portal/dashboard@0.0.11
+
 ## 0.9.1
 
 ### Patch Changes
