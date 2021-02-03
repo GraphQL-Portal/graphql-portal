@@ -18,6 +18,7 @@
     "@typescript-eslint/ban-types": "warn",
     "@typescript-eslint/no-unused-vars": "off",
     "@typescript-eslint/no-use-before-define": "off",
+    "@typescript-eslint/no-extra-semi": "error",
     "@typescript-eslint/no-namespace": "off",
     "@typescript-eslint/no-empty-interface": "off",
     "@typescript-eslint/no-empty-function": "off",
