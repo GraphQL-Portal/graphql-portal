@@ -2,6 +2,7 @@ import { diff } from '@graphql-inspector/core';
 import { processConfig } from '@graphql-mesh/config';
 import { getMesh } from '@graphql-mesh/runtime';
 import { MeshPubSub } from '@graphql-mesh/types';
+import { config } from '@graphql-portal/config';
 import { prefixLogger } from '@graphql-portal/logger';
 import { ApiDef } from '@graphql-portal/types';
 import { Application, Request, RequestHandler, Router } from 'express';
@@ -73,7 +74,9 @@ async function buildApi(toRouter: Router, apiDef: ApiDef, mesh?: IMesh) {
   const { schema, contextBuilder, pubsub } = mesh;
   apiSchema[apiDef.name] = schema;
 
-  await subscribeToRequestMetrics(pubsub);
+  if (config.gateway?.metrics?.enabled) {
+    await subscribeToRequestMetrics(pubsub);
+  }
 
   logger.info(`Loaded API ${apiDef.name} ➜ ${apiDef.endpoint}`);
 

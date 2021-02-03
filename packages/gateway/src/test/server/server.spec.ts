@@ -65,6 +65,9 @@ jest.mock('@graphql-portal/config', () => ({
       redis_connection_string: 'redis',
       listen_port: 8080,
       hostname: 'localhost',
+      metrics: {
+        enabled: true,
+      },
     },
     timestamp: Date.now(),
   },
