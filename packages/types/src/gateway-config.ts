@@ -34,8 +34,8 @@ export interface ControlApiConfig {
   endpoint?: string;
 }
 /**
- * Used to specify GraphQL Portal Metrics settings
+ * Used to specify GraphQL Portal metrics settings
  */
 export interface Metrics {
-  enabled: boolean;
+  enabled?: boolean;
 }
