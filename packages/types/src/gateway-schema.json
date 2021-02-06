@@ -38,6 +38,9 @@
     "control_api_config": {
       "$ref": "#/definitions/control_api_config"
     },
+    "metrics": {
+      "$ref": "#/definitions/metrics"
+    },
     "log_format": {
       "type": "string",
       "enum": [
@@ -104,6 +107,16 @@
         "endpoint": {
           "type": "string",
           "pattern": "^/"
+        }
+      }
+    },
+    "metrics": {
+      "type": "object",
+      "description": "Used to specify GraphQL Portal metrics settings",
+      "additionalProperties": false,
+      "properties": {
+        "enabled": {
+          "type": "boolean"
         }
       }
     }
