@@ -11,9 +11,9 @@ Unless installed via docker compose, you will need:
 
 ### Docker Compose
 
-Check out [our dedicated repository](https://github.com:graphql-portal/graphql-portal-docker) with docker compose files and examples of the configuration:
+Check out [our dedicated repository](https://github.com/graphql-portal/graphql-portal-docker) with docker compose files and examples of the configuration:
 ```shell
-git clone git@github.com:graphql-portal/graphql-portal-docker.git
+git clone git@github.com/graphql-portal/graphql-portal-docker.git
 cd graphql-portal-docker
 
 docker-compose -f docker-compose.yml up
@@ -88,7 +88,7 @@ env REDIS="redis://localhost:6379" NODE_ENV=production graphql-portal
 ```
 
 You should now see the output of the server without any errors.
-[Read more about the configuration of the gateway here.](#configuration)
+[Read more about the configuration of the gateway here.](/configuration/basic)
 
 ### Standalone Dashboard without Docker
 
@@ -117,7 +117,7 @@ _production_ environment:
 ```shell
 vim packages/backend/config/env/production.json
 ```
-```json
+```json title="packages/backend/config/env/production.json"
 {
   "application": {
     "env": "production",
@@ -147,7 +147,7 @@ In that file, we have 3 main configuration variables which we have to specify:
 
 Now, we have two choices: either we can pass these values as environment variables, or we can put them directly in the file.
 In our current case, we will pass them as environment variables. Read more about [the configuration of the Gateway and
-Dashboard here](#configuration).
+Dashboard here](/configuration/basic).
 
 We can now launch the server:
 ```shell

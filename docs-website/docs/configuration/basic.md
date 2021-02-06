@@ -11,7 +11,7 @@ Respectively, there are two ways how we can configure the Gateway:
 ## Configuring Gateway without dashboard
 
 Main configuration file of the Gateway is `gateway.json|yaml`, which should look like following:
-```json
+```json title="config/gateway.json" {3}
 {
   "hostname": "localhost",
   "listen_port": 3000,
@@ -29,9 +29,12 @@ Main configuration file of the Gateway is `gateway.json|yaml`, which should look
 
 All the options above are required, see [Gateway config reference](/config/gateway-reference) for a full list of options.
 
-**NOTE:** The configuration must be located in `config/gateway.json|yaml`, which should be 
-relative to the directory in which we launch the gateway (i.e., if we 
-launch `graphql-portal` in `/opt/graphql-portal` then it will look for configuration
-file in `/opt/graphql-portal/config/gateway.json|yaml`).
+:::info
+The configuration must be located in `config/gateway.json|yaml`, which should be 
+relative to the directory in which we launch the gateway. 
+
+It means that if we launch `graphql-portal` in `/opt/graphql-portal` then we 
+will look for configuration file in `/opt/graphql-portal/config/gateway.json|yaml`).
+:::
 
 ## Configuring Gateway with dashboard
