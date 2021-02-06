@@ -7,8 +7,14 @@
 module.exports = {
   docs: {
     Overview: ['overview/introduction', 'overview/how-it-works'],
-    'Getting Started': ['getting-started/quick-start', 'getting-started/installation'],
-    Configuration: ['configuration/basic' /*, 'configuration/gateway-reference', 'configuration/dashboard-reference'*/],
+    'Getting Started': [
+      'getting-started/quick-start',
+      'getting-started/installation' /*, 'getting-started/control-api', 'getting-started/custom-middlewares', 'getting-started/available-data-connectors' */,
+    ],
+    Configuration: [
+      'configuration/basic',
+      'configuration/gateway-options' /*, 'configuration/api-definition', 'configuration/data-source-definition', 'configuration/dashboard-reference'*/,
+    ],
     'Use Cases': [],
   },
 };
