@@ -31,7 +31,7 @@
   "dependencies": {
   },
   "devDependencies": {
-    "@changesets/cli": "2.14.0",
+    "@changesets/cli": "2.14.1",
     "@types/jest": "26.0.20",
     "@typescript-eslint/eslint-plugin": "4.14.1",
     "@typescript-eslint/parser": "4.14.1",
