@@ -13,7 +13,8 @@ module.exports = {
     ],
     Configuration: [
       'configuration/basic',
-      'configuration/gateway-options' /*, 'configuration/api-definition', 'configuration/data-source-definition', 'configuration/dashboard-reference'*/,
+      'configuration/gateway-options',
+      'configuration/api-definitions' /*, 'configuration/data-source-definition', 'configuration/dashboard-reference'*/,
     ],
     'Use Cases': [],
   },

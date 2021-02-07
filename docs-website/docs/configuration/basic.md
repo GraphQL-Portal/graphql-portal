@@ -38,3 +38,5 @@ will look for configuration file in `/opt/graphql-portal/config/gateway.json|yam
 :::
 
 ## Configuring Gateway with dashboard
+
+*Coming soon*
