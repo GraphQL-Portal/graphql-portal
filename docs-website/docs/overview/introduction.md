@@ -8,6 +8,8 @@ slug: /
     <img alt="GraphQL Portal Logo animation" src="https://raw.githubusercontent.com/graphql-portal/graphql-portal-docker/main/graphql-portal.gif" />
 </p>
 
+GraphQL Portal is a single point of entry of your application to the data scattered across multiple APIs and other data sources.
+
 The GraphQL Community and Ecosystem are growing rapidly, and the goal of GraphQL Portal is to bring an API Gateway that
 is native to GraphQL. It is designed to be a simple and universal GraphQL Gateway for those who must mix legacy services
 with new ones exposing GraphQL APIs, but also for those who already have GraphQL APIs and want to have a light gateway

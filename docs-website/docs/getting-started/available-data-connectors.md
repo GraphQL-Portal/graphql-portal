@@ -3,7 +3,7 @@ id: available-data-connectors
 title: Data Connectors
 sidebar_label: Data Connectors
 ---
-Under the hood, GraphQL Portal is using [GraphQL Mesh input handlers](https://graphql-mesh.com/docs) (called _input handlers_ in Mesh)
+Under the hood, GraphQL Portal is using [GraphQL Mesh input handlers](https://graphql-mesh.com/docs)
 as the base of its data connectors. Thus, there are two types of data connectors (or data sources) available:
 1. Those provided by GraphQL Mesh
 2. Custom data connectors provided by GraphQL Portal.
@@ -41,4 +41,3 @@ enter the connection details (auth keys or headers, logins or passwords).
 ### Stripe
 ### Twitter
 ### Weatherbit
-
