@@ -49,6 +49,7 @@ export async function startServer(): Promise<void> {
       return;
     }
     if (+timestamp && +timestamp <= config.timestamp) {
+      logger.debug('Config is actual');
       return;
     }
     if (!(await loadApiDefs())) return;

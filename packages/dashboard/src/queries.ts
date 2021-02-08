@@ -10,6 +10,10 @@ export default {
           handler
           transforms
         }
+        authentication {
+          auth_tokens
+          auth_header_name
+        }
       }
     }
   }`,
