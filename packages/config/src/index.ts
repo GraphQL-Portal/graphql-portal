@@ -1,6 +1,8 @@
 import { dashboard, initDashboard } from '@graphql-portal/dashboard';
 import { prefixLogger } from '@graphql-portal/logger';
 import { ApiDef, GatewayConfig } from '@graphql-portal/types';
+import cluster from 'cluster';
+import { getConfigFromMaster, registerHandlers, spreadMessageToWorkers } from '@graphql-portal/gateway/src/ipc/utils';
 import { customAlphabet } from 'nanoid';
 import { loadApiDefs as loadApiDefsFromFs } from './api-def.config';
 import { loadConfig } from './gateway.config';
@@ -8,12 +10,14 @@ import useEnv from './use-env';
 
 const logger = prefixLogger('config');
 
-let config: {
+export type Config = {
   nodeId: string;
   gateway: GatewayConfig;
   apiDefs: ApiDef[];
   timestamp: number;
-} = {} as any;
+};
+
+let config: Config = {} as any;
 
 export async function initConfig() {
   config.nodeId = customAlphabet('0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz-', 11)();
@@ -25,8 +29,10 @@ export async function initConfig() {
 }
 
 export async function loadApiDefs() {
-  if (!config.gateway) {
-    return;
+  if (cluster.isWorker) {
+    const configPromise = getConfigFromMaster();
+    await spreadMessageToWorkers({ event: 'updateConfig', data: undefined });
+    return await configPromise;
   }
 
   config.apiDefs = config.apiDefs ?? [];
@@ -50,3 +56,8 @@ export async function loadApiDefs() {
 }
 
 export { config };
+
+registerHandlers('updateConfig', undefined, async () => {
+  await loadApiDefs();
+  spreadMessageToWorkers({ event: 'config', data: config });
+});

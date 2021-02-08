@@ -26,6 +26,7 @@ export interface GatewayConfig {
  */
 export interface DashboardConfig {
   connection_string: string;
+  secret: string;
 }
 /**
  * Used to specify GraphQL Portal Control API settings

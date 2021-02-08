@@ -1,6 +1,6 @@
 export default {
-  getApiDefs: `query {
-    getApiDefs {
+  getAllApiDefs: `query {
+    getAllApiDefs {
       timestamp
       apiDefs {
         name

@@ -24,19 +24,24 @@ export default class DashboardApi {
     logger.info(`Dashboard url ➜ ${this.dashboardUrl}`);
     this.http = axios.create({
       baseURL: this.dashboardUrl,
+      headers: {
+        authorization: gatewayConfig.dashboard_config.secret,
+      },
     });
   }
 
   async loadApiDefs(): Promise<{ apiDefs: ApiDef[]; timestamp: number } | void> {
     try {
-      const {
-        data: { data },
-      } = await this.http.post(graphqlRoute, {
-        query: queries.getApiDefs,
+      const { data } = await this.http.post(graphqlRoute, {
+        query: queries.getAllApiDefs,
       });
 
+      if (data.errors?.length) {
+        throw new Error(data.errors[0].message);
+      }
+
       logger.debug('Loaded API definitions from the dashboard');
-      return data?.getApiDefs;
+      return data.data?.getAllApiDefs;
     } catch (error) {
       logger.error(`Failed to load API configs from the dashboard: ${error.message}`);
     }

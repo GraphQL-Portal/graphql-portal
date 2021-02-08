@@ -2,7 +2,7 @@ import { config, initConfig, loadApiDefs } from '@graphql-portal/config';
 import { configureLogger, logger } from '@graphql-portal/logger';
 import cluster from 'cluster';
 import { cpus } from 'os';
-import { applyRegisteredHandlers, registerWorkerHandler, spreadMessageToWorkers } from './ipc/utils';
+import { applyRegisteredHandlers, getConfigFromMaster, spreadMessageToWorkers } from './ipc/utils';
 import { startServer } from './server';
 
 function handleStopSignal(): void {
@@ -42,12 +42,7 @@ async function start(): Promise<void> {
 
     applyRegisteredHandlers();
   } else {
-    await new Promise((resolve) => {
-      registerWorkerHandler('config', (message) => {
-        (config as any) = message.data;
-        resolve(config);
-      });
-    });
+    await getConfigFromMaster();
     configureLogger(config.gateway);
     applyRegisteredHandlers();
     await startServer();
