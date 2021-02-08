@@ -34,6 +34,8 @@ In order to add the data-sources to our API we have to specify the `source_confi
 Only the file name is required, the path is going to be resolved from the `sources_path` option in `gateway.json`.
 :::
 
+[Read more about configuration of data sources](/configuration/data-source-configuration).
+
 Below is the list of all available configuration options.
 
 ## name
