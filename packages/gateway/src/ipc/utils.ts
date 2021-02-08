@@ -64,9 +64,10 @@ export function applyRegisteredHandlers() {
   registeredHandlers.splice(0);
 }
 
-export async function getConfigFromMaster(): Promise<Config> {
-  (config as any) = await new Promise((resolve) => {
+export async function getConfigFromMaster(): Promise<{ config: Config; [key: string]: any }> {
+  const data = await new Promise<{ config: Config; [key: string]: any }>((resolve) => {
     registerWorkerHandler('config', (message) => resolve(message.data), true);
   });
-  return config;
+  (config as any) = data.config;
+  return data;
 }

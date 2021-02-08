@@ -51,7 +51,7 @@ export async function startServer(): Promise<void> {
     if (+timestamp && +timestamp <= config.timestamp) {
       return;
     }
-    await loadApiDefs();
+    if (!(await loadApiDefs())) return;
     await setRouter(app, config.apiDefs);
   });
 

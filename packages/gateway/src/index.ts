@@ -25,7 +25,7 @@ async function start(): Promise<void> {
 
     cluster.on('fork', (worker) => {
       logger.info(`forked worker ${worker.process.pid}`);
-      spreadMessageToWorkers({ event: 'config', data: config });
+      spreadMessageToWorkers({ event: 'config', data: { config } });
     });
 
     for (let i = 0; i < numCPUs; i += 1) {

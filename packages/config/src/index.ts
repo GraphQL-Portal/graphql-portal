@@ -28,11 +28,12 @@ export async function initConfig() {
   useEnv(config.gateway);
 }
 
-export async function loadApiDefs() {
+export async function loadApiDefs(): Promise<boolean> {
   if (cluster.isWorker) {
     const configPromise = getConfigFromMaster();
     await spreadMessageToWorkers({ event: 'updateConfig', data: undefined });
-    return await configPromise;
+    const { loaded } = await configPromise;
+    return loaded;
   }
 
   config.apiDefs = config.apiDefs ?? [];
@@ -43,7 +44,7 @@ export async function loadApiDefs() {
 
     if (!(loaded && loaded?.apiDefs?.length)) {
       logger.info('API Definitions were not updated from Dashboard.');
-      return;
+      return false;
     }
 
     config.apiDefs = loaded.apiDefs;
@@ -53,11 +54,12 @@ export async function loadApiDefs() {
     config.timestamp = Date.now();
     useEnv(config.apiDefs);
   }
+  return true;
 }
 
 export { config };
 
 registerHandlers('updateConfig', undefined, async () => {
-  await loadApiDefs();
-  spreadMessageToWorkers({ event: 'config', data: config });
+  const loaded = await loadApiDefs();
+  spreadMessageToWorkers({ event: 'config', data: { config, loaded } });
 });
