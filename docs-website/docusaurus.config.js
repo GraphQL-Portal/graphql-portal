@@ -26,7 +26,8 @@ module.exports = {
         },
         {
           href: 'https://github.com/graphql-portal/graphql-portal',
-          label: 'GitHub',
+          'aria-label': 'GitHub',
+          className: 'header-github-link',
           position: 'right',
         },
       ],
