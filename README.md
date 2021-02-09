@@ -247,8 +247,8 @@ In that file, we have 5 main configuration variables which we have to specify:
 * port – it is a port on which the dashboard application is going to be available.
 * redis:connectionString – self-explicative, connection string for Redis.
 * mongodb:connectionString – connection string for Mongo.
-* defaultAdmin:email – email for default admin.
-* defaultAdmin:password – password for default admin.
+* defaultAdmin:email – default admin email.
+* defaultAdmin:password – default admin password.
 
 Now, we have two choices: either we can pass these values as environment variables, or we can put them directly in the file.
 In our current case, we will pass them as environment variables. Read more about [the configuration of the Gateway and
@@ -282,15 +282,17 @@ HOST="dashboard_backend_host" \
 ```
 
 You can use the following variables data in your dynamic templates:
-* Confirmation template – confirmationUrl, firstName;
-* Reset password template – resetPasswordUrl, firstName;
+* Confirmation template: `confirmationUrl`, `firstName`;
+* Reset password template: `resetPasswordUrl`, `firstName`;
 
 ## Metrics
 * metrics:enabled – enable metrics recording to mongo; (default = true).
 * metrics:chunk – count of records that will be read per 1 iteration (default = 100).
 * metrics:delay – delay between recording iterations in ms (default = 5000).
+
+###### If you want to enable geo data in request metrics specify `maxmind:dbPath` for using local mmdb database file or `maxmind:licenseKey` **and** `maxmind:accountId` for WebServiceClient
 * maxmind:dbPath – path to the binary mmdb database file.
-* maxmind:licenseKey – maxmind\ license key, used to authorize access to query maxmind web services and download databases.
+* maxmind:licenseKey – maxmind license key, used to authorize access to query maxmind web services and download databases.
 * maxmind:accountId – maxmind account id.
 
 ```shell
