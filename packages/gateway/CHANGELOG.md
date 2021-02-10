@@ -1,5 +1,13 @@
 # @graphql-portal/gateway
 
+## 0.10.1
+
+### Patch Changes
+
+- dfb1dc8: fix update config
+- Updated dependencies [dfb1dc8]
+  - @graphql-portal/config@0.6.1
+
 ## 0.10.0
 
 ### Minor Changes

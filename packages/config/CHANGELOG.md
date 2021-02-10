@@ -1,5 +1,11 @@
 # @graphql-portal/config
 
+## 0.6.1
+
+### Patch Changes
+
+- dfb1dc8: fix update config
+
 ## 0.6.0
 
 ### Minor Changes
