@@ -1,7 +1,7 @@
 {
-  "SlackHandler": {
+  "StripeHandler": {
     "additionalProperties": false,
     "type": "object",
-    "title": "SlackHandler"
+    "title": "StripeHandler"
   }
 }

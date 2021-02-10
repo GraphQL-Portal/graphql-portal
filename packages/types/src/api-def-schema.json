@@ -230,7 +230,13 @@
         "thrift": { "$ref": "#/definitions/ThriftHandler", "description": "Handler for OData" },
         "tuql": { "$ref": "#/definitions/TuqlHandler", "description": "Handler for SQLite database, based on `tuql`" },
         "ContentfulHandler": { "$ref": "#/definitions/ContentfulHandler" },
-        "SlackHandler": { "$ref": "#/definitions/SlackHandler" }
+        "CrunchbaseHandler": { "$ref": "#/definitions/CrunchbaseHandler" },
+        "FedexHandler": { "$ref": "#/definitions/FedexHandler" },
+        "SalesforceHandler": { "$ref": "#/definitions/SalesforceHandler" },
+        "SlackHandler": { "$ref": "#/definitions/SlackHandler" },
+        "StripeHandler": { "$ref": "#/definitions/StripeHandler" },
+        "TwitterHandler": { "$ref": "#/definitions/TwitterHandler" },
+        "WeatherbitHandler": { "$ref": "#/definitions/WeatherbitHandler" }
       }
     },
     "AdditionalStitchingResolverObject": {
@@ -1225,18 +1231,19 @@
       },
       "required": ["token", "endpoint"]
     },
-    "SlackHandler": {
+    "CrunchbaseHandler": { "additionalProperties": false, "type": "object", "title": "CrunchbaseHandler" },
+    "FedexHandler": { "additionalProperties": false, "type": "object", "title": "FedexHandler" },
+    "SalesforceHandler": {
       "additionalProperties": false,
       "type": "object",
-      "title": "SlackHandler",
-      "properties": {
-        "token": {
-          "type": "string",
-          "description": "Token, which can be obtained here: https://api.slack.com/authentication"
-        }
-      },
-      "required": ["token"]
-    }
+      "title": "SalesforceHandler",
+      "properties": { "baseUrl": { "type": "string", "description": "A endpoint of your Salesforce API" } },
+      "required": ["baseUrl"]
+    },
+    "SlackHandler": { "additionalProperties": false, "type": "object", "title": "SlackHandler" },
+    "StripeHandler": { "additionalProperties": false, "type": "object", "title": "StripeHandler" },
+    "TwitterHandler": { "additionalProperties": false, "type": "object", "title": "TwitterHandler" },
+    "WeatherbitHandler": { "additionalProperties": false, "type": "object", "title": "WeatherbitHandler" }
   },
   "properties": {
     "name": { "type": "string" },

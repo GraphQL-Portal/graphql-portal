@@ -1,7 +1,7 @@
 {
-  "SlackHandler": {
+  "TwitterHandler": {
     "additionalProperties": false,
     "type": "object",
-    "title": "SlackHandler"
+    "title": "TwitterHandler"
   }
 }

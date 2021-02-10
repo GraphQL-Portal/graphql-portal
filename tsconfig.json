@@ -44,6 +44,24 @@
     },
     {
       "path": "packages/datasources/slack"
+    },
+    {
+      "path": "packages/datasources/stripe"
+    },
+    {
+      "path": "packages/datasources/weatherbit"
+    },
+    {
+      "path": "packages/datasources/crunchbase"
+    },
+    {
+      "path": "packages/datasources/fedex"
+    },
+    {
+      "path": "packages/datasources/twitter"
+    },
+    {
+      "path": "packages/datasources/salesforce"
     }
   ],
   "exclude": ["node_modules", "dist", "*.d.ts"]

@@ -1,0 +1,14 @@
+{
+  "SalesforceHandler": {
+    "additionalProperties": false,
+    "type": "object",
+    "title": "SalesforceHandler",
+    "properties": {
+      "baseUrl": {
+        "type": "string",
+        "description": "A endpoint of your Salesforce API"
+      }
+    },
+    "required": ["baseUrl"]
+  }
+}

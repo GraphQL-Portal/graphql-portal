@@ -1,7 +1,7 @@
 {
-  "SlackHandler": {
+  "WeatherbitHandler": {
     "additionalProperties": false,
     "type": "object",
-    "title": "SlackHandler"
+    "title": "WeatherbitHandler"
   }
 }
