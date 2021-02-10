@@ -31,6 +31,7 @@ const getMiddleware: RequestMiddleware = function (apiDef: ApiDef): RequestHandl
     logger.info('Enabling requests from the following IPs: %s', ips);
   }
 
+  // _allow_ list has a priority over _deny_ list
   if (apiDef.deny_ips?.length && strategy != 'allow') {
     strategy = 'deny';
     ips = apiDef.deny_ips.filter(ipValidator);

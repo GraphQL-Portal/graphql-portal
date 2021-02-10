@@ -1,0 +1,7 @@
+{
+  "StripeHandler": {
+    "additionalProperties": false,
+    "type": "object",
+    "title": "StripeHandler"
+  }
+}
