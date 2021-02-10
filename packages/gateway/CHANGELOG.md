@@ -1,5 +1,18 @@
 # @graphql-portal/gateway
 
+## 0.11.0
+
+### Minor Changes
+
+- 998e57a: add apiDef.playground: boolean to config
+
+### Patch Changes
+
+- Updated dependencies [998e57a]
+  - @graphql-portal/types@0.11.0
+  - @graphql-portal/config@0.6.2
+  - @graphql-portal/dashboard@0.0.13
+
 ## 0.10.1
 
 ### Patch Changes
