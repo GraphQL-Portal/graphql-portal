@@ -1,6 +1,6 @@
 export default {
-  getApiDefs: `query {
-    getApiDefs {
+  getAllApiDefs: `query {
+    getAllApiDefs {
       timestamp
       apiDefs {
         name
@@ -9,6 +9,10 @@ export default {
           name
           handler
           transforms
+        }
+        authentication {
+          auth_tokens
+          auth_header_name
         }
       }
     }

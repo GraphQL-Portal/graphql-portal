@@ -71,7 +71,7 @@ jest.mock('@graphql-portal/config', () => ({
     },
     timestamp: Date.now(),
   },
-  loadApiDefs: jest.fn(),
+  loadApiDefs: jest.fn().mockResolvedValue(true),
 }));
 
 describe('Server', () => {

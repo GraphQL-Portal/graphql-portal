@@ -22,13 +22,18 @@ export function registerMasterHandler(event: IPCEvent, handler: IPCMessageHandle
   });
 }
 
-export function registerWorkerHandler(event: IPCEvent, handler: IPCMessageHandler) {
+export function registerWorkerHandler(event: IPCEvent, handler: IPCMessageHandler, once = false) {
   if (!cluster.isWorker) return;
   logger.debug(`registerWorkerHandler for ${event}`);
-  process.on('message', (message: IPCMessage) => {
+  const onHandler = (message: IPCMessage) => {
     if (message.event !== event) return;
+    if (once) {
+      logger.debug(`deregisterWorkerHandler for ${event}`);
+      process.off('message', onHandler);
+    }
     handler(message);
-  });
+  };
+  process.on('message', onHandler);
 }
 
 export function spreadMessageToWorkers(message: IPCMessage) {
@@ -44,14 +49,12 @@ export function spreadMessageToWorkers(message: IPCMessage) {
 }
 
 const registeredHandlers: Function[] = [];
-export function registerHandlers(event: IPCEvent, worker: IPCMessageHandler) {
+export function registerHandlers(event: IPCEvent, worker?: IPCMessageHandler, master?: IPCMessageHandler) {
   const defaultMasterHandler: IPCMessageHandler = (message: IPCMessage): void => {
     spreadMessageToWorkers(message);
   };
-  registeredHandlers.push(
-    () => registerMasterHandler(event, defaultMasterHandler),
-    () => registerWorkerHandler(event, worker)
-  );
+  registeredHandlers.push(() => registerMasterHandler(event, master || defaultMasterHandler));
+  worker && registeredHandlers.push(() => registerWorkerHandler(event, worker));
 }
 
 export function applyRegisteredHandlers() {
