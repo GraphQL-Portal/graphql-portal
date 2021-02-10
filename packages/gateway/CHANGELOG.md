@@ -1,5 +1,20 @@
 # @graphql-portal/gateway
 
+## 0.10.0
+
+### Minor Changes
+
+- 2d282f5: Update peer dependencies
+
+### Patch Changes
+
+- eb6ea42: fix getting config from the dashboard, fix api auth
+- Updated dependencies [eb6ea42]
+- Updated dependencies [4745bdd]
+  - @graphql-portal/config@0.6.0
+  - @graphql-portal/dashboard@0.0.12
+  - @graphql-portal/types@0.10.1
+
 ## 0.9.2
 
 ### Patch Changes
