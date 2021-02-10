@@ -91,7 +91,7 @@ async function buildApi(toRouter: Router, apiDef: ApiDef, mesh?: IMesh) {
       return {
         schema,
         context,
-        graphiql: { headerEditorEnabled: true },
+        graphiql: apiDef.playground ? { headerEditorEnabled: true } : false,
       };
     })
   );
