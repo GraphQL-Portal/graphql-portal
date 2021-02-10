@@ -5,7 +5,7 @@ import { GraphQLError, parse, TypeInfo, ValidationContext, visit, Visitor, visit
 import CostAnalysis from 'graphql-cost-analysis/dist/costAnalysis';
 import depthLimit from 'graphql-depth-limit';
 import { apiSchema } from '../../server/router';
-import { isPlaygroundRequest, throwError } from '../utils';
+import { isIntrospectionRequest, throwError } from '../utils';
 import RequestCostTool from './request-cost.tool';
 
 const logger = prefixLogger('cost-analysis');
@@ -32,7 +32,7 @@ const rateLimitMiddleware = (apiDef: ApiDef): RequestHandler => {
 
   return async function rateLimitMiddleware(req: Request, res: Response, next: NextFunction): Promise<void> {
     const { body } = req;
-    if (isPlaygroundRequest(req)) {
+    if (isIntrospectionRequest(req)) {
       return next();
     }
 

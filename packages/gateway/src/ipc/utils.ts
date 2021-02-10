@@ -1,7 +1,6 @@
 import cluster from 'cluster';
 import { IPCEvent, IPCMessage, IPCMessageHandler } from './ipc-message.interface';
 import { prefixLogger } from '@graphql-portal/logger';
-import { config, Config } from '@graphql-portal/config';
 
 const logger = prefixLogger('ipc-utils');
 
@@ -62,12 +61,4 @@ export function applyRegisteredHandlers() {
   logger.debug(`applyRegisteredHandlers`);
   registeredHandlers.forEach((handler) => handler());
   registeredHandlers.splice(0);
-}
-
-export async function getConfigFromMaster(): Promise<{ config: Config; [key: string]: any }> {
-  const data = await new Promise<{ config: Config; [key: string]: any }>((resolve) => {
-    registerWorkerHandler('config', (message) => resolve(message.data), true);
-  });
-  (config as any) = data.config;
-  return data;
 }

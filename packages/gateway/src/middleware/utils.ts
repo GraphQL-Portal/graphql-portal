@@ -1,6 +1,6 @@
 import { Request } from 'express';
 
-export function isPlaygroundRequest(req: Request): boolean {
+export function isIntrospectionRequest(req: Request): boolean {
   const { method, body } = req;
   if (method !== 'POST' || !body?.query || body?.operationName === 'IntrospectionQuery') {
     return true;
