@@ -1,11 +1,12 @@
 import { dashboard, initDashboard } from '@graphql-portal/dashboard';
-import { registerHandlers, registerWorkerHandler, spreadMessageToWorkers } from '@graphql-portal/gateway/src/ipc/utils';
+import { registerHandlers, spreadMessageToWorkers } from '@graphql-portal/gateway/src/ipc/utils';
 import { prefixLogger } from '@graphql-portal/logger';
 import { ApiDef, GatewayConfig } from '@graphql-portal/types';
 import cluster from 'cluster';
 import { customAlphabet } from 'nanoid';
 import { loadApiDefs as loadApiDefsFromFs } from './api-def.config';
 import { loadConfig } from './gateway.config';
+import { getConfigFromMaster } from './ipc.utils';
 import useEnv from './use-env';
 
 const logger = prefixLogger('config');
@@ -63,11 +64,3 @@ registerHandlers('updateConfig', undefined, async () => {
   const loaded = await loadApiDefs();
   spreadMessageToWorkers({ event: 'config', data: { config, loaded } });
 });
-
-export async function getConfigFromMaster(): Promise<{ config: Config; [key: string]: any }> {
-  const data = await new Promise<{ config: Config; [key: string]: any }>((resolve) => {
-    registerWorkerHandler('config', (message) => resolve(message.data), true);
-  });
-  (config as any) = data.config;
-  return data;
-}

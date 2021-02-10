@@ -1,4 +1,5 @@
-import { config, initConfig, loadApiDefs, getConfigFromMaster } from '@graphql-portal/config';
+import { getConfigFromMaster } from '@graphql-portal/config/src/ipc.utils';
+import { config, initConfig, loadApiDefs } from '@graphql-portal/config';
 import { configureLogger, logger } from '@graphql-portal/logger';
 import cluster from 'cluster';
 import { cpus } from 'os';
