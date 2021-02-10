@@ -2,6 +2,7 @@ import { diff } from '@graphql-inspector/core';
 import { processConfig } from '@graphql-mesh/config';
 import { getMesh } from '@graphql-mesh/runtime';
 import { MeshPubSub } from '@graphql-mesh/types';
+import { config } from '@graphql-portal/config';
 import { prefixLogger } from '@graphql-portal/logger';
 import { ApiDef } from '@graphql-portal/types';
 import { Application, Request, RequestHandler, Router } from 'express';
@@ -73,7 +74,9 @@ async function buildApi(toRouter: Router, apiDef: ApiDef, mesh?: IMesh) {
   const { schema, contextBuilder, pubsub } = mesh;
   apiSchema[apiDef.name] = schema;
 
-  await subscribeToRequestMetrics(pubsub);
+  if (config.gateway?.metrics?.enabled) {
+    await subscribeToRequestMetrics(pubsub);
+  }
 
   logger.info(`Loaded API ${apiDef.name} ➜ ${apiDef.endpoint}`);
 
@@ -112,11 +115,17 @@ async function getMeshForApiDef(apiDef: ApiDef, mesh?: IMesh, retry = 5): Promis
   return mesh;
 }
 
+/**
+ * Rebuilds the Mesh for a give apiDef and updates the endpoint in the router
+ * to point to a new Mesh instance.
+ *
+ * @param apiDef API Definition which should be updated
+ */
 export async function updateApi(apiDef: ApiDef): Promise<void> {
   logger.debug(`Updating API ${apiDef.name}: ${apiDef.endpoint}`);
   const mesh = await getMeshForApiDef(apiDef);
   if (!mesh) {
-    logger.error(`Could not get schema for API, enpoint ${apiDef.endpoint} won't be updated in the router`);
+    logger.error(`Could not get schema for API, endpoint ${apiDef.endpoint} won't be updated in the router`);
     return;
   }
   if (apiSchema[apiDef.name] && !diff(mesh.schema, apiSchema[apiDef.name]!).length) {

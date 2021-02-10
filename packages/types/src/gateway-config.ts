@@ -12,6 +12,7 @@ export interface GatewayConfig {
   dashboard_config?: DashboardConfig;
   enable_control_api: boolean;
   control_api_config?: ControlApiConfig;
+  metrics?: Metrics;
   log_format?: 'text' | 'json';
   log_level: 'debug' | 'info' | 'warn' | 'error';
   redis_connection_string: string;
@@ -31,4 +32,10 @@ export interface DashboardConfig {
  */
 export interface ControlApiConfig {
   endpoint?: string;
+}
+/**
+ * Used to specify GraphQL Portal metrics settings
+ */
+export interface Metrics {
+  enabled?: boolean;
 }
