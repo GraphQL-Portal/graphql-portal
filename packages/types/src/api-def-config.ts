@@ -32,6 +32,7 @@ export interface ApiDefConfig {
     auth_header_name?: string;
     auth_tokens: string[];
   };
+  playground?: boolean;
   mesh?: {
     serve?: ServeConfig;
     require?: string[];
@@ -153,12 +154,13 @@ export interface Handler {
   thrift?: ThriftHandler;
   tuql?: TuqlHandler;
   ContentfulHandler?: ContentfulHandler;
-  SlackHandler?: SlackHandler;
-  StripeHandler?: StripeHandler;
-  WeatherbitHandler?: WeatherbitHandler;
   CrunchbaseHandler?: CrunchbaseHandler;
   FedexHandler?: FedexHandler;
+  SalesforceHandler?: SalesforceHandler;
+  SlackHandler?: SlackHandler;
+  StripeHandler?: StripeHandler;
   TwitterHandler?: TwitterHandler;
+  WeatherbitHandler?: WeatherbitHandler;
   [k: string]: unknown;
 }
 export interface FhirHandler {
@@ -826,12 +828,18 @@ export interface ContentfulHandler {
    */
   endpoint: string;
 }
-export interface SlackHandler {}
-export interface StripeHandler {}
-export interface WeatherbitHandler {}
 export interface CrunchbaseHandler {}
 export interface FedexHandler {}
+export interface SalesforceHandler {
+  /**
+   * A endpoint of your Salesforce API
+   */
+  baseUrl: string;
+}
+export interface SlackHandler {}
+export interface StripeHandler {}
 export interface TwitterHandler {}
+export interface WeatherbitHandler {}
 export interface Transform {
   /**
    * Transformer to apply caching for your data sources

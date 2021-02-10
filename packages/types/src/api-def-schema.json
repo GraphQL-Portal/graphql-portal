@@ -1276,6 +1276,10 @@
       "required": ["auth_tokens"],
       "additionalProperties": false
     },
+    "playground": {
+      "type": "boolean",
+      "default": true
+    },
     "mesh": {
       "type": "object",
       "additionalProperties": false,
