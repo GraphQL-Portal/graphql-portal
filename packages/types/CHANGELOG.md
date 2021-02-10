@@ -1,5 +1,12 @@
 # @graphql-portal/types
 
+## 0.10.1
+
+### Patch Changes
+
+- eb6ea42: fix getting config from the dashboard, fix api auth
+- 4745bdd: added new data source
+
 ## 0.10.0
 
 ### Minor Changes

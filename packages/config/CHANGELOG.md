@@ -1,5 +1,18 @@
 # @graphql-portal/config
 
+## 0.6.0
+
+### Minor Changes
+
+- eb6ea42: fix getting config from the dashboard, fix api auth
+
+### Patch Changes
+
+- Updated dependencies [eb6ea42]
+- Updated dependencies [4745bdd]
+  - @graphql-portal/types@0.10.1
+  - @graphql-portal/slack@0.0.3
+
 ## 0.5.4
 
 ### Patch Changes
