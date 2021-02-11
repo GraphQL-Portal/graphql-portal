@@ -6,10 +6,10 @@ import bytes from 'bytes';
 
 const logger = prefixLogger('request-size-limit');
 
-const getMiddleware: RequestMiddleware = function(apiDef: ApiDef): RequestHandler {
+const getMiddleware: RequestMiddleware = function (apiDef: ApiDef): RequestHandler {
   let limit = bytes.parse(apiDef.request_size_limit!);
 
-  return function(req, res, next) {
+  return function (req, res, next) {
     const length = Number(req.headers['content-length']);
     if (limit && length && length > limit) {
       logger.debug(`size ${length}, limit ${limit}`);

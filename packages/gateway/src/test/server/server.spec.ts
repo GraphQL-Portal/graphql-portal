@@ -1,10 +1,11 @@
-import { setRouter } from '../../server/router';
-import { startServer } from '../../server';
-import { config, loadApiDefs } from '@graphql-portal/config';
-import setupRedis from '../../redis';
-import { startPeriodicMetricsRecording } from '../../metric';
+import { config } from '@graphql-portal/config';
 import { Channel } from '@graphql-portal/types';
 import { Redis } from 'ioredis';
+import { getConfigFromMaster } from '../../ipc/utils';
+import { startPeriodicMetricsRecording } from '../../metric';
+import setupRedis from '../../redis';
+import { startServer } from '../../server';
+import { setRouter } from '../../server/router';
 
 let app: { use: jest.SpyInstance };
 let server: { listen: jest.SpyInstance; getConnections: jest.SpyInstance };
@@ -53,7 +54,13 @@ jest.mock('../../metric', () => {
     startPeriodicMetricsRecording: jest.fn(),
   };
 });
-
+jest.mock('../../ipc/utils', () => {
+  const utils = jest.requireActual('../../ipc/utils');
+  return {
+    ...utils,
+    getConfigFromMaster: jest.fn().mockResolvedValue({ loaded: true }),
+  };
+});
 jest.mock('../../server/router', () => ({
   setRouter: jest.fn(),
 }));
@@ -98,7 +105,7 @@ describe('Server', () => {
       expect(startPeriodicMetricsRecording).toHaveBeenCalledTimes(1);
 
       await redis.emit('message', Channel.apiDefsUpdated, Date.now());
-      expect(loadApiDefs).toHaveBeenCalledTimes(1);
+      expect(getConfigFromMaster).toHaveBeenCalledTimes(1);
       expect(setRouter).toHaveBeenCalledTimes(2);
     });
   });

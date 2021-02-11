@@ -1,12 +1,10 @@
 import { dashboard, initDashboard } from '@graphql-portal/dashboard';
-import { registerHandlers, spreadMessageToWorkers } from '@graphql-portal/gateway/src/ipc/utils';
 import { prefixLogger } from '@graphql-portal/logger';
 import { ApiDef, GatewayConfig } from '@graphql-portal/types';
 import cluster from 'cluster';
 import { customAlphabet } from 'nanoid';
 import { loadApiDefs as loadApiDefsFromFs } from './api-def.config';
 import { loadConfig } from './gateway.config';
-import { getConfigFromMaster } from './ipc.utils';
 import useEnv from './use-env';
 
 const logger = prefixLogger('config');
@@ -31,10 +29,7 @@ export async function initConfig() {
 
 export async function loadApiDefs(): Promise<boolean> {
   if (cluster.isWorker) {
-    const configPromise = getConfigFromMaster();
-    await spreadMessageToWorkers({ event: 'updateConfig', data: undefined });
-    const { loaded } = await configPromise;
-    return loaded;
+    return false;
   }
 
   config.apiDefs = config.apiDefs ?? [];
@@ -43,7 +38,7 @@ export async function loadApiDefs(): Promise<boolean> {
     initDashboard(config.gateway);
     const loaded = await dashboard.loadApiDefs();
 
-    if (!(loaded && loaded?.apiDefs?.length)) {
+    if (!(loaded && loaded?.apiDefs)) {
       logger.info('API Definitions were not updated from Dashboard.');
       return false;
     }
@@ -59,8 +54,3 @@ export async function loadApiDefs(): Promise<boolean> {
 }
 
 export { config };
-
-registerHandlers('updateConfig', undefined, async () => {
-  const loaded = await loadApiDefs();
-  spreadMessageToWorkers({ event: 'config', data: { config, loaded } });
-});

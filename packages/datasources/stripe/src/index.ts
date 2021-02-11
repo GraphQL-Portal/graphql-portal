@@ -9,6 +9,6 @@ export default class StripeHandler extends OpenAPIHandler {
     config.source = OPENAPI_SPECIFICATION;
     config.baseUrl = BASE_URL;
 
-    super({ name, config, cache});
+    super({ name, config, cache });
   }
 }

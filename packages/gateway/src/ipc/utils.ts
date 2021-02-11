@@ -1,6 +1,7 @@
+import { Config, config, loadApiDefs } from '@graphql-portal/config';
+import { prefixLogger } from '@graphql-portal/logger';
 import cluster from 'cluster';
 import { IPCEvent, IPCMessage, IPCMessageHandler } from './ipc-message.interface';
-import { prefixLogger } from '@graphql-portal/logger';
 
 const logger = prefixLogger('ipc-utils');
 
@@ -62,3 +63,18 @@ export function applyRegisteredHandlers() {
   registeredHandlers.forEach((handler) => handler());
   registeredHandlers.splice(0);
 }
+
+export async function getConfigFromMaster(): Promise<{ config: Config; [key: string]: any }> {
+  const data = await new Promise<{ config: Config; [key: string]: any }>((resolve) => {
+    registerWorkerHandler('config', (message) => resolve(message.data), true);
+    spreadMessageToWorkers({ event: 'updateConfig', data: undefined });
+  });
+  delete require.cache[require.resolve('@graphql-portal/config')];
+  (config as any) = data.config;
+  return data;
+}
+
+registerHandlers('updateConfig', undefined, async () => {
+  const loaded = await loadApiDefs();
+  spreadMessageToWorkers({ event: 'config', data: { config, loaded } });
+});

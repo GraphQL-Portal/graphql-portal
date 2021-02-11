@@ -34,7 +34,7 @@ export default class RequestCostTool {
     const costs = (await redis.mget(keys)).filter(Boolean) as string[];
     if (!costs?.length) return 0;
 
-    return costs.map(costJson => JSON.parse(costJson)).reduce((total, { cost }: CostData) => total + cost, 0);
+    return costs.map((costJson) => JSON.parse(costJson)).reduce((total, { cost }: CostData) => total + cost, 0);
   }
 
   private tableCostForUser(ip: string, id: string): string {
