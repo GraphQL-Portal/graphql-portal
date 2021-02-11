@@ -4,7 +4,7 @@ import { ApiDef, GatewayConfig } from '@graphql-portal/types';
 import cluster from 'cluster';
 import { customAlphabet } from 'nanoid';
 import { loadApiDefs as loadApiDefsFromFs } from './api-def.config';
-import { loadConfig } from './gateway.config'
+import { loadConfig } from './gateway.config';
 import useEnv from "./use-env"
 
 const logger = prefixLogger('config');
