@@ -18,7 +18,7 @@
     "build": "tsc -b",
     "postbuild": "yarn copy-graphql-files",
     "start": "yarn workspace @graphql-portal/gateway start",
-    "lint": "eslint '{src,apps,libs,test}/**/*.ts' --fix",
+    "lint": "eslint 'packages/**/*.ts' --fix",
     "test": "jest --coverage",
     "prerelease": "yarn build",
     "release": "changeset publish",
