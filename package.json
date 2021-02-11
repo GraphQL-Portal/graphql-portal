@@ -14,7 +14,7 @@
     "copy-graphql-files": "copyfiles -u 5 packages/gateway/src/server/control-api/*.gql packages/gateway/dist/src/server/control-api/",
     "mesh-config-sync": "ts-node ./packages/types/src/mesh-config-sync.ts && prettier --write ./packages/types/src/mesh-source-schema.json ./packages/types/src/api-def-schema.json",
     "prettier": "prettier --write \"./packages/**/*.ts\"",
-    "prebuild": "yarn clear-dist && yarn mesh-config-sync && yarn generate-configs && yarn prettier",
+    "prebuild": "yarn clear-dist && yarn mesh-config-sync && yarn generate-configs",
     "build": "tsc -b",
     "postbuild": "yarn copy-graphql-files",
     "start": "yarn workspace @graphql-portal/gateway start",
@@ -55,11 +55,6 @@
     "ts-jest": "26.5.0",
     "ts-node": "9.1.1",
     "typescript": "4.1.3"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
   },
   "lint-staged": {
     "*.{ts,tsx}": [

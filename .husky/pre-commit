@@ -1,4 +1,5 @@
 #!/bin/sh
 . "$(dirname "$0")/_/husky.sh"
 
-lint-staged
+echo $PATH
+node_modules/.bin/lint-staged --debug
