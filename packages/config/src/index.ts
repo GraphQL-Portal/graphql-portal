@@ -16,9 +16,9 @@ export type Config = {
   timestamp: number;
 };
 
-let config: Config = {} as any;
+const config: Config = {} as any;
 
-export async function initConfig() {
+export async function initConfig(): Promise<void> {
   config.nodeId = customAlphabet('0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz-', 11)();
   config.gateway = (await loadConfig()) as GatewayConfig;
   if (!config.gateway) {
