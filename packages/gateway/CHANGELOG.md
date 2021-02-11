@@ -1,5 +1,18 @@
 # @graphql-portal/gateway
 
+## 0.12.0
+
+### Minor Changes
+
+- 20cea17: Remove "secret" top-level configuration option from the gateway
+
+### Patch Changes
+
+- Updated dependencies [20cea17]
+  - @graphql-portal/config@0.7.0
+  - @graphql-portal/types@0.12.0
+  - @graphql-portal/dashboard@0.0.14
+
 ## 0.11.0
 
 ### Minor Changes

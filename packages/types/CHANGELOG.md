@@ -1,5 +1,11 @@
 # @graphql-portal/types
 
+## 0.12.0
+
+### Minor Changes
+
+- 20cea17: Remove "secret" top-level configuration option from the gateway
+
 ## 0.11.0
 
 ### Minor Changes
