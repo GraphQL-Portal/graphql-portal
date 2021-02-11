@@ -14,9 +14,6 @@
       "type": "integer",
       "minimum": 1
     },
-    "secret": {
-      "type": "string"
-    },
     "apis_path": {
       "type": "string"
     },
@@ -65,18 +62,6 @@
       "description": "Argument of the bytes package's method parse https://www.npmjs.com/package/bytes"
     }
   },
-  "required": [
-    "hostname",
-    "listen_port",
-    "secret",
-    "apis_path",
-    "middleware_path",
-    "sources_path",
-    "use_dashboard_configs",
-    "enable_control_api",
-    "log_level",
-    "redis_connection_string"
-  ],
   "definitions": {
     "dashboard_config": {
       "type": "object",
@@ -113,5 +98,16 @@
         }
       }
     }
-  }
+  },
+  "required": [
+    "hostname",
+    "listen_port",
+    "apis_path",
+    "middleware_path",
+    "sources_path",
+    "use_dashboard_configs",
+    "enable_control_api",
+    "log_level",
+    "redis_connection_string"
+  ]
 }

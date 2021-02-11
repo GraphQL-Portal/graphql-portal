@@ -4,7 +4,6 @@ export interface GatewayConfig {
   hostname: string;
   listen_port: number;
   pool_size?: number;
-  secret: string;
   apis_path: string;
   middleware_path: string;
   sources_path: string;
