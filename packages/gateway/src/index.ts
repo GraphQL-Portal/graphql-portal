@@ -1,9 +1,8 @@
-import { getConfigFromMaster } from '@graphql-portal/config/src/ipc.utils';
 import { config, initConfig, loadApiDefs } from '@graphql-portal/config';
 import { configureLogger, logger } from '@graphql-portal/logger';
 import cluster from 'cluster';
 import { cpus } from 'os';
-import { applyRegisteredHandlers, spreadMessageToWorkers } from './ipc/utils';
+import { applyRegisteredHandlers, getConfigFromMaster, spreadMessageToWorkers } from './ipc/utils';
 import { startServer } from './server';
 
 function handleStopSignal(): void {

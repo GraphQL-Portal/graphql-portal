@@ -13,7 +13,8 @@
     "clear-dist": "rm -rf dist ./packages/config/dist ./packages/gateway/dist ./packages/types/dist ./packages/dashboard/dist ./packages/logger/dist",
     "copy-graphql-files": "copyfiles -u 5 packages/gateway/src/server/control-api/*.gql packages/gateway/dist/src/server/control-api/",
     "mesh-config-sync": "ts-node ./packages/types/src/mesh-config-sync.ts && prettier --write ./packages/types/src/mesh-source-schema.json ./packages/types/src/api-def-schema.json",
-    "prebuild": "yarn clear-dist && yarn mesh-config-sync && yarn generate-configs",
+    "prettier": "prettier --write \"./packages/**/*.ts\"",
+    "prebuild": "yarn clear-dist && yarn mesh-config-sync && yarn generate-configs && yarn prettier",
     "build": "tsc -b",
     "postbuild": "yarn copy-graphql-files",
     "start": "yarn workspace @graphql-portal/gateway start",
@@ -28,8 +29,7 @@
     "packages/*",
     "packages/datasources/*"
   ],
-  "dependencies": {
-  },
+  "dependencies": {},
   "devDependencies": {
     "@changesets/cli": "2.14.1",
     "@types/jest": "26.0.20",

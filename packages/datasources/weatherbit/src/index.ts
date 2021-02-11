@@ -8,6 +8,6 @@ export default class WeatherbitHandler extends OpenAPIHandler {
   constructor({ name, config, cache }: GetMeshSourceOptions<YamlConfig.OpenapiHandler>) {
     config.source = OPENAPI_SPECIFICATION;
     config.baseUrl = BASE_URL;
-    super({ name, config, cache});
+    super({ name, config, cache });
   }
 }
