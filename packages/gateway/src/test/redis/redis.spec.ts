@@ -3,17 +3,11 @@ import mockConnect from '../../redis/connect';
 import { ping as mockPing } from '../../redis/ping';
 
 jest.mock('../../redis/connect', () =>
-  jest
-    .fn()
-    .mockResolvedValue({ publisher: true })
-    .mockReturnValueOnce({ publisher: false })
+  jest.fn().mockResolvedValue({ publisher: true }).mockReturnValueOnce({ publisher: false })
 );
 
 jest.mock('../../redis/ping', () => ({
-  ping: jest
-    .fn()
-    .mockResolvedValue({ publisher: true })
-    .mockReturnValueOnce({ publisher: false }),
+  ping: jest.fn().mockResolvedValue({ publisher: true }).mockReturnValueOnce({ publisher: false }),
 }));
 
 describe('Redis', () => {

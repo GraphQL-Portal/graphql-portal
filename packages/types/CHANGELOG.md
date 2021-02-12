@@ -1,5 +1,24 @@
 # @graphql-portal/types
 
+## 0.12.0
+
+### Minor Changes
+
+- 20cea17: Remove "secret" top-level configuration option from the gateway
+
+## 0.11.0
+
+### Minor Changes
+
+- 998e57a: add apiDef.playground: boolean to config
+
+## 0.10.1
+
+### Patch Changes
+
+- eb6ea42: fix getting config from the dashboard, fix api auth
+- 4745bdd: added new data source
+
 ## 0.10.0
 
 ### Minor Changes

@@ -1,4 +1,4 @@
-import { config, loadApiDefs } from '@graphql-portal/config';
+import { config } from '@graphql-portal/config';
 import { logger } from '@graphql-portal/logger';
 import { Channel } from '@graphql-portal/types';
 import bodyParser from 'body-parser';
@@ -6,6 +6,7 @@ import cookieParser from 'cookie-parser';
 import express from 'express';
 import { graphqlUploadExpress } from 'graphql-upload';
 import { createServer } from 'http';
+import { getConfigFromMaster } from '../ipc/utils';
 import { promisify } from 'util';
 import { startPeriodicMetricsRecording } from '../metric';
 import { logResponse } from '../middleware';
@@ -49,9 +50,11 @@ export async function startServer(): Promise<void> {
       return;
     }
     if (+timestamp && +timestamp <= config.timestamp) {
+      logger.debug('Config is actual');
       return;
     }
-    await loadApiDefs();
+    const { loaded } = await getConfigFromMaster();
+    if (!loaded) return;
     await setRouter(app, config.apiDefs);
   });
 

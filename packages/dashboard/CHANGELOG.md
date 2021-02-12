@@ -1,5 +1,28 @@
 # @graphql-portal/dashboard
 
+## 0.0.14
+
+### Patch Changes
+
+- Updated dependencies [20cea17]
+  - @graphql-portal/types@0.12.0
+
+## 0.0.13
+
+### Patch Changes
+
+- Updated dependencies [998e57a]
+  - @graphql-portal/types@0.11.0
+
+## 0.0.12
+
+### Patch Changes
+
+- eb6ea42: fix getting config from the dashboard, fix api auth
+- Updated dependencies [eb6ea42]
+- Updated dependencies [4745bdd]
+  - @graphql-portal/types@0.10.1
+
 ## 0.0.11
 
 ### Patch Changes

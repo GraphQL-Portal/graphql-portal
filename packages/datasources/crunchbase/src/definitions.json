@@ -1,0 +1,7 @@
+{
+  "CrunchbaseHandler": {
+    "additionalProperties": false,
+    "type": "object",
+    "title": "CrunchbaseHandler"
+  }
+}

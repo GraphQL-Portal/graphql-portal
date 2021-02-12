@@ -1,0 +1,7 @@
+{
+  "WeatherbitHandler": {
+    "additionalProperties": false,
+    "type": "object",
+    "title": "WeatherbitHandler"
+  }
+}

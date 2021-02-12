@@ -1,0 +1,7 @@
+{
+  "TwitterHandler": {
+    "additionalProperties": false,
+    "type": "object",
+    "title": "TwitterHandler"
+  }
+}

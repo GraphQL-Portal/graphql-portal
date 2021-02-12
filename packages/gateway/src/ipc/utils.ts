@@ -1,6 +1,7 @@
+import { Config, config, loadApiDefs } from '@graphql-portal/config';
+import { prefixLogger } from '@graphql-portal/logger';
 import cluster from 'cluster';
 import { IPCEvent, IPCMessage, IPCMessageHandler } from './ipc-message.interface';
-import { prefixLogger } from '@graphql-portal/logger';
 
 const logger = prefixLogger('ipc-utils');
 
@@ -22,13 +23,18 @@ export function registerMasterHandler(event: IPCEvent, handler: IPCMessageHandle
   });
 }
 
-export function registerWorkerHandler(event: IPCEvent, handler: IPCMessageHandler) {
+export function registerWorkerHandler(event: IPCEvent, handler: IPCMessageHandler, once = false) {
   if (!cluster.isWorker) return;
   logger.debug(`registerWorkerHandler for ${event}`);
-  process.on('message', (message: IPCMessage) => {
+  const onHandler = (message: IPCMessage) => {
     if (message.event !== event) return;
+    if (once) {
+      logger.debug(`deregisterWorkerHandler for ${event}`);
+      process.off('message', onHandler);
+    }
     handler(message);
-  });
+  };
+  process.on('message', onHandler);
 }
 
 export function spreadMessageToWorkers(message: IPCMessage) {
@@ -44,14 +50,12 @@ export function spreadMessageToWorkers(message: IPCMessage) {
 }
 
 const registeredHandlers: Function[] = [];
-export function registerHandlers(event: IPCEvent, worker: IPCMessageHandler) {
+export function registerHandlers(event: IPCEvent, worker?: IPCMessageHandler, master?: IPCMessageHandler) {
   const defaultMasterHandler: IPCMessageHandler = (message: IPCMessage): void => {
     spreadMessageToWorkers(message);
   };
-  registeredHandlers.push(
-    () => registerMasterHandler(event, defaultMasterHandler),
-    () => registerWorkerHandler(event, worker)
-  );
+  registeredHandlers.push(() => registerMasterHandler(event, master || defaultMasterHandler));
+  worker && registeredHandlers.push(() => registerWorkerHandler(event, worker));
 }
 
 export function applyRegisteredHandlers() {
@@ -59,3 +63,18 @@ export function applyRegisteredHandlers() {
   registeredHandlers.forEach((handler) => handler());
   registeredHandlers.splice(0);
 }
+
+export async function getConfigFromMaster(): Promise<{ config: Config; [key: string]: any }> {
+  const data = await new Promise<{ config: Config; [key: string]: any }>((resolve) => {
+    registerWorkerHandler('config', (message) => resolve(message.data), true);
+    spreadMessageToWorkers({ event: 'updateConfig', data: undefined });
+  });
+  delete require.cache[require.resolve('@graphql-portal/config')];
+  (config as any) = data.config;
+  return data;
+}
+
+registerHandlers('updateConfig', undefined, async () => {
+  const loaded = await loadApiDefs();
+  spreadMessageToWorkers({ event: 'config', data: { config, loaded } });
+});

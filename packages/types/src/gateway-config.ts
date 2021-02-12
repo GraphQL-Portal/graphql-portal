@@ -4,7 +4,6 @@ export interface GatewayConfig {
   hostname: string;
   listen_port: number;
   pool_size?: number;
-  secret: string;
   apis_path: string;
   middleware_path: string;
   sources_path: string;
@@ -26,6 +25,7 @@ export interface GatewayConfig {
  */
 export interface DashboardConfig {
   connection_string: string;
+  secret: string;
 }
 /**
  * Used to specify GraphQL Portal Control API settings

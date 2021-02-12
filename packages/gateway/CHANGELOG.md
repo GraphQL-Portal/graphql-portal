@@ -1,5 +1,54 @@
 # @graphql-portal/gateway
 
+## 0.12.0
+
+### Minor Changes
+
+- 20cea17: Remove "secret" top-level configuration option from the gateway
+
+### Patch Changes
+
+- Updated dependencies [20cea17]
+  - @graphql-portal/config@0.7.0
+  - @graphql-portal/types@0.12.0
+  - @graphql-portal/dashboard@0.0.14
+
+## 0.11.0
+
+### Minor Changes
+
+- 998e57a: add apiDef.playground: boolean to config
+
+### Patch Changes
+
+- Updated dependencies [998e57a]
+  - @graphql-portal/types@0.11.0
+  - @graphql-portal/config@0.6.2
+  - @graphql-portal/dashboard@0.0.13
+
+## 0.10.1
+
+### Patch Changes
+
+- dfb1dc8: fix update config
+- Updated dependencies [dfb1dc8]
+  - @graphql-portal/config@0.6.1
+
+## 0.10.0
+
+### Minor Changes
+
+- 2d282f5: Update peer dependencies
+
+### Patch Changes
+
+- eb6ea42: fix getting config from the dashboard, fix api auth
+- Updated dependencies [eb6ea42]
+- Updated dependencies [4745bdd]
+  - @graphql-portal/config@0.6.0
+  - @graphql-portal/dashboard@0.0.12
+  - @graphql-portal/types@0.10.1
+
 ## 0.9.2
 
 ### Patch Changes

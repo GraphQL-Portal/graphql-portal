@@ -14,9 +14,6 @@
       "type": "integer",
       "minimum": 1
     },
-    "secret": {
-      "type": "string"
-    },
     "apis_path": {
       "type": "string"
     },
@@ -43,20 +40,12 @@
     },
     "log_format": {
       "type": "string",
-      "enum": [
-        "text",
-        "json"
-      ],
+      "enum": ["text", "json"],
       "default": "text"
     },
     "log_level": {
       "type": "string",
-      "enum": [
-        "debug",
-        "info",
-        "warn",
-        "error"
-      ]
+      "enum": ["debug", "info", "warn", "error"]
     },
     "redis_connection_string": {
       "type": "string"
@@ -73,18 +62,6 @@
       "description": "Argument of the bytes package's method parse https://www.npmjs.com/package/bytes"
     }
   },
-  "required": [
-    "hostname",
-    "listen_port",
-    "secret",
-    "apis_path",
-    "middleware_path",
-    "sources_path",
-    "use_dashboard_configs",
-    "enable_control_api",
-    "log_level",
-    "redis_connection_string"
-  ],
   "definitions": {
     "dashboard_config": {
       "type": "object",
@@ -93,11 +70,12 @@
       "properties": {
         "connection_string": {
           "type": "string"
+        },
+        "secret": {
+          "type": "string"
         }
       },
-      "required": [
-        "connection_string"
-      ]
+      "required": ["connection_string", "secret"]
     },
     "control_api_config": {
       "type": "object",
@@ -120,5 +98,16 @@
         }
       }
     }
-  }
+  },
+  "required": [
+    "hostname",
+    "listen_port",
+    "apis_path",
+    "middleware_path",
+    "sources_path",
+    "use_dashboard_configs",
+    "enable_control_api",
+    "log_level",
+    "redis_connection_string"
+  ]
 }
