@@ -74,9 +74,9 @@ export async function startServer(): Promise<void> {
 
   httpServer.listen(config.gateway.listen_port, config.gateway.hostname, () => {});
 
-  // if (config.gateway?.metrics?.enabled) {
+  if (config.gateway?.metrics?.enabled) {
     startPeriodicMetricsRecording();
-  // }
+  }
 
   logger.info(`🐥 Started server in the worker process`);
 }
