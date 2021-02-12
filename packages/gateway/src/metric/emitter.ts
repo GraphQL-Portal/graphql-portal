@@ -98,6 +98,9 @@ const subscribe = async (pubsub: MeshPubSub): Promise<void> => {
   await pubsub.subscribe(
     PubSubEvents.RESOLVER_CALLED,
     pubSubListenerWrapper(({ resolverData }) => {
+      resolverData.context.tracerSpan.setTag('graphql.fieldName', resolverData.info?.fieldName);
+      resolverData.context.tracerSpan.setTag('graphql.returnType', resolverData.info?.returnType.toString());
+      resolverData.context.tracerSpan.setTag('graphql.parentType', resolverData.info?.parentType.toString());
       metricEmitter.emit(MetricsChannels.RESOLVER_CALLED, resolverData);
     })
   );

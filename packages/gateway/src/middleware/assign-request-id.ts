@@ -1,5 +1,5 @@
 import { RequestHandler } from 'express';
-import uuid from 'uuid';
+import * as uuid from 'uuid';
 import { MetricsChannels } from '@graphql-portal/types';
 import { metricEmitter } from '../metric';
 

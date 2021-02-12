@@ -86,6 +86,7 @@ async function buildApi(toRouter: Router, apiDef: ApiDef, mesh?: IMesh) {
       const context = await contextBuilder({
         forwardHeaders: req?.context?.forwardHeaders || {},
         requestId: req.id,
+        tracerSpan: req?.context?.tracerSpan || {},
       });
 
       return {
