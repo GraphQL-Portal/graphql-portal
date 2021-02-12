@@ -5,6 +5,7 @@ import bodyParser from 'body-parser';
 import cookieParser from 'cookie-parser';
 import express from 'express';
 import { graphqlUploadExpress } from 'graphql-upload';
+import { Span } from 'opentracing';
 import { createServer } from 'http';
 import { getConfigFromMaster } from '../ipc/utils';
 import { promisify } from 'util';
@@ -18,6 +19,7 @@ export type ForwardHeaders = Record<string, string>;
 export interface Context {
   forwardHeaders: ForwardHeaders;
   requestId: string;
+  tracerSpan: Span;
 }
 
 export const connections = {
