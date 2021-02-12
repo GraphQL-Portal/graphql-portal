@@ -12,7 +12,7 @@ Converge all your data sources into One Graph with a configurable, distributed a
 
 ## Motivation
 
-The GraphQL Community and Ecosystem are growing rapidly, and the goal of GraphQL Portal is to bring an API Gateway that 
+The GraphQL Community and Ecosystem are growing rapidly, and the goal of GraphQL Portal is to bring an API Gateway that
 is native to GraphQL. It is designed to be a simple and universal GraphQL Gateway for those who must mix legacy services
 with new ones exposing GraphQL APIs, but also for those who already have GraphQL APIs and want to have a light gateway
 that will bring more control and visibility to their APIs.
@@ -21,6 +21,7 @@ It is open source by choice, relies on existing open source tools by design, is 
 It can either be installed on-premises, or be used as a [SaaS Gateway](https://www.graphql-portal.com/) (_coming soon_).
 
 Key facts and features:
+
 * it is open source but is also available in a SaaS version (coming soon)
 * written in TypeScript
 * based on GraphQL Mesh and supports most of its input handlers
@@ -47,10 +48,11 @@ Key facts and features:
 ## How it works
 
 GraphQL Portal consists of two major components:
+
 * Gateway – can be launched as 1 or more instances in 1 or more servers/containers/pods;
-* Dashboard – a backend (NestJS) and frontend (React) application that connects with Gateway nodes and works as a 
+* Dashboard – a backend (NestJS) and frontend (React) application that connects with Gateway nodes and works as a
   configuration interface for Gateways.
-  
+
 We plan on adding a GraphQL Registry in the future.
 
 In a full-power mode, GraphQL Portal will require two more components: Redis and MongoDB.
@@ -109,7 +111,7 @@ You may download a sample config:
 curl -s -o ./gateway.yaml https://raw.githubusercontent.com/graphql-portal/graphql-portal-docker/main/basic.gateway.yaml
 ```
 
-Once that is done, you can now launch the Gateway in a standalone mode (you may have to specify a Redis connection 
+Once that is done, you can now launch the Gateway in a standalone mode (you may have to specify a Redis connection
 string relevant to your local environment):
 ```shell
 docker run --name graphql-gateway \
@@ -140,10 +142,10 @@ You now should be able to open the configuration dashboard by going to http://lo
 The Gateway can also be installed either via npm/yarn, or by pulling this repository and then building the source codes.
 
 The package `@graphql-portal/gateway` provides a CLI command `graphql-portal` which will start the server.
-However, in order for the server to start correctly, we should first create (or download) a configuration file. By 
-default, GraphQL Portal will search for a configuration in `./config/gateway.json|yaml` file. That's why, prior to 
+However, in order for the server to start correctly, we should first create (or download) a configuration file. By
+default, GraphQL Portal will search for a configuration in `./config/gateway.json|yaml` file. That's why, prior to
 launching the gateway, you may want to create a directory and place a config file into it. You can use a [basic configuration
-file](https://raw.githubusercontent.com/graphql-portal/graphql-portal-docker/main/basic.gateway.yaml) 
+file](https://raw.githubusercontent.com/graphql-portal/graphql-portal-docker/main/basic.gateway.yaml)
 from our [examples repository here](https://github.com/graphql-portal/graphql-portal-docker).
 
 ```shell
@@ -164,7 +166,7 @@ yarn global add @graphql-portal/gateway
 env REDIS="redis://localhost:6379" NODE_ENV=production graphql-portal
 ```
 
-You should now see the output of the server without any errors. 
+You should now see the output of the server without any errors.
 [Read more about the configuration of the gateway here.](#configuration)
 
 ### Standalone Dashboard without Docker
@@ -189,7 +191,7 @@ yarn install --frozen-lockfile
 yarn build
 ```
 
-We'll have to edit the configuration file before launching the server. To do that, open the configuration file for 
+We'll have to edit the configuration file before launching the server. To do that, open the configuration file for
 _production_ environment:
 ```shell
 vim packages/backend/config/env/production.json
@@ -200,11 +202,35 @@ vim packages/backend/config/env/production.json
     "env": "production",
     "useSwaggerUi": false,
     "port": "@@DASHBOARD_PORT",
+    "host": "@@HOST",
     "graphQL": {
       "playground": false,
       "debug": false
     },
-    "logLevel": "log"
+    "logLevel": "log",
+    "defaultAdmin": {
+      "email": "@@DEFAULT_ADMIN_EMAIL",
+      "password": "@@DEFAULT_ADMIN_PASSWORD"
+    },
+    "sendgrid": {
+      "senderEmail": "@@SENDGRID_SENDER_EMAIL",
+      "confirmationTemplateId": "@@SENDGRID_CONFIRMATION_TEMPLATE",
+      "resetPasswordTemplateId": "@@SENDGRID_RESET_PASSWORD_TEMPLATE",
+      "apiKey": "@@SENDGRID_API_KEY"
+    },
+    "metrics": {
+      "enabled": "@@METRICS_ENABLED",
+      "chunk": "@@METRICS_CHUNK",
+      "delay": "@@METRICS_DELAY"
+    },
+    "maxmind": {
+      "dbPath": "@@MAXMIND_DB_PATH",
+      "licenseKey": "@@MAXMIND_LICENSE_KEY",
+      "accountId": "@@MAXMIND_ACCOUNT_ID"
+    }
+  },
+  "client": {
+    "host": "@@CLIENT_HOST"
   },
   "db": {
     "redis": {
@@ -217,10 +243,12 @@ vim packages/backend/config/env/production.json
 }
 ```
 
-In that file, we have 3 main configuration variables which we have to specify:
-* port – it is a port on which the dashboard application is going to be available;
-* redis:connectionString – self-explicative, connection string for Redis
+In that file, we have 5 main configuration variables which we have to specify:
+* port – it is a port on which the dashboard application is going to be available.
+* redis:connectionString – self-explicative, connection string for Redis.
 * mongodb:connectionString – connection string for Mongo.
+* defaultAdmin:email – default admin email.
+* defaultAdmin:password – default admin password.
 
 Now, we have two choices: either we can pass these values as environment variables, or we can put them directly in the file.
 In our current case, we will pass them as environment variables. Read more about [the configuration of the Gateway and
@@ -232,10 +260,49 @@ We can now launch the server:
 DASHBOARD_PORT=8080 \
 REDIS_CONNECTION_STRING="redis://localhost:6379" \
 MONGODB_CONNECTION_STRING="mongodb://localhost:27017" \
+DEFAULT_ADMIN_EMAIL="your_email" \
+DEFAULT_ADMIN_PASSWORD="your_password" \
 NODE_ENV=production yarn start:prod
 ```
 
-Once the server is launched, you can open the dashboard by going to http://localhost:8080.
+Once the server is launched, you can open the dashboard by going to http://localhost:8080 and login via admin credentials.
+
+
+## Authentication
+If you want enable manual authentication you have to specify these environment varibales:
+
+```shell
+# replace the following values with those relevant to your sendgrid account and environment
+SENDGRID_SENDER_EMAIL="no-reply@example.com" \
+SENDGRID_CONFIRMATION_TEMPLATE="your_confirmation_template_id" \
+SENDGRID_RESET_PASSWORD_TEMPLATE="your_reset_password_template_id" \
+SENDGRID_API_KEY="your_api_key" \
+CLIENT_HOST="dashboard_frontend_host" \
+HOST="dashboard_backend_host" \
+```
+
+You can use the following variables data in your dynamic templates:
+* Confirmation template: `confirmationUrl`, `firstName`;
+* Reset password template: `resetPasswordUrl`, `firstName`;
+
+## Metrics
+* metrics:enabled – enable metrics recording to mongo; (default = true).
+* metrics:chunk – count of records that will be read per 1 iteration (default = 100).
+* metrics:delay – delay between recording iterations in ms (default = 5000).
+
+###### If you want to enable geo data in request metrics specify `maxmind:dbPath` for using local mmdb database file or `maxmind:licenseKey` **and** `maxmind:accountId` for WebServiceClient
+* maxmind:dbPath – path to the binary mmdb database file.
+* maxmind:licenseKey – maxmind license key, used to authorize access to query maxmind web services and download databases.
+* maxmind:accountId – maxmind account id.
+
+```shell
+METRICS_ENABLED="true" \
+METRICS_CHUNK="100" \
+METRICS_DELAY="5000" \
+MAXMIND_DB_PATH="db_path" \
+MAXMIND_LICENSE_KEY="license_key" \
+MAXMIND_ACCOUNT_ID="account_id" \
+```
 
 ## Configuration
 
