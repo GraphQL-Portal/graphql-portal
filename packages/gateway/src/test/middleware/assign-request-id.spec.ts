@@ -1,5 +1,6 @@
 import { MetricsChannels } from '@graphql-portal/types';
 import { NextFunction, Request, Response } from 'express';
+import { Tracer } from 'opentracing';
 import assignRequestId from '../../middleware/assign-request-id';
 import { metricEmitter } from '../../metric';
 
@@ -23,6 +24,11 @@ describe('Assign reequest id MW', () => {
     mockRequest = {
       body: 'body',
       ip: 'ip',
+      context: {
+        forwardHeaders: {},
+        requestId: 'requestId',
+        tracerSpan: (new Tracer).startSpan('test'),
+      },
       headers: {
         'user-agent': 'user-agent',
       },

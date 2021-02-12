@@ -1,5 +1,6 @@
-import { NextFunction, Response } from 'express';
 import { MetricsChannels } from '@graphql-portal/types';
+import { NextFunction, Response } from 'express';
+import { Tracer } from 'opentracing';
 import { metricEmitter } from '../../metric';
 import { logResponse } from '../../middleware';
 
@@ -11,10 +12,15 @@ jest.mock('../../metric/emitter', () => ({
 }));
 
 describe('Log response MW', () => {
-  let mockRequest: {
-    id: 'id';
+  const mockRequest = {
+    id: 'id',
+    context: {
+      requestId: 'requestId',
+      forwardHeaders: {},
+      tracerSpan: (new Tracer()).startSpan('test'),
+    },
   };
-  let nextFunction: NextFunction = jest.fn();
+  const nextFunction: NextFunction = jest.fn();
   let mockResponse: Partial<Response>;
 
   beforeEach(() => {
