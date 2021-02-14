@@ -728,7 +728,7 @@
     "@graphql-tools/resolvers-composition" "6.2.5"
     "@graphql-tools/schema" "7.1.2"
 
-"@graphql-mesh/types@0.29.2", "@graphql-mesh/types@^0.29.2":
+"@graphql-mesh/types@0.29.2":
   version "0.29.2"
   resolved "https://registry.yarnpkg.com/@graphql-mesh/types/-/types-0.29.2.tgz#e6d4bcc1169447fcec8408b30ffd7d561b8db863"
   integrity sha512-hI/2hxaVcteKiC3Isz2CzVKgxkP3gEu9KAuaDfqMg+rziyXZ+RCocD6DxexB5EdPKDG7ZGkJ4bH9CbwBCJCbhA==
@@ -738,7 +738,7 @@
     "@graphql-typed-document-node/core" "3.1.0"
     fetchache "0.0.4"
 
-"@graphql-mesh/types@0.31.0":
+"@graphql-mesh/types@0.31.0", "@graphql-mesh/types@^0.31.0":
   version "0.31.0"
   resolved "https://registry.yarnpkg.com/@graphql-mesh/types/-/types-0.31.0.tgz#e808a4e2d82637f7b486943f325f7e56de2438fe"
   integrity sha512-Go9RueKI7lMs8lhgDoloMtXt380pMVHRhIXQRMfS7/V2EEgx/BC2GX/vAA8MJPAhhmptuTLbJn/RABE5EhYbSQ==
