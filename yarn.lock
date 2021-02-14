@@ -679,7 +679,7 @@
     swagger2openapi "7.0.4"
     url-join "4.0.1"
 
-"@graphql-mesh/runtime@0.11.0":
+"@graphql-mesh/runtime@0.11.0", "@graphql-mesh/runtime@^0.11.0":
   version "0.11.0"
   resolved "https://registry.yarnpkg.com/@graphql-mesh/runtime/-/runtime-0.11.0.tgz#d862a5855b1ed01743f5bd4d58288978de004960"
   integrity sha512-p+qulXHqpz/l5AGJEsF2EZKTR0OXapvKPzHJeRpXkcjtd7/sPUKy6Ndj9mDVFxrRgjj3uPe5v3UKf7vkpwF8RQ==
@@ -693,19 +693,6 @@
     "@graphql-tools/wrap" "7.0.5"
     "@n1ru4l/graphql-live-query" "0.7.1"
     "@n1ru4l/in-memory-live-query-store" "0.6.0"
-
-"@graphql-mesh/runtime@^0.10.22":
-  version "0.10.22"
-  resolved "https://registry.yarnpkg.com/@graphql-mesh/runtime/-/runtime-0.10.22.tgz#5bbbe4553ae207aba0b2aeba3f6282212bc246af"
-  integrity sha512-EMBvxb2rpmilIuWZjwyXxTbDL9vZCwhwQrtWdcdZ4/p0QatDlUhEe6SYNPzb7Tx4XIQn54tUWY2OLfwpbKiIdA==
-  dependencies:
-    "@graphql-mesh/types" "0.29.2"
-    "@graphql-mesh/utils" "0.8.7"
-    "@graphql-tools/delegate" "7.0.9"
-    "@graphql-tools/resolvers-composition" "6.2.5"
-    "@graphql-tools/schema" "7.1.2"
-    "@graphql-tools/utils" "7.2.4"
-    "@graphql-tools/wrap" "7.0.5"
 
 "@graphql-mesh/transform-federation@^0.4.32":
   version "0.4.44"
