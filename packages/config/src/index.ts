@@ -22,7 +22,7 @@ export async function initConfig(): Promise<void> {
   config.nodeId = customAlphabet('0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz-', 11)();
   config.gateway = (await loadConfig()) as GatewayConfig;
   if (!config.gateway) {
-    throw new Error('Gateway config was not found, open config/gateway.yaml');
+    throw new Error('Gateway config was not found at path "./config/gateway.yaml"');
   }
   useEnv(config.gateway);
 }
