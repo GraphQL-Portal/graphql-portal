@@ -4,6 +4,7 @@ import { Tracer } from 'opentracing';
 import { metricEmitter } from '../../metric';
 import { logResponse } from '../../middleware';
 
+jest.mock('../../tracer');
 jest.mock('../../metric/emitter', () => ({
   metricEmitter: {
     on: jest.fn(),
@@ -17,7 +18,7 @@ describe('Log response MW', () => {
     context: {
       requestId: 'requestId',
       forwardHeaders: {},
-      tracerSpan: (new Tracer()).startSpan('test'),
+      tracerSpan: new Tracer().startSpan('test'),
     },
   };
   const nextFunction: NextFunction = jest.fn();

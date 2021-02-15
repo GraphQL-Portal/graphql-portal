@@ -10,6 +10,8 @@ import { setRouter } from '../../server/router';
 let app: { use: jest.SpyInstance };
 let server: { listen: jest.SpyInstance; getConnections: jest.SpyInstance };
 
+jest.mock('../../tracer');
+
 jest.mock('express', () =>
   jest.fn(() => {
     app = { use: jest.fn() };

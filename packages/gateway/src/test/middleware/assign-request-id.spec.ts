@@ -7,7 +7,7 @@ import { metricEmitter } from '../../metric';
 jest.mock('uuid', () => ({
   v4: () => 'requestId',
 }));
-
+jest.mock('../../tracer');
 jest.mock('../../metric/emitter', () => ({
   metricEmitter: {
     on: jest.fn(),
@@ -27,7 +27,7 @@ describe('Assign reequest id MW', () => {
       context: {
         forwardHeaders: {},
         requestId: 'requestId',
-        tracerSpan: (new Tracer).startSpan('test'),
+        tracerSpan: new Tracer().startSpan('test'),
       },
       headers: {
         'user-agent': 'user-agent',
