@@ -37,6 +37,7 @@ export interface Handler {
   StripeHandler?: StripeHandler;
   TwitterHandler?: TwitterHandler;
   WeatherbitHandler?: WeatherbitHandler;
+  IPAPIHandler?: IPAPIHandler;
   [k: string]: unknown;
 }
 export interface FhirHandler {
@@ -716,6 +717,7 @@ export interface SlackHandler {}
 export interface StripeHandler {}
 export interface TwitterHandler {}
 export interface WeatherbitHandler {}
+export interface IPAPIHandler {}
 export interface Transform {
   /**
    * Transformer to apply caching for your data sources

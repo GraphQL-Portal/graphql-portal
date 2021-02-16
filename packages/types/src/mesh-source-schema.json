@@ -232,7 +232,8 @@
         "SlackHandler": { "$ref": "#/definitions/SlackHandler" },
         "StripeHandler": { "$ref": "#/definitions/StripeHandler" },
         "TwitterHandler": { "$ref": "#/definitions/TwitterHandler" },
-        "WeatherbitHandler": { "$ref": "#/definitions/WeatherbitHandler" }
+        "WeatherbitHandler": { "$ref": "#/definitions/WeatherbitHandler" },
+        "IPAPIHandler": { "$ref": "#/definitions/IPAPIHandler" }
       }
     },
     "AdditionalStitchingResolverObject": {
@@ -1237,6 +1238,7 @@
       "required": ["baseUrl"]
     },
     "SlackHandler": { "additionalProperties": false, "type": "object", "title": "SlackHandler" },
+    "IPAPIHandler": { "additionalProperties": false, "type": "object", "title": "IPAPIHandler" },
     "StripeHandler": { "additionalProperties": false, "type": "object", "title": "StripeHandler" },
     "TwitterHandler": { "additionalProperties": false, "type": "object", "title": "TwitterHandler" },
     "WeatherbitHandler": { "additionalProperties": false, "type": "object", "title": "WeatherbitHandler" }

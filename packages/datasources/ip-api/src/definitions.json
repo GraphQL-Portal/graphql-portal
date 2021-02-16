@@ -1,0 +1,7 @@
+{
+  "IPAPIHandler": {
+    "additionalProperties": false,
+    "type": "object",
+    "title": "IPAPIHandler"
+  }
+}
