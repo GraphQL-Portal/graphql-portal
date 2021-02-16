@@ -8,7 +8,7 @@ import { serializer } from './utils';
 
 const logger = prefixLogger('analytics:hit-record');
 
-const hitRecord = async () => {
+const hitRecord = async (): Promise<void> => {
   const connections = await ConnectionTool.get();
   if (!connections) return;
 

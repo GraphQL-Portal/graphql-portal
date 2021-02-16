@@ -175,7 +175,7 @@ Connection string specifying access to a Redis instance, for example:
 
 ## request_size_limit
 
-Optional. Default value is 10mb. This value specifies an HTTP Request size limit. Accepts numeric (in bytes) or string 
+Optional. Default value is 100kb. This value specifies an HTTP Request size limit. Accepts numeric (in bytes) or string 
 values. When string is used, the following abbreviations are used:
 * b for bytes
 * kb for kilobytes

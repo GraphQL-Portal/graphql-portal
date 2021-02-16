@@ -20,8 +20,9 @@ export interface Context {
   requestId: string;
 }
 
+// Helper for metrics gathering
 export const connections = {
-  get: async () => 0,
+  get: async (): Promise<number> => 0,
 };
 
 export async function startServer(): Promise<void> {
@@ -32,8 +33,11 @@ export async function startServer(): Promise<void> {
 
   connections.get = promisify(httpServer.getConnections.bind(httpServer));
 
-  app.use(bodyParser.json({ limit: config.gateway.request_size_limit || '10mb' }));
+  app.get('/health', (_, res) => res.sendStatus(200));
+
+  app.use(bodyParser.json({ limit: config.gateway.request_size_limit || '100kb' }));
   app.use(cookieParser());
+  // TODO: replace with a proper implementation of graphQL-upload
   app.use(graphqlUploadExpress());
   app.use(logResponse);
 

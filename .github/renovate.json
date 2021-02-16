@@ -1,11 +1,13 @@
 {
-  "extends": [
-    "config:base",
-    "schedule:weekends"
-  ],
+  "extends": ["config:base", "schedule:weekends"],
   "automerge": true,
   "major": {
     "automerge": false
   },
-  "labels": ["dependencies"]
+  "labels": ["dependencies"],
+  "packageRules": [
+    {
+      "matchSourceUrlPrefixes": ["https://github.com/Urigo/graphql-modules", "https://github.com/Urigo/graphql-mesh"]
+    }
+  ]
 }
