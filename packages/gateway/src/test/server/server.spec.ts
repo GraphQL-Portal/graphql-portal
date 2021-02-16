@@ -7,12 +7,12 @@ import setupRedis from '../../redis';
 import { startServer } from '../../server';
 import { setRouter } from '../../server/router';
 
-let app: { use: jest.SpyInstance };
+let app: { use: jest.SpyInstance; get: jest.SpyInstance };
 let server: { listen: jest.SpyInstance; getConnections: jest.SpyInstance };
 
 jest.mock('express', () =>
   jest.fn(() => {
-    app = { use: jest.fn() };
+    app = { use: jest.fn(), get: jest.fn() };
     return app;
   })
 );
@@ -34,7 +34,7 @@ jest.mock(
         }
         onHandlers[event].push(handler);
       }),
-      emit: async (event: string, ...data: any) => {
+      emit: async (event: string, ...data: any): Promise<void> => {
         await Promise.all(
           onHandlers[event].map((handler: (...args: any[]) => any) => {
             return handler(...data);

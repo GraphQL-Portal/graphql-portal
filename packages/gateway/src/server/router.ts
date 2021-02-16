@@ -44,17 +44,20 @@ export async function buildRouter(apiDefs: ApiDef[]): Promise<Router> {
   return router;
 }
 
-async function buildApi(toRouter: Router, apiDef: ApiDef, mesh?: IMesh) {
+async function buildApi(toRouter: Router, apiDef: ApiDef, mesh?: IMesh): Promise<void> {
   if (!mesh) {
     const customMiddlewares = await loadCustomMiddlewares();
-    [...defaultMiddlewares, ...customMiddlewares].map((mw) => {
+
+    [...defaultMiddlewares, ...customMiddlewares].forEach((mw) => {
       const handler = mw(apiDef);
+
       function wrap(fn: RequestHandler): RequestHandler {
-        return (req, res, next) => {
-          const handleError = (error: Error) => {
+        return (req, res, next): void => {
+          const handleError = (error: Error): void => {
             error.handlerName = handler.name;
             return next(error);
           };
+
           try {
             (fn(req, res, next) as any)?.catch(handleError);
           } catch (error) {
@@ -62,13 +65,14 @@ async function buildApi(toRouter: Router, apiDef: ApiDef, mesh?: IMesh) {
           }
         };
       }
+
       toRouter.use(apiDef.endpoint, wrap(handler));
     });
   }
 
   mesh = await getMeshForApiDef(apiDef, mesh);
   if (!mesh) {
-    logger.error(`Could not get schema for API, enpoint ${apiDef.endpoint} won't be added to the router`);
+    logger.error(`Could not get schema for API, endpoint ${apiDef.endpoint} won't be added to the router`);
     return;
   }
   const { schema, contextBuilder, pubsub } = mesh;
