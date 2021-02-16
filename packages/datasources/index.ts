@@ -6,6 +6,7 @@ import crunchbaseDefinitions from './crunchbase/src/definitions.json';
 import fedexDefinitions from './fedex/src/definitions.json';
 import salesforceDefinitions from './salesforce/src/definitions.json';
 import twitteroDefinitions from './twitter/src/definitions.json';
+import ipApiDefinitions from './ip-api/src/definitions.json';
 
 export default {
   ...contentfulDefinition,
@@ -16,4 +17,5 @@ export default {
   ...stripeDefinitions,
   ...twitteroDefinitions,
   ...weatherbitDefinitions,
+  ...ipApiDefinitions,
 };
