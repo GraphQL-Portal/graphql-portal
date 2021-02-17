@@ -1,5 +1,11 @@
 # @graphql-portal/types
 
+## 0.13.0
+
+### Minor Changes
+
+- 97068da: Add IP-API handler + fix error 500 in assign-request-id middleware
+
 ## 0.12.0
 
 ### Minor Changes

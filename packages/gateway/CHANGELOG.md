@@ -1,5 +1,18 @@
 # @graphql-portal/gateway
 
+## 0.13.0
+
+### Minor Changes
+
+- 97068da: Add IP-API handler + fix error 500 in assign-request-id middleware
+
+### Patch Changes
+
+- Updated dependencies [97068da]
+  - @graphql-portal/types@0.13.0
+  - @graphql-portal/config@0.7.1
+  - @graphql-portal/dashboard@0.0.15
+
 ## 0.12.0
 
 ### Minor Changes
