@@ -82,7 +82,8 @@ async function buildApi(toRouter: Router, apiDef: ApiDef, mesh?: IMesh): Promise
     await subscribeToRequestMetrics(pubsub);
   }
 
-  logger.info(`Loaded API ${apiDef.name} ➜ ${apiDef.endpoint}`);
+  const endpointUrl = `http://${config.gateway.hostname}:${config.gateway.listen_port}${apiDef.endpoint}`;
+  logger.info(`Loaded API ${apiDef.name} ➜ ${endpointUrl}`);
 
   toRouter.use(
     apiDef.endpoint,

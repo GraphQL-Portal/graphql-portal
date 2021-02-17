@@ -19,9 +19,8 @@ async function start(): Promise<void> {
     const numCPUs: number = Number(config.gateway.pool_size) ? Number(config.gateway.pool_size) : cpus().length;
 
     logger.info(`GraphQL Portal API Gateway v${process.env.npm_package_version}`);
-    logger.info(
-      `🔥 Starting GraphQL API Portal with ${numCPUs} worker(s) on: http://${config.gateway.hostname}:${config.gateway.listen_port}, nodeID: ${config.nodeId}`
-    );
+    const gatewayUrl = `http://${config.gateway.hostname}:${config.gateway.listen_port}`;
+    logger.info(`🔥 Starting GraphQL API Portal with ${numCPUs} worker(s) on: ${gatewayUrl}, nodeID: ${config.nodeId}`);
 
     cluster.on('fork', (worker) => {
       logger.info(`forked worker ${worker.process.pid}`);
