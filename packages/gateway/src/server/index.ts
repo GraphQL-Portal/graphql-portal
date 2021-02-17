@@ -53,10 +53,14 @@ export async function startServer(): Promise<void> {
     if (channel !== Channel.apiDefsUpdated) {
       return;
     }
+
+    logger.info('Received "apiDefsUpdate" message from Dashboard via Redis.');
+
     if (+timestamp && +timestamp <= config.timestamp) {
-      logger.debug('Config is actual');
+      logger.info('New config is equal to the current one. Skipping update process.');
       return;
     }
+
     const { loaded } = await getConfigFromMaster();
     if (!loaded) return;
     await setRouter(app, config.apiDefs);

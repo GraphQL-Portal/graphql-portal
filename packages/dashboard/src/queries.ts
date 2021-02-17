@@ -5,6 +5,7 @@ export default {
       apiDefs {
         name
         endpoint
+        playground
         sources {
           name
           handler
