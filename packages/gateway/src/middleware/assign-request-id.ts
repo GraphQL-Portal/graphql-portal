@@ -1,10 +1,10 @@
 import { RequestHandler } from 'express';
-import uuid from 'uuid';
+import { v4 as uuidv4 } from 'uuid';
 import { MetricsChannels } from '@graphql-portal/types';
 import { metricEmitter } from '../metric';
 
 const assignRequestId: RequestHandler = (req, res, next) => {
-  req.id = uuid.v4();
+  req.id = uuidv4();
   metricEmitter.emit(MetricsChannels.GOT_REQUEST, req.id, {
     query: req.body || '',
     userAgent: req.headers?.['user-agent'] || '',
@@ -14,4 +14,4 @@ const assignRequestId: RequestHandler = (req, res, next) => {
   next();
 };
 
-export default () => assignRequestId;
+export default (): RequestHandler => assignRequestId;

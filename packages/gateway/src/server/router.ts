@@ -54,6 +54,7 @@ async function buildApi(toRouter: Router, apiDef: ApiDef, mesh?: IMesh): Promise
       function wrap(fn: RequestHandler): RequestHandler {
         return (req, res, next): void => {
           const handleError = (error: Error): void => {
+            logger.debug(`Error in buildApi mw wrapper: ${JSON.stringify(error)}`);
             error.handlerName = handler.name;
             return next(error);
           };
