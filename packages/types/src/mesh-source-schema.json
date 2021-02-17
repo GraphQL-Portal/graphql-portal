@@ -1238,10 +1238,10 @@
       "required": ["baseUrl"]
     },
     "SlackHandler": { "additionalProperties": false, "type": "object", "title": "SlackHandler" },
-    "IPAPIHandler": { "additionalProperties": false, "type": "object", "title": "IPAPIHandler" },
     "StripeHandler": { "additionalProperties": false, "type": "object", "title": "StripeHandler" },
     "TwitterHandler": { "additionalProperties": false, "type": "object", "title": "TwitterHandler" },
-    "WeatherbitHandler": { "additionalProperties": false, "type": "object", "title": "WeatherbitHandler" }
+    "WeatherbitHandler": { "additionalProperties": false, "type": "object", "title": "WeatherbitHandler" },
+    "IPAPIHandler": { "additionalProperties": false, "type": "object", "title": "IPAPIHandler" }
   },
   "type": "object",
   "title": "SourceConfig",
