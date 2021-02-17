@@ -6,7 +6,7 @@ import { ping } from './ping';
 export let redisSubscriber: IORedis.Redis;
 export let redis: IORedis.Redis;
 
-export default async function setupRedis(connectionString: string) {
+export default async function setupRedis(connectionString: string): Promise<IORedis.Redis> {
   redisSubscriber = await connect(connectionString);
   redis = await connect(connectionString);
 
