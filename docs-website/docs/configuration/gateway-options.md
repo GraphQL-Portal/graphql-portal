@@ -82,6 +82,11 @@ The hostname to bind the gateway node to.
 
 The port on which GraphQL Portal Gateway will listen for the incoming connections.
 
+## servername
+
+Optional string. This value should be set to the external server name when gateway is used behind the load-balancer 
+proxy.
+
 ## pool_size
 
 The size of the NodeJS Cluster pool, i.e. how many instances of the gateway are going to be launched on the same host.
@@ -144,6 +149,44 @@ the URL path on which to which the Control API will be bind.
   }
 }
 ```
+
+## cors
+
+Optional. Enables and configures CORS requests.
+CORS requests from Dashboard are enabled by default when `use_dashboard_configs` is set to true.
+
+### enabled
+
+Boolean, `false` by default. Enables CORS configuration.
+
+### origins
+
+Array of strings. Configures the Access-Control-Allow-Origin CORS header. Expects an Array of valid origins.
+
+### methods
+
+Array of strings. Configures the Access-Control-Allow-Methods CORS header. Expects an array of HTTP Methods.
+
+### allowedHeaders
+
+Array of strings. Configures the Access-Control-Allow-Headers CORS header. Expects and Array of headers.
+
+### exposedHeaders
+
+Array of strings. Configures the Access-Control-Expose-Headers CORS header.
+
+### credentials
+
+Array of strings. Configures the Access-Control-Allow-Credentials CORS header.
+
+### maxAge
+
+Integer. Configures the Access-Control-Max-Age CORS header.
+
+### optionsSuccessStatus
+
+Integer. Provides a status code to use for successful OPTIONS requests, since some legacy browsers (IE11, various SmartTVs) 
+choke on 204.
 
 ## metrics
 

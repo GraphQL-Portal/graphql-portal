@@ -13,6 +13,7 @@ export async function ping(redis: Redis): Promise<void> {
         hostname: os.hostname(),
         listenHostname: config.gateway.hostname,
         listenPort: config.gateway.listen_port,
+        servername: config.gateway.servername,
       })
     );
   }, 5000);
