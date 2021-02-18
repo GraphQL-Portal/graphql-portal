@@ -1,5 +1,11 @@
 # @graphql-portal/types
 
+## 0.14.0
+
+### Minor Changes
+
+- d818162: Add CORS support
+
 ## 0.13.0
 
 ### Minor Changes
