@@ -1,5 +1,12 @@
 # @graphql-portal/gateway
 
+## 0.15.1
+
+### Patch Changes
+
+- 68d8ad7: Fixing version string
+- 68d8ad7: Fixing gateway version string
+
 ## 0.15.0
 
 ### Minor Changes
