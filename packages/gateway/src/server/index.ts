@@ -4,6 +4,7 @@ import { Channel } from '@graphql-portal/types';
 import bodyParser from 'body-parser';
 import cookieParser from 'cookie-parser';
 import express from 'express';
+import cors from 'cors';
 import { graphqlUploadExpress } from 'graphql-upload';
 import { createServer } from 'http';
 import { getConfigFromMaster } from '../ipc/utils';
@@ -40,6 +41,11 @@ export async function startServer(): Promise<void> {
   // TODO: replace with a proper implementation of graphQL-upload
   app.use(graphqlUploadExpress());
   app.use(logResponse);
+
+  // configure global CORS
+  if (config.gateway.use_dashboard_configs || config.gateway.cors?.enabled) {
+    app.use(cors(getCorsOptions()));
+  }
 
   const apiDefsToControlApi = config.apiDefs.filter((apiDef) => apiDef.schema_updates_through_control_api);
   if (apiDefsToControlApi.length) {
@@ -85,4 +91,25 @@ export async function startServer(): Promise<void> {
   }
 
   logger.info(`🐥 Started server in the worker process`);
+}
+
+/**
+ * Get and merge CORS options from various configs
+ */
+function getCorsOptions(): cors.CorsOptions {
+  const opts: cors.CorsOptions = {};
+  if (config.gateway.use_dashboard_configs && config.gateway.dashboard_config?.connection_string) {
+    opts.origin = [config.gateway.dashboard_config.connection_string];
+  }
+
+  if (config.gateway.cors?.enabled) {
+    const { enabled, origins, ...options } = config.gateway.cors;
+    const additionalOrigins = origins ?? [];
+
+    Object.assign(opts, options);
+    Array.isArray(opts.origin) ? opts.origin.push(...additionalOrigins) : (opts.origin = [...additionalOrigins]);
+  }
+
+  logger.info(`Enabling CORS for following Origins: ${JSON.stringify(opts.origin)}`);
+  return opts;
 }

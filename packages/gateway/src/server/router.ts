@@ -48,12 +48,14 @@ async function buildApi(toRouter: Router, apiDef: ApiDef, mesh?: IMesh): Promise
   if (!mesh) {
     const customMiddlewares = await loadCustomMiddlewares();
 
+    // Loading middlewares
     [...defaultMiddlewares, ...customMiddlewares].forEach((mw) => {
       const handler = mw(apiDef);
 
       function wrap(fn: RequestHandler): RequestHandler {
         return (req, res, next): void => {
           const handleError = (error: Error): void => {
+            logger.debug(`Error in buildApi mw wrapper: ${JSON.stringify(error)}`);
             error.handlerName = handler.name;
             return next(error);
           };
@@ -70,6 +72,7 @@ async function buildApi(toRouter: Router, apiDef: ApiDef, mesh?: IMesh): Promise
     });
   }
 
+  // Setting up Mesh for the endpoint
   mesh = await getMeshForApiDef(apiDef, mesh);
   if (!mesh) {
     logger.error(`Could not get schema for API, endpoint ${apiDef.endpoint} won't be added to the router`);

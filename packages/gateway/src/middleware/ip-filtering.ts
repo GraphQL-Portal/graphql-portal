@@ -12,7 +12,7 @@ const logger = prefixLogger('ip-filtering');
 const getMiddleware: RequestMiddleware = function (apiDef: ApiDef): RequestHandler {
   // skipping if disabled
   if (apiDef.enable_ip_filtering !== true) {
-    return (req, res, next) => next();
+    return (req, res, next): void => next();
   }
 
   let ips: string[] = [];
@@ -32,7 +32,7 @@ const getMiddleware: RequestMiddleware = function (apiDef: ApiDef): RequestHandl
   }
 
   // _allow_ list has a priority over _deny_ list
-  if (apiDef.deny_ips?.length && strategy != 'allow') {
+  if (apiDef.deny_ips?.length && strategy !== 'allow') {
     strategy = 'deny';
     ips = apiDef.deny_ips.filter(ipValidator);
     logger.info('Denying requests from the following IPs: %s', ips);
@@ -40,10 +40,10 @@ const getMiddleware: RequestMiddleware = function (apiDef: ApiDef): RequestHandl
 
   if (!ips.length || strategy === 'none') {
     logger.warn('IP filtering is enabled but no valid IPs were found in the configuration. Skipping...');
-    return (req, res, next) => next();
+    return (req, res, next): void => next();
   }
 
-  return function (req, res, next) {
+  return function (req, res, next): void {
     const ip: string = getClientIp(req) as string;
 
     try {

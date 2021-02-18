@@ -11,6 +11,7 @@ export interface GatewayConfig {
   dashboard_config?: DashboardConfig;
   enable_control_api: boolean;
   control_api_config?: ControlApiConfig;
+  cors?: Cors;
   metrics?: Metrics;
   log_format?: 'text' | 'json';
   log_level: 'debug' | 'info' | 'warn' | 'error';
@@ -32,6 +33,43 @@ export interface DashboardConfig {
  */
 export interface ControlApiConfig {
   endpoint?: string;
+}
+/**
+ * Configure CORS for all APIs in the gateway. CORS from Dashboard are enabled by default.
+ */
+export interface Cors {
+  /**
+   * Enables CORS requests for all APIs. CORS requests from Dashboard are enabled by default.
+   */
+  enabled?: boolean;
+  /**
+   * Configures the Access-Control-Allow-Origin CORS header. Expects an Array of valid origins.
+   */
+  origins?: string[];
+  /**
+   * Configures the Access-Control-Allow-Methods CORS header. Expects an array of HTTP Methods.
+   */
+  methods?: ('GET' | 'HEAD' | 'POST' | 'PUT' | 'PATCH' | 'DELETE')[];
+  /**
+   * Configures the Access-Control-Allow-Headers CORS header. Expects and Array of headers.
+   */
+  allowedHeaders?: string[];
+  /**
+   * Configures the Access-Control-Expose-Headers CORS header.
+   */
+  exposedHeaders?: string[];
+  /**
+   * Configures the Access-Control-Allow-Credentials CORS header.
+   */
+  credentials?: boolean;
+  /**
+   * Configures the Access-Control-Max-Age CORS header.
+   */
+  maxAge?: number;
+  /**
+   * Provides a status code to use for successful OPTIONS requests, since some legacy browsers (IE11, various SmartTVs) choke on 204.
+   */
+  optionsSuccessStatus?: number;
 }
 /**
  * Used to specify GraphQL Portal metrics settings

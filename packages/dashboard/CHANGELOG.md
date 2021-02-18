@@ -1,5 +1,12 @@
 # @graphql-portal/dashboard
 
+## 0.0.15
+
+### Patch Changes
+
+- Updated dependencies [97068da]
+  - @graphql-portal/types@0.13.0
+
 ## 0.0.14
 
 ### Patch Changes

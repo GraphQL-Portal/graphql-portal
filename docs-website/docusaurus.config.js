@@ -93,7 +93,7 @@ module.exports = {
         docs: {
           sidebarPath: require.resolve('./sidebars.js'),
           // Please change this to your repo.
-          editUrl: 'https://github.com/graphql-portal/graphql-portal/edit/master/website/',
+          editUrl: 'https://github.com/graphql-portal/graphql-portal/edit/main/docs-website/',
           routeBasePath: '/',
         },
         theme: {
