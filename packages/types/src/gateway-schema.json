@@ -10,6 +10,10 @@
     "listen_port": {
       "type": "integer"
     },
+    "servername": {
+      "type": "string",
+      "description": "Should be set when used behind the load-balancer which has a _servername_ different from the gateway's _hostname_."
+    },
     "pool_size": {
       "type": "integer",
       "minimum": 1

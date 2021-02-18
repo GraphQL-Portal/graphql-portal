@@ -3,7 +3,7 @@ import DashboardApi from './dashboard-api';
 
 let dashboard: DashboardApi;
 
-export function initDashboard(gatewayConfig: GatewayConfig) {
+export function initDashboard(gatewayConfig: GatewayConfig): void {
   dashboard = dashboard ?? new DashboardApi(gatewayConfig);
 }
 

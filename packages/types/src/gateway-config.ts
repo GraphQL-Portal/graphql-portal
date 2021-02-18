@@ -3,6 +3,10 @@
 export interface GatewayConfig {
   hostname: string;
   listen_port: number;
+  /**
+   * Should be set when used behind the load-balancer which has a _servername_ different from the gateway's _hostname_.
+   */
+  servername?: string;
   pool_size?: number;
   apis_path: string;
   middleware_path: string;
