@@ -1,5 +1,11 @@
 # @graphql-portal/types
 
+## 0.15.0
+
+### Minor Changes
+
+- aeb892c: Add CORS documentation; servername config option; add servername, listenHostname and listenPort to ping
+
 ## 0.14.0
 
 ### Minor Changes
