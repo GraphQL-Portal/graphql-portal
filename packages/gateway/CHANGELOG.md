@@ -1,5 +1,18 @@
 # @graphql-portal/gateway
 
+## 0.14.0
+
+### Minor Changes
+
+- d818162: Add CORS support
+
+### Patch Changes
+
+- Updated dependencies [d818162]
+  - @graphql-portal/types@0.14.0
+  - @graphql-portal/config@0.7.2
+  - @graphql-portal/dashboard@0.0.16
+
 ## 0.13.0
 
 ### Minor Changes
