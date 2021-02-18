@@ -679,6 +679,25 @@
     swagger2openapi "7.0.4"
     url-join "4.0.1"
 
+"@graphql-mesh/openapi@^0.12.14":
+  version "0.12.14"
+  resolved "https://registry.yarnpkg.com/@graphql-mesh/openapi/-/openapi-0.12.14.tgz#5ecdbd9f974d87425f86b60023615555c89787a6"
+  integrity sha512-hDAqWVAtMIvxBj0wnLnVjQ0QfWQIT46Y5xjILdUgbofzrvsx0M7kxP6kk9a5vUsxc0mtamo2haBWWZQF8K0+/A==
+  dependencies:
+    "@graphql-mesh/types" "0.32.0"
+    "@graphql-mesh/utils" "0.8.7"
+    deep-equal "2.0.5"
+    fetchache "0.0.4"
+    form-urlencoded "4.2.1"
+    graphql-scalars "1.7.1"
+    graphql-subscriptions "1.2.0"
+    json-ptr "2.0.0"
+    jsonpath-plus "5.0.3"
+    lodash "4.17.20"
+    pluralize "8.0.0"
+    swagger2openapi "7.0.5"
+    url-join "4.0.1"
+
 "@graphql-mesh/runtime@0.11.0", "@graphql-mesh/runtime@^0.11.0":
   version "0.11.0"
   resolved "https://registry.yarnpkg.com/@graphql-mesh/runtime/-/runtime-0.11.0.tgz#d862a5855b1ed01743f5bd4d58288978de004960"
@@ -732,6 +751,16 @@
   dependencies:
     "@graphql-tools/delegate" "7.0.10"
     "@graphql-tools/utils" "7.2.5"
+    "@graphql-typed-document-node/core" "3.1.0"
+    fetchache "0.0.4"
+
+"@graphql-mesh/types@0.32.0", "@graphql-mesh/types@^0.32.0":
+  version "0.32.0"
+  resolved "https://registry.yarnpkg.com/@graphql-mesh/types/-/types-0.32.0.tgz#b8ef810f136ec308801724c633d7629f85599c03"
+  integrity sha512-f4HrlEh7eNRMnulvKIltclCbJJS6+MxAUk95KAmF99U0KUtci53eAQIPgsI2rWDthWZQKQTMw3HQvyAdYcsUFg==
+  dependencies:
+    "@graphql-tools/delegate" "7.0.10"
+    "@graphql-tools/utils" "7.3.0"
     "@graphql-typed-document-node/core" "3.1.0"
     fetchache "0.0.4"
 
@@ -948,6 +977,15 @@
   version "7.2.5"
   resolved "https://registry.yarnpkg.com/@graphql-tools/utils/-/utils-7.2.5.tgz#d7f3fca326bbac34de664773d75634bf588ba2db"
   integrity sha512-S9RUkPimq+5eEDohDjiq/JCPUsiZblKRG8ve+diUwF1f8+r6FV2xGXrOt0qhQJiMxIO+BOK3DU9c+U3tX9Jo0w==
+  dependencies:
+    "@ardatan/aggregate-error" "0.0.6"
+    camel-case "4.1.2"
+    tslib "~2.1.0"
+
+"@graphql-tools/utils@7.3.0":
+  version "7.3.0"
+  resolved "https://registry.yarnpkg.com/@graphql-tools/utils/-/utils-7.3.0.tgz#e978a02da12d20781becf2442f66d215f63e6694"
+  integrity sha512-8MD5/jRsvbA4zSdI5bBRXvXh5pn208pSc+KGd0xjBVyY3m/tTFxl0hohDPC5hw6JcHnz8IfhpuuNfi8gm9I+5g==
   dependencies:
     "@ardatan/aggregate-error" "0.0.6"
     camel-case "4.1.2"
@@ -1388,6 +1426,11 @@
     "@types/express" "*"
     "@types/keygrip" "*"
     "@types/node" "*"
+
+"@types/cors@^2.8.10":
+  version "2.8.10"
+  resolved "https://registry.yarnpkg.com/@types/cors/-/cors-2.8.10.tgz#61cc8469849e5bcdd0c7044122265c39cec10cf4"
+  integrity sha512-C7srjHiVG3Ey1nR6d511dtDkCEjxuN9W1HWAEjGq8kpcwmNM6JJkpC0xvabM7BXTG2wDq8Eu33iH9aQKa7IvLQ==
 
 "@types/express-serve-static-core@^4.17.18":
   version "4.17.18"
@@ -2902,6 +2945,14 @@ core-util-is@1.0.2, core-util-is@~1.0.0:
   resolved "https://registry.yarnpkg.com/core-util-is/-/core-util-is-1.0.2.tgz#b5fd54220aa2bc5ab57aab7140c940754503c1a7"
   integrity sha1-tf1UIgqivFq1eqtxQMlAdUUDwac=
 
+cors@^2.8.5:
+  version "2.8.5"
+  resolved "https://registry.yarnpkg.com/cors/-/cors-2.8.5.tgz#eac11da51592dd86b9f06f6e7ac293b3df875d29"
+  integrity sha512-KIHbLJqu73RGr/hnbrO9uBeixNGuvSQjul/jdFvS/KFSIH1hWVd1ng7zOHx+YrEfInLG7q4n6GHQ9cDtxv/P6g==
+  dependencies:
+    object-assign "^4"
+    vary "^1"
+
 cosmiconfig@7.0.0, cosmiconfig@^7.0.0:
   version "7.0.0"
   resolved "https://registry.yarnpkg.com/cosmiconfig/-/cosmiconfig-7.0.0.tgz#ef9b44d773959cae63ddecd122de23853b60f8d3"
@@ -4389,6 +4440,13 @@ graphql-scalars@1.7.0:
   dependencies:
     tslib "~2.0.3"
 
+graphql-scalars@1.7.1:
+  version "1.7.1"
+  resolved "https://registry.yarnpkg.com/graphql-scalars/-/graphql-scalars-1.7.1.tgz#1894b216fc9d1c9a9a552554557a884a45503bd5"
+  integrity sha512-Z5Iy2Wo+AyjS5x27QnZewbro/xnfclfTGRhSrDva6BOhQws3+RAberK36DC+1hSO+6bIAwnaz1EQ0qkV5ENA4w==
+  dependencies:
+    tslib "~2.1.0"
+
 graphql-subscriptions@1.1.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/graphql-subscriptions/-/graphql-subscriptions-1.1.0.tgz#5f2fa4233eda44cf7570526adfcf3c16937aef11"
@@ -5750,6 +5808,11 @@ jsonpath-plus@5.0.2:
   resolved "https://registry.yarnpkg.com/jsonpath-plus/-/jsonpath-plus-5.0.2.tgz#ede88d064264172560ab1420a366a106cfab683d"
   integrity sha512-J1StEInJIb5INbUkzf/DM6mby0hEyU2o6kw+AUzrJnrgMunvDKdZgGFXEqH5qA2TVF3mVH7A6ZZQJpcNXXg90A==
 
+jsonpath-plus@5.0.3:
+  version "5.0.3"
+  resolved "https://registry.yarnpkg.com/jsonpath-plus/-/jsonpath-plus-5.0.3.tgz#502f0fc953d0f92428b2c2357c0c6809a803ec36"
+  integrity sha512-RDvpzY21CmKTvEfxuGqQmPqRTuzNOim7L+/TcsdBM8jguI5ok38t0p2eKr9GAsVkazrTyylpMZV/hKSQCWqx9g==
+
 jsprim@^1.2.2:
   version "1.4.1"
   resolved "https://registry.yarnpkg.com/jsprim/-/jsprim-1.4.1.tgz#313e66bc1e5cc06e438bc1b7499c2e5c56acb6a2"
@@ -6506,7 +6569,7 @@ oas-schema-walker@^1.1.5:
   resolved "https://registry.yarnpkg.com/oas-schema-walker/-/oas-schema-walker-1.1.5.tgz#74c3cd47b70ff8e0b19adada14455b5d3ac38a22"
   integrity sha512-2yucenq1a9YPmeNExoUa9Qwrt9RFkjqaMAA1X+U7sbb0AqBeTIdMHky9SQQ6iN94bO5NW0W4TRYXerG+BdAvAQ==
 
-oas-validator@^5.0.4:
+oas-validator@^5.0.4, oas-validator@^5.0.5:
   version "5.0.5"
   resolved "https://registry.yarnpkg.com/oas-validator/-/oas-validator-5.0.5.tgz#f42d5a9f0422a46caafa4f007007fdb7c6872aca"
   integrity sha512-d10yy6xlhRTh6np44k2U0gm5M66pioYTllH8J1ZTj+WSY3cpTvU+Dt51iWOT85HJqyGHo0RZKXF3u/NGQWDFgg==
@@ -6525,7 +6588,7 @@ oauth-sign@~0.9.0:
   resolved "https://registry.yarnpkg.com/oauth-sign/-/oauth-sign-0.9.0.tgz#47a7b016baa68b5fa0ecf3dee08a85c679ac6455"
   integrity sha512-fexhUFFPTGV8ybAtSIGbV6gOkSv8UtRbDBnAyLQw4QPKkgNlsH2ByPGtMUqdWkos6YCRmAqViwgZrJc/mRDzZQ==
 
-object-assign@^4.0.1:
+object-assign@^4, object-assign@^4.0.1:
   version "4.1.1"
   resolved "https://registry.yarnpkg.com/object-assign/-/object-assign-4.1.1.tgz#2109adc7965887cfc05cbbd442cac8bfbb360863"
   integrity sha1-IQmtx5ZYh8/AXLvUQsrIv7s2CGM=
@@ -8188,6 +8251,23 @@ swagger2openapi@7.0.4:
     yaml "^1.10.0"
     yargs "^16.1.1"
 
+swagger2openapi@7.0.5:
+  version "7.0.5"
+  resolved "https://registry.yarnpkg.com/swagger2openapi/-/swagger2openapi-7.0.5.tgz#9f622d8bc3a281aad850386994c0dc35d18654a8"
+  integrity sha512-Hzxse+VTX0u8xBgYJ665EjO6BfvW2PN9Yv+yIjBDm6ga9jl83+4CEdCCpznH+ILr5MS8bIIXB+XcQUM3u25w4g==
+  dependencies:
+    call-me-maybe "^1.0.1"
+    node-fetch "^2.6.1"
+    node-fetch-h2 "^2.3.0"
+    node-readfiles "^0.2.0"
+    oas-kit-common "^1.0.8"
+    oas-resolver "^2.5.4"
+    oas-schema-walker "^1.1.5"
+    oas-validator "^5.0.5"
+    reftools "^1.1.8"
+    yaml "^1.10.0"
+    yargs "^16.1.1"
+
 symbol-observable@^1.0.4:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/symbol-observable/-/symbol-observable-1.2.0.tgz#c22688aed4eab3cdc2dfeacbb561660560a00804"
@@ -8703,7 +8783,7 @@ validate-npm-package-license@^3.0.1:
     spdx-correct "^3.0.0"
     spdx-expression-parse "^3.0.0"
 
-vary@~1.1.2:
+vary@^1, vary@~1.1.2:
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/vary/-/vary-1.1.2.tgz#2299f02c6ded30d4a5961b0b9f74524a18f634fc"
   integrity sha1-IpnwLG3tMNSllhsLn3RSShj2NPw=

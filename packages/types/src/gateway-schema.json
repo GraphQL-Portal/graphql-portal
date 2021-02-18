@@ -35,6 +35,9 @@
     "control_api_config": {
       "$ref": "#/definitions/control_api_config"
     },
+    "cors": {
+      "$ref": "#/definitions/cors"
+    },
     "metrics": {
       "$ref": "#/definitions/metrics"
     },
@@ -85,6 +88,59 @@
         "endpoint": {
           "type": "string",
           "pattern": "^/"
+        }
+      }
+    },
+    "cors": {
+      "type": "object",
+      "description": "Configure CORS for all APIs in the gateway. CORS from Dashboard are enabled by default.",
+      "additionalProperties": false,
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "default": false,
+          "description": "Enables CORS requests for all APIs. CORS requests from Dashboard are enabled by default."
+        },
+        "origins": {
+          "type": "array",
+          "description": "Configures the Access-Control-Allow-Origin CORS header. Expects an Array of valid origins.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "methods": {
+          "type": "array",
+          "description": "Configures the Access-Control-Allow-Methods CORS header. Expects an array of HTTP Methods.",
+          "items": {
+            "type": "string",
+            "enum": ["GET", "HEAD", "POST", "PUT", "PATCH", "DELETE"]
+          }
+        },
+        "allowedHeaders": {
+          "type": "array",
+          "description": "Configures the Access-Control-Allow-Headers CORS header. Expects and Array of headers.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "exposedHeaders": {
+          "type": "array",
+          "description": "Configures the Access-Control-Expose-Headers CORS header.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "credentials": {
+          "type": "boolean",
+          "description": "Configures the Access-Control-Allow-Credentials CORS header."
+        },
+        "maxAge": {
+          "type": "integer",
+          "description": "Configures the Access-Control-Max-Age CORS header."
+        },
+        "optionsSuccessStatus": {
+          "type": "integer",
+          "description": "Provides a status code to use for successful OPTIONS requests, since some legacy browsers (IE11, various SmartTVs) choke on 204."
         }
       }
     },
