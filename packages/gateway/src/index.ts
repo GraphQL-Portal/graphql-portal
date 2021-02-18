@@ -4,7 +4,7 @@ import cluster from 'cluster';
 import { cpus } from 'os';
 import { applyRegisteredHandlers, getConfigFromMaster, spreadMessageToWorkers } from './ipc/utils';
 import { startServer } from './server';
-const { version } = require('./package.json');
+const { version } = require('../../package.json');
 
 function handleStopSignal(): void {
   logger.info('Stop signal received');
