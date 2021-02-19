@@ -84,9 +84,7 @@ jobs:
           tags: |
             gqlportal/gateway:latest
             gqlportal/gateway:0.x
-#            gqlportal/gateway:${{ steps.package-version.outputs.current-version }}
             ghcr.io/graphql-portal/graphql-portal-gateway:latest
             ghcr.io/graphql-portal/graphql-portal-gateway:0.x
-#            ghcr.io/graphql-portal/graphql-portal-gateway:${{ steps.package-version.outputs.current-version }}
       - name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}
