@@ -1,6 +1,11 @@
 /* eslint-disable */
 
-export interface GatewayConfig {
+export type GatewayConfig = GatewayConfig1 & GatewayConfig2;
+export type GatewayConfig1 = {
+  [k: string]: unknown;
+};
+
+export interface GatewayConfig2 {
   hostname: string;
   listen_port: number;
   /**
@@ -8,9 +13,9 @@ export interface GatewayConfig {
    */
   servername?: string;
   pool_size?: number;
-  apis_path: string;
-  middleware_path: string;
-  sources_path: string;
+  apis_path?: string;
+  middleware_path?: string;
+  sources_path?: string;
   use_dashboard_configs: boolean;
   dashboard_config?: DashboardConfig;
   enable_control_api: boolean;
