@@ -1,5 +1,16 @@
 # @graphql-portal/gateway
 
+## 0.15.2
+
+### Patch Changes
+
+- 264981b: Fix config.gateway.enable_control_api option being ignored
+- Updated dependencies [be1f437]
+- Updated dependencies [6341161]
+  - @graphql-portal/config@0.8.0
+  - @graphql-portal/types@0.16.0
+  - @graphql-portal/dashboard@0.1.1
+
 ## 0.15.1
 
 ### Patch Changes

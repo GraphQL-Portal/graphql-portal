@@ -1,5 +1,15 @@
 # @graphql-portal/types
 
+## 0.16.0
+
+### Minor Changes
+
+- be1f437: apis_path, middleware_path, sources_path are required only when use_dashboard_configs is false
+
+### Patch Changes
+
+- 6341161: Upgrading AJV validator to version 7.x
+
 ## 0.15.0
 
 ### Minor Changes

@@ -1,5 +1,18 @@
 # @graphql-portal/config
 
+## 0.8.0
+
+### Minor Changes
+
+- be1f437: apis_path, middleware_path, sources_path are required only when use_dashboard_configs is false
+
+### Patch Changes
+
+- Updated dependencies [be1f437]
+- Updated dependencies [6341161]
+  - @graphql-portal/types@0.16.0
+  - @graphql-portal/dashboard@0.1.1
+
 ## 0.7.3
 
 ### Patch Changes
