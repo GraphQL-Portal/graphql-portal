@@ -162,12 +162,23 @@
   "required": [
     "hostname",
     "listen_port",
-    "apis_path",
-    "middleware_path",
-    "sources_path",
     "use_dashboard_configs",
     "enable_control_api",
     "log_level",
     "redis_connection_string"
+  ],
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "use_dashboard_configs": {
+            "enum": [false]
+          }
+        }
+      },
+      "then": {
+        "required": ["apis_path", "middleware_path", "sources_path"]
+      }
+    }
   ]
 }

@@ -15,7 +15,8 @@
     "ajv": "^7.0.1",
     "cosmiconfig": "^7.0.0",
     "find-yarn-workspace-root": "^2.0.0",
-    "nanoid": "^3.1.20"
+    "nanoid": "^3.1.20",
+    "yaml": "^1.10.0"
   },
   "publishConfig": {
     "access": "public"

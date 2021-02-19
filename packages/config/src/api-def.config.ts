@@ -59,8 +59,8 @@ export async function loadApiDefs(gatewayConfig: GatewayConfig): Promise<ApiDef[
 
   const workspaceRoot: string =
     findWorkspaceRoot(process.cwd()) === null ? process.cwd() : (findWorkspaceRoot(process.cwd()) as string);
-  const apiConfigsDir = join(workspaceRoot, gatewayConfig.apis_path);
-  const sourceConfigsDir = join(workspaceRoot, gatewayConfig.sources_path);
+  const apiConfigsDir = join(workspaceRoot, <string>gatewayConfig.apis_path);
+  const sourceConfigsDir = join(workspaceRoot, <string>gatewayConfig.sources_path);
 
   const fileNames = await readdir(apiConfigsDir);
   const apiDefs = await Promise.all(
