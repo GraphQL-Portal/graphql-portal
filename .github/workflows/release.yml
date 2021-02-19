@@ -81,9 +81,6 @@ jobs:
           username: ${{ secrets.GH_REGISTRY_USERNAME }}
           password: ${{ secrets.GH_REGISTRY_TOKEN }}
 
-      - name: Debug current directory
-        run: echo ${{ needs.release.outputs.gateway-version }}
-
       - name: Build and push
         id: docker_build
         uses: docker/build-push-action@v2
@@ -92,8 +89,10 @@ jobs:
           tags: |
             gqlportal/gateway:latest
             gqlportal/gateway:0.x
+            gqlportal/gateway:${{ needs.release.outputs.gateway-version }}
             ghcr.io/graphql-portal/graphql-portal-gateway:latest
             ghcr.io/graphql-portal/graphql-portal-gateway:0.x
+            ghcr.io/graphql-portal/graphql-portal-gateway:${{ needs.release.outputs.gateway-version }}
 
       - name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}
