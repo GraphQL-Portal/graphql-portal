@@ -12,6 +12,8 @@ jobs:
     timeout-minutes: 15
     outputs:
       gateway-version: ${{ steps.package-version.outputs.current-version }}
+      gateway-version-major: ${{ steps.semver_parser.outputs.major }}
+      gateway-version-minor: ${{ steps.semver_parser.outputs.minor }}
     steps:
       - name: Checkout Repo
         uses: actions/checkout@master
@@ -56,6 +58,12 @@ jobs:
         with:
           path: packages/gateway
 
+      - name: Parse semver Gateway version
+        id: semver_parser
+        uses: booxmedialtd/ws-action-parse-semver@v1
+        with:
+          input_string: ${{ steps.package-version.outputs.current-version }}
+
   dockerhub:
     name: Dockerhub
     runs-on: ubuntu-latest
@@ -90,9 +98,11 @@ jobs:
             gqlportal/gateway:latest
             gqlportal/gateway:0.x
             gqlportal/gateway:${{ needs.release.outputs.gateway-version }}
+            gqlportal/gateway:${{ needs.release.outputs.gateway-version-major }}.${{ needs.release.outputs.gateway-version-minor }}.x
             ghcr.io/graphql-portal/graphql-portal-gateway:latest
             ghcr.io/graphql-portal/graphql-portal-gateway:0.x
             ghcr.io/graphql-portal/graphql-portal-gateway:${{ needs.release.outputs.gateway-version }}
+            ghcr.io/graphql-portal/graphql-portal-gateway:${{ needs.release.outputs.gateway-version-major }}.${{ needs.release.outputs.gateway-version-minor }}.x
 
       - name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}
