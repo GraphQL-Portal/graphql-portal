@@ -36,6 +36,8 @@ export async function startServer(): Promise<void> {
 
   app.get('/health', (_, res) => res.sendStatus(200));
 
+  app.disable('x-powered-by');
+
   app.use(bodyParser.json({ limit: config.gateway.request_size_limit || '100kb' }));
   app.use(cookieParser());
   // TODO: replace with a proper implementation of graphQL-upload
@@ -47,8 +49,9 @@ export async function startServer(): Promise<void> {
     app.use(cors(getCorsOptions()));
   }
 
+  // setting Control API for APIDefs
   const apiDefsToControlApi = config.apiDefs.filter((apiDef) => apiDef.schema_updates_through_control_api);
-  if (apiDefsToControlApi.length) {
+  if (config.gateway.enable_control_api && apiDefsToControlApi.length) {
     setupControlApi(app, apiDefsToControlApi);
   }
 

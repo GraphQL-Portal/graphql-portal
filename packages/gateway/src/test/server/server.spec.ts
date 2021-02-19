@@ -6,13 +6,14 @@ import { startPeriodicMetricsRecording } from '../../metric';
 import setupRedis from '../../redis';
 import { startServer } from '../../server';
 import { setRouter } from '../../server/router';
+import setupControlApi from '../../server/control-api';
 
-let app: { use: jest.SpyInstance; get: jest.SpyInstance };
+let app: { use: jest.SpyInstance; get: jest.SpyInstance; disable: jest.SpyInstance };
 let server: { listen: jest.SpyInstance; getConnections: jest.SpyInstance };
 
 jest.mock('express', () =>
   jest.fn(() => {
-    app = { use: jest.fn(), get: jest.fn() };
+    app = { use: jest.fn(), get: jest.fn(), disable: jest.fn() };
     return app;
   })
 );
@@ -84,6 +85,12 @@ jest.mock('@graphql-portal/config', () => ({
   },
   loadApiDefs: jest.fn().mockResolvedValue(true),
 }));
+jest.mock('../../server/control-api/', () => {
+  return {
+    __esModule: true,
+    default: jest.fn(),
+  };
+});
 
 describe('Server', () => {
   let redis: Redis;
@@ -97,10 +104,13 @@ describe('Server', () => {
       await startServer();
 
       expect(app.use).toHaveBeenCalledTimes(5);
+      expect(app.disable).toHaveBeenCalledTimes(1);
+      expect(app.disable).toHaveBeenCalledWith('x-powered-by');
       expect(setRouter).toHaveBeenCalledWith(app, config.apiDefs);
       expect(setupRedis).toHaveBeenCalledWith(config.gateway.redis_connection_string);
       expect(redis.subscribe).toHaveBeenCalledWith(Channel.apiDefsUpdated);
       expect(redis.on).toHaveBeenCalledWith('message', expect.any(Function));
+      expect(setupControlApi).toHaveBeenCalledTimes(0);
       expect(server.listen).toHaveBeenCalledWith(
         config.gateway.listen_port,
         config.gateway.hostname,

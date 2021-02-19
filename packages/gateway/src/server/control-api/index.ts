@@ -6,10 +6,16 @@ import { Express } from 'express';
 import { graphqlHTTP } from 'express-graphql';
 import { readFileSync } from 'fs';
 import resolvers from './resolvers';
+import path from 'path';
 
 const logger = prefixLogger('control-api');
 
-export default function setupControlApi(app: Express, apiDefs: ApiDef[]) {
+export default function setupControlApi(app: Express, apiDefs: ApiDef[]): void {
+  if (!config.gateway.enable_control_api) {
+    logger.info('Control API is disabled.');
+    return;
+  }
+
   const { endpoint } = config.gateway?.control_api_config || {};
   if (!endpoint) {
     logger.warn('Control API will not run: endpoint is not specified!');
@@ -17,7 +23,7 @@ export default function setupControlApi(app: Express, apiDefs: ApiDef[]) {
   }
 
   const schema = makeExecutableSchema({
-    typeDefs: readFileSync(`${__dirname}/schema.gql`, 'utf8'),
+    typeDefs: readFileSync(path.join(__dirname, 'schema.gql'), 'utf8'),
     resolvers,
   });
 
