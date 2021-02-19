@@ -83,7 +83,7 @@ jobs:
           password: ${{ secrets.GH_REGISTRY_TOKEN }}
 
       - name: Debug current directory
-        run: pwd && ls && echo "${{ needs.release.outputs.gateway-version }}"
+        run: echo ${{ needs.release.outputs.gateway-version }}
 
       - name: Build and push
         id: docker_build
