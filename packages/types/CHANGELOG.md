@@ -1,5 +1,11 @@
 # @graphql-portal/types
 
+## 0.16.1
+
+### Patch Changes
+
+- 9c0aad8: Fix a strict validation mode error in ajv
+
 ## 0.16.0
 
 ### Minor Changes
