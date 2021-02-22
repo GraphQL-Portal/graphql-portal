@@ -744,7 +744,7 @@
     "@graphql-typed-document-node/core" "3.1.0"
     fetchache "0.0.4"
 
-"@graphql-mesh/types@0.31.0", "@graphql-mesh/types@^0.31.0":
+"@graphql-mesh/types@0.31.0":
   version "0.31.0"
   resolved "https://registry.yarnpkg.com/@graphql-mesh/types/-/types-0.31.0.tgz#e808a4e2d82637f7b486943f325f7e56de2438fe"
   integrity sha512-Go9RueKI7lMs8lhgDoloMtXt380pMVHRhIXQRMfS7/V2EEgx/BC2GX/vAA8MJPAhhmptuTLbJn/RABE5EhYbSQ==
