@@ -1258,7 +1258,7 @@
     "deny_ips": { "type": "array", "items": { "type": "string" } },
     "request_size_limit": {
       "oneOf": [{ "type": "string" }, { "type": "number" }],
-      "description": "Argument of the bytes package's method parse https://www.npmjs.com/package/bytes"
+      "description": "This value specifies an HTTP Request size limit for a particular API Definition. Accepts numeric (in bytes) or string values, i.e. 'b' for bytes, 'kb' for kilobytes and 'mb' for megabytes (f.e., '10kb' or '10mb')."
     },
     "depth_limit": { "type": "integer", "minimum": 1, "description": "Maximum GraphQL query depth" },
     "request_complexity_limit": { "type": "integer", "minimum": 1, "description": "Maximum complexity for a request" },
