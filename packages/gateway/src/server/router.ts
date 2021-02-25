@@ -105,7 +105,12 @@ async function buildApi(toRouter: Router, apiDef: ApiDef, mesh?: IMesh): Promise
   );
 }
 
-async function getMeshForApiDef(apiDef: ApiDef, mesh?: IMesh, retry = 5): Promise<IMesh | undefined> {
+export async function getMeshForApiDef(
+  apiDef: ApiDef,
+  mesh?: IMesh,
+  retry = 5,
+  errorHandler?: (error: Error) => any
+): Promise<IMesh | undefined> {
   if (mesh) {
     return mesh;
   }
@@ -113,7 +118,11 @@ async function getMeshForApiDef(apiDef: ApiDef, mesh?: IMesh, retry = 5): Promis
     const meshConfig = await processConfig({ sources: apiDef.sources, ...apiDef.mesh });
     mesh = await getMesh(meshConfig);
   } catch (error) {
-    logger.error(error);
+    if (errorHandler) {
+      errorHandler(error);
+    } else {
+      logger.error(error);
+    }
     if (retry) {
       logger.warn('Failed to load schema, retrying after 5 seconds...');
       await new Promise((resolve) => setTimeout(resolve, 5000));
