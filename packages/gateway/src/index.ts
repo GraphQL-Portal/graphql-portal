@@ -1,9 +1,11 @@
 import { config, initConfig, loadApiDefs } from '@graphql-portal/config';
-import { configureLogger, logger } from '@graphql-portal/logger';
+import { configureLogger, prefixLogger } from '@graphql-portal/logger';
 import cluster from 'cluster';
 import { cpus } from 'os';
 import { applyRegisteredHandlers, getConfigFromMaster, spreadMessageToWorkers } from './ipc/utils';
 import { startServer } from './server';
+
+const logger = prefixLogger('server');
 
 function handleStopSignal(): void {
   logger.info('Stop signal received');
