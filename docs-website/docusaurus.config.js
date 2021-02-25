@@ -85,6 +85,10 @@ module.exports = {
       ],
       copyright: `Copyright © ${new Date().getFullYear()} GraphQL Portal. Built with Docusaurus. From Paris with 💜`,
     },
+    algolia: {
+      apiKey: 'fb4728e0819fe7c2922c8a95bbcb28da',
+      indexName: 'graphql-portal',
+    },
   },
   presets: [
     [
