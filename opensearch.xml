@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<OpenSearchDescription xmlns="http://a9.com/-/spec/opensearch/1.1/"
+                       xmlns:moz="http://www.mozilla.org/2006/browser/search/">
+  <ShortName>GraphQL Portal Documentation</ShortName>
+  <Description>Search GraphQL Portal Documentation</Description>
+  <InputEncoding>UTF-8</InputEncoding>
+  <Image width="16" height="16" type="image/x-icon">https://docs.graphql-portal.com/img/favicon.ico</Image>
+  <Url type="text/html" method="get" template="https://docs.graphql-portal.com/search?q={searchTerms}"/>
+  <Url type="application/opensearchdescription+xml" rel="self" template="https://docs.graphql-portal.com/opensearch.xml" />
+  <moz:SearchForm>https://docs.graphql-portal.com</moz:SearchForm>
+</OpenSearchDescription>
