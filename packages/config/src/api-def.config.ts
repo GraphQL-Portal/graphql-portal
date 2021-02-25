@@ -12,6 +12,7 @@ import {
   validateApiDefConfig,
 } from '@graphql-portal/types';
 import findWorkspaceRoot from 'find-yarn-workspace-root';
+import * as path from 'path';
 
 const logger = prefixLogger('apiDefs-config');
 
@@ -64,26 +65,28 @@ export async function loadApiDefs(gatewayConfig: GatewayConfig): Promise<ApiDef[
 
   const fileNames = await readdir(apiConfigsDir);
   const apiDefs = await Promise.all(
-    fileNames.map(async (name) => {
-      const apiPath = join(apiConfigsDir, name);
-      const file = await readFile(apiPath, 'utf8');
-      const apiConfig = parse(file);
-      if (!apiDefConfigGuard(apiConfig)) {
-        throw new Error(`API configuration file is not valid: ${apiPath}`);
-      }
-      if (!apiConfig.source_config_names?.length) {
-        throw new Error(`API should have some source_config_names: ${apiPath}`);
-      }
+    fileNames
+      .filter((name) => ['.json', '.yaml', '.yml'].includes(path.extname(name)))
+      .map(async (name) => {
+        const apiPath = join(apiConfigsDir, name);
+        const file = await readFile(apiPath, 'utf8');
+        const apiConfig = parse(file);
+        if (!apiDefConfigGuard(apiConfig)) {
+          throw new Error(`API configuration file is not valid: ${apiPath}`);
+        }
+        if (!apiConfig.source_config_names?.length) {
+          throw new Error(`API should have some source_config_names: ${apiPath}`);
+        }
 
-      const sources = await Promise.all(
-        apiConfig.source_config_names.map((configName) => loadSourceConfig(join(sourceConfigsDir, configName)))
-      );
-      return {
-        ...apiConfig,
-        sources,
-        mesh: apiConfig.mesh || {},
-      };
-    })
+        const sources = await Promise.all(
+          apiConfig.source_config_names.map((configName) => loadSourceConfig(join(sourceConfigsDir, configName)))
+        );
+        return {
+          ...apiConfig,
+          sources,
+          mesh: apiConfig.mesh || {},
+        };
+      })
   );
 
   return apiDefs;

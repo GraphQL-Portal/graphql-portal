@@ -1,7 +1,9 @@
-import { logger } from '@graphql-portal/logger';
+import { prefixLogger } from '@graphql-portal/logger';
 import IORedis from 'ioredis';
 import connect from './connect';
 import { ping } from './ping';
+
+const logger = prefixLogger('redis');
 
 export let redisSubscriber: IORedis.Redis;
 export let redis: IORedis.Redis;

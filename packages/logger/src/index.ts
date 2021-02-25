@@ -1,4 +1,5 @@
 import winston, { format, transports } from 'winston';
+import { gray } from 'chalk';
 
 const labelPid = { label: `pid: ${process.pid}` };
 
@@ -9,7 +10,7 @@ const consoleFormat: winston.Logform.Format = format.combine(
   format.colorize(),
   format.printf((info) => {
     const prefix: string = info.prefix === undefined ? '' : `[${info.prefix}]`;
-    return `${info.timestamp} ${info.label} ${prefix} ${info.level}: ${info.message}`;
+    return `${gray(info.timestamp)} ${gray(info.label)} ${prefix} ${info.level}: ${info.message}`;
   })
 );
 
@@ -31,8 +32,9 @@ function createLogger(): winston.Logger {
   });
 }
 
-export let logger: winston.Logger = createLogger();
+export const logger: winston.Logger = createLogger();
 
+/* eslint-disable camelcase */
 export function configureLogger(config: {
   log_level: 'debug' | 'info' | 'warn' | 'error';
   log_format?: 'json' | 'text';
@@ -47,6 +49,6 @@ export function configureLogger(config: {
   );
 }
 
-export function prefixLogger(prefix: string = ''): winston.Logger {
+export function prefixLogger(prefix = ''): winston.Logger {
   return logger.child({ prefix });
 }

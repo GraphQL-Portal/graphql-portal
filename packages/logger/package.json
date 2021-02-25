@@ -7,10 +7,16 @@
     "build": "tsc -b"
   },
   "dependencies": {
-    "winston": "^3.3.3"
+    "chalk": "4.1.0",
+    "winston": "3.3.3"
   },
   "publishConfig": {
     "access": "public"
   },
-  "keywords": ["graphql", "gateway", "dashboard", "graphql-gateway"]
+  "keywords": [
+    "graphql",
+    "gateway",
+    "dashboard",
+    "graphql-gateway"
+  ]
 }

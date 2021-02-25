@@ -1,5 +1,5 @@
 import { config } from '@graphql-portal/config';
-import { logger } from '@graphql-portal/logger';
+import { prefixLogger } from '@graphql-portal/logger';
 import { Channel } from '@graphql-portal/types';
 import bodyParser from 'body-parser';
 import cookieParser from 'cookie-parser';
@@ -14,6 +14,8 @@ import { logResponse } from '../middleware';
 import setupRedis from '../redis';
 import setupControlApi from './control-api';
 import { setRouter, updateApi } from './router';
+
+const logger = prefixLogger('server');
 
 export type ForwardHeaders = Record<string, string>;
 export interface Context {

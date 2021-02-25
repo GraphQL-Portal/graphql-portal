@@ -68,5 +68,5 @@
     "es6": true,
     "node": true
   },
-  "ignorePatterns": ["dist", "node_modules", "examples", "scripts"]
+  "ignorePatterns": ["dist", "node_modules", "examples", "scripts", "packages/types/src/*-config.ts"]
 }

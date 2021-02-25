@@ -10,7 +10,7 @@ export interface ApiDefConfig {
   allow_ips?: string[];
   deny_ips?: string[];
   /**
-   * Argument of the bytes package's method parse https://www.npmjs.com/package/bytes
+   * This value specifies an HTTP Request size limit for a particular API Definition. Accepts numeric (in bytes) or string values, i.e. 'b' for bytes, 'kb' for kilobytes and 'mb' for megabytes (f.e., '10kb' or '10mb').
    */
   request_size_limit?: string | number;
   /**
