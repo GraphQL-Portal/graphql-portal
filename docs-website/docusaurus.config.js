@@ -90,6 +90,12 @@ module.exports = {
       indexName: 'graphql-portal',
     },
   },
+  scripts: [
+    {
+      src: 'https://docs.graphql-portal.com/js/chat.js',
+      async: true,
+    },
+  ],
   presets: [
     [
       '@docusaurus/preset-classic',
