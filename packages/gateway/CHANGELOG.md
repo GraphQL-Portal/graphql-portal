@@ -1,5 +1,19 @@
 # @graphql-portal/gateway
 
+## 0.16.0
+
+### Minor Changes
+
+- 18c714a: export getMeshForApiDef from router
+
+### Patch Changes
+
+- f36fa72: Fix generation of gateway config + minor logger enhancement
+- Updated dependencies [f36fa72]
+  - @graphql-portal/config@0.8.1
+  - @graphql-portal/logger@0.3.1
+  - @graphql-portal/types@0.16.2
+
 ## 0.15.2
 
 ### Patch Changes
