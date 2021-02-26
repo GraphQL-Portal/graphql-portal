@@ -1,5 +1,11 @@
 # @graphql-portal/logger
 
+## 0.3.1
+
+### Patch Changes
+
+- f36fa72: Fix generation of gateway config + minor logger enhancement
+
 ## 0.3.0
 
 ### Minor Changes
