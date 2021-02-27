@@ -760,32 +760,13 @@
     "@graphql-tools/wrap" "7.0.5"
     fetchache "0.0.4"
 
-"@graphql-mesh/openapi@^0.12.0":
-  version "0.12.5"
-  resolved "https://registry.yarnpkg.com/@graphql-mesh/openapi/-/openapi-0.12.5.tgz#1450091bf2bcfd7640181e3a592da829d9bb99d2"
-  integrity sha512-BYkIyQQ/zKfGKbtHUcnkNcf/wGCTYfokAX2krHwZg3u6j/oy3QN07t1bHxZTQHm666WLHF/o1/eC8CrJG2u+Dw==
+"@graphql-mesh/openapi@^0.13.0":
+  version "0.13.1"
+  resolved "https://registry.yarnpkg.com/@graphql-mesh/openapi/-/openapi-0.13.1.tgz#d51c91775816e5541353c3119021acef08e0db98"
+  integrity sha512-UR55QGxILumtu2ll4iLSf0C9OArcNV3wX0a9cdqj7VNuAL+4X+uabDACt/QnHzx59Un9TsZoOzkkU3pO2Bxd6A==
   dependencies:
-    "@graphql-mesh/types" "0.29.2"
-    "@graphql-mesh/utils" "0.8.6"
-    deep-equal "2.0.5"
-    fetchache "0.0.4"
-    form-urlencoded "4.2.1"
-    graphql-scalars "1.7.0"
-    graphql-subscriptions "1.1.0"
-    json-ptr "2.0.0"
-    jsonpath-plus "5.0.2"
-    lodash "4.17.20"
-    pluralize "8.0.0"
-    swagger2openapi "7.0.4"
-    url-join "4.0.1"
-
-"@graphql-mesh/openapi@^0.12.14":
-  version "0.12.14"
-  resolved "https://registry.yarnpkg.com/@graphql-mesh/openapi/-/openapi-0.12.14.tgz#5ecdbd9f974d87425f86b60023615555c89787a6"
-  integrity sha512-hDAqWVAtMIvxBj0wnLnVjQ0QfWQIT46Y5xjILdUgbofzrvsx0M7kxP6kk9a5vUsxc0mtamo2haBWWZQF8K0+/A==
-  dependencies:
-    "@graphql-mesh/types" "0.32.0"
-    "@graphql-mesh/utils" "0.8.7"
+    "@graphql-mesh/types" "0.35.1"
+    "@graphql-mesh/utils" "0.9.0"
     deep-equal "2.0.5"
     fetchache "0.0.4"
     form-urlencoded "4.2.1"
@@ -793,7 +774,7 @@
     graphql-subscriptions "1.2.0"
     json-ptr "2.0.0"
     jsonpath-plus "5.0.3"
-    lodash "4.17.20"
+    lodash "4.17.21"
     pluralize "8.0.0"
     swagger2openapi "7.0.5"
     url-join "4.0.1"
@@ -4484,26 +4465,12 @@ graphql-extensions@^0.12.8:
     apollo-server-env "^3.0.0"
     apollo-server-types "^0.6.3"
 
-graphql-scalars@1.7.0:
-  version "1.7.0"
-  resolved "https://registry.yarnpkg.com/graphql-scalars/-/graphql-scalars-1.7.0.tgz#32cf623027664f1d50c5d058767a87387475c107"
-  integrity sha512-CCL9aaZdK1VD2jYFCF0ONB1cT5brK9DXymSuu/E/JoYLmAaLwGgjdzY66mT2ZI5oOIrSrJqWTf4y20qdSaE4MQ==
-  dependencies:
-    tslib "~2.0.3"
-
 graphql-scalars@1.7.1:
   version "1.7.1"
   resolved "https://registry.yarnpkg.com/graphql-scalars/-/graphql-scalars-1.7.1.tgz#1894b216fc9d1c9a9a552554557a884a45503bd5"
   integrity sha512-Z5Iy2Wo+AyjS5x27QnZewbro/xnfclfTGRhSrDva6BOhQws3+RAberK36DC+1hSO+6bIAwnaz1EQ0qkV5ENA4w==
   dependencies:
     tslib "~2.1.0"
-
-graphql-subscriptions@1.1.0:
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/graphql-subscriptions/-/graphql-subscriptions-1.1.0.tgz#5f2fa4233eda44cf7570526adfcf3c16937aef11"
-  integrity sha512-6WzlBFC0lWmXJbIVE8OgFgXIP4RJi3OQgTPa0DVMsDXdpRDjTsM1K9wfl5HSYX7R87QAGlvcv2Y4BIZa/ItonA==
-  dependencies:
-    iterall "^1.2.1"
 
 graphql-subscriptions@1.2.0:
   version "1.2.0"
@@ -5820,11 +5787,6 @@ jsonfile@^4.0.0:
   optionalDependencies:
     graceful-fs "^4.1.6"
 
-jsonpath-plus@5.0.2:
-  version "5.0.2"
-  resolved "https://registry.yarnpkg.com/jsonpath-plus/-/jsonpath-plus-5.0.2.tgz#ede88d064264172560ab1420a366a106cfab683d"
-  integrity sha512-J1StEInJIb5INbUkzf/DM6mby0hEyU2o6kw+AUzrJnrgMunvDKdZgGFXEqH5qA2TVF3mVH7A6ZZQJpcNXXg90A==
-
 jsonpath-plus@5.0.3:
   version "5.0.3"
   resolved "https://registry.yarnpkg.com/jsonpath-plus/-/jsonpath-plus-5.0.3.tgz#502f0fc953d0f92428b2c2357c0c6809a803ec36"
@@ -6540,7 +6502,7 @@ oas-linter@^3.2.1:
     should "^13.2.1"
     yaml "^1.10.0"
 
-oas-resolver@^2.5.3, oas-resolver@^2.5.4:
+oas-resolver@^2.5.4:
   version "2.5.4"
   resolved "https://registry.yarnpkg.com/oas-resolver/-/oas-resolver-2.5.4.tgz#81fa1aaa7e2387ab2dba1045827e9d7b79822326"
   integrity sha512-1vIj5Wkjmi+kZj5sFamt95LkuXoalmoKUohtaUQoCQZjLfPFaY8uZ7nw6IZaWuE6eLON2b6xrXhxD4hiTdYl0g==
@@ -6556,7 +6518,7 @@ oas-schema-walker@^1.1.5:
   resolved "https://registry.yarnpkg.com/oas-schema-walker/-/oas-schema-walker-1.1.5.tgz#74c3cd47b70ff8e0b19adada14455b5d3ac38a22"
   integrity sha512-2yucenq1a9YPmeNExoUa9Qwrt9RFkjqaMAA1X+U7sbb0AqBeTIdMHky9SQQ6iN94bO5NW0W4TRYXerG+BdAvAQ==
 
-oas-validator@^5.0.4, oas-validator@^5.0.5:
+oas-validator@^5.0.5:
   version "5.0.5"
   resolved "https://registry.yarnpkg.com/oas-validator/-/oas-validator-5.0.5.tgz#f42d5a9f0422a46caafa4f007007fdb7c6872aca"
   integrity sha512-d10yy6xlhRTh6np44k2U0gm5M66pioYTllH8J1ZTj+WSY3cpTvU+Dt51iWOT85HJqyGHo0RZKXF3u/NGQWDFgg==
@@ -7250,7 +7212,7 @@ redis-parser@^3.0.0:
   dependencies:
     redis-errors "^1.0.0"
 
-reftools@^1.1.7, reftools@^1.1.8:
+reftools@^1.1.8:
   version "1.1.8"
   resolved "https://registry.yarnpkg.com/reftools/-/reftools-1.1.8.tgz#cc08fd67eb913d779fd330657d010cc080c7d643"
   integrity sha512-Yvz9NH8uFHzD/AXX82Li1GdAP6FzDBxEZw+njerNBBQv/XHihqsWAjNfXtaq4QD2l4TEZVnp4UbktdYSegAM3g==
@@ -8117,23 +8079,6 @@ supports-hyperlinks@^2.0.0:
     has-flag "^4.0.0"
     supports-color "^7.0.0"
 
-swagger2openapi@7.0.4:
-  version "7.0.4"
-  resolved "https://registry.yarnpkg.com/swagger2openapi/-/swagger2openapi-7.0.4.tgz#63f20ecc6a57a8dde33c92cc4aeb8dc34671e1b0"
-  integrity sha512-MGzJU44XSXHKxvtx/NbBnP3z5s1KzN5xhqIBERoZEKfRiZ56lNUo5TGOv0dJ8n7JGeheCeU0CydfvbSOh+DaXg==
-  dependencies:
-    call-me-maybe "^1.0.1"
-    node-fetch "^2.6.1"
-    node-fetch-h2 "^2.3.0"
-    node-readfiles "^0.2.0"
-    oas-kit-common "^1.0.8"
-    oas-resolver "^2.5.3"
-    oas-schema-walker "^1.1.5"
-    oas-validator "^5.0.4"
-    reftools "^1.1.7"
-    yaml "^1.10.0"
-    yargs "^16.1.1"
-
 swagger2openapi@7.0.5:
   version "7.0.5"
   resolved "https://registry.yarnpkg.com/swagger2openapi/-/swagger2openapi-7.0.5.tgz#9f622d8bc3a281aad850386994c0dc35d18654a8"
@@ -8414,7 +8359,7 @@ tslib@^2.0.0, tslib@^2.0.3, tslib@~2.1.0:
   resolved "https://registry.yarnpkg.com/tslib/-/tslib-2.1.0.tgz#da60860f1c2ecaa5703ab7d39bc05b6bf988b97a"
   integrity sha512-hcVC3wYEziELGGmEEXue7D75zbwIIVUMWAVbHItGPx0ziyXxrOMQx4rQEVEV45Ut/1IotuEvwqPopzIOkDMf0A==
 
-tslib@~2.0.1, tslib@~2.0.3:
+tslib@~2.0.1:
   version "2.0.3"
   resolved "https://registry.yarnpkg.com/tslib/-/tslib-2.0.3.tgz#8e0741ac45fc0c226e58a17bfc3e64b9bc6ca61c"
   integrity sha512-uZtkfKblCEQtZKBF6EBXVZeQNl82yqtDQdv+eck8u7tdPxjLu2/lp5/uPW+um2tpuxINHWy3GhiccY7QgEaVHQ==
