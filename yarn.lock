@@ -850,17 +850,7 @@
     "@graphql-typed-document-node/core" "3.1.0"
     fetchache "0.0.4"
 
-"@graphql-mesh/types@0.32.0", "@graphql-mesh/types@^0.32.0":
-  version "0.32.0"
-  resolved "https://registry.yarnpkg.com/@graphql-mesh/types/-/types-0.32.0.tgz#b8ef810f136ec308801724c633d7629f85599c03"
-  integrity sha512-f4HrlEh7eNRMnulvKIltclCbJJS6+MxAUk95KAmF99U0KUtci53eAQIPgsI2rWDthWZQKQTMw3HQvyAdYcsUFg==
-  dependencies:
-    "@graphql-tools/delegate" "7.0.10"
-    "@graphql-tools/utils" "7.3.0"
-    "@graphql-typed-document-node/core" "3.1.0"
-    fetchache "0.0.4"
-
-"@graphql-mesh/types@0.35.1":
+"@graphql-mesh/types@0.35.1", "@graphql-mesh/types@^0.35.0":
   version "0.35.1"
   resolved "https://registry.yarnpkg.com/@graphql-mesh/types/-/types-0.35.1.tgz#b2eec8ed26c8df25f9bbd72175c4d9e109dc9f36"
   integrity sha512-Y3GaZbzjQ3tlJ37PSiXep4hfsSYcazHkJGESf78R4gqKAf8UhaiKTFsu/UWw6l8/mQcvQp9wlByJz8nwn5LQVQ==
@@ -1090,15 +1080,6 @@
   version "7.2.5"
   resolved "https://registry.yarnpkg.com/@graphql-tools/utils/-/utils-7.2.5.tgz#d7f3fca326bbac34de664773d75634bf588ba2db"
   integrity sha512-S9RUkPimq+5eEDohDjiq/JCPUsiZblKRG8ve+diUwF1f8+r6FV2xGXrOt0qhQJiMxIO+BOK3DU9c+U3tX9Jo0w==
-  dependencies:
-    "@ardatan/aggregate-error" "0.0.6"
-    camel-case "4.1.2"
-    tslib "~2.1.0"
-
-"@graphql-tools/utils@7.3.0":
-  version "7.3.0"
-  resolved "https://registry.yarnpkg.com/@graphql-tools/utils/-/utils-7.3.0.tgz#e978a02da12d20781becf2442f66d215f63e6694"
-  integrity sha512-8MD5/jRsvbA4zSdI5bBRXvXh5pn208pSc+KGd0xjBVyY3m/tTFxl0hohDPC5hw6JcHnz8IfhpuuNfi8gm9I+5g==
   dependencies:
     "@ardatan/aggregate-error" "0.0.6"
     camel-case "4.1.2"
