@@ -820,15 +820,15 @@
     graphql-transform-federation "2.2.0"
     lodash "4.17.21"
 
-"@graphql-mesh/transform-resolvers-composition@^0.7.8":
-  version "0.7.20"
-  resolved "https://registry.yarnpkg.com/@graphql-mesh/transform-resolvers-composition/-/transform-resolvers-composition-0.7.20.tgz#45af7a3b4437de958a734536708d52db653531ed"
-  integrity sha512-fruQWVhPk5IBTKQOrF9XzoRgX/EIZHu5HkowiH1igJdzvX8Z/h1VoO/XlQolSg5xjYkbOQsJx08rOP2cuwnY0w==
+"@graphql-mesh/transform-resolvers-composition@^0.8.0":
+  version "0.8.1"
+  resolved "https://registry.yarnpkg.com/@graphql-mesh/transform-resolvers-composition/-/transform-resolvers-composition-0.8.1.tgz#54c7461dc0c8b177d031da708b937d73559f5fe4"
+  integrity sha512-gP/EQ2r5VzyLAixM9sVBCXZgTT68cDsPdrgrJD3pxDeKu65VWJewzY1Q5rztita/4fSuCnzXtYLJMR52uFkDSA==
   dependencies:
-    "@graphql-mesh/types" "0.29.2"
-    "@graphql-mesh/utils" "0.8.6"
-    "@graphql-tools/resolvers-composition" "6.2.5"
-    "@graphql-tools/schema" "7.1.2"
+    "@graphql-mesh/types" "0.35.1"
+    "@graphql-mesh/utils" "0.9.0"
+    "@graphql-tools/resolvers-composition" "6.2.6"
+    "@graphql-tools/schema" "7.1.3"
 
 "@graphql-mesh/types@0.29.2":
   version "0.29.2"
@@ -869,21 +869,6 @@
     "@graphql-tools/utils" "7.5.0"
     "@graphql-typed-document-node/core" "3.1.0"
     fetchache "0.0.4"
-
-"@graphql-mesh/utils@0.8.6":
-  version "0.8.6"
-  resolved "https://registry.yarnpkg.com/@graphql-mesh/utils/-/utils-0.8.6.tgz#104a2e68a078357917ba7173646960b8847d3d49"
-  integrity sha512-hP7Uybz69JNh+287l9317Tkuw0peT4OfGUikGh6wpqrMFormNhuTDYJh0u8k6yPp4GRGiPx4DAAcxv69cf2uOA==
-  dependencies:
-    "@ardatan/string-interpolation" "1.2.11"
-    "@graphql-tools/delegate" "7.0.9"
-    "@graphql-tools/utils" "7.2.4"
-    "@graphql-typed-document-node/core" "3.1.0"
-    date-fns "2.16.1"
-    fetchache "0.0.4"
-    is-url "1.2.4"
-    js-yaml "4.0.0"
-    object-hash "2.1.1"
 
 "@graphql-mesh/utils@0.8.7":
   version "0.8.7"
