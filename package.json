@@ -52,7 +52,7 @@
     "lint-staged": "10.5.4",
     "pinst": "2.1.6",
     "prettier": "2.2.1",
-    "ts-jest": "26.5.1",
+    "ts-jest": "26.5.2",
     "ts-node": "9.1.1",
     "typescript": "4.1.5"
   },
