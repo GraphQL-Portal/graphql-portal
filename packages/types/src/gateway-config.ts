@@ -94,13 +94,42 @@ export interface GatewayConfig {
     enabled?: boolean;
   };
   /**
-   * Sets the logging format. Can be 'text' or 'json'. JSON should be used while running in a Kubernetes pod.
+   * Sets the default (console) logging format. Can be 'text' or 'json'. JSON should be used while running in a Kubernetes pod.
    */
   log_format?: 'text' | 'json';
   /**
    * Sets the log level. Should not be set to 'debug' in production.
    */
   log_level: 'debug' | 'info' | 'warn' | 'error';
+  /**
+   * Configures sending of log messages to Datadog.
+   */
+  datadog_logging?: {
+    /**
+     * Enable or disable logging to Datadog. Defaults to false.
+     */
+    enabled: boolean;
+    /**
+     * Datadog API key of your application
+     */
+    apiKey: string;
+    /**
+     * Host of the Datadog TCP (TLS) intake. Defaults to the US server (intake.logs.datadoghq.com).
+     */
+    host?: string;
+    /**
+     * Port of the Datadog TCP (TLS) intake. Default to 10516.
+     */
+    port?: number;
+    /**
+     * Adds an environment attribute to Datadog logs. Empty by default.
+     */
+    environment?: string;
+    /**
+     * Allows transport level tagging in Datadog. Each tag should follow the format <KEY>:<VALUE>. For more information see https://docs.datadoghq.com/getting_started/tagging/.
+     */
+    tags?: string[];
+  };
   /**
    * Redis connection string in a format 'redis://localhost:6379'.
    */
