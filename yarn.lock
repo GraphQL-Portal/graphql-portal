@@ -809,16 +809,16 @@
     "@n1ru4l/graphql-live-query" "0.7.1"
     "@n1ru4l/in-memory-live-query-store" "0.6.0"
 
-"@graphql-mesh/transform-federation@^0.4.32":
-  version "0.4.44"
-  resolved "https://registry.yarnpkg.com/@graphql-mesh/transform-federation/-/transform-federation-0.4.44.tgz#3cb2ebcca6d996784394775b9c1e87b01dd40a35"
-  integrity sha512-vFztOw094sIecYX0xRwNAiwO0H4YblznCpme3LtZtpQoucS+tDIBUHhKhehMQt4o9sepJaKYVVBRNb6fk7QZwg==
+"@graphql-mesh/transform-federation@^0.5.0":
+  version "0.5.1"
+  resolved "https://registry.yarnpkg.com/@graphql-mesh/transform-federation/-/transform-federation-0.5.1.tgz#a0daaeaf135f269f788b45ed330ef44016d08273"
+  integrity sha512-3gmS3+BDsqkrj3/ddFk8vBHfeDxv+lM/NZtJVT848hP73dIegQ+CudNZeN9Pq5ITDfbAukOlXcAena6V90P+gg==
   dependencies:
     "@apollo/federation" "0.21.0"
-    "@graphql-mesh/types" "0.29.2"
-    "@graphql-mesh/utils" "0.8.6"
+    "@graphql-mesh/types" "0.35.1"
+    "@graphql-mesh/utils" "0.9.0"
     graphql-transform-federation "2.2.0"
-    lodash "4.17.20"
+    lodash "4.17.21"
 
 "@graphql-mesh/transform-resolvers-composition@^0.7.8":
   version "0.7.20"
