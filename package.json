@@ -36,8 +36,8 @@
   "devDependencies": {
     "@changesets/cli": "2.14.1",
     "@types/jest": "26.0.20",
-    "@typescript-eslint/eslint-plugin": "4.15.1",
-    "@typescript-eslint/parser": "4.15.1",
+    "@typescript-eslint/eslint-plugin": "4.15.2",
+    "@typescript-eslint/parser": "4.15.2",
     "copyfiles": "2.4.1",
     "eslint": "7.20.0",
     "eslint-config-prettier": "8.1.0",
