@@ -1,5 +1,11 @@
 # @graphql-portal/dashboard
 
+## 0.1.2
+
+### Patch Changes
+
+- c934fb5: fix query name
+
 ## 0.1.1
 
 ### Patch Changes
