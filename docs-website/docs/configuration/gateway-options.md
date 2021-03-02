@@ -207,6 +207,34 @@ Optional. Can be `text` or `json`. Default value is `text`.
 
 Possible values are: 'debug' | 'info' | 'warn' | 'error'.
 
+## datadog_logging
+
+Configures sending of log messages to Datadog.
+
+### enabled
+
+Boolean. Enable or disable logging to Datadog. Defaults to false.
+
+### apiKey
+
+String. Datadog API key of your application.
+
+### host
+
+String. Host of the Datadog TCP (TLS) intake. Defaults to the US server (_intake.logs.datadoghq.com_).
+
+### port
+
+Number. Port of the Datadog TCP (TLS) intake. Defaults to _10516_.
+
+### environment
+
+String. Adds an environment attribute to Datadog logs. Empty by default.
+
+### tags
+
+Array of strings. Allows transport level tagging in Datadog. Each tag should follow the format `<KEY>:<VALUE>`. For more information see https://docs.datadoghq.com/getting_started/tagging/.
+
 ## redis_connection_string
 
 Connection string specifying access to a Redis instance, for example:

@@ -197,7 +197,7 @@
         },
         "port": {
           "type": "number",
-          "description": "Port of the Datadog TCP (TLS) intake. Default to 10516."
+          "description": "Port of the Datadog TCP (TLS) intake. Defaults to 10516."
         },
         "environment": {
           "type": "string",
