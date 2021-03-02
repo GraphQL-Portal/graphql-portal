@@ -15,6 +15,7 @@ export default {
           auth_tokens
           auth_header_name
         }
+        mesh
       }
     }
   }`,
