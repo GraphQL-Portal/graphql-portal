@@ -1,6 +1,6 @@
 import { dashboard, initDashboard } from '@graphql-portal/dashboard';
 import { prefixLogger } from '@graphql-portal/logger';
-import { ApiDef, GatewayConfig } from '@graphql-portal/types';
+import { ApiDef, apiDefSchema, GatewayConfig } from '@graphql-portal/types';
 import cluster from 'cluster';
 import { customAlphabet } from 'nanoid';
 import { loadApiDefs as loadApiDefsFromFs } from './api-def.config';
@@ -48,7 +48,7 @@ export async function loadApiDefs(): Promise<boolean> {
   } else {
     config.apiDefs = await loadApiDefsFromFs(config.gateway);
     config.timestamp = Date.now();
-    useEnv(config.apiDefs);
+    useEnv(config.apiDefs, apiDefSchema);
   }
   return true;
 }

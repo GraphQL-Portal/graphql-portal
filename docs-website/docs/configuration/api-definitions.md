@@ -138,5 +138,5 @@ Optional. An object with two fields:
   
 :::caution
 Due to security reasons we do not recommend specifying `auth_tokens` directly in the configuration file but rather pass
-them through the environment variables by setting `auth_tokens` to `@@AUTH_TOKENS`.
+them through the environment variables (separated by coma) by setting `auth_tokens` to `@@AUTH_TOKENS`.
 :::
