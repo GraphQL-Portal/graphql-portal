@@ -1,5 +1,7 @@
 import winston, { format, transports } from 'winston';
 import { gray } from 'chalk';
+import { GatewayConfig } from '@graphql-portal/types';
+import { DatadogTransport, DatadogTransportOptions } from './datadog-winston-transport';
 
 const labelPid = { label: `pid: ${process.pid}` };
 
@@ -35,20 +37,40 @@ function createLogger(): winston.Logger {
 export const logger: winston.Logger = createLogger();
 
 /* eslint-disable camelcase */
-export function configureLogger(config: {
-  log_level: 'debug' | 'info' | 'warn' | 'error';
-  log_format?: 'json' | 'text';
-}): void {
+/**
+ * Configures logger transports.
+ * Winston.transports.Console is always on.
+ */
+export function configureLogger({ log_format, log_level, datadog_logging, hostname }: GatewayConfig): void {
   logger.clear();
 
+  // Add Console Transport. Always on.
   logger.add(
     new transports.Console({
-      level: config.log_level,
-      format: config?.log_format === 'json' ? jsonFormat : consoleFormat,
+      level: log_level,
+      format: log_format === 'json' ? jsonFormat : consoleFormat,
     })
   );
+
+  // Datadog Transport
+  if (datadog_logging?.enabled) {
+    const opts: DatadogTransportOptions = datadog_logging;
+    opts.metadata = {
+      ddsource: 'graphql-portal',
+      service: 'gateway',
+      hostname,
+    };
+
+    if (datadog_logging.environment) opts.metadata.environment = datadog_logging.environment;
+
+    logger.add(new DatadogTransport(opts));
+  }
 }
 
+/**
+ * Creates a prefixed logger -> [{prefix}] {message}
+ * @param prefix
+ */
 export function prefixLogger(prefix = ''): winston.Logger {
   return logger.child({ prefix });
 }
