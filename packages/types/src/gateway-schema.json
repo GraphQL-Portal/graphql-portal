@@ -61,12 +61,16 @@
       "type": "string",
       "enum": ["text", "json"],
       "default": "text",
-      "description": "Sets the logging format. Can be 'text' or 'json'. JSON should be used while running in a Kubernetes pod."
+      "description": "Sets the default (console) logging format. Can be 'text' or 'json'. JSON should be used while running in a Kubernetes pod."
     },
     "log_level": {
       "type": "string",
       "enum": ["debug", "info", "warn", "error"],
       "description": "Sets the log level. Should not be set to 'debug' in production."
+    },
+    "datadog_logging": {
+      "$ref": "#/definitions/datadog_logging",
+      "description": "Configures sending of log messages to Datadog."
     },
     "redis_connection_string": {
       "type": "string",
@@ -172,6 +176,42 @@
           "type": "boolean"
         }
       }
+    },
+    "datadog_logging": {
+      "type": "object",
+      "description": "Configures sending of log messages to Datadog. If enabled will log to console and Datadog.",
+      "additionalProperties": false,
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "Enable or disable logging to Datadog. Defaults to false.",
+          "default": false
+        },
+        "apiKey": {
+          "type": "string",
+          "description": "Datadog API key of your application"
+        },
+        "host": {
+          "type": "string",
+          "description": "Host of the Datadog TCP (TLS) intake. Defaults to the US server (intake.logs.datadoghq.com)."
+        },
+        "port": {
+          "type": "number",
+          "description": "Port of the Datadog TCP (TLS) intake. Defaults to 10516."
+        },
+        "environment": {
+          "type": "string",
+          "description": "Adds an environment attribute to Datadog logs. Empty by default."
+        },
+        "tags": {
+          "type": "array",
+          "description": "Allows transport level tagging in Datadog. Each tag should follow the format <KEY>:<VALUE>. For more information see https://docs.datadoghq.com/getting_started/tagging/.",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": ["enabled", "apiKey"]
     }
   },
   "required": [
