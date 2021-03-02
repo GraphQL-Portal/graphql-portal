@@ -1,6 +1,6 @@
 export default {
-  getAllApiDefs: `query {
-    getAllApiDefs {
+  getAllApiDefsForGateway: `query {
+    getAllApiDefsForGateway {
       timestamp
       apiDefs {
         name
