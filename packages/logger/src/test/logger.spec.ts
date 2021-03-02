@@ -3,7 +3,7 @@ import { GatewayConfig } from '@graphql-portal/types';
 
 describe('logger', () => {
   describe('configureLogger', () => {
-    const config: GatewayConfig = {
+    const baseConfig: GatewayConfig = {
       hostname: 'localhost',
       listen_port: 8080,
       log_level: 'debug',
@@ -21,7 +21,7 @@ describe('logger', () => {
       const loggerClearSpy = jest.spyOn(logger.logger, 'clear');
       const loggerAddSpy = jest.spyOn(logger.logger, 'add');
 
-      logger.configureLogger(config);
+      logger.configureLogger(baseConfig);
       expect(loggerClearSpy).toHaveBeenCalledTimes(1);
       expect(loggerAddSpy).toHaveBeenCalledTimes(1);
 
@@ -29,14 +29,16 @@ describe('logger', () => {
     });
 
     it('should add Datadog transport if it is enabled in config', () => {
-      config.datadog_logging = {
-        enabled: true,
-        apiKey: '123',
-      };
       const loggerClearSpy = jest.spyOn(logger.logger, 'clear');
       const loggerAddSpy = jest.spyOn(logger.logger, 'add');
 
-      logger.configureLogger(config);
+      logger.configureLogger({
+        ...baseConfig,
+        datadog_logging: {
+          enabled: true,
+          apiKey: '123',
+        },
+      });
       expect(loggerClearSpy).toHaveBeenCalledTimes(1);
       expect(loggerAddSpy).toHaveBeenCalledTimes(2);
 
