@@ -42,7 +42,6 @@ export async function startServer(): Promise<void> {
 
   app.use(bodyParser.json({ limit: config.gateway.request_size_limit || '100kb' }));
   app.use(cookieParser());
-  // TODO: replace with a proper implementation of graphQL-upload
   app.use(graphqlUploadExpress());
   app.use(logResponse);
 
