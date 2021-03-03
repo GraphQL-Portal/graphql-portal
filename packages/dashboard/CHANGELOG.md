@@ -1,5 +1,15 @@
 # @graphql-portal/dashboard
 
+## 0.1.3
+
+### Patch Changes
+
+- d1a6115: add mesh packages, fix cors.origin, add apiDef.mesh to dashboard query
+- Updated dependencies [824f9f0]
+- Updated dependencies [d1a6115]
+  - @graphql-portal/logger@0.4.0
+  - @graphql-portal/types@0.17.0
+
 ## 0.1.2
 
 ### Patch Changes

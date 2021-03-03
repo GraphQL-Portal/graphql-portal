@@ -113,6 +113,7 @@ function getCorsOptions(): cors.CorsOptions {
 
     Object.assign(opts, options);
     Array.isArray(opts.origin) ? opts.origin.push(...additionalOrigins) : (opts.origin = [...additionalOrigins]);
+    opts.origin = opts.origin.map((origin) => (typeof origin === 'string' ? origin.replace(/\/+$/, '') : origin));
   }
 
   logger.info(`Enabling CORS for following Origins: ${JSON.stringify(opts.origin)}`);

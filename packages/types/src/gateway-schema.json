@@ -154,7 +154,8 @@
           "type": "array",
           "description": "Configures the Access-Control-Allow-Origin CORS header. Expects an Array of valid origins.",
           "items": {
-            "type": "string"
+            "type": "string",
+            "pattern": "[^\\/]$"
           }
         },
         "methods": {
