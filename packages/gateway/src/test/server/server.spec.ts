@@ -70,7 +70,7 @@ jest.mock('@graphql-portal/config', () => ({
     apiDefs: [],
     gateway: {
       use_dashboard_configs: true,
-      redis_connection_string: 'redis',
+      redis: { connection_string: 'redis' },
       listen_port: 8080,
       hostname: 'localhost',
       enable_metrics_recording: true,
@@ -94,7 +94,7 @@ describe('Server', () => {
   let redis: Redis | Cluster;
 
   beforeAll(async () => {
-    redis = await setupRedis({ connection_string: 'string', is_cluster: false });
+    redis = await setupRedis({ connection_string: 'string' });
   });
 
   describe('startServer', () => {

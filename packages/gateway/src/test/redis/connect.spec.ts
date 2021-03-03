@@ -16,7 +16,7 @@ jest.mock(
 
 describe('Redis', () => {
   describe('connect', () => {
-    const options = { connection_string: 'redis://localhost:6379', is_cluster: false };
+    const options = { connection_string: 'redis://localhost:6379' };
 
     it('should create an instance of redis client and wait for connect event before resolving the promise', async () => {
       const promise = connect(options);

@@ -6,7 +6,7 @@ jest.mock('@graphql-portal/config', () => ({
   config: {
     gateway: {
       use_dashboard_configs: true,
-      redis_connection_string: 'redis',
+      redis: { connection_string: 'redis' },
       listen_port: 8080,
       hostname: 'localhost',
     },

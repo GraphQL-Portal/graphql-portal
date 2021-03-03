@@ -12,7 +12,7 @@ jest.mock('../../redis/ping', () => ({
 
 describe('Redis', () => {
   describe('setupRedis', () => {
-    const options = { connection_string: 'redis://localhost:6379', is_cluster: false };
+    const options = { connection_string: 'redis://localhost:6379' };
 
     it('should call connect with given options, ping with the publisher and return the subscriber', async () => {
       const result = await setupRedis(options);

@@ -64,7 +64,9 @@ For example, lets take the following configuration file:
   "apis_path": "config/apidefs",
   "sources_path": "config/datasources",
   "middleware_path": "config/middlewares",
-  "redis_connection_string": "redis://localhost:6379",
+  "redis": {
+    "connection_string": "redis://localhost:6379"
+  },
   "use_dashboard_configs": false,
   "enable_control_api": false,
   "log_level": "@@LOG_LEVEL"
@@ -188,16 +190,9 @@ Integer. Configures the Access-Control-Max-Age CORS header.
 Integer. Provides a status code to use for successful OPTIONS requests, since some legacy browsers (IE11, various SmartTVs) 
 choke on 204.
 
-## metrics
+## enable_metrics_recording
 
-Optional. Enables metrics gathering. Disabled by default.
-```json
-{
-  "metrics": {
-    "enabled": false
-  }
-}
-```
+Boolean. Enables metrics gathering. Disabled by default.
 
 ## log_format
 
@@ -235,12 +230,20 @@ String. Adds an environment attribute to Datadog logs. Empty by default.
 
 Array of strings. Allows transport level tagging in Datadog. Each tag should follow the format `<KEY>:<VALUE>`. For more information see https://docs.datadoghq.com/getting_started/tagging/.
 
-## redis_connection_string
+## redis
+Redis connection options.
 
 Connection string specifying access to a Redis instance, for example:
 ```json
 {
-  "redis_connection_string": "redis://localhost:6379"
+  "connection_string": "redis://localhost:6379",
+}
+```
+If you want to connect to a Redis cluster:
+```json
+{
+  "is_cluster": true,
+  "cluster_nodes": ["redis://localhost:7001", "redis://localhost:7002", "redis://localhost:7003"],
 }
 ```
 
