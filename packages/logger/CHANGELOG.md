@@ -1,5 +1,17 @@
 # @graphql-portal/logger
 
+## 0.4.0
+
+### Minor Changes
+
+- 824f9f0: Add Datadog logger
+
+### Patch Changes
+
+- Updated dependencies [824f9f0]
+- Updated dependencies [d1a6115]
+  - @graphql-portal/types@0.17.0
+
 ## 0.3.1
 
 ### Patch Changes
