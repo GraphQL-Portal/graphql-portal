@@ -45,6 +45,10 @@ export interface GatewayConfig {
    */
   enable_control_api: boolean;
   /**
+   * Enable or disable metrics recording to Redis
+   */
+  enable_metrics_recording?: boolean;
+  /**
    * Configuration of the Control API
    */
   control_api_config?: {
@@ -88,12 +92,6 @@ export interface GatewayConfig {
     optionsSuccessStatus?: number;
   };
   /**
-   * Configuration of the analytics/metrics.
-   */
-  metrics?: {
-    enabled?: boolean;
-  };
-  /**
    * Sets the default (console) logging format. Can be 'text' or 'json'. JSON should be used while running in a Kubernetes pod.
    */
   log_format?: 'text' | 'json';
@@ -118,7 +116,7 @@ export interface GatewayConfig {
      */
     host?: string;
     /**
-     * Port of the Datadog TCP (TLS) intake. Default to 10516.
+     * Port of the Datadog TCP (TLS) intake. Defaults to 10516.
      */
     port?: number;
     /**
@@ -131,9 +129,11 @@ export interface GatewayConfig {
     tags?: string[];
   };
   /**
-   * Redis connection string in a format 'redis://localhost:6379'.
+   * Redis connection options
    */
-  redis_connection_string: string;
+  redis: {
+    [k: string]: unknown;
+  };
   /**
    * This value specifies an HTTP Request size limit for a particular API Definition. Accepts numeric (in bytes) or string values, i.e. 'b' for bytes, 'kb' for kilobytes and 'mb' for megabytes (f.e., '10kb' or '10mb').
    */

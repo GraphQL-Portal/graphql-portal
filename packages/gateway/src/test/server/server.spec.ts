@@ -1,6 +1,6 @@
 import { config } from '@graphql-portal/config';
 import { Channel } from '@graphql-portal/types';
-import { Redis } from 'ioredis';
+import { Redis, Cluster } from 'ioredis';
 import { getConfigFromMaster } from '../../ipc/utils';
 import { startPeriodicMetricsRecording } from '../../metric';
 import setupRedis from '../../redis';
@@ -73,9 +73,7 @@ jest.mock('@graphql-portal/config', () => ({
       redis_connection_string: 'redis',
       listen_port: 8080,
       hostname: 'localhost',
-      metrics: {
-        enabled: true,
-      },
+      enable_metrics_recording: true,
       cors: {
         enabled: true,
         origins: ['http://localhost:3000'],
@@ -93,10 +91,10 @@ jest.mock('../../server/control-api/', () => {
 });
 
 describe('Server', () => {
-  let redis: Redis;
+  let redis: Redis | Cluster;
 
   beforeAll(async () => {
-    redis = await setupRedis('string');
+    redis = await setupRedis({ connection_string: 'string', is_cluster: false });
   });
 
   describe('startServer', () => {
@@ -107,7 +105,7 @@ describe('Server', () => {
       expect(app.disable).toHaveBeenCalledTimes(1);
       expect(app.disable).toHaveBeenCalledWith('x-powered-by');
       expect(setRouter).toHaveBeenCalledWith(app, config.apiDefs);
-      expect(setupRedis).toHaveBeenCalledWith(config.gateway.redis_connection_string);
+      expect(setupRedis).toHaveBeenCalledWith(config.gateway.redis);
       expect(redis.subscribe).toHaveBeenCalledWith(Channel.apiDefsUpdated);
       expect(redis.on).toHaveBeenCalledWith('message', expect.any(Function));
       expect(setupControlApi).toHaveBeenCalledTimes(0);
