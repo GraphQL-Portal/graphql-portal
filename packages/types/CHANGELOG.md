@@ -1,5 +1,15 @@
 # @graphql-portal/types
 
+## 0.17.0
+
+### Minor Changes
+
+- 824f9f0: Add Datadog logger
+
+### Patch Changes
+
+- d1a6115: add mesh packages, fix cors.origin, add apiDef.mesh to dashboard query
+
 ## 0.16.2
 
 ### Patch Changes

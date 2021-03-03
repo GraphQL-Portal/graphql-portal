@@ -1,14 +1,14 @@
 {
   "name": "@graphql-portal/dashboard",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "license": "MIT",
   "main": "dist/src/index.js",
   "scripts": {
     "build": "tsc -b"
   },
   "dependencies": {
-    "@graphql-portal/logger": "^0.3.0",
-    "@graphql-portal/types": "^0.16.0",
+    "@graphql-portal/logger": "^0.4.0",
+    "@graphql-portal/types": "^0.17.0",
     "axios": "^0.21.1"
   },
   "publishConfig": {
