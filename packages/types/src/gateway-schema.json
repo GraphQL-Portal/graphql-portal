@@ -73,34 +73,39 @@
       "description": "Configures sending of log messages to Datadog."
     },
     "redis": {
-      "type": "object",
-      "description": "Redis connection options",
-      "properties": {
-        "connection_string": {
-          "type": "string",
-          "description": "Redis connection string in a format 'redis://localhost:6379'."
-        },
-        "is_cluster": {
-          "type": "boolean",
-          "default": false,
-          "description": "Is connection to cluster"
-        },
-        "cluster_nodes": {
-          "type": "array",
-          "items": {
-            "type": "string",
-            "description": "Cluster nodes in a format 'redis://localhost:6379'."
-          }
-        }
-      },
       "oneOf": [
         {
-          "required": ["connection_string"]
+          "type": "object",
+          "properties": {
+            "connection_string": {
+              "type": "string",
+              "description": "Redis connection string in a format 'redis://localhost:6379'."
+            }
+          },
+          "required": ["connection_string"],
+          "additionalProperties": false
         },
         {
-          "required": ["cluster_nodes"]
+          "type": "object",
+          "properties": {
+            "is_cluster": {
+              "type": "boolean",
+              "default": false,
+              "description": "Is connection to cluster"
+            },
+            "cluster_nodes": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "description": "Cluster nodes in a format 'redis://localhost:6379'."
+              }
+            }
+          },
+          "required": ["cluster_nodes", "is_cluster"],
+          "additionalProperties": false
         }
-      ]
+      ],
+      "description": "Redis connection options"
     },
     "request_size_limit": {
       "oneOf": [
