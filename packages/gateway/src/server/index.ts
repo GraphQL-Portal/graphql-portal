@@ -30,7 +30,7 @@ export const connections = {
 };
 
 export async function startServer(): Promise<void> {
-  const redisSubscriber = await setupRedis((config.gateway.redis as unknown) as RedisConnectionOptions);
+  const redisSubscriber = await setupRedis(config.gateway.redis as RedisConnectionOptions);
 
   const app = express();
   const httpServer = createServer(app);
