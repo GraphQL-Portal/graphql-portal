@@ -705,17 +705,45 @@ export interface ContentfulHandler {
    */
   endpoint: string;
 }
-export interface CrunchbaseHandler {}
+export interface CrunchbaseHandler {
+  /**
+   * Authentication API Key
+   */
+  userKey: string;
+}
 export interface FedexHandler {}
 export interface SalesforceHandler {
   /**
    * A endpoint of your Salesforce API
    */
   baseUrl: string;
+  /**
+   * Authentication token
+   */
+  token?: string;
 }
 export interface SlackHandler {}
-export interface StripeHandler {}
-export interface TwitterHandler {}
+export interface StripeHandler {
+  /**
+   * Authentication token
+   */
+  token: string;
+}
+export interface TwitterHandler {
+  /**
+   * Authorization header. Set up the following variables in order to run each request (depending on the authentication type used by the request you are sending):
+   *
+   * |Name|Description|
+   * |---|---|
+   * |`consumer_key`|Your consumer key|
+   * |`consumer_secret`|Your consumer secret|
+   * |`access_token`|Your access token|
+   * |`token_secret`|Your access token secret|
+   * |`bearer_token`|Your bearer token|
+   *
+   */
+  authorization: string;
+}
 export interface WeatherbitHandler {}
 export interface IPAPIHandler {}
 export interface Transform {

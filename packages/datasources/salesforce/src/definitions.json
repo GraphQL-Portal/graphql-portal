@@ -7,6 +7,10 @@
       "baseUrl": {
         "type": "string",
         "description": "A endpoint of your Salesforce API"
+      },
+      "token": {
+        "type": "string",
+        "description": "Authentication token"
       }
     },
     "required": ["baseUrl"]

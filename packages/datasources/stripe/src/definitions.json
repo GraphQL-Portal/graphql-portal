@@ -2,6 +2,13 @@
   "StripeHandler": {
     "additionalProperties": false,
     "type": "object",
-    "title": "StripeHandler"
+    "title": "StripeHandler",
+    "properties": {
+      "token": {
+        "type": "string",
+        "description": "Authentication token"
+      }
+    },
+    "required": ["token"]
   }
 }
