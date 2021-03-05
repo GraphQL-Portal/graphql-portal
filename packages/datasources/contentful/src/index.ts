@@ -5,8 +5,9 @@ const GraphQLHandler = require('@graphql-mesh/graphql');
 
 export default class ContentfulHandler extends GraphQLHandler {
   public constructor({ name, config, cache }: GetMeshSourceOptions<YamlConfig.GraphQLHandler & { token: string }>) {
-    config.schemaHeaders = { authorization: `Bearer ${config.token}` };
-    config.operationHeaders = { authorization: `Bearer ${config.token}` };
+    config.schemaHeaders = config.operationHeaders = {
+      authorization: `Bearer ${config.token}`,
+    };
     super({ name, config, cache });
   }
 }
