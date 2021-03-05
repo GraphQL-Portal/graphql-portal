@@ -3,6 +3,8 @@ import { configureLogger, prefixLogger } from '@graphql-portal/logger';
 import cluster from 'cluster';
 import { cpus } from 'os';
 import { applyRegisteredHandlers, getConfigFromMaster, spreadMessageToWorkers } from './ipc/utils';
+import setupRedis from './redis';
+import RedisConnectionOptions from './redis/redis-connection.interface';
 import { startServer } from './server';
 
 const logger = prefixLogger('server');
@@ -43,6 +45,7 @@ async function start(): Promise<void> {
     process.on('SIGTERM', handleStopSignal);
 
     applyRegisteredHandlers();
+    await setupRedis(config.gateway.redis as RedisConnectionOptions);
   } else {
     await getConfigFromMaster();
     configureLogger(config.gateway);
