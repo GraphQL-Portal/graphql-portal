@@ -1,3 +1,4 @@
+import cluster from 'cluster';
 import { prefixLogger } from '@graphql-portal/logger';
 import IORedis, { Cluster } from 'ioredis';
 import connect from './connect';
@@ -14,6 +15,6 @@ export default async function setupRedis(options: RedisConnectionOptions): Promi
   redis = await connect(options);
 
   logger.info('Connected to Redis at ➜ %s', options);
-  ping(redis);
+  if (cluster.isMaster) ping(redis);
   return redisSubscriber;
 }
