@@ -12,6 +12,7 @@ import { promisify } from 'util';
 import { startPeriodicMetricsRecording } from '../metric';
 import { logResponse } from '../middleware';
 import setupRedis from '../redis';
+import RedisConnectionOptions from '../redis/redis-connection.interface';
 import setupControlApi from './control-api';
 import { setRouter, updateApi } from './router';
 
@@ -29,7 +30,7 @@ export const connections = {
 };
 
 export async function startServer(): Promise<void> {
-  const redisSubscriber = await setupRedis(config.gateway.redis_connection_string);
+  const redisSubscriber = await setupRedis(config.gateway.redis as RedisConnectionOptions);
 
   const app = express();
   const httpServer = createServer(app);
@@ -90,7 +91,7 @@ export async function startServer(): Promise<void> {
 
   httpServer.listen(config.gateway.listen_port, config.gateway.hostname, () => {});
 
-  if (config.gateway?.metrics?.enabled) {
+  if (config.gateway?.enable_metrics_recording) {
     startPeriodicMetricsRecording();
   }
 

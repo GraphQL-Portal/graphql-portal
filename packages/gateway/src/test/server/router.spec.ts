@@ -11,9 +11,7 @@ import { buildRouter, setRouter } from '../../server/router';
 jest.mock('@graphql-portal/config', () => ({
   config: {
     gateway: {
-      metrics: {
-        enabled: true,
-      },
+      enable_metrics_recording: true,
     },
   },
 }));
@@ -57,7 +55,7 @@ describe('Server', () => {
       it('should use mesh for api endpoint', async () => {
         const result = await buildRouter([apiDef]);
 
-        expect(result.stack.find((layer) => layer.regexp.test(apiDef.endpoint))).toBeDefined;
+        expect(result.stack.find((layer) => layer.regexp.test(apiDef.endpoint))).toBeDefined();
         expect(processConfig).toHaveBeenCalledTimes(1);
         expect(getMesh).toHaveBeenCalledTimes(1);
         expect(graphqlHTTP).toHaveBeenCalledTimes(1);

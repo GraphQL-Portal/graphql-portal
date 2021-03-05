@@ -45,6 +45,10 @@
       "type": "boolean",
       "description": "Enables or disables the Control API which is used to update GraphQL Schema definitions."
     },
+    "enable_metrics_recording": {
+      "type": "boolean",
+      "description": "Enable or disable metrics recording to Redis"
+    },
     "control_api_config": {
       "$ref": "#/definitions/control_api_config",
       "description": "Configuration of the Control API"
@@ -52,10 +56,6 @@
     "cors": {
       "$ref": "#/definitions/cors",
       "description": "Configuration of CORS requests."
-    },
-    "metrics": {
-      "$ref": "#/definitions/metrics",
-      "description": "Configuration of the analytics/metrics."
     },
     "log_format": {
       "type": "string",
@@ -72,9 +72,40 @@
       "$ref": "#/definitions/datadog_logging",
       "description": "Configures sending of log messages to Datadog."
     },
-    "redis_connection_string": {
-      "type": "string",
-      "description": "Redis connection string in a format 'redis://localhost:6379'."
+    "redis": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "connection_string": {
+              "type": "string",
+              "description": "Redis connection string in a format 'redis://localhost:6379'."
+            }
+          },
+          "required": ["connection_string"],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "is_cluster": {
+              "type": "boolean",
+              "default": false,
+              "description": "Is connection to cluster"
+            },
+            "cluster_nodes": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "description": "Cluster nodes in a format 'redis://localhost:6379'."
+              }
+            }
+          },
+          "required": ["cluster_nodes", "is_cluster"],
+          "additionalProperties": false
+        }
+      ],
+      "description": "Redis connection options"
     },
     "request_size_limit": {
       "oneOf": [
@@ -168,16 +199,6 @@
         }
       }
     },
-    "metrics": {
-      "type": "object",
-      "description": "Used to specify GraphQL Portal metrics settings",
-      "additionalProperties": false,
-      "properties": {
-        "enabled": {
-          "type": "boolean"
-        }
-      }
-    },
     "datadog_logging": {
       "type": "object",
       "description": "Configures sending of log messages to Datadog. If enabled will log to console and Datadog.",
@@ -215,14 +236,7 @@
       "required": ["enabled", "apiKey"]
     }
   },
-  "required": [
-    "hostname",
-    "listen_port",
-    "use_dashboard_configs",
-    "enable_control_api",
-    "log_level",
-    "redis_connection_string"
-  ],
+  "required": ["hostname", "listen_port", "use_dashboard_configs", "enable_control_api", "log_level", "redis"],
   "if": {
     "properties": {
       "use_dashboard_configs": {

@@ -1,9 +1,9 @@
 import { config } from '@graphql-portal/config';
 import { Channel } from '@graphql-portal/types';
-import { Redis } from 'ioredis';
+import { Redis, Cluster } from 'ioredis';
 import * as os from 'os';
 
-export async function ping(redis: Redis): Promise<void> {
+export async function ping(redis: Redis | Cluster): Promise<void> {
   setInterval(() => {
     redis.publish(
       Channel.ping,

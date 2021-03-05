@@ -1,18 +1,19 @@
 import { prefixLogger } from '@graphql-portal/logger';
-import IORedis from 'ioredis';
+import IORedis, { Cluster } from 'ioredis';
 import connect from './connect';
 import { ping } from './ping';
+import RedisConnectionOptions from './redis-connection.interface';
 
 const logger = prefixLogger('redis');
 
-export let redisSubscriber: IORedis.Redis;
-export let redis: IORedis.Redis;
+export let redisSubscriber: IORedis.Redis | Cluster;
+export let redis: IORedis.Redis | Cluster;
 
-export default async function setupRedis(connectionString: string): Promise<IORedis.Redis> {
-  redisSubscriber = await connect(connectionString);
-  redis = await connect(connectionString);
+export default async function setupRedis(options: RedisConnectionOptions): Promise<IORedis.Redis | Cluster> {
+  redisSubscriber = await connect(options);
+  redis = await connect(options);
 
-  logger.info('Connected to Redis at ➜ %s', connectionString);
+  logger.info('Connected to Redis at ➜ %s', options);
   ping(redis);
   return redisSubscriber;
 }

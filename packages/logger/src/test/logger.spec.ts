@@ -14,7 +14,7 @@ describe('logger', () => {
         secret: '123',
       },
       enable_control_api: false,
-      redis_connection_string: 'redis://localhost:6379',
+      redis: { connection_string: 'redis://localhost:6379', is_cluster: false },
     };
 
     it('should always enable console logging', () => {
