@@ -4,6 +4,18 @@
   "type": "object",
   "additionalProperties": false,
   "properties": {
+    "apiDefs": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "sources": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
     "hostname": {
       "type": "string",
       "description": "The hostname to bind the gateway node to.",
@@ -49,7 +61,7 @@
     "enable_control_api": {
       "type": "boolean",
       "description": "Enables or disables the Control API which is used to update GraphQL Schema definitions.",
-      "default": "true"
+      "default": true
     },
     "enable_metrics_recording": {
       "type": "boolean",

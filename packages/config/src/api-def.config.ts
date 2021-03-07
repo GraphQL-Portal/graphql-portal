@@ -52,7 +52,7 @@ export function apiDefConfigGuard(apiDef: any): apiDef is ApiDefConfig {
   return true;
 }
 
-export async function loadApiDefs(gatewayConfig: GatewayConfig): Promise<ApiDef[]> {
+export async function loadApiDefsFromFs(gatewayConfig: GatewayConfig): Promise<ApiDef[]> {
   if (gatewayConfig.apis_path === '' || gatewayConfig.sources_path === '') {
     logger.warn('"apis_path" and "sources_path" cannot be empty, skipping loading of API Definitions.');
     return [];
@@ -87,6 +87,41 @@ export async function loadApiDefs(gatewayConfig: GatewayConfig): Promise<ApiDef[
           mesh: apiConfig.mesh || {},
         };
       })
+  );
+
+  return apiDefs;
+}
+
+export async function loadApiDefsFromGatewayConfig(gatewayConfig: GatewayConfig): Promise<ApiDef[]> {
+  const apiDefs = await Promise.all(
+    gatewayConfig.apiDefs!.map(async (apiConfig, i) => {
+      const apiPath = `gateway.apiDefs[${i}]`;
+      if (!apiDefConfigGuard(apiConfig)) {
+        throw new Error(`API configuration is not valid: ${apiPath}`);
+      }
+      if (!apiConfig.source_names?.length) {
+        throw new Error(`API should have some source_names: ${apiPath}`);
+      }
+
+      const sources = await Promise.all(
+        apiConfig.source_names!.map(async (sourceName) => {
+          const source = gatewayConfig.sources!.find((source) => source.name === sourceName);
+          if (!source) {
+            logger.warn(`Source "${sourceName}" was not found for ${apiPath}`);
+          }
+          if (!sourceConfigGuard(source)) {
+            throw new Error(`Source configuration is not valid: ${sourceName}`);
+          }
+          return source;
+        })
+      );
+
+      return {
+        ...apiConfig,
+        sources,
+        mesh: apiConfig.mesh || {},
+      };
+    })
   );
 
   return apiDefs;

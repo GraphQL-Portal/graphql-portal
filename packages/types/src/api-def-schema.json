@@ -1251,6 +1251,7 @@
     "name": { "type": "string" },
     "endpoint": { "type": "string", "pattern": "^/" },
     "source_config_names": { "type": "array", "items": { "type": "string", "pattern": "\\.(yaml|json)$" } },
+    "source_names": { "type": "array", "items": { "type": "string" } },
     "schema_polling_interval": { "type": "integer" },
     "schema_updates_through_control_api": { "type": "boolean", "default": false },
     "enable_ip_filtering": { "type": "boolean" },
