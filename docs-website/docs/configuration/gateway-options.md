@@ -91,9 +91,9 @@ proxy.
 
 ## pool_size
 
-The size of the NodeJS Cluster pool, i.e. how many instances of the gateway are going to be launched on the same host.
+Optional number. The size of the NodeJS Cluster pool, i.e. how many instances of the gateway are going to be launched on the same host.
 It is recommended to keep this number equal to the number of CPU cores on the machine. Setting this value to 1 will 
-launch a single-instance gateway.
+launch a single-instance gateway. Setting it to 0 or removing it will use all the available CPU cores on the machine.
 
 ## use_dashboard_configs
 
