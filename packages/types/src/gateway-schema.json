@@ -86,6 +86,7 @@
               "description": "Redis connection string in a format 'redis://localhost:6379'."
             }
           },
+          "required": ["connection_string"],
           "additionalProperties": false
         },
         {
@@ -104,6 +105,7 @@
               }
             }
           },
+          "required": ["cluster_nodes", "is_cluster"],
           "additionalProperties": false
         }
       ],

@@ -140,14 +140,14 @@ export interface GatewayConfig {
         /**
          * Redis connection string in a format 'redis://localhost:6379'.
          */
-        connection_string?: string;
+        connection_string: string;
       }
     | {
         /**
          * Is connection to cluster
          */
-        is_cluster?: boolean;
-        cluster_nodes?: string[];
+        is_cluster: boolean;
+        cluster_nodes: string[];
       };
   /**
    * This value specifies an HTTP Request size limit for a particular API Definition. Accepts numeric (in bytes) or string values, i.e. 'b' for bytes, 'kb' for kilobytes and 'mb' for megabytes (f.e., '10kb' or '10mb').
