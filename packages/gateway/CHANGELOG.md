@@ -1,5 +1,11 @@
 # @graphql-portal/gateway
 
+## 0.16.2
+
+### Patch Changes
+
+- 660f3a5: ping redis only from master
+
 ## 0.16.1
 
 ### Patch Changes
