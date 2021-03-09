@@ -81,7 +81,7 @@ async function buildApi(toRouter: Router, apiDef: ApiDef, mesh?: IMesh): Promise
   const { schema, contextBuilder, pubsub } = mesh;
   apiSchema[apiDef.name] = schema;
 
-  if (config.gateway?.metrics?.enabled) {
+  if (config.gateway?.enable_metrics_recording) {
     await subscribeToRequestMetrics(pubsub);
   }
 

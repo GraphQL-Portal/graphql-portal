@@ -7,7 +7,7 @@ jest.mock(
   'ioredis',
   () =>
     class RedisMock extends EventEmitter {
-      constructor(public connectionString: string) {
+      public constructor(public connectionString: string) {
         super();
         redisClient = this;
       }
@@ -16,15 +16,15 @@ jest.mock(
 
 describe('Redis', () => {
   describe('connect', () => {
-    const connectionString = 'redis://localhost:6379';
+    const options = { connection_string: 'redis://localhost:6379' };
 
     it('should create an instance of redis client and wait for connect event before resolving the promise', async () => {
-      const promise = connect(connectionString);
+      const promise = connect(options);
       redisClient.emit('connect');
       const result = await promise;
 
       expect(result).toBe(redisClient);
-      expect((result as any).connectionString).toBe(connectionString);
+      expect((result as any).connectionString).toStrictEqual(options.connection_string);
     });
   });
 });
