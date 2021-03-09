@@ -18,7 +18,7 @@ export default async function redisConnect(
   } else if (options?.is_cluster && options?.cluster_nodes?.length) {
     redis = new Redis.Cluster(options?.cluster_nodes);
   } else {
-    return Promise.reject(new Error('Redis connection string does not provided'));
+    return Promise.reject(new Error('Redis connection string was not provided'));
   }
 
   await new Promise((resolve, reject) => {

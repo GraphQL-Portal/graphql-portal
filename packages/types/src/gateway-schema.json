@@ -74,7 +74,7 @@
     },
     "redis_connection_string": {
       "type": "string",
-      "description": "Redis connection string in a format 'redis://localhost:6379'."
+      "description": "(Deprecated) Redis connection string in a format 'redis://localhost:6379'."
     },
     "redis": {
       "oneOf": [

@@ -129,7 +129,7 @@ export interface GatewayConfig {
     tags?: string[];
   };
   /**
-   * Redis connection string in a format 'redis://localhost:6379'.
+   * (Deprecated) Redis connection string in a format 'redis://localhost:6379'.
    */
   redis_connection_string?: string;
   /**

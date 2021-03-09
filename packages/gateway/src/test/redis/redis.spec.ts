@@ -18,7 +18,7 @@ describe('Redis', () => {
       const result = await setupRedis(options);
 
       expect(mockConnect).toHaveBeenCalledTimes(2);
-      expect(mockConnect).toHaveBeenCalledWith(options);
+      expect(mockConnect).toHaveBeenCalledWith(options, undefined);
       expect(mockPing).toHaveBeenCalledTimes(1);
       expect(mockPing).toHaveBeenCalledWith({ publisher: true });
       expect(result).toMatchObject({ publisher: false });
