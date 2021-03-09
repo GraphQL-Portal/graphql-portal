@@ -31,7 +31,6 @@ export interface Handler {
   tuql?: TuqlHandler;
   ContentfulHandler?: ContentfulHandler;
   CrunchbaseHandler?: CrunchbaseHandler;
-  FedexHandler?: FedexHandler;
   SalesforceHandler?: SalesforceHandler;
   SlackHandler?: SlackHandler;
   StripeHandler?: StripeHandler;
@@ -711,7 +710,6 @@ export interface CrunchbaseHandler {
    */
   userKey: string;
 }
-export interface FedexHandler {}
 export interface SalesforceHandler {
   /**
    * A endpoint of your Salesforce API
