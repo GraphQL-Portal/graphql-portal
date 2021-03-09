@@ -55,9 +55,6 @@
       "path": "packages/datasources/crunchbase"
     },
     {
-      "path": "packages/datasources/fedex"
-    },
-    {
       "path": "packages/datasources/twitter"
     },
     {
