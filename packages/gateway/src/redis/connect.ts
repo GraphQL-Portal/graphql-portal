@@ -10,6 +10,9 @@ export default async function redisConnect(
   connectionString?: string
 ): Promise<IRedis | Cluster> {
   let redis: IRedis | Cluster;
+  if (connectionString) {
+    logger.warn('redis_connection_string is deprecated. Use redis.connection_string instead.');
+  }
   if (connectionString || options?.connection_string) {
     redis = new Redis(connectionString || options?.connection_string);
   } else if (options?.is_cluster && options?.cluster_nodes?.length) {
