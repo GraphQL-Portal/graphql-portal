@@ -45,7 +45,7 @@ async function start(): Promise<void> {
     process.on('SIGTERM', handleStopSignal);
 
     applyRegisteredHandlers();
-    await setupRedis(config.gateway.redis as RedisConnectionOptions);
+    await setupRedis(config.gateway.redis as RedisConnectionOptions, config.gateway.redis_connection_string);
   } else {
     await getConfigFromMaster();
     configureLogger(config.gateway);

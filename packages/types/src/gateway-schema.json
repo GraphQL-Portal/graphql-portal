@@ -72,6 +72,10 @@
       "$ref": "#/definitions/datadog_logging",
       "description": "Configures sending of log messages to Datadog."
     },
+    "redis_connection_string": {
+      "type": "string",
+      "description": "Redis connection string in a format 'redis://localhost:6379'."
+    },
     "redis": {
       "oneOf": [
         {
@@ -82,7 +86,6 @@
               "description": "Redis connection string in a format 'redis://localhost:6379'."
             }
           },
-          "required": ["connection_string"],
           "additionalProperties": false
         },
         {
@@ -101,7 +104,6 @@
               }
             }
           },
-          "required": ["cluster_nodes", "is_cluster"],
           "additionalProperties": false
         }
       ],
@@ -236,7 +238,7 @@
       "required": ["enabled", "apiKey"]
     }
   },
-  "required": ["hostname", "listen_port", "use_dashboard_configs", "enable_control_api", "log_level", "redis"],
+  "required": ["hostname", "listen_port", "use_dashboard_configs", "enable_control_api", "log_level"],
   "if": {
     "properties": {
       "use_dashboard_configs": {
