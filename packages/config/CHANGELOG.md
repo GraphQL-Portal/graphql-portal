@@ -1,5 +1,18 @@
 # @graphql-portal/config
 
+## 0.9.0
+
+### Minor Changes
+
+- 20dc51d: zero and single file config
+
+### Patch Changes
+
+- Updated dependencies [20dc51d]
+  - @graphql-portal/types@0.18.0
+  - @graphql-portal/dashboard@0.1.4
+  - @graphql-portal/logger@0.4.1
+
 ## 0.8.2
 
 ### Patch Changes
