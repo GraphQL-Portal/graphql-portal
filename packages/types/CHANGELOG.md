@@ -1,5 +1,11 @@
 # @graphql-portal/types
 
+## 0.18.0
+
+### Minor Changes
+
+- 20dc51d: zero and single file config
+
 ## 0.17.0
 
 ### Minor Changes
