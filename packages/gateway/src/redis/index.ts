@@ -17,7 +17,16 @@ export default async function setupRedis(
   redisSubscriber = await connect(options, connectionString);
   redis = await connect(options, connectionString);
 
-  logger.info('Connected to Redis at ➜ %s', JSON.stringify({ options, connectionString }));
+  const redisConnectionString = connectionString || options.connection_string;
+  if (redisConnectionString) {
+    logger.info('Connected to Redis at ➜ %s', redisConnectionString);
+  } else {
+    logger.info('Connected to Redis Cluster');
+    logger.info('Cluster nodes: ');
+    for (const node of options.cluster_nodes!) {
+      logger.info(`  ${node}`);
+    }
+  }
   if (cluster.isMaster) ping(redis);
   return redisSubscriber;
 }
