@@ -1,5 +1,14 @@
 # @graphql-portal/config
 
+## 0.9.2
+
+### Patch Changes
+
+- c50438b: fix config
+- Updated dependencies [c50438b]
+  - @graphql-portal/types@0.18.2
+  - @graphql-portal/logger@0.4.3
+
 ## 0.9.1
 
 ### Patch Changes
