@@ -10,6 +10,9 @@
     "@graphql-mesh/openapi": "^0.13.0",
     "graphql": "^15.4.0"
   },
+  "devDependencies": {
+    "@graphql-mesh/types": "0.35.1"
+  },
   "publishConfig": {
     "access": "public"
   }
