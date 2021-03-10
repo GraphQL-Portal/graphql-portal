@@ -3,7 +3,7 @@ import { prefixLogger } from '@graphql-portal/logger';
 import { ApiDef, apiDefSchema, GatewayConfig } from '@graphql-portal/types';
 import cluster from 'cluster';
 import { customAlphabet } from 'nanoid';
-import { loadApiDefs as loadApiDefsFromFs } from './api-def.config';
+import { loadApiDefsFromFs, loadApiDefsFromGatewayConfig } from './api-def.config';
 import { loadConfig } from './gateway.config';
 import useEnv from './use-env';
 
@@ -46,7 +46,12 @@ export async function loadApiDefs(): Promise<boolean> {
     config.apiDefs = loaded.apiDefs;
     config.timestamp = +loaded.timestamp;
   } else {
-    config.apiDefs = await loadApiDefsFromFs(config.gateway);
+    if (config.gateway.apiDefs?.length && config.gateway.sources?.length) {
+      logger.info('Use API defs from config.gateway');
+      config.apiDefs = await loadApiDefsFromGatewayConfig(config.gateway);
+    } else {
+      config.apiDefs = await loadApiDefsFromFs(config.gateway);
+    }
     config.timestamp = Date.now();
     useEnv(config.apiDefs, apiDefSchema);
   }

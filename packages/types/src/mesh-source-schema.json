@@ -64,11 +64,12 @@
           "description": "TCP Port to listen (default: `3000`) (Any of: Int, String)",
           "anyOf": [{ "type": "integer" }, { "type": "string" }]
         },
+        "hostname": { "type": "string", "description": "The binding hostname (default: `localhost`)" },
         "exampleQuery": {
           "type": "string",
-          "description": "Provide an example query or queries for GraphQL Playground"
+          "description": "Provide an example query or queries for GraphQL Playground\nThe value can be the file path, glob expression for the file paths or the SDL.\n(.js, .jsx, .graphql, .gql, .ts and .tsx files are supported.\nBut TypeScript support is only available if `ts-node` is installed and `ts-node/register` is added under `require` parameter)"
         },
-        "cors": { "$ref": "#/definitions/CorsConfig" },
+        "cors": { "$ref": "#/definitions/CorsConfig", "description": "Configuration for CORS" },
         "handlers": {
           "type": "array",
           "items": {
@@ -76,19 +77,23 @@
             "anyOf": [{ "$ref": "#/definitions/WebhookHandler" }, { "$ref": "#/definitions/ExpressHandler" }]
           },
           "additionalItems": false,
-          "description": "Any of: WebhookHandler, ExpressHandler"
+          "description": "Express/Connect compatible handlers and middlewares extend GraphQL Mesh HTTP Server (Any of: WebhookHandler, ExpressHandler)"
         },
-        "staticFiles": { "type": "string" },
-        "playground": { "type": "boolean", "description": "Show playground" },
-        "maxFileSize": {
-          "type": "integer",
-          "description": "Maximum File Size for GraphQL Upload (default: '100000000')"
+        "staticFiles": {
+          "type": "string",
+          "description": "Path to your static files you want to be served with GraphQL Mesh HTTP Server"
         },
-        "maxFiles": { "type": "integer", "description": "Maximum number of files for GraphQL Upload (default: '10')" },
+        "playground": { "type": "boolean", "description": "Show GraphiQL Playground" },
         "maxRequestBodySize": {
           "description": "Controls the maximum request body size. If this is a number, then the value specifies the number of bytes; if it is a string, the value is passed to the bytes library for parsing. Defaults to '100kb'. (Any of: Int, String)",
           "anyOf": [{ "type": "integer" }, { "type": "string" }]
-        }
+        },
+        "upload": { "$ref": "#/definitions/UploadOptions", "description": "Configuration for GraphQL File Upload" },
+        "sslCredentials": {
+          "$ref": "#/definitions/HTTPSConfig",
+          "description": "SSL Credentials for HTTPS Server\nIf this is provided, Mesh will be served via HTTPS"
+        },
+        "endpoint": { "type": "string", "description": "Path to GraphQL Endpoint (default: /graphql)" }
       }
     },
     "CorsConfig": {
@@ -96,7 +101,13 @@
       "type": "object",
       "title": "CorsConfig",
       "properties": {
-        "origin": { "anyOf": [{ "type": "object", "additionalProperties": true }, { "type": "string" }] },
+        "origin": {
+          "anyOf": [
+            { "type": "object", "additionalProperties": true },
+            { "type": "string" },
+            { "type": "array", "additionalItems": true }
+          ]
+        },
         "allowedHeaders": { "type": "array", "items": { "type": "string" }, "additionalItems": false },
         "exposedHeaders": { "type": "array", "items": { "type": "string" }, "additionalItems": false },
         "credentials": { "type": "boolean" },
@@ -110,12 +121,12 @@
       "type": "object",
       "title": "ExpressHandler",
       "properties": {
-        "path": { "type": "string" },
-        "handler": { "type": "string" },
+        "path": { "type": "string", "description": "Path that the handler will control" },
+        "handler": { "type": "string", "description": "Path of the handler's code" },
         "method": {
           "type": "string",
           "enum": ["GET", "POST", "DELETE", "PATCH"],
-          "description": "Allowed values: GET, POST, DELETE, PATCH"
+          "description": "HTTP Method that the handler will control (Allowed values: GET, POST, DELETE, PATCH)"
         }
       },
       "required": ["path", "handler"]
@@ -125,11 +136,30 @@
       "type": "object",
       "title": "WebhookHandler",
       "properties": {
-        "path": { "type": "string" },
-        "pubsubTopic": { "type": "string" },
-        "payload": { "type": "string" }
+        "path": { "type": "string", "description": "Path that remote API will ping" },
+        "pubsubTopic": { "type": "string", "description": "Name of the topic you want to pass incoming payload" },
+        "payload": { "type": "string", "description": "Part of the object you want to pass (e.g. `data.messages`)" }
       },
       "required": ["path", "pubsubTopic"]
+    },
+    "UploadOptions": {
+      "additionalProperties": false,
+      "type": "object",
+      "title": "UploadOptions",
+      "properties": {
+        "maxFileSize": {
+          "type": "integer",
+          "description": "Maximum File Size for GraphQL Upload (default: `100000000`)"
+        },
+        "maxFiles": { "type": "integer", "description": "Maximum number of files for GraphQL Upload (default: `10`)" }
+      }
+    },
+    "HTTPSConfig": {
+      "additionalProperties": false,
+      "type": "object",
+      "title": "HTTPSConfig",
+      "properties": { "key": { "type": "string" }, "cert": { "type": "string" } },
+      "required": ["key", "cert"]
     },
     "Source": {
       "additionalProperties": false,
@@ -170,7 +200,19 @@
         },
         "extend": { "$ref": "#/definitions/ExtendTransform" },
         "federation": { "$ref": "#/definitions/FederationTransform" },
-        "filterSchema": { "type": "array", "items": { "type": "string" }, "additionalItems": false },
+        "filterSchema": {
+          "description": "Transformer to filter (white/black list) GraphQL types, fields and arguments (Any of: FilterSchemaTransform, Any)",
+          "anyOf": [
+            { "$ref": "#/definitions/FilterSchemaTransform" },
+            {
+              "anyOf": [
+                { "type": "object", "additionalProperties": true },
+                { "type": "string" },
+                { "type": "array", "additionalItems": true }
+              ]
+            }
+          ]
+        },
         "mock": { "$ref": "#/definitions/MockingConfig", "description": "Mock configuration for your source" },
         "namingConvention": {
           "$ref": "#/definitions/NamingConventionTransformConfig",
@@ -178,10 +220,17 @@
         },
         "prefix": { "$ref": "#/definitions/PrefixTransformConfig", "description": "Prefix transform" },
         "rename": {
-          "type": "array",
-          "items": { "$ref": "#/definitions/RenameTransformObject" },
-          "additionalItems": false,
-          "description": "Transformer to apply rename of a GraphQL type"
+          "description": "Transformer to rename GraphQL types and fields (Any of: RenameTransform, Any)",
+          "anyOf": [
+            { "$ref": "#/definitions/RenameTransform" },
+            {
+              "anyOf": [
+                { "type": "object", "additionalProperties": true },
+                { "type": "string" },
+                { "type": "array", "additionalItems": true }
+              ]
+            }
+          ]
         },
         "resolversComposition": {
           "type": "array",
@@ -272,9 +321,25 @@
       "title": "PubSubConfig",
       "properties": {
         "name": { "type": "string" },
-        "config": { "anyOf": [{ "type": "object", "additionalProperties": true }, { "type": "string" }] }
+        "config": {
+          "anyOf": [
+            { "type": "object", "additionalProperties": true },
+            { "type": "string" },
+            { "type": "array", "additionalItems": true }
+          ]
+        }
       },
       "required": ["name"]
+    },
+    "LiveQueryInvalidation": {
+      "additionalProperties": false,
+      "type": "object",
+      "title": "LiveQueryInvalidation",
+      "properties": {
+        "field": { "type": "string" },
+        "invalidate": { "type": "array", "items": { "type": "string" }, "additionalItems": false }
+      },
+      "required": ["field", "invalidate"]
     },
     "FhirHandler": {
       "additionalProperties": false,
@@ -292,7 +357,11 @@
           "description": "A url or file path to your remote GraphQL endpoint.\nIf you provide a path to a code file(js or ts),\nother options will be ignored and the schema exported from the file will be used directly."
         },
         "schemaHeaders": {
-          "anyOf": [{ "type": "object", "additionalProperties": true }, { "type": "string" }],
+          "anyOf": [
+            { "type": "object", "additionalProperties": true },
+            { "type": "string" },
+            { "type": "array", "additionalItems": true }
+          ],
           "description": "JSON object representing the Headers to add to the runtime of the API calls only for schema introspection\nYou can also provide `.js` or `.ts` file path that exports schemaHeaders as an object"
         },
         "operationHeaders": {
@@ -311,7 +380,11 @@
           "description": "Use Server Sent Events instead of WebSocket for Subscriptions"
         },
         "customFetch": {
-          "anyOf": [{ "type": "object", "additionalProperties": true }, { "type": "string" }],
+          "anyOf": [
+            { "type": "object", "additionalProperties": true },
+            { "type": "string" },
+            { "type": "array", "additionalItems": true }
+          ],
           "description": "Path to a custom W3 Compatible Fetch Implementation"
         },
         "webSocketImpl": { "type": "string", "description": "Path to a custom W3 Compatible WebSocket Implementation" },
@@ -404,9 +477,19 @@
           "additionalItems": false
         },
         "disableTimestampScalar": { "type": "boolean" },
-        "baseSchema": { "anyOf": [{ "type": "object", "additionalProperties": true }, { "type": "string" }] }
+        "baseSchema": {
+          "anyOf": [
+            { "type": "object", "additionalProperties": true },
+            { "type": "string" },
+            { "type": "array", "additionalItems": true }
+          ]
+        },
+        "errorMessageField": {
+          "type": "string",
+          "description": "Field name of your custom error object (default: 'message')"
+        }
       },
-      "required": ["baseUrl", "operations"]
+      "required": ["operations"]
     },
     "JsonSchemaOperation": {
       "additionalProperties": false,
@@ -427,11 +510,35 @@
           "enum": ["GET", "DELETE", "POST", "PUT", "PATCH"],
           "description": "Allowed values: GET, DELETE, POST, PUT, PATCH"
         },
-        "requestSchema": { "anyOf": [{ "type": "object", "additionalProperties": true }, { "type": "string" }] },
-        "requestSample": { "anyOf": [{ "type": "object", "additionalProperties": true }, { "type": "string" }] },
+        "requestSchema": {
+          "anyOf": [
+            { "type": "object", "additionalProperties": true },
+            { "type": "string" },
+            { "type": "array", "additionalItems": true }
+          ]
+        },
+        "requestSample": {
+          "anyOf": [
+            { "type": "object", "additionalProperties": true },
+            { "type": "string" },
+            { "type": "array", "additionalItems": true }
+          ]
+        },
         "requestTypeName": { "type": "string" },
-        "responseSample": { "anyOf": [{ "type": "object", "additionalProperties": true }, { "type": "string" }] },
-        "responseSchema": { "anyOf": [{ "type": "object", "additionalProperties": true }, { "type": "string" }] },
+        "responseSample": {
+          "anyOf": [
+            { "type": "object", "additionalProperties": true },
+            { "type": "string" },
+            { "type": "array", "additionalItems": true }
+          ]
+        },
+        "responseSchema": {
+          "anyOf": [
+            { "type": "object", "additionalProperties": true },
+            { "type": "string" },
+            { "type": "array", "additionalItems": true }
+          ]
+        },
         "responseTypeName": { "type": "string" },
         "argTypeMap": { "type": "object", "properties": {} },
         "headers": { "type": "object", "properties": {} }
@@ -631,7 +738,11 @@
         "password": { "type": "string" },
         "database": { "type": "string" },
         "pool": {
-          "anyOf": [{ "type": "object", "additionalProperties": true }, { "type": "string" }],
+          "anyOf": [
+            { "type": "object", "additionalProperties": true },
+            { "type": "string" },
+            { "type": "array", "additionalItems": true }
+          ],
           "description": "Use existing `Pool` instance\nFormat: modulePath#exportName"
         }
       }
@@ -726,7 +837,11 @@
           "description": "JSON object representing the query search parameters to add to the API calls"
         },
         "customFetch": {
-          "anyOf": [{ "type": "object", "additionalProperties": true }, { "type": "string" }],
+          "anyOf": [
+            { "type": "object", "additionalProperties": true },
+            { "type": "string" },
+            { "type": "array", "additionalItems": true }
+          ],
           "description": "W3 Compatible Fetch Implementation"
         },
         "includeHttpDetails": {
@@ -778,7 +893,11 @@
           "description": "An array of strings which specifies the PostgreSQL schemas that PostGraphile will use to create a GraphQL schema. The default schema is the public schema."
         },
         "pool": {
-          "anyOf": [{ "type": "object", "additionalProperties": true }, { "type": "string" }],
+          "anyOf": [
+            { "type": "object", "additionalProperties": true },
+            { "type": "string" },
+            { "type": "array", "additionalItems": true }
+          ],
           "description": "Connection Pool instance or settings or you can provide the path of a code file that exports any of those"
         },
         "appendPlugins": {
@@ -800,6 +919,14 @@
         "cacheIntrospection": {
           "description": "Cache Introspection (Any of: GraphQLIntrospectionCachingOptions, Boolean)",
           "anyOf": [{ "$ref": "#/definitions/GraphQLIntrospectionCachingOptions" }, { "type": "boolean" }]
+        },
+        "subscriptions": {
+          "type": "boolean",
+          "description": "Enable GraphQL websocket transport support for subscriptions (default: true)"
+        },
+        "live": {
+          "type": "boolean",
+          "description": "Enables live-query support via GraphQL subscriptions (sends updated payload any time nested collections/records change) (default: true)"
         }
       }
     },
@@ -816,6 +943,19 @@
         "securityCert": {
           "$ref": "#/definitions/SoapSecurityCertificateConfig",
           "description": "SSL Certificate Based Authentication Configuration\nIncluding public key, private key and password fields"
+        },
+        "schemaHeaders": {
+          "anyOf": [
+            { "type": "object", "additionalProperties": true },
+            { "type": "string" },
+            { "type": "array", "additionalItems": true }
+          ],
+          "description": "JSON object representing the Headers to add to the runtime of the API calls only for schema introspection\nYou can also provide `.js` or `.ts` file path that exports schemaHeaders as an object"
+        },
+        "operationHeaders": {
+          "type": "object",
+          "properties": {},
+          "description": "JSON object representing the Headers to add to the runtime of the API calls only for operation during runtime"
         }
       },
       "required": ["wsdl"]
@@ -958,8 +1098,20 @@
       "type": "object",
       "title": "ExtendTransform",
       "properties": {
-        "typeDefs": { "anyOf": [{ "type": "object", "additionalProperties": true }, { "type": "string" }] },
-        "resolvers": { "anyOf": [{ "type": "object", "additionalProperties": true }, { "type": "string" }] }
+        "typeDefs": {
+          "anyOf": [
+            { "type": "object", "additionalProperties": true },
+            { "type": "string" },
+            { "type": "array", "additionalItems": true }
+          ]
+        },
+        "resolvers": {
+          "anyOf": [
+            { "type": "object", "additionalProperties": true },
+            { "type": "string" },
+            { "type": "array", "additionalItems": true }
+          ]
+        }
       }
     },
     "FederationTransform": {
@@ -1026,6 +1178,25 @@
         "provides": { "type": "string" },
         "required": { "type": "string" }
       }
+    },
+    "FilterSchemaTransform": {
+      "additionalProperties": false,
+      "type": "object",
+      "title": "FilterSchemaTransform",
+      "properties": {
+        "mode": {
+          "type": "string",
+          "enum": ["bare", "wrap"],
+          "description": "Specify to apply filter-schema transforms to bare schema or by wrapping original schema (Allowed values: bare, wrap)"
+        },
+        "filters": {
+          "type": "array",
+          "items": { "type": "string" },
+          "additionalItems": false,
+          "description": "Array of filter rules"
+        }
+      },
+      "required": ["filters"]
     },
     "MockingConfig": {
       "additionalProperties": false,
@@ -1151,6 +1322,25 @@
         "includeRootOperations": { "type": "boolean", "description": "Changes root types and changes the field names" }
       }
     },
+    "RenameTransform": {
+      "additionalProperties": false,
+      "type": "object",
+      "title": "RenameTransform",
+      "properties": {
+        "mode": {
+          "type": "string",
+          "enum": ["bare", "wrap"],
+          "description": "Specify to apply rename transforms to bare schema or by wrapping original schema (Allowed values: bare, wrap)"
+        },
+        "renames": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/RenameTransformObject" },
+          "additionalItems": false,
+          "description": "Array of rename rules"
+        }
+      },
+      "required": ["renames"]
+    },
     "RenameTransformObject": {
       "additionalProperties": false,
       "type": "object",
@@ -1176,7 +1366,11 @@
       "properties": {
         "resolver": { "type": "string", "description": "The GraphQL Resolver path\nExample: Query.users" },
         "composer": {
-          "anyOf": [{ "type": "object", "additionalProperties": true }, { "type": "string" }],
+          "anyOf": [
+            { "type": "object", "additionalProperties": true },
+            { "type": "string" },
+            { "type": "array", "additionalItems": true }
+          ],
           "description": "Path to the composer function\nExample: ./src/auth.js#authComposer"
         }
       },

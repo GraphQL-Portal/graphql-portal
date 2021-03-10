@@ -4,6 +4,7 @@ export interface ApiDefConfig {
   name: string;
   endpoint: string;
   source_config_names?: string[];
+  source_names?: string[];
   schema_polling_interval?: number;
   schema_updates_through_control_api?: boolean;
   enable_ip_filtering?: boolean;
@@ -47,7 +48,12 @@ export interface ApiDefConfig {
     /**
      * Additional type definitions, or type definitions overrides you wish to add to the schema mesh
      */
-    additionalTypeDefs?: string;
+    additionalTypeDefs?:
+      | {
+          [k: string]: unknown;
+        }
+      | string
+      | unknown[];
     /**
      * Additional resolvers, or resolvers overrides you wish to add to the schema mesh (Any of: String, AdditionalStitchingResolverObject, AdditionalSubscriptionObject)
      */
@@ -61,8 +67,16 @@ export interface ApiDefConfig {
      * PubSub Implementation (Any of: String, PubSubConfig)
      */
     pubsub?: string | PubSubConfig;
+    /**
+     * Live Query Invalidations
+     */
+    liveQueryInvalidations?: LiveQueryInvalidation[];
   };
 }
+/**
+ * Configuration for `mesh serve` command.
+ * Those commands won't be available in programmatic usage.
+ */
 export interface ServeConfig {
   /**
    * Spawn multiple server instances as node clusters (default: `1`) (Any of: Int, Boolean)
@@ -73,38 +87,50 @@ export interface ServeConfig {
    */
   port?: number | string;
   /**
+   * The binding hostname (default: `localhost`)
+   */
+  hostname?: string;
+  /**
    * Provide an example query or queries for GraphQL Playground
+   * The value can be the file path, glob expression for the file paths or the SDL.
+   * (.js, .jsx, .graphql, .gql, .ts and .tsx files are supported.
+   * But TypeScript support is only available if `ts-node` is installed and `ts-node/register` is added under `require` parameter)
    */
   exampleQuery?: string;
   cors?: CorsConfig;
   /**
-   * Any of: WebhookHandler, ExpressHandler
+   * Express/Connect compatible handlers and middlewares extend GraphQL Mesh HTTP Server (Any of: WebhookHandler, ExpressHandler)
    */
   handlers?: (WebhookHandler | ExpressHandler)[];
+  /**
+   * Path to your static files you want to be served with GraphQL Mesh HTTP Server
+   */
   staticFiles?: string;
   /**
-   * Show playground
+   * Show GraphiQL Playground
    */
   playground?: boolean;
-  /**
-   * Maximum File Size for GraphQL Upload (default: '100000000')
-   */
-  maxFileSize?: number;
-  /**
-   * Maximum number of files for GraphQL Upload (default: '10')
-   */
-  maxFiles?: number;
   /**
    * Controls the maximum request body size. If this is a number, then the value specifies the number of bytes; if it is a string, the value is passed to the bytes library for parsing. Defaults to '100kb'. (Any of: Int, String)
    */
   maxRequestBodySize?: number | string;
+  upload?: UploadOptions;
+  sslCredentials?: HTTPSConfig;
+  /**
+   * Path to GraphQL Endpoint (default: /graphql)
+   */
+  endpoint?: string;
 }
+/**
+ * Configuration for CORS
+ */
 export interface CorsConfig {
   origin?:
     | {
         [k: string]: unknown;
       }
-    | string;
+    | string
+    | unknown[];
   allowedHeaders?: string[];
   exposedHeaders?: string[];
   credentials?: boolean;
@@ -113,17 +139,53 @@ export interface CorsConfig {
   optionsSuccessStatus?: number;
 }
 export interface WebhookHandler {
+  /**
+   * Path that remote API will ping
+   */
   path: string;
+  /**
+   * Name of the topic you want to pass incoming payload
+   */
   pubsubTopic: string;
+  /**
+   * Part of the object you want to pass (e.g. `data.messages`)
+   */
   payload?: string;
 }
 export interface ExpressHandler {
+  /**
+   * Path that the handler will control
+   */
   path: string;
+  /**
+   * Path of the handler's code
+   */
   handler: string;
   /**
-   * Allowed values: GET, POST, DELETE, PATCH
+   * HTTP Method that the handler will control (Allowed values: GET, POST, DELETE, PATCH)
    */
   method?: 'GET' | 'POST' | 'DELETE' | 'PATCH';
+}
+/**
+ * Configuration for GraphQL File Upload
+ */
+export interface UploadOptions {
+  /**
+   * Maximum File Size for GraphQL Upload (default: `100000000`)
+   */
+  maxFileSize?: number;
+  /**
+   * Maximum number of files for GraphQL Upload (default: `10`)
+   */
+  maxFiles?: number;
+}
+/**
+ * SSL Credentials for HTTPS Server
+ * If this is provided, Mesh will be served via HTTPS
+ */
+export interface HTTPSConfig {
+  key: string;
+  cert: string;
 }
 export interface Source {
   /**
@@ -184,7 +246,8 @@ export interface GraphQLHandler {
     | {
         [k: string]: unknown;
       }
-    | string;
+    | string
+    | unknown[];
   /**
    * JSON object representing the Headers to add to the runtime of the API calls only for operation during runtime
    */
@@ -210,7 +273,8 @@ export interface GraphQLHandler {
     | {
         [k: string]: unknown;
       }
-    | string;
+    | string
+    | unknown[];
   /**
    * Path to a custom W3 Compatible WebSocket Implementation
    */
@@ -310,7 +374,7 @@ export interface GrpcCredentialsSsl {
  * Handler for JSON Schema specification. Source could be a local json file, or a url to it.
  */
 export interface JsonSchemaHandler {
-  baseUrl: string;
+  baseUrl?: string;
   operationHeaders?: {
     [k: string]: unknown;
   };
@@ -323,7 +387,12 @@ export interface JsonSchemaHandler {
     | {
         [k: string]: unknown;
       }
-    | string;
+    | string
+    | unknown[];
+  /**
+   * Field name of your custom error object (default: 'message')
+   */
+  errorMessageField?: string;
 }
 export interface JsonSchemaOperation {
   field: string;
@@ -342,23 +411,27 @@ export interface JsonSchemaOperation {
     | {
         [k: string]: unknown;
       }
-    | string;
+    | string
+    | unknown[];
   requestSample?:
     | {
         [k: string]: unknown;
       }
-    | string;
+    | string
+    | unknown[];
   requestTypeName?: string;
   responseSample?:
     | {
         [k: string]: unknown;
       }
-    | string;
+    | string
+    | unknown[];
   responseSchema?:
     | {
         [k: string]: unknown;
       }
-    | string;
+    | string
+    | unknown[];
   responseTypeName?: string;
   argTypeMap?: {
     [k: string]: unknown;
@@ -512,7 +585,8 @@ export interface MySQLHandler {
     | {
         [k: string]: unknown;
       }
-    | string;
+    | string
+    | unknown[];
 }
 /**
  * Handler for Neo4j
@@ -628,7 +702,8 @@ export interface OpenapiHandler {
     | {
         [k: string]: unknown;
       }
-    | string;
+    | string
+    | unknown[];
   /**
    * Include HTTP Response details to the result object
    */
@@ -683,7 +758,8 @@ export interface PostGraphileHandler {
     | {
         [k: string]: unknown;
       }
-    | string;
+    | string
+    | unknown[];
   /**
    * Extra Postgraphile Plugins to append
    */
@@ -704,6 +780,14 @@ export interface PostGraphileHandler {
    * Cache Introspection (Any of: GraphQLIntrospectionCachingOptions, Boolean)
    */
   cacheIntrospection?: GraphQLIntrospectionCachingOptions | boolean;
+  /**
+   * Enable GraphQL websocket transport support for subscriptions (default: true)
+   */
+  subscriptions?: boolean;
+  /**
+   * Enables live-query support via GraphQL subscriptions (sends updated payload any time nested collections/records change) (default: true)
+   */
+  live?: boolean;
 }
 /**
  * Handler for SOAP
@@ -715,6 +799,22 @@ export interface SoapHandler {
   wsdl: string;
   basicAuth?: SoapSecurityBasicAuthConfig;
   securityCert?: SoapSecurityCertificateConfig;
+  /**
+   * JSON object representing the Headers to add to the runtime of the API calls only for schema introspection
+   * You can also provide `.js` or `.ts` file path that exports schemaHeaders as an object
+   */
+  schemaHeaders?:
+    | {
+        [k: string]: unknown;
+      }
+    | string
+    | unknown[];
+  /**
+   * JSON object representing the Headers to add to the runtime of the API calls only for operation during runtime
+   */
+  operationHeaders?: {
+    [k: string]: unknown;
+  };
 }
 /**
  * Basic Authentication Configuration
@@ -848,14 +948,33 @@ export interface Transform {
   encapsulate?: EncapsulateTransformObject;
   extend?: ExtendTransform;
   federation?: FederationTransform;
-  filterSchema?: string[];
+  /**
+   * Transformer to filter (white/black list) GraphQL types, fields and arguments (Any of: FilterSchemaTransform, Any)
+   */
+  filterSchema?:
+    | FilterSchemaTransform
+    | (
+        | {
+            [k: string]: unknown;
+          }
+        | string
+        | unknown[]
+      );
   mock?: MockingConfig;
   namingConvention?: NamingConventionTransformConfig;
   prefix?: PrefixTransformConfig;
   /**
-   * Transformer to apply rename of a GraphQL type
+   * Transformer to rename GraphQL types and fields (Any of: RenameTransform, Any)
    */
-  rename?: RenameTransformObject[];
+  rename?:
+    | RenameTransform
+    | (
+        | {
+            [k: string]: unknown;
+          }
+        | string
+        | unknown[]
+      );
   /**
    * Transformer to apply composition to resolvers
    */
@@ -932,12 +1051,14 @@ export interface ExtendTransform {
     | {
         [k: string]: unknown;
       }
-    | string;
+    | string
+    | unknown[];
   resolvers?:
     | {
         [k: string]: unknown;
       }
-    | string;
+    | string
+    | unknown[];
 }
 export interface FederationTransform {
   types?: FederationTransformType[];
@@ -976,6 +1097,16 @@ export interface ResolveReferenceObject {
   };
   resultSelectionSet?: string;
   resultDepth?: number;
+}
+export interface FilterSchemaTransform {
+  /**
+   * Specify to apply filter-schema transforms to bare schema or by wrapping original schema (Allowed values: bare, wrap)
+   */
+  mode?: 'bare' | 'wrap';
+  /**
+   * Array of filter rules
+   */
+  filters: string[];
 }
 /**
  * Mock configuration for your source
@@ -1095,6 +1226,16 @@ export interface PrefixTransformConfig {
    */
   includeRootOperations?: boolean;
 }
+export interface RenameTransform {
+  /**
+   * Specify to apply rename transforms to bare schema or by wrapping original schema (Allowed values: bare, wrap)
+   */
+  mode?: 'bare' | 'wrap';
+  /**
+   * Array of rename rules
+   */
+  renames: RenameTransformObject[];
+}
 export interface RenameTransformObject {
   from: RenameConfig;
   to: RenameConfig;
@@ -1125,7 +1266,8 @@ export interface ResolversCompositionTransformObject {
     | {
         [k: string]: unknown;
       }
-    | string;
+    | string
+    | unknown[];
 }
 /**
  * Configuration for Snapshot extension
@@ -1215,5 +1357,10 @@ export interface PubSubConfig {
     | {
         [k: string]: unknown;
       }
-    | string;
+    | string
+    | unknown[];
+}
+export interface LiveQueryInvalidation {
+  field: string;
+  invalidate: string[];
 }

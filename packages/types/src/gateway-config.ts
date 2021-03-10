@@ -1,14 +1,20 @@
 /* eslint-disable */
 
 export interface GatewayConfig {
+  apiDefs?: {
+    [k: string]: unknown;
+  }[];
+  sources?: {
+    [k: string]: unknown;
+  }[];
   /**
    * The hostname to bind the gateway node to.
    */
-  hostname: string;
+  hostname?: string;
   /**
    * The port on which the gateway will listen for the incoming connections.
    */
-  listen_port: number;
+  listen_port?: number;
   /**
    * Should be set when used behind the load-balancer which has a _servername_ different from the gateway's _hostname_.
    */
@@ -32,7 +38,7 @@ export interface GatewayConfig {
   /**
    * If set to _true_, the gateway will try to connect to the dashboard using the credentials in _dashboard_config_ section and get the API configurations from there.
    */
-  use_dashboard_configs: boolean;
+  use_dashboard_configs?: boolean;
   /**
    * Configuration of the connection to GraphQL Portal Dashboard.
    */
@@ -43,7 +49,7 @@ export interface GatewayConfig {
   /**
    * Enables or disables the Control API which is used to update GraphQL Schema definitions.
    */
-  enable_control_api: boolean;
+  enable_control_api?: boolean;
   /**
    * Enable or disable metrics recording to Redis
    */
@@ -98,7 +104,7 @@ export interface GatewayConfig {
   /**
    * Sets the log level. Should not be set to 'debug' in production.
    */
-  log_level: 'debug' | 'info' | 'warn' | 'error';
+  log_level?: 'debug' | 'info' | 'warn' | 'error';
   /**
    * Configures sending of log messages to Datadog.
    */
@@ -131,7 +137,7 @@ export interface GatewayConfig {
   /**
    * Redis connection options
    */
-  redis:
+  redis?:
     | {
         /**
          * Redis connection string in a format 'redis://localhost:6379'.
