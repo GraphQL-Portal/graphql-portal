@@ -48,7 +48,7 @@ export async function loadConfig(): Promise<GatewayConfig | null> {
   const results = await explorer.search();
   let config: GatewayConfig;
   if (results) {
-    config = { ...results.config, ...defaultConfig };
+    config = results.config;
   } else {
     logger.warn('config/gateway.json|yaml cannot be found, default config will be used');
     config = defaultConfig;
