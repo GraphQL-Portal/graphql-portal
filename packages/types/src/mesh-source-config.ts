@@ -60,7 +60,8 @@ export interface GraphQLHandler {
     | {
         [k: string]: unknown;
       }
-    | string;
+    | string
+    | unknown[];
   /**
    * JSON object representing the Headers to add to the runtime of the API calls only for operation during runtime
    */
@@ -86,7 +87,8 @@ export interface GraphQLHandler {
     | {
         [k: string]: unknown;
       }
-    | string;
+    | string
+    | unknown[];
   /**
    * Path to a custom W3 Compatible WebSocket Implementation
    */
@@ -186,7 +188,7 @@ export interface GrpcCredentialsSsl {
  * Handler for JSON Schema specification. Source could be a local json file, or a url to it.
  */
 export interface JsonSchemaHandler {
-  baseUrl: string;
+  baseUrl?: string;
   operationHeaders?: {
     [k: string]: unknown;
   };
@@ -199,7 +201,12 @@ export interface JsonSchemaHandler {
     | {
         [k: string]: unknown;
       }
-    | string;
+    | string
+    | unknown[];
+  /**
+   * Field name of your custom error object (default: 'message')
+   */
+  errorMessageField?: string;
 }
 export interface JsonSchemaOperation {
   field: string;
@@ -218,23 +225,27 @@ export interface JsonSchemaOperation {
     | {
         [k: string]: unknown;
       }
-    | string;
+    | string
+    | unknown[];
   requestSample?:
     | {
         [k: string]: unknown;
       }
-    | string;
+    | string
+    | unknown[];
   requestTypeName?: string;
   responseSample?:
     | {
         [k: string]: unknown;
       }
-    | string;
+    | string
+    | unknown[];
   responseSchema?:
     | {
         [k: string]: unknown;
       }
-    | string;
+    | string
+    | unknown[];
   responseTypeName?: string;
   argTypeMap?: {
     [k: string]: unknown;
@@ -388,7 +399,8 @@ export interface MySQLHandler {
     | {
         [k: string]: unknown;
       }
-    | string;
+    | string
+    | unknown[];
 }
 /**
  * Handler for Neo4j
@@ -504,7 +516,8 @@ export interface OpenapiHandler {
     | {
         [k: string]: unknown;
       }
-    | string;
+    | string
+    | unknown[];
   /**
    * Include HTTP Response details to the result object
    */
@@ -559,7 +572,8 @@ export interface PostGraphileHandler {
     | {
         [k: string]: unknown;
       }
-    | string;
+    | string
+    | unknown[];
   /**
    * Extra Postgraphile Plugins to append
    */
@@ -580,6 +594,14 @@ export interface PostGraphileHandler {
    * Cache Introspection (Any of: GraphQLIntrospectionCachingOptions, Boolean)
    */
   cacheIntrospection?: GraphQLIntrospectionCachingOptions | boolean;
+  /**
+   * Enable GraphQL websocket transport support for subscriptions (default: true)
+   */
+  subscriptions?: boolean;
+  /**
+   * Enables live-query support via GraphQL subscriptions (sends updated payload any time nested collections/records change) (default: true)
+   */
+  live?: boolean;
 }
 /**
  * Handler for SOAP
@@ -591,6 +613,22 @@ export interface SoapHandler {
   wsdl: string;
   basicAuth?: SoapSecurityBasicAuthConfig;
   securityCert?: SoapSecurityCertificateConfig;
+  /**
+   * JSON object representing the Headers to add to the runtime of the API calls only for schema introspection
+   * You can also provide `.js` or `.ts` file path that exports schemaHeaders as an object
+   */
+  schemaHeaders?:
+    | {
+        [k: string]: unknown;
+      }
+    | string
+    | unknown[];
+  /**
+   * JSON object representing the Headers to add to the runtime of the API calls only for operation during runtime
+   */
+  operationHeaders?: {
+    [k: string]: unknown;
+  };
 }
 /**
  * Basic Authentication Configuration
@@ -752,14 +790,33 @@ export interface Transform {
   encapsulate?: EncapsulateTransformObject;
   extend?: ExtendTransform;
   federation?: FederationTransform;
-  filterSchema?: string[];
+  /**
+   * Transformer to filter (white/black list) GraphQL types, fields and arguments (Any of: FilterSchemaTransform, Any)
+   */
+  filterSchema?:
+    | FilterSchemaTransform
+    | (
+        | {
+            [k: string]: unknown;
+          }
+        | string
+        | unknown[]
+      );
   mock?: MockingConfig;
   namingConvention?: NamingConventionTransformConfig;
   prefix?: PrefixTransformConfig;
   /**
-   * Transformer to apply rename of a GraphQL type
+   * Transformer to rename GraphQL types and fields (Any of: RenameTransform, Any)
    */
-  rename?: RenameTransformObject[];
+  rename?:
+    | RenameTransform
+    | (
+        | {
+            [k: string]: unknown;
+          }
+        | string
+        | unknown[]
+      );
   /**
    * Transformer to apply composition to resolvers
    */
@@ -836,12 +893,14 @@ export interface ExtendTransform {
     | {
         [k: string]: unknown;
       }
-    | string;
+    | string
+    | unknown[];
   resolvers?:
     | {
         [k: string]: unknown;
       }
-    | string;
+    | string
+    | unknown[];
 }
 export interface FederationTransform {
   types?: FederationTransformType[];
@@ -880,6 +939,16 @@ export interface ResolveReferenceObject {
   };
   resultSelectionSet?: string;
   resultDepth?: number;
+}
+export interface FilterSchemaTransform {
+  /**
+   * Specify to apply filter-schema transforms to bare schema or by wrapping original schema (Allowed values: bare, wrap)
+   */
+  mode?: 'bare' | 'wrap';
+  /**
+   * Array of filter rules
+   */
+  filters: string[];
 }
 /**
  * Mock configuration for your source
@@ -999,6 +1068,16 @@ export interface PrefixTransformConfig {
    */
   includeRootOperations?: boolean;
 }
+export interface RenameTransform {
+  /**
+   * Specify to apply rename transforms to bare schema or by wrapping original schema (Allowed values: bare, wrap)
+   */
+  mode?: 'bare' | 'wrap';
+  /**
+   * Array of rename rules
+   */
+  renames: RenameTransformObject[];
+}
 export interface RenameTransformObject {
   from: RenameConfig;
   to: RenameConfig;
@@ -1029,7 +1108,8 @@ export interface ResolversCompositionTransformObject {
     | {
         [k: string]: unknown;
       }
-    | string;
+    | string
+    | unknown[];
 }
 /**
  * Configuration for Snapshot extension

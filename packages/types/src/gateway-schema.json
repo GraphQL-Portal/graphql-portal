@@ -4,13 +4,27 @@
   "type": "object",
   "additionalProperties": false,
   "properties": {
+    "apiDefs": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "sources": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
     "hostname": {
       "type": "string",
-      "description": "The hostname to bind the gateway node to."
+      "description": "The hostname to bind the gateway node to.",
+      "default": "localhost"
     },
     "listen_port": {
       "type": "integer",
-      "description": "The port on which the gateway will listen for the incoming connections."
+      "description": "The port on which the gateway will listen for the incoming connections.",
+      "default": 8080
     },
     "servername": {
       "type": "string",
@@ -23,7 +37,8 @@
     },
     "apis_path": {
       "type": "string",
-      "description": "Path to the directory with API Definition files."
+      "description": "Path to the directory with API Definition files.",
+      "default": "./config/apis"
     },
     "middleware_path": {
       "type": "string",
@@ -31,11 +46,13 @@
     },
     "sources_path": {
       "type": "string",
-      "description": "Path to the data sources configuration files (yaml or json)."
+      "description": "Path to the data sources configuration files (yaml or json).",
+      "default": "./config/sources"
     },
     "use_dashboard_configs": {
       "type": "boolean",
-      "description": "If set to _true_, the gateway will try to connect to the dashboard using the credentials in _dashboard_config_ section and get the API configurations from there."
+      "description": "If set to _true_, the gateway will try to connect to the dashboard using the credentials in _dashboard_config_ section and get the API configurations from there.",
+      "default": false
     },
     "dashboard_config": {
       "$ref": "#/definitions/dashboard_config",
@@ -43,11 +60,13 @@
     },
     "enable_control_api": {
       "type": "boolean",
-      "description": "Enables or disables the Control API which is used to update GraphQL Schema definitions."
+      "description": "Enables or disables the Control API which is used to update GraphQL Schema definitions.",
+      "default": true
     },
     "enable_metrics_recording": {
       "type": "boolean",
-      "description": "Enable or disable metrics recording to Redis"
+      "description": "Enable or disable metrics recording to Redis",
+      "default": true
     },
     "control_api_config": {
       "$ref": "#/definitions/control_api_config",
@@ -66,7 +85,8 @@
     "log_level": {
       "type": "string",
       "enum": ["debug", "info", "warn", "error"],
-      "description": "Sets the log level. Should not be set to 'debug' in production."
+      "description": "Sets the log level. Should not be set to 'debug' in production.",
+      "default": "info"
     },
     "datadog_logging": {
       "$ref": "#/definitions/datadog_logging",
@@ -83,7 +103,8 @@
           "properties": {
             "connection_string": {
               "type": "string",
-              "description": "Redis connection string in a format 'redis://localhost:6379'."
+              "description": "Redis connection string in a format 'redis://localhost:6379'.",
+              "default": "redis://localhost:6379"
             }
           },
           "required": ["connection_string"],
@@ -145,7 +166,8 @@
       "properties": {
         "endpoint": {
           "type": "string",
-          "pattern": "^/"
+          "pattern": "^/",
+          "default": "/control_api"
         }
       }
     },
@@ -239,17 +261,5 @@
       },
       "required": ["enabled", "apiKey"]
     }
-  },
-  "required": ["hostname", "listen_port", "use_dashboard_configs", "enable_control_api", "log_level"],
-  "if": {
-    "properties": {
-      "use_dashboard_configs": {
-        "enum": [false]
-      }
-    }
-  },
-  "then": {
-    "required": ["apis_path", "middleware_path", "sources_path"]
-  },
-  "else": {}
+  }
 }
