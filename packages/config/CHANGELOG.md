@@ -1,5 +1,14 @@
 # @graphql-portal/config
 
+## 0.9.1
+
+### Patch Changes
+
+- a8ffe38: fix ajv errors output and merge default config
+- Updated dependencies [a8ffe38]
+  - @graphql-portal/types@0.18.1
+  - @graphql-portal/logger@0.4.2
+
 ## 0.9.0
 
 ### Minor Changes

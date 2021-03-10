@@ -1,5 +1,12 @@
 # @graphql-portal/logger
 
+## 0.4.2
+
+### Patch Changes
+
+- Updated dependencies [a8ffe38]
+  - @graphql-portal/types@0.18.1
+
 ## 0.4.1
 
 ### Patch Changes
