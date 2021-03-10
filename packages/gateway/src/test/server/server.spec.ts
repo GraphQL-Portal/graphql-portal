@@ -105,7 +105,7 @@ describe('Server', () => {
       expect(app.disable).toHaveBeenCalledTimes(1);
       expect(app.disable).toHaveBeenCalledWith('x-powered-by');
       expect(setRouter).toHaveBeenCalledWith(app, config.apiDefs);
-      expect(setupRedis).toHaveBeenCalledWith(config.gateway.redis);
+      expect(setupRedis).toHaveBeenCalledWith(config.gateway.redis, undefined);
       expect(redis.subscribe).toHaveBeenCalledWith(Channel.apiDefsUpdated);
       expect(redis.on).toHaveBeenCalledWith('message', expect.any(Function));
       expect(setupControlApi).toHaveBeenCalledTimes(0);

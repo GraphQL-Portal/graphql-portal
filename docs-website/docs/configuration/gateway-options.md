@@ -236,14 +236,24 @@ Redis connection options.
 Connection string specifying access to a Redis instance, for example:
 ```json
 {
-  "connection_string": "redis://localhost:6379",
+  "redis_connection_string": "redis://localhost:6379",
 }
 ```
-If you want to connect to a Redis cluster:
+`redis_connection_string` is deprecated. **Use** `redis.connection_string` instead:
 ```json
 {
-  "is_cluster": true,
-  "cluster_nodes": ["redis://localhost:7001", "redis://localhost:7002", "redis://localhost:7003"],
+  "redis": {
+    "connection_string": "redis://localhost:6379",
+  }
+}
+```
+If you want to connect to a **Redis cluster**:
+```json
+{
+  "redis": {
+    "is_cluster": true,
+    "cluster_nodes": ["redis://localhost:7001", "redis://localhost:7002", "redis://localhost:7003"],
+  }
 }
 ```
 

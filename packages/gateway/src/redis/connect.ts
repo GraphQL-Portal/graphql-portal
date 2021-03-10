@@ -5,11 +5,21 @@ import Redis, { Redis as IRedis, Cluster } from 'ioredis';
 const logger = prefixLogger('redis');
 
 // TODO: add support for cluster & sentinel modes
-export default async function redisConnect(options: RedisConnectionOptions): Promise<IRedis | Cluster> {
-  const redis =
-    options.is_cluster && options.cluster_nodes?.length
-      ? new Redis.Cluster(options.cluster_nodes)
-      : new Redis(options.connection_string);
+export default async function redisConnect(
+  options: RedisConnectionOptions,
+  connectionString?: string
+): Promise<IRedis | Cluster> {
+  let redis: IRedis | Cluster;
+  if (connectionString) {
+    logger.warn('redis_connection_string is deprecated. Use redis.connection_string instead.');
+  }
+  if (connectionString || options?.connection_string) {
+    redis = new Redis(connectionString || options?.connection_string);
+  } else if (options?.is_cluster && options?.cluster_nodes?.length) {
+    redis = new Redis.Cluster(options?.cluster_nodes);
+  } else {
+    return Promise.reject(new Error('Redis connection string was not provided'));
+  }
 
   await new Promise((resolve, reject) => {
     redis.on('error', (e) => {
