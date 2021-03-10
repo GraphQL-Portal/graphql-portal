@@ -1,5 +1,5 @@
 import { prefixLogger } from '@graphql-portal/logger';
-import { GatewayConfig, gatewaySchema } from '@graphql-portal/types';
+import { GatewayConfig, gatewaySchema, getAjvErrorsText } from '@graphql-portal/types';
 import Ajv from 'ajv';
 import { cosmiconfig } from 'cosmiconfig';
 
@@ -11,16 +11,33 @@ export function validateConfig(config: any): config is GatewayConfig {
 
   if (!validate(config)) {
     logger.error('GraphQL Portal configuration is not valid:');
-    logger.error(
-      ajv.errorsText(validate.errors, {
-        dataVar: 'config',
-      })
-    );
+    logger.error(getAjvErrorsText(ajv, validate.errors!, 'config'));
     return false;
   }
 
   return true;
 }
+
+const defaultConfig: GatewayConfig = {
+  hostname: 'localhost',
+  listen_port: 8080,
+  apis_path: './config/apis',
+  sources_path: './config/sources',
+  use_dashboard_configs: false,
+  enable_control_api: false,
+  enable_metrics_recording: false,
+  log_format: 'text',
+  log_level: 'info',
+  redis: {
+    connection_string: 'redis://localhost:6379',
+  },
+  control_api_config: {
+    endpoint: '/control_api',
+  },
+  cors: {
+    enabled: false,
+  },
+};
 
 export async function loadConfig(): Promise<GatewayConfig | null> {
   logger.info('Loading main configuration file.');
@@ -31,29 +48,10 @@ export async function loadConfig(): Promise<GatewayConfig | null> {
   const results = await explorer.search();
   let config: GatewayConfig;
   if (results) {
-    config = results.config;
+    config = { ...results.config, ...defaultConfig };
   } else {
     logger.warn('config/gateway.json|yaml cannot be found, default config will be used');
-    config = {
-      hostname: 'localhost',
-      listen_port: 8080,
-      apis_path: './config/apis',
-      sources_path: './config/sources',
-      use_dashboard_configs: false,
-      enable_control_api: false,
-      enable_metrics_recording: false,
-      log_format: 'text',
-      log_level: 'info',
-      redis: {
-        connection_string: 'redis://localhost:6379',
-      },
-      control_api_config: {
-        endpoint: '/control_api',
-      },
-      cors: {
-        enabled: false,
-      },
-    };
+    config = defaultConfig;
   }
 
   if (!validateConfig(config)) {
