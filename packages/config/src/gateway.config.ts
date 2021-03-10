@@ -40,8 +40,8 @@ export async function loadConfig(): Promise<GatewayConfig | null> {
       apis_path: './config/apis',
       sources_path: './config/sources',
       use_dashboard_configs: false,
-      enable_control_api: true,
-      enable_metrics_recording: true,
+      enable_control_api: false,
+      enable_metrics_recording: false,
       log_format: 'text',
       log_level: 'info',
       redis: {
