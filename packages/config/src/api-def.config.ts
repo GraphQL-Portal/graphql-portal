@@ -53,7 +53,7 @@ export function apiDefConfigGuard(apiDef: any): apiDef is ApiDefConfig {
 }
 
 export async function loadApiDefsFromFs(gatewayConfig: GatewayConfig): Promise<ApiDef[]> {
-  if (!gatewayConfig.apis_path || !gatewayConfig.sources_path) {
+  if (gatewayConfig.apis_path === '' || gatewayConfig.sources_path === '') {
     logger.warn('"apis_path" and "sources_path" cannot be empty, skipping loading of API Definitions.');
     return [];
   }
