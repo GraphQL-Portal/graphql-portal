@@ -1,6 +1,6 @@
 {
   "name": "@graphql-portal/types",
-  "version": "0.18.0",
+  "version": "0.18.1",
   "license": "MIT",
   "main": "dist/src/index.js",
   "scripts": {

@@ -1,5 +1,11 @@
 # @graphql-portal/types
 
+## 0.18.1
+
+### Patch Changes
+
+- a8ffe38: fix ajv errors output and merge default config
+
 ## 0.18.0
 
 ### Minor Changes
