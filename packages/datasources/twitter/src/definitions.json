@@ -2,6 +2,13 @@
   "TwitterHandler": {
     "additionalProperties": false,
     "type": "object",
-    "title": "TwitterHandler"
+    "title": "TwitterHandler",
+    "properties": {
+      "authorization": {
+        "type": "string",
+        "description": "You have to sign each API request by passing several generated keys and tokens"
+      }
+    },
+    "required": ["authorization"]
   }
 }

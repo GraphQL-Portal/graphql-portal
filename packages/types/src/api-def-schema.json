@@ -280,7 +280,6 @@
         "tuql": { "$ref": "#/definitions/TuqlHandler", "description": "Handler for SQLite database, based on `tuql`" },
         "ContentfulHandler": { "$ref": "#/definitions/ContentfulHandler" },
         "CrunchbaseHandler": { "$ref": "#/definitions/CrunchbaseHandler" },
-        "FedexHandler": { "$ref": "#/definitions/FedexHandler" },
         "SalesforceHandler": { "$ref": "#/definitions/SalesforceHandler" },
         "SlackHandler": { "$ref": "#/definitions/SlackHandler" },
         "StripeHandler": { "$ref": "#/definitions/StripeHandler" },
@@ -1427,7 +1426,6 @@
       "required": ["token", "endpoint"]
     },
     "CrunchbaseHandler": { "additionalProperties": false, "type": "object", "title": "CrunchbaseHandler" },
-    "FedexHandler": { "additionalProperties": false, "type": "object", "title": "FedexHandler" },
     "SalesforceHandler": {
       "additionalProperties": false,
       "type": "object",

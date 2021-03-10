@@ -276,7 +276,6 @@
         "tuql": { "$ref": "#/definitions/TuqlHandler", "description": "Handler for SQLite database, based on `tuql`" },
         "ContentfulHandler": { "$ref": "#/definitions/ContentfulHandler" },
         "CrunchbaseHandler": { "$ref": "#/definitions/CrunchbaseHandler" },
-        "FedexHandler": { "$ref": "#/definitions/FedexHandler" },
         "SalesforceHandler": { "$ref": "#/definitions/SalesforceHandler" },
         "SlackHandler": { "$ref": "#/definitions/SlackHandler" },
         "StripeHandler": { "$ref": "#/definitions/StripeHandler" },
@@ -1422,18 +1421,50 @@
       },
       "required": ["token", "endpoint"]
     },
-    "CrunchbaseHandler": { "additionalProperties": false, "type": "object", "title": "CrunchbaseHandler" },
-    "FedexHandler": { "additionalProperties": false, "type": "object", "title": "FedexHandler" },
+    "CrunchbaseHandler": {
+      "additionalProperties": false,
+      "type": "object",
+      "title": "CrunchbaseHandler",
+      "properties": {
+        "userKey": {
+          "type": "string",
+          "description": "Authentication API Key"
+        }
+      },
+      "required": ["userKey"]
+    },
     "SalesforceHandler": {
       "additionalProperties": false,
       "type": "object",
       "title": "SalesforceHandler",
-      "properties": { "baseUrl": { "type": "string", "description": "A endpoint of your Salesforce API" } },
+      "properties": {
+        "baseUrl": { "type": "string", "description": "A endpoint of your Salesforce API" },
+        "token": { "type": "string", "description": "Authentication token" }
+      },
       "required": ["baseUrl"]
     },
     "SlackHandler": { "additionalProperties": false, "type": "object", "title": "SlackHandler" },
-    "StripeHandler": { "additionalProperties": false, "type": "object", "title": "StripeHandler" },
-    "TwitterHandler": { "additionalProperties": false, "type": "object", "title": "TwitterHandler" },
+    "StripeHandler": {
+      "additionalProperties": false,
+      "type": "object",
+      "title": "StripeHandler",
+      "properties": {
+        "token": { "type": "string", "description": "Authentication token" }
+      },
+      "required": ["token"]
+    },
+    "TwitterHandler": {
+      "additionalProperties": false,
+      "type": "object",
+      "title": "TwitterHandler",
+      "properties": {
+        "authorization": {
+          "type": "string",
+          "description": "Authorization header. Set up the following variables in order to run each request (depending on the authentication type used by the request you are sending):\n\n|Name|Description|\n|---|---|\n|`consumer_key`|Your consumer key|\n|`consumer_secret`|Your consumer secret|\n|`access_token`|Your access token|\n|`token_secret`|Your access token secret|\n|`bearer_token`|Your bearer token|\n"
+        }
+      },
+      "required": ["authorization"]
+    },
     "WeatherbitHandler": { "additionalProperties": false, "type": "object", "title": "WeatherbitHandler" },
     "IPAPIHandler": { "additionalProperties": false, "type": "object", "title": "IPAPIHandler" }
   },

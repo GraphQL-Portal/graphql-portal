@@ -36,8 +36,8 @@ enter the connection details (auth keys or headers, logins or passwords).
 ### Slack
 ### Contentful
 ### Crunchbase
-### Fedex
 ### Salesforce
 ### Stripe
 ### Twitter
+### IPAPI
 ### Weatherbit
