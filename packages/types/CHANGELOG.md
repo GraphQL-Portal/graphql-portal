@@ -1,5 +1,11 @@
 # @graphql-portal/types
 
+## 0.18.2
+
+### Patch Changes
+
+- c50438b: fix config
+
 ## 0.18.1
 
 ### Patch Changes
