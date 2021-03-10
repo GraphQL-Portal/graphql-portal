@@ -42,7 +42,8 @@
     },
     "middleware_path": {
       "type": "string",
-      "description": "Path to the custom middleware handlers."
+      "description": "Path to the custom middleware handlers.",
+      "default": "./config/middlewares"
     },
     "sources_path": {
       "type": "string",
@@ -61,12 +62,12 @@
     "enable_control_api": {
       "type": "boolean",
       "description": "Enables or disables the Control API which is used to update GraphQL Schema definitions.",
-      "default": true
+      "default": false
     },
     "enable_metrics_recording": {
       "type": "boolean",
       "description": "Enable or disable metrics recording to Redis",
-      "default": true
+      "default": false
     },
     "control_api_config": {
       "$ref": "#/definitions/control_api_config",
@@ -261,5 +262,6 @@
       },
       "required": ["enabled", "apiKey"]
     }
-  }
+  },
+  "required": ["hostname", "listen_port", "redis"]
 }
