@@ -1,0 +1,12 @@
+diff --git a/node_modules/@graphql-mesh/types/config-schema.json b/node_modules/@graphql-mesh/types/config-schema.json
+index 98790e6..d7b5252 100644
+--- a/node_modules/@graphql-mesh/types/config-schema.json
++++ b/node_modules/@graphql-mesh/types/config-schema.json
+@@ -592,6 +592,7 @@
+       "properties": {
+         "endpoint": {
+           "type": "string",
++          "pattern": "^https?://.*$",
+           "description": "A url or file path to your remote GraphQL endpoint.\nIf you provide a path to a code file(js or ts),\nother options will be ignored and the schema exported from the file will be used directly."
+         },
+         "schemaHeaders": {

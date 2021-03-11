@@ -1,0 +1,12 @@
+diff --git a/node_modules/@graphql-mesh/openapi/index.cjs.js b/node_modules/@graphql-mesh/openapi/index.cjs.js
+index 16659bd..dbf95e6 100644
+--- a/node_modules/@graphql-mesh/openapi/index.cjs.js
++++ b/node_modules/@graphql-mesh/openapi/index.cjs.js
+@@ -4892,6 +4892,7 @@ class OpenAPIHandler {
+                 resolverParams.requestOptions = {
+                     headers: utils.getHeadersObject(headersFactory(resolverData)),
+                 };
++                resolverParams.qs = qs;
+                 /* FIXME: baseUrl is coming from Fastify Request
+                 if (context?.baseUrl) {
+                   resolverParams.baseUrl = context.baseUrl;

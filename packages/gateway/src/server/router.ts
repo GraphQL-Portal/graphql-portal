@@ -121,7 +121,7 @@ export async function getMeshForApiDef(
     if (errorHandler) {
       errorHandler(error);
     } else {
-      logger.error(error);
+      logger.error(error.stack);
     }
     if (retry) {
       logger.warn('Failed to load schema, retrying after 5 seconds...');
