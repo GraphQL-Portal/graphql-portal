@@ -37,7 +37,7 @@ export class RedisTransport extends TransportStream {
     this.expire = opts.expire;
   }
 
-  public async log(info: any, callback: any): Promise<any> {
+  public async log(info: any, callback: any): Promise<void> {
     setImmediate(() => {
       this.emit('logged', info);
     });

@@ -48,6 +48,7 @@ async function start(): Promise<void> {
     applyRegisteredHandlers();
   } else {
     await getConfigFromMaster();
+    await setupRedis(config.gateway.redis as RedisConnectionOptions, config.gateway.redis_connection_string);
     await configureLogger(config.gateway, config.nodeId, redis);
     applyRegisteredHandlers();
     await startServer();

@@ -1,5 +1,6 @@
 import * as logger from '../index';
 import { GatewayConfig } from '@graphql-portal/types';
+import { Redis } from 'ioredis';
 
 describe('logger', () => {
   describe('configureLogger', () => {
@@ -44,7 +45,8 @@ describe('logger', () => {
             expire: 10,
           },
         },
-        '1'
+        '1',
+        {} as Redis
       );
       expect(loggerClearSpy).toHaveBeenCalledTimes(1);
       expect(loggerAddSpy).toHaveBeenCalledTimes(3);
