@@ -93,6 +93,10 @@
       "$ref": "#/definitions/datadog_logging",
       "description": "Configures sending of log messages to Datadog."
     },
+    "redis_logging": {
+      "$ref": "#/definitions/redis_logging",
+      "description": "Configures sending of log messages to Redis."
+    },
     "redis_connection_string": {
       "type": "string",
       "description": "(Deprecated) Redis connection string in a format 'redis://localhost:6379'."
@@ -259,6 +263,24 @@
         }
       },
       "required": ["enabled", "apiKey"]
+    },
+    "redis_logging": {
+      "type": "object",
+      "description": "Configures sending of log messages to Redis. If enabled will log to console and Redis.",
+      "additionalProperties": false,
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "Enable or disable logging to Redis. Defaults to false.",
+          "default": false
+        },
+        "expire": {
+          "type": "number",
+          "description": "After the timeout has expired, the log will automatically be deleted (seconds)",
+          "default": 10
+        }
+      },
+      "required": ["enabled", "expire"]
     }
   },
   "required": ["hostname", "listen_port"]

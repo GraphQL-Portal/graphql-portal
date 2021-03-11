@@ -17,7 +17,7 @@ function handleStopSignal(): void {
 async function start(): Promise<void> {
   if (cluster.isMaster) {
     await initConfig();
-    configureLogger(config.gateway);
+    await configureLogger(config.gateway, config.nodeId);
     await loadApiDefs();
 
     const numCPUs: number = Number(config.gateway.pool_size) ? Number(config.gateway.pool_size) : cpus().length;
@@ -48,7 +48,7 @@ async function start(): Promise<void> {
     await setupRedis(config.gateway.redis as RedisConnectionOptions, config.gateway.redis_connection_string);
   } else {
     await getConfigFromMaster();
-    configureLogger(config.gateway);
+    await configureLogger(config.gateway, config.nodeId);
     applyRegisteredHandlers();
     await startServer();
   }

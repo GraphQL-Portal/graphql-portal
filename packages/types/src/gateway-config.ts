@@ -135,6 +135,19 @@ export interface GatewayConfig {
     tags?: string[];
   };
   /**
+   * Configures sending of log messages to Redis.
+   */
+  redis_logging?: {
+    /**
+     * Enable or disable logging to Redis. Defaults to false.
+     */
+    enabled: boolean;
+    /**
+     * After the timeout has expired, the log will automatically be deleted (seconds)
+     */
+    expire: number;
+  };
+  /**
    * (Deprecated) Redis connection string in a format 'redis://localhost:6379'.
    */
   redis_connection_string?: string;
