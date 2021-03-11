@@ -930,7 +930,7 @@ export interface ContentfulHandler {
 }
 export interface CrunchbaseHandler {
   /**
-   * Used to validate each developer's access to the API and ensure that any rate limits or quotas are respected
+   * Authentication API Key
    */
   userKey: string;
 }
@@ -953,7 +953,7 @@ export interface StripeHandler {
 }
 export interface TwitterHandler {
   /**
-   * You have to sign each API request by passing several generated keys and tokens
+   * Authorization header. Set up the following variables in order to run each request (depending on the authentication type used by the request you are sending):\n\n|Name|Description|\n|---|---|\n|`consumer_key`|Your consumer key|\n|`consumer_secret`|Your consumer secret|\n|`access_token`|Your access token|\n|`token_secret`|Your access token secret|\n|`bearer_token`|Your bearer token|\n
    */
   authorization: string;
 }

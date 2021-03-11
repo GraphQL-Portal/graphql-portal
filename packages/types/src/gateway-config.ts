@@ -143,7 +143,7 @@ export interface GatewayConfig {
      */
     enabled: boolean;
     /**
-     * After the timeout has expired, the log will automatically be deleted (seconds)
+     * After the timeout has expired, the log will automatically be deleted (in seconds)
      */
     expire: number;
   };
