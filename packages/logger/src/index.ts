@@ -1,7 +1,6 @@
-import connect from '@graphql-portal/gateway/src/redis/connect';
-import RedisConnectionOptions from '@graphql-portal/gateway/src/redis/redis-connection.interface';
 import { GatewayConfig } from '@graphql-portal/types';
 import { gray } from 'chalk';
+import { Cluster, Redis } from 'ioredis';
 import winston, { format, transports } from 'winston';
 import { DatadogTransport, DatadogTransportOptions } from './datadog-winston-transport';
 import { RedisTransport } from './redis-winston-transport';
@@ -45,8 +44,9 @@ export const logger: winston.Logger = createLogger();
  * Winston.transports.Console is always on.
  */
 export async function configureLogger(
-  { log_format, log_level, datadog_logging, hostname, redis, redis_connection_string, redis_logging }: GatewayConfig,
-  nodeId: string
+  { log_format, log_level, datadog_logging, hostname, redis_logging }: GatewayConfig,
+  nodeId: string,
+  redis?: Redis | Cluster
 ): Promise<void> {
   logger.clear();
 
@@ -73,11 +73,10 @@ export async function configureLogger(
     logger.add(new DatadogTransport(opts));
   }
 
-  if (redis_logging?.enabled) {
-    const client = await connect(redis as RedisConnectionOptions, redis_connection_string);
+  if (redis_logging?.enabled && redis) {
     logger.add(
       new RedisTransport({
-        redis: client,
+        redis,
         expire: redis_logging.expire,
         metadata: {
           nodeId,

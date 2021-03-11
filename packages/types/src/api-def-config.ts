@@ -928,16 +928,35 @@ export interface ContentfulHandler {
    */
   endpoint: string;
 }
-export interface CrunchbaseHandler {}
+export interface CrunchbaseHandler {
+  /**
+   * Used to validate each developer's access to the API and ensure that any rate limits or quotas are respected
+   */
+  userKey: string;
+}
 export interface SalesforceHandler {
   /**
    * A endpoint of your Salesforce API
    */
   baseUrl: string;
+  /**
+   * Authentication token
+   */
+  token?: string;
 }
 export interface SlackHandler {}
-export interface StripeHandler {}
-export interface TwitterHandler {}
+export interface StripeHandler {
+  /**
+   * Authentication token
+   */
+  token: string;
+}
+export interface TwitterHandler {
+  /**
+   * You have to sign each API request by passing several generated keys and tokens
+   */
+  authorization: string;
+}
 export interface WeatherbitHandler {}
 export interface IPAPIHandler {}
 export interface Transform {

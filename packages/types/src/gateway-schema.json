@@ -276,8 +276,8 @@
         },
         "expire": {
           "type": "number",
-          "description": "After the timeout has expired, the log will automatically be deleted (seconds)",
-          "default": 10
+          "description": "After the timeout has expired, the log will automatically be deleted (in seconds)",
+          "default": 30
         }
       },
       "required": ["enabled", "expire"]

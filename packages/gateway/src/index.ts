@@ -3,7 +3,7 @@ import { configureLogger, prefixLogger } from '@graphql-portal/logger';
 import cluster from 'cluster';
 import { cpus } from 'os';
 import { applyRegisteredHandlers, getConfigFromMaster, spreadMessageToWorkers } from './ipc/utils';
-import setupRedis from './redis';
+import setupRedis, { redis } from './redis';
 import RedisConnectionOptions from './redis/redis-connection.interface';
 import { startServer } from './server';
 
@@ -17,7 +17,8 @@ function handleStopSignal(): void {
 async function start(): Promise<void> {
   if (cluster.isMaster) {
     await initConfig();
-    await configureLogger(config.gateway, config.nodeId);
+    await setupRedis(config.gateway.redis as RedisConnectionOptions, config.gateway.redis_connection_string);
+    await configureLogger(config.gateway, config.nodeId, redis);
     await loadApiDefs();
 
     const numCPUs: number = Number(config.gateway.pool_size) ? Number(config.gateway.pool_size) : cpus().length;
@@ -45,10 +46,9 @@ async function start(): Promise<void> {
     process.on('SIGTERM', handleStopSignal);
 
     applyRegisteredHandlers();
-    await setupRedis(config.gateway.redis as RedisConnectionOptions, config.gateway.redis_connection_string);
   } else {
     await getConfigFromMaster();
-    await configureLogger(config.gateway, config.nodeId);
+    await configureLogger(config.gateway, config.nodeId, redis);
     applyRegisteredHandlers();
     await startServer();
   }

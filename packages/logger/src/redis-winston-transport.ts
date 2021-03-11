@@ -26,6 +26,10 @@ export class RedisTransport extends TransportStream {
   private readonly redis: Redis | Cluster;
   private readonly expire: number;
 
+  /**
+   * Constructor function for Redis Transport.
+   * @param {RedisTransportOptions} opts - Redis options
+   */
   public constructor(opts: RedisTransportOptions) {
     super(opts);
     this.redis = opts.redis;
@@ -38,10 +42,8 @@ export class RedisTransport extends TransportStream {
       this.emit('logged', info);
     });
 
-    // merge metadata and log an error
     const logEntry = { ...this.metadata, ...info };
     const key = `logs:${this.metadata.nodeId}:${this.metadata.hostname}:${+new Date()}`;
-    console.log('logging');
     await this.redis.multi().set(key, stringify(logEntry)).expire(key, this.expire).exec(callback);
   }
 }

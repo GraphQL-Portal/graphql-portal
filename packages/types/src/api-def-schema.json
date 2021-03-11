@@ -1425,17 +1425,48 @@
       },
       "required": ["token", "endpoint"]
     },
-    "CrunchbaseHandler": { "additionalProperties": false, "type": "object", "title": "CrunchbaseHandler" },
+    "CrunchbaseHandler": {
+      "additionalProperties": false,
+      "type": "object",
+      "title": "CrunchbaseHandler",
+      "properties": {
+        "userKey": {
+          "type": "string",
+          "description": "Used to validate each developer's access to the API and ensure that any rate limits or quotas are respected"
+        }
+      },
+      "required": ["userKey"]
+    },
     "SalesforceHandler": {
       "additionalProperties": false,
       "type": "object",
       "title": "SalesforceHandler",
-      "properties": { "baseUrl": { "type": "string", "description": "A endpoint of your Salesforce API" } },
+      "properties": {
+        "baseUrl": { "type": "string", "description": "A endpoint of your Salesforce API" },
+        "token": { "type": "string", "description": "Authentication token" }
+      },
       "required": ["baseUrl"]
     },
     "SlackHandler": { "additionalProperties": false, "type": "object", "title": "SlackHandler" },
-    "StripeHandler": { "additionalProperties": false, "type": "object", "title": "StripeHandler" },
-    "TwitterHandler": { "additionalProperties": false, "type": "object", "title": "TwitterHandler" },
+    "StripeHandler": {
+      "additionalProperties": false,
+      "type": "object",
+      "title": "StripeHandler",
+      "properties": { "token": { "type": "string", "description": "Authentication token" } },
+      "required": ["token"]
+    },
+    "TwitterHandler": {
+      "additionalProperties": false,
+      "type": "object",
+      "title": "TwitterHandler",
+      "properties": {
+        "authorization": {
+          "type": "string",
+          "description": "You have to sign each API request by passing several generated keys and tokens"
+        }
+      },
+      "required": ["authorization"]
+    },
     "WeatherbitHandler": { "additionalProperties": false, "type": "object", "title": "WeatherbitHandler" },
     "IPAPIHandler": { "additionalProperties": false, "type": "object", "title": "IPAPIHandler" }
   },
