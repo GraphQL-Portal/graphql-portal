@@ -42,8 +42,8 @@ export class RedisTransport extends TransportStream {
       this.emit('logged', info);
     });
 
-    const logEntry = { ...this.metadata, ...info };
-    const key = `logs:${this.metadata.nodeId}:${this.metadata.hostname}:${+new Date()}`;
-    this.redis.multi().set(key, stringify(logEntry)).expire(key, this.expire).exec(callback);
+    const logEntry = stringify({ ...this.metadata, ...info });
+    const key = `logs:${this.metadata.hostname}:${this.metadata.nodeId}:${+new Date()}`;
+    this.redis.multi().set(key, logEntry).expire(key, this.expire).publish('logs-updated', logEntry).exec(callback);
   }
 }
