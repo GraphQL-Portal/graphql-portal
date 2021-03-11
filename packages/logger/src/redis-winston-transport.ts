@@ -37,13 +37,13 @@ export class RedisTransport extends TransportStream {
     this.expire = opts.expire;
   }
 
-  public async log(info: any, callback: any): Promise<void> {
+  public log(info: any, callback: any): void {
     setImmediate(() => {
       this.emit('logged', info);
     });
 
     const logEntry = { ...this.metadata, ...info };
     const key = `logs:${this.metadata.nodeId}:${this.metadata.hostname}:${+new Date()}`;
-    await this.redis.multi().set(key, stringify(logEntry)).expire(key, this.expire).exec(callback);
+    this.redis.multi().set(key, stringify(logEntry)).expire(key, this.expire).exec(callback);
   }
 }
