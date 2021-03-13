@@ -33,7 +33,7 @@
     "packages/datasources/*"
   ],
   "dependencies": {
-    "patch-package": "6.4.6",
+    "patch-package": "6.4.7",
     "postinstall-postinstall": "2.1.0"
   },
   "devDependencies": {
