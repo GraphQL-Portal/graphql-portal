@@ -22,7 +22,7 @@ const pubSubListenerWrapper = (emit: (...args: any[]) => any) => {
 };
 
 const subscribe = async (pubsub: MeshPubSub): Promise<void> => {
-  metricEmitter.on(MetricsChannels.GOT_REQUEST, async (id: string, { query, userAgent, ip, request }) => {
+  metricEmitter.on(MetricsChannels.GOT_REQUEST, async (id: string, { query, userAgent, ip, request, date }) => {
     await lpush(MetricsChannels.REQUEST_IDS, id);
     await lpush(
       id,
@@ -34,7 +34,7 @@ const subscribe = async (pubsub: MeshPubSub): Promise<void> => {
           userAgent,
           ip,
           request,
-          date: Date.now(),
+          date,
         },
         ['parser', 'res', '_']
       )
