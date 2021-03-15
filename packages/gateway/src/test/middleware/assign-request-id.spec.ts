@@ -45,6 +45,7 @@ describe('Assign reequest id MW', () => {
       userAgent: mockRequest?.headers?.['user-agent'],
       ip: mockRequest.ip,
       request: mockRequest,
+      date: expect.any(Number),
     });
   });
 });

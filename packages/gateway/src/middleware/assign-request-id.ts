@@ -10,6 +10,7 @@ const assignRequestId: RequestHandler = (req, res, next) => {
     userAgent: req.headers?.['user-agent'] || '',
     ip: req.ip,
     request: req,
+    date: Date.now(),
   });
   next();
 };
