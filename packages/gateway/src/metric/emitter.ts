@@ -72,25 +72,27 @@ const subscribe = async (pubsub: MeshPubSub): Promise<void> => {
     )
   );
 
-  metricEmitter.on(MetricsChannels.SENT_RESPONSE, (id: string, rawResponseBody: string, contentLength: number) =>
-    lpush(
-      id,
-      serializer({
-        event: MetricsChannels.SENT_RESPONSE,
-        rawResponseBody,
-        contentLength,
-        date: Date.now(),
-      })
-    )
+  metricEmitter.on(
+    MetricsChannels.SENT_RESPONSE,
+    (id: string, rawResponseBody: string, contentLength: number, date: number) =>
+      lpush(
+        id,
+        serializer({
+          event: MetricsChannels.SENT_RESPONSE,
+          rawResponseBody,
+          contentLength,
+          date,
+        })
+      )
   );
 
-  metricEmitter.on(MetricsChannels.GOT_ERROR, (id: string, error: Error) =>
+  metricEmitter.on(MetricsChannels.GOT_ERROR, (id: string, error: Error, date: number) =>
     lpush(
       id,
       serializer({
         event: MetricsChannels.GOT_ERROR,
         error,
-        date: Date.now(),
+        date,
       })
     )
   );
