@@ -1,5 +1,15 @@
 # @graphql-portal/gateway
 
+## 0.16.4
+
+### Patch Changes
+
+- 14461fb: sync config, print mesh error stack
+- 203e0ee: fix metrics request date
+- Updated dependencies [14461fb]
+  - @graphql-portal/types@0.18.3
+  - @graphql-portal/logger@0.4.4
+
 ## 0.16.3
 
 ### Patch Changes
