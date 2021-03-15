@@ -11,15 +11,21 @@ jest.mock('../../metric/emitter', () => ({
 }));
 
 describe('Log response MW', () => {
-  let mockRequest: {
-    id: 'id';
+  const mockRequest = {
+    id: 'id',
   };
   let nextFunction: NextFunction = jest.fn();
   let mockResponse: Partial<Response>;
 
   beforeEach(() => {
+    const handlers: { [key: string]: Function } = {};
     mockResponse = {
-      on: jest.fn(),
+      on: jest.fn().mockImplementation(function (event, handler) {
+        handlers[event] = handler;
+      }),
+      emit: jest.fn().mockImplementation(function (event) {
+        handlers[event]();
+      }),
       write: jest.fn(),
       end: jest.fn(),
     };
@@ -34,10 +40,15 @@ describe('Log response MW', () => {
     const body = 'body';
     const buffer = Buffer.from(body);
 
-    (mockResponse as any).write(buffer, () => {
-      (mockResponse as any).end();
-      expect(metricEmitter.emit).toBeCalledTimes(1);
-      expect(metricEmitter.emit).toBeCalledWith(MetricsChannels.SENT_RESPONSE, mockRequest.id, body, buffer.byteLength);
-    });
+    (mockResponse as any).write(buffer);
+    (mockResponse as any).emit('finish');
+    expect(metricEmitter.emit).toBeCalledTimes(1);
+    expect(metricEmitter.emit).toBeCalledWith(
+      MetricsChannels.SENT_RESPONSE,
+      mockRequest.id,
+      body,
+      buffer.byteLength,
+      expect.any(Number)
+    );
   });
 });
