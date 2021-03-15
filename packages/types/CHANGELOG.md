@@ -1,5 +1,11 @@
 # @graphql-portal/types
 
+## 0.18.3
+
+### Patch Changes
+
+- 14461fb: sync config, print mesh error stack
+
 ## 0.18.2
 
 ### Patch Changes
