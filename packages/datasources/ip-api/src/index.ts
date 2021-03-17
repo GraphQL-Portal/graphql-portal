@@ -4,7 +4,7 @@ import { GetMeshSourceOptions, YamlConfig } from '@graphql-mesh/types';
 // eslint-disable-next-line @typescript-eslint/naming-convention
 const OpenAPIHandler = require('@graphql-mesh/openapi');
 
-const BASE_URL = 'https://ip-api.com';
+const BASE_URL = 'http://ip-api.com';
 
 export default class IPAPIHandler extends OpenAPIHandler {
   public constructor({ name, config, cache }: GetMeshSourceOptions<YamlConfig.OpenapiHandler>) {
