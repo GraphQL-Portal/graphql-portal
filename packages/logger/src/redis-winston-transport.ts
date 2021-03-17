@@ -1,6 +1,7 @@
 import stringify from 'fast-safe-stringify';
 import TransportStream from 'winston-transport';
 import { Redis, Cluster } from 'ioredis';
+import { Channel } from '@graphql-portal/types';
 
 export interface RedisOptions {
   redis: Redis | Cluster;
@@ -45,6 +46,11 @@ export class RedisTransport extends TransportStream {
     const timestamp = +new Date();
     const logEntry = stringify({ ...this.metadata, ...info, timestamp });
     const key = `logs:${this.metadata.hostname}:${this.metadata.nodeId}:${+new Date()}`;
-    this.redis.multi().set(key, logEntry).expire(key, this.expire).publish('logs-updated', logEntry).exec(callback);
+    this.redis
+      .multi()
+      .set(key, logEntry)
+      .expire(key, this.expire)
+      .publish(Channel.logsUpdated, logEntry)
+      .exec(callback);
   }
 }
