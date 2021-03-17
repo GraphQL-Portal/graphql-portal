@@ -1,13 +1,13 @@
 {
   "name": "@graphql-portal/config",
-  "version": "0.9.2",
+  "version": "0.9.3",
   "license": "MIT",
   "main": "dist/src/index.js",
   "scripts": {
     "build": "tsc -b"
   },
   "dependencies": {
-    "@graphql-portal/contentful": "^0.0.2",
+    "@graphql-portal/contentful": "^0.0.3",
     "@graphql-portal/dashboard": "^0.1.4",
     "@graphql-portal/logger": "^0.4.3",
     "@graphql-portal/slack": "^0.0.3",
