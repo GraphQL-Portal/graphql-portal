@@ -354,6 +354,7 @@
       "properties": {
         "endpoint": {
           "type": "string",
+          "pattern": "^https?://.*$",
           "description": "A url or file path to your remote GraphQL endpoint.\nIf you provide a path to a code file(js or ts),\nother options will be ignored and the schema exported from the file will be used directly."
         },
         "schemaHeaders": {
@@ -1428,7 +1429,7 @@
       "properties": {
         "userKey": {
           "type": "string",
-          "description": "Authentication API Key"
+          "description": "Used to validate each developer's access to the API and ensure that any rate limits or quotas are respected"
         }
       },
       "required": ["userKey"]
@@ -1458,7 +1459,7 @@
       "properties": {
         "authorization": {
           "type": "string",
-          "description": "Authorization header. Set up the following variables in order to run each request (depending on the authentication type used by the request you are sending):\n\n|Name|Description|\n|---|---|\n|`consumer_key`|Your consumer key|\n|`consumer_secret`|Your consumer secret|\n|`access_token`|Your access token|\n|`token_secret`|Your access token secret|\n|`bearer_token`|Your bearer token|\n"
+          "description": "You have to sign each API request by passing several generated keys and tokens"
         }
       },
       "required": ["authorization"]

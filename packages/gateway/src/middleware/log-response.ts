@@ -22,7 +22,7 @@ export const logResponse: RequestHandler = (req, res, next) => {
     const buffer = Buffer.concat(chunks);
     const contentLength = buffer.byteLength;
     const responseBody = buffer.toString('utf8');
-    metricEmitter.emit(MetricsChannels.SENT_RESPONSE, req.id, responseBody, contentLength);
+    metricEmitter.emit(MetricsChannels.SENT_RESPONSE, req.id, responseBody, contentLength, Date.now());
   });
 
   next();
