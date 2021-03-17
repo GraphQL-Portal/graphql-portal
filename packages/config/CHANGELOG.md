@@ -1,5 +1,12 @@
 # @graphql-portal/config
 
+## 0.9.3
+
+### Patch Changes
+
+- Updated dependencies [4a0f4b3]
+  - @graphql-portal/contentful@0.0.3
+
 ## 0.9.2
 
 ### Patch Changes
