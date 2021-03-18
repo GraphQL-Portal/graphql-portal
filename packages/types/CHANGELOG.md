@@ -1,5 +1,11 @@
 # @graphql-portal/types
 
+## 0.19.0
+
+### Minor Changes
+
+- b931565: Redis transport
+
 ## 0.18.3
 
 ### Patch Changes

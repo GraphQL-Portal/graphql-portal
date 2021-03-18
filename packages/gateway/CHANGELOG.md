@@ -1,5 +1,19 @@
 # @graphql-portal/gateway
 
+## 0.17.0
+
+### Minor Changes
+
+- b931565: Redis transport
+
+### Patch Changes
+
+- Updated dependencies [b931565]
+  - @graphql-portal/logger@0.5.0
+  - @graphql-portal/types@0.19.0
+  - @graphql-portal/config@0.9.4
+  - @graphql-portal/dashboard@0.1.5
+
 ## 0.16.4
 
 ### Patch Changes
