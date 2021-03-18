@@ -230,6 +230,18 @@ String. Adds an environment attribute to Datadog logs. Empty by default.
 
 Array of strings. Allows transport level tagging in Datadog. Each tag should follow the format `<KEY>:<VALUE>`. For more information see https://docs.datadoghq.com/getting_started/tagging/.
 
+## redis_logging
+
+Configures sending of log messages to Redis.
+
+### enabled
+
+Boolean. Enable or disable logging to Redis. Defaults to false.
+
+### expire
+
+Number. Timeout in seconds, after the timeout has expired, the log will automatically be deleted, 30 by default.
+
 ## redis
 Redis connection options.
 

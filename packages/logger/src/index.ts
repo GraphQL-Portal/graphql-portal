@@ -1,7 +1,9 @@
-import winston, { format, transports } from 'winston';
-import { gray } from 'chalk';
 import { GatewayConfig } from '@graphql-portal/types';
+import { gray } from 'chalk';
+import { Cluster, Redis } from 'ioredis';
+import winston, { format, transports } from 'winston';
 import { DatadogTransport, DatadogTransportOptions } from './datadog-winston-transport';
+import { RedisTransport } from './redis-winston-transport';
 
 const labelPid = { label: `pid: ${process.pid}` };
 
@@ -41,7 +43,11 @@ export const logger: winston.Logger = createLogger();
  * Configures logger transports.
  * Winston.transports.Console is always on.
  */
-export function configureLogger({ log_format, log_level, datadog_logging, hostname }: GatewayConfig): void {
+export async function configureLogger(
+  { log_format, log_level, datadog_logging, hostname, redis_logging }: GatewayConfig,
+  nodeId: string,
+  redis?: Redis | Cluster
+): Promise<void> {
   logger.clear();
 
   // Add Console Transport. Always on.
@@ -59,11 +65,25 @@ export function configureLogger({ log_format, log_level, datadog_logging, hostna
       ddsource: 'graphql-portal',
       service: 'gateway',
       hostname,
+      nodeId,
     };
 
     if (datadog_logging.environment) opts.metadata.environment = datadog_logging.environment;
 
     logger.add(new DatadogTransport(opts));
+  }
+
+  if (redis_logging?.enabled && redis) {
+    logger.add(
+      new RedisTransport({
+        redis,
+        expire: redis_logging.expire,
+        metadata: {
+          nodeId,
+          hostname,
+        },
+      })
+    );
   }
 }
 

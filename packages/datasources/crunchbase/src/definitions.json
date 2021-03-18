@@ -6,7 +6,7 @@
     "properties": {
       "userKey": {
         "type": "string",
-        "description": "Used to validate each developer's access to the API and ensure that any rate limits or quotas are respected"
+        "description": "Authentication API Key"
       }
     },
     "required": ["userKey"]
