@@ -1,5 +1,16 @@
 # @graphql-portal/logger
 
+## 0.5.0
+
+### Minor Changes
+
+- b931565: Redis transport
+
+### Patch Changes
+
+- Updated dependencies [b931565]
+  - @graphql-portal/types@0.19.0
+
 ## 0.4.4
 
 ### Patch Changes
