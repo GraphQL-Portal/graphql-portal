@@ -1,7 +1,16 @@
 import { prefixLogger } from '@graphql-portal/logger';
 import { ApiDef } from '@graphql-portal/types';
 import { NextFunction, Request, RequestHandler, Response } from 'express';
-import { GraphQLError, parse, TypeInfo, ValidationContext, visit, Visitor, visitWithTypeInfo } from 'graphql';
+import {
+  DocumentNode,
+  GraphQLError,
+  parse,
+  TypeInfo,
+  ValidationContext,
+  visit,
+  Visitor,
+  visitWithTypeInfo,
+} from 'graphql';
 import CostAnalysis from 'graphql-cost-analysis/dist/costAnalysis';
 import depthLimit from 'graphql-depth-limit';
 import { apiSchema } from '../../server/router';
@@ -13,6 +22,7 @@ const logger = prefixLogger('cost-analysis');
 export class CustomCostAnalysis extends CostAnalysis {
   public cost = 0;
 
+  // eslint-disable-next-line no-useless-constructor
   public constructor(context: ValidationContext, options: any) {
     super(context, options);
   }
@@ -37,7 +47,13 @@ const rateLimitMiddleware = (apiDef: ApiDef): RequestHandler => {
     }
 
     const schema = apiSchema[apiDef.name];
-    const query = parse(body.query);
+    let query: DocumentNode;
+    try {
+      query = parse(body.query);
+    } catch (error) {
+      logger.error(error.message);
+      return next();
+    }
     const typeInfo = new TypeInfo(schema);
     const validationContext = new ValidationContext(schema, query, typeInfo, () => {});
 
