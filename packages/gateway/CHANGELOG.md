@@ -1,5 +1,12 @@
 # @graphql-portal/gateway
 
+## 0.17.1
+
+### Patch Changes
+
+- c5701ab: emit metric with error
+- c5701ab: skip rateLimitMiddleware for invalid queries
+
 ## 0.17.0
 
 ### Minor Changes
