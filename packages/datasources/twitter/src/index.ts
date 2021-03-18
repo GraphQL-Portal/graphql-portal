@@ -1,4 +1,3 @@
-import { readFileSync } from 'fs';
 import { GetMeshSourceOptions, YamlConfig } from '@graphql-mesh/types';
 // eslint-disable-next-line @typescript-eslint/naming-convention
 const OpenAPIHandler = require('@graphql-mesh/openapi');
@@ -11,7 +10,7 @@ export default class TwitterHandler extends OpenAPIHandler {
     config,
     cache,
   }: GetMeshSourceOptions<YamlConfig.OpenapiHandler & { authorization: string }>) {
-    config.source = readFileSync('./source.json').toString();
+    config.source = require.resolve('@graphql-portal/twitter/src/source.json');
     config.baseUrl = BASE_URL;
     config.operationHeaders = config.schemaHeaders = {
       authorization: config.authorization,
