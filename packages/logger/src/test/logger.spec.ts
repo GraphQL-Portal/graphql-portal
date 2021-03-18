@@ -1,5 +1,6 @@
 import * as logger from '../index';
 import { GatewayConfig } from '@graphql-portal/types';
+import { Redis } from 'ioredis';
 
 describe('logger', () => {
   describe('configureLogger', () => {
@@ -17,30 +18,38 @@ describe('logger', () => {
       redis: { connection_string: 'redis://localhost:6379', is_cluster: false },
     };
 
-    it('should always enable console logging', () => {
+    it('should always enable console logging', async () => {
       const loggerClearSpy = jest.spyOn(logger.logger, 'clear');
       const loggerAddSpy = jest.spyOn(logger.logger, 'add');
 
-      logger.configureLogger(baseConfig);
+      await logger.configureLogger(baseConfig, '1');
       expect(loggerClearSpy).toHaveBeenCalledTimes(1);
       expect(loggerAddSpy).toHaveBeenCalledTimes(1);
 
       jest.clearAllMocks();
     });
 
-    it('should add Datadog transport if it is enabled in config', () => {
+    it('should add Datadog and Redis transport if it is enabled in config', async () => {
       const loggerClearSpy = jest.spyOn(logger.logger, 'clear');
       const loggerAddSpy = jest.spyOn(logger.logger, 'add');
 
-      logger.configureLogger({
-        ...baseConfig,
-        datadog_logging: {
-          enabled: true,
-          apiKey: '123',
+      await logger.configureLogger(
+        {
+          ...baseConfig,
+          datadog_logging: {
+            enabled: true,
+            apiKey: '123',
+          },
+          redis_logging: {
+            enabled: true,
+            expire: 10,
+          },
         },
-      });
+        '1',
+        {} as Redis
+      );
       expect(loggerClearSpy).toHaveBeenCalledTimes(1);
-      expect(loggerAddSpy).toHaveBeenCalledTimes(2);
+      expect(loggerAddSpy).toHaveBeenCalledTimes(3);
 
       jest.clearAllMocks();
     });

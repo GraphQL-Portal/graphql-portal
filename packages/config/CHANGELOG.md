@@ -1,5 +1,21 @@
 # @graphql-portal/config
 
+## 0.9.4
+
+### Patch Changes
+
+- Updated dependencies [b931565]
+  - @graphql-portal/logger@0.5.0
+  - @graphql-portal/types@0.19.0
+  - @graphql-portal/dashboard@0.1.5
+
+## 0.9.3
+
+### Patch Changes
+
+- Updated dependencies [4a0f4b3]
+  - @graphql-portal/contentful@0.0.3
+
 ## 0.9.2
 
 ### Patch Changes

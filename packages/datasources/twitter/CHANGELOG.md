@@ -1,5 +1,11 @@
 # @graphql-portal/twitter
 
+## 0.1.1
+
+### Patch Changes
+
+- b931565: Redis transport
+
 ## 0.1.0
 
 ### Minor Changes

@@ -1,9 +1,8 @@
 import { config } from '@graphql-portal/config';
 import { Channel } from '@graphql-portal/types';
-import { Redis, Cluster } from 'ioredis';
 import { getConfigFromMaster } from '../../ipc/utils';
 import { startPeriodicMetricsRecording } from '../../metric';
-import setupRedis from '../../redis';
+import { redisSubscriber } from '../../redis';
 import { startServer } from '../../server';
 import { setRouter } from '../../server/router';
 import setupControlApi from '../../server/control-api';
@@ -23,33 +22,29 @@ jest.mock('http', () => ({
     return server;
   }),
 }));
-jest.mock(
-  '../../redis',
-  jest.fn(() => {
-    const onHandlers: any = {};
-    const redis = {
-      subscribe: jest.fn(),
-      on: jest.fn((event: string, handler: () => any) => {
-        if (!onHandlers[event]) {
-          onHandlers[event] = [];
-        }
-        onHandlers[event].push(handler);
-      }),
-      emit: async (event: string, ...data: any): Promise<void> => {
-        await Promise.all(
-          onHandlers[event].map((handler: (...args: any[]) => any) => {
-            return handler(...data);
-          })
-        );
-      },
-    };
+jest.mock('../../redis', () => {
+  const onHandlers: any = {};
+  const redisSubscriber = {
+    subscribe: jest.fn(),
+    on: jest.fn((event: string, handler: () => any) => {
+      if (!onHandlers[event]) {
+        onHandlers[event] = [];
+      }
+      onHandlers[event].push(handler);
+    }),
+    emit: async (event: string, ...data: any): Promise<void> => {
+      await Promise.all(
+        onHandlers[event].map((handler: (...args: any[]) => any) => {
+          return handler(...data);
+        })
+      );
+    },
+  };
 
-    return {
-      __esModule: true,
-      default: jest.fn(() => redis),
-    };
-  })
-);
+  return {
+    redisSubscriber,
+  };
+});
 jest.mock('../../metric', () => {
   return {
     startPeriodicMetricsRecording: jest.fn(),
@@ -91,12 +86,6 @@ jest.mock('../../server/control-api/', () => {
 });
 
 describe('Server', () => {
-  let redis: Redis | Cluster;
-
-  beforeAll(async () => {
-    redis = await setupRedis({ connection_string: 'string' });
-  });
-
   describe('startServer', () => {
     it('should setup express server and subscribe to api defs updates', async () => {
       await startServer();
@@ -105,9 +94,8 @@ describe('Server', () => {
       expect(app.disable).toHaveBeenCalledTimes(1);
       expect(app.disable).toHaveBeenCalledWith('x-powered-by');
       expect(setRouter).toHaveBeenCalledWith(app, config.apiDefs);
-      expect(setupRedis).toHaveBeenCalledWith(config.gateway.redis, undefined);
-      expect(redis.subscribe).toHaveBeenCalledWith(Channel.apiDefsUpdated);
-      expect(redis.on).toHaveBeenCalledWith('message', expect.any(Function));
+      expect(redisSubscriber.subscribe).toHaveBeenCalledWith(Channel.apiDefsUpdated);
+      expect(redisSubscriber.on).toHaveBeenCalledWith('message', expect.any(Function));
       expect(setupControlApi).toHaveBeenCalledTimes(0);
       expect(server.listen).toHaveBeenCalledWith(
         config.gateway.listen_port,
@@ -116,7 +104,7 @@ describe('Server', () => {
       );
       expect(startPeriodicMetricsRecording).toHaveBeenCalledTimes(1);
 
-      await redis.emit('message', Channel.apiDefsUpdated, Date.now());
+      await redisSubscriber.emit('message', Channel.apiDefsUpdated, Date.now());
       expect(getConfigFromMaster).toHaveBeenCalledTimes(1);
       expect(setRouter).toHaveBeenCalledTimes(2);
     });

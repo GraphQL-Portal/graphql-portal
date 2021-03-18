@@ -11,8 +11,7 @@ import { getConfigFromMaster } from '../ipc/utils';
 import { promisify } from 'util';
 import { startPeriodicMetricsRecording } from '../metric';
 import { logResponse } from '../middleware';
-import setupRedis from '../redis';
-import RedisConnectionOptions from '../redis/redis-connection.interface';
+import { redisSubscriber } from '../redis';
 import setupControlApi from './control-api';
 import { setRouter, updateApi } from './router';
 
@@ -30,11 +29,6 @@ export const connections = {
 };
 
 export async function startServer(): Promise<void> {
-  const redisSubscriber = await setupRedis(
-    config.gateway.redis as RedisConnectionOptions,
-    config.gateway.redis_connection_string
-  );
-
   const app = express();
   const httpServer = createServer(app);
 
