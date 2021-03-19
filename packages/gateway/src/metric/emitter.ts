@@ -15,87 +15,89 @@ const lpush = (key: string, ...args: any[]): Promise<number | void> =>
   });
 
 const pubSubListenerWrapper = (emit: (...args: any[]) => any) => {
-  return (data: { resolverData: ResolverData }) => {
+  return (data: { resolverData: ResolverData }): void => {
     if (!getSourceName(data.resolverData)) return; // do not emit resolver events without sourcename (nested queries)
     emit(data);
   };
 };
 
 const subscribe = async (pubsub: MeshPubSub): Promise<void> => {
-  metricEmitter.on(MetricsChannels.GOT_REQUEST, async (id: string, { query, userAgent, ip, request, date }) => {
-    await lpush(MetricsChannels.REQUEST_IDS, id);
-    await lpush(
-      id,
-      serializer(
-        {
-          event: MetricsChannels.GOT_REQUEST,
-          nodeId: config.nodeId,
-          query,
-          userAgent,
-          ip,
-          request,
-          date,
-        },
-        ['parser', 'res', '_']
+  if (!metricEmitter.listenerCount(MetricsChannels.GOT_REQUEST)) {
+    metricEmitter.on(MetricsChannels.GOT_REQUEST, async (id: string, { query, userAgent, ip, request, date }) => {
+      await lpush(MetricsChannels.REQUEST_IDS, id);
+      await lpush(
+        id,
+        serializer(
+          {
+            event: MetricsChannels.GOT_REQUEST,
+            nodeId: config.nodeId,
+            query,
+            userAgent,
+            ip,
+            request,
+            date,
+          },
+          ['parser', 'res', '_']
+        )
+      );
+    });
+
+    metricEmitter.on(MetricsChannels.RESOLVER_CALLED, (resolverData: ResolverData) =>
+      lpush(
+        resolverData.context.requestId,
+        serializer({
+          ...transformResolverData(MetricsChannels.RESOLVER_CALLED, resolverData),
+          info: resolverData.info,
+          args: resolverData.args,
+        })
       )
     );
-  });
 
-  metricEmitter.on(MetricsChannels.RESOLVER_CALLED, (resolverData: ResolverData) =>
-    lpush(
-      resolverData.context.requestId,
-      serializer({
-        ...transformResolverData(MetricsChannels.RESOLVER_CALLED, resolverData),
-        info: resolverData.info,
-        args: resolverData.args,
-      })
-    )
-  );
+    metricEmitter.on(MetricsChannels.RESOLVER_DONE, (resolverData: ResolverData, result: any) =>
+      lpush(
+        resolverData.context.requestId,
+        serializer({
+          ...transformResolverData(MetricsChannels.RESOLVER_DONE, resolverData),
+          result,
+        })
+      )
+    );
 
-  metricEmitter.on(MetricsChannels.RESOLVER_DONE, (resolverData: ResolverData, result: any) =>
-    lpush(
-      resolverData.context.requestId,
-      serializer({
-        ...transformResolverData(MetricsChannels.RESOLVER_DONE, resolverData),
-        result,
-      })
-    )
-  );
+    metricEmitter.on(MetricsChannels.RESOLVER_ERROR, (resolverData: ResolverData, error: Error) =>
+      lpush(
+        resolverData.context.requestId,
+        serializer({
+          ...transformResolverData(MetricsChannels.RESOLVER_ERROR, resolverData),
+          error,
+        })
+      )
+    );
 
-  metricEmitter.on(MetricsChannels.RESOLVER_ERROR, (resolverData: ResolverData, error: Error) =>
-    lpush(
-      resolverData.context.requestId,
-      serializer({
-        ...transformResolverData(MetricsChannels.RESOLVER_ERROR, resolverData),
-        error,
-      })
-    )
-  );
+    metricEmitter.on(
+      MetricsChannels.SENT_RESPONSE,
+      (id: string, rawResponseBody: string, contentLength: number, date: number) =>
+        lpush(
+          id,
+          serializer({
+            event: MetricsChannels.SENT_RESPONSE,
+            rawResponseBody,
+            contentLength,
+            date,
+          })
+        )
+    );
 
-  metricEmitter.on(
-    MetricsChannels.SENT_RESPONSE,
-    (id: string, rawResponseBody: string, contentLength: number, date: number) =>
+    metricEmitter.on(MetricsChannels.GOT_ERROR, (id: string, error: Error, date: number) =>
       lpush(
         id,
         serializer({
-          event: MetricsChannels.SENT_RESPONSE,
-          rawResponseBody,
-          contentLength,
+          event: MetricsChannels.GOT_ERROR,
+          error,
           date,
         })
       )
-  );
-
-  metricEmitter.on(MetricsChannels.GOT_ERROR, (id: string, error: Error, date: number) =>
-    lpush(
-      id,
-      serializer({
-        event: MetricsChannels.GOT_ERROR,
-        error,
-        date,
-      })
-    )
-  );
+    );
+  }
 
   await pubsub.subscribe(
     PubSubEvents.RESOLVER_CALLED,
