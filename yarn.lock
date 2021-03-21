@@ -5897,10 +5897,10 @@ inherits@2.0.3:
   resolved "https://registry.yarnpkg.com/inherits/-/inherits-2.0.3.tgz#633c2c83e3da42a502f52466022480f4208261de"
   integrity sha1-Yzwsg+PaQqUC9SRmAiSA9CCCYd4=
 
-ioredis-mock@5.2.4:
-  version "5.2.4"
-  resolved "https://registry.yarnpkg.com/ioredis-mock/-/ioredis-mock-5.2.4.tgz#274a5d3e78aa92c01d579ed16dd21e9a2176e52a"
-  integrity sha512-Ek4pC+hl0rjKilaxYpm4E9qZRILevFzb5vFsjf3njR1a1EDM1DXHnxjQiMgeugcObxFLouksfadysuCXJJ8bZQ==
+ioredis-mock@5.3.0:
+  version "5.3.0"
+  resolved "https://registry.yarnpkg.com/ioredis-mock/-/ioredis-mock-5.3.0.tgz#9b1f432a7c2c02b2c0d1e7066ea53098e5fef06e"
+  integrity sha512-herNl9MSlf8f3+fipR7O32EvzJgrNOd56eEPtgz+cY7fwSu23ZjQ2rdzDWsNuSQoBbfkZAKACrvudnXvJA1UGQ==
   dependencies:
     array-from "^2.1.1"
     es6-map "^0.1.5"
