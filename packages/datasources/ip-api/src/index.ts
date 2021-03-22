@@ -1,4 +1,3 @@
-import { readFileSync } from 'fs';
 import { GetMeshSourceOptions, YamlConfig } from '@graphql-mesh/types';
 
 // eslint-disable-next-line @typescript-eslint/naming-convention
@@ -8,7 +7,7 @@ const BASE_URL = 'http://ip-api.com';
 
 export default class IPAPIHandler extends OpenAPIHandler {
   public constructor({ name, config, cache }: GetMeshSourceOptions<YamlConfig.OpenapiHandler>) {
-    config.source = readFileSync('./source.json').toString();
+    config.source = require.resolve('@graphql-portal/ip-api/src/source.json');
     config.baseUrl = BASE_URL;
 
     super({ name, config, cache });
