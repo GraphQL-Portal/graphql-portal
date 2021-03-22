@@ -13,12 +13,13 @@ jest.mock('../../redis', () => ({
   },
 }));
 jest.mock('events', () => {
-  function EventEmitter() {}
-  EventEmitter.prototype.on = jest.fn();
-  EventEmitter.prototype.emit = jest.fn();
+  function eventEmitter(): any {}
+  eventEmitter.prototype.on = jest.fn();
+  eventEmitter.prototype.emit = jest.fn();
+  eventEmitter.prototype.listenerCount = jest.fn();
 
   return {
-    EventEmitter,
+    EventEmitter: eventEmitter,
   };
 });
 
