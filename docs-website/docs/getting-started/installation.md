@@ -50,13 +50,12 @@ docker pull gqlportal/dashboard:latest
 docker run --name graphql-dashboard \
   -e REDIS_CONNECTION_STRING="redis://localhost:6379" \
   -e MONGODB_CONNECTION_STRING="mongodb://localhost:27017" \
-  -e DASHBOARD_PORT=3030 \
-  -e NODE_ENV=production \
   -p 3030:3030 \
+  -p 8080:8080 \
   gqlportal/dashboard:latest
 ```
 
-You now should be able to open the configuration dashboard by going to http://localhost:3030 in your browser.
+You now should be able to open the configuration dashboard by going to http://localhost:8080 in your browser.
 
 ### Standalone Gateway with Yarn/NPM
 
@@ -119,15 +118,46 @@ vim packages/backend/config/env/production.json
 ```
 ```json title="packages/backend/config/env/production.json"
 {
+  "gateway": {
+    "secret": "@@DASHBOARD_SECRET"
+  },
   "application": {
     "env": "production",
+    "host": "@@HOST",
+    "publicHost": "@@PUBLIC_HOST",
     "useSwaggerUi": false,
     "port": "@@DASHBOARD_PORT",
     "graphQL": {
-      "playground": false,
-      "debug": false
+      "playground": "@@GRAPHQL_PLAYGROUND",
+      "debug": "@@GRAPHQL_PLAYGROUND"
     },
-    "logLevel": "log"
+    "serveStatic": "false",
+    "jwtSecret": "@@JWT_SECRET",
+    "logLevel": "log",
+    "maxmind": {
+      "dbPath": "@@MAXMIND_DB_PATH",
+      "licenseKey": "@@MAXMIND_LICENSE_KEY",
+      "accountId": "@@MAXMIND_ACCOUNT_ID"
+    },
+    "sendgrid": {
+      "senderEmail": "@@SENDGRID_SENDER_EMAIL",
+      "confirmationTemplateId": "@@SENDGRID_CONFIRMATION_TEMPLATE",
+      "resetPasswordTemplateId": "@@SENDGRID_RESET_PASSWORD_TEMPLATE",
+      "apiKey": "@@SENDGRID_API_KEY"
+    },
+    "defaultAdmin": {
+      "email": "@@DEFAULT_ADMIN_EMAIL",
+      "password": "@@DEFAULT_ADMIN_PASSWORD"
+    },
+    "metrics": {
+      "enabled": "@@METRICS_ENABLED",
+      "chunk": "@@METRICS_CHUNK",
+      "delay": "@@METRICS_DELAY"
+    },
+    "cryptoSecret": "@@CRYPTO_SECRET"
+  },
+  "client": {
+    "host": "@@CLIENT_HOST"
   },
   "db": {
     "redis": {
