@@ -18,7 +18,7 @@ export default function useEnv(config: { [key: string]: any }, schema?: typeof a
         config[key] = envValue;
       }
     }
-    if (typeof value === 'object') {
+    if (value && typeof value === 'object') {
       useEnv(value);
     }
   });

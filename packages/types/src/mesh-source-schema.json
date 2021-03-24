@@ -1444,7 +1444,14 @@
       },
       "required": ["baseUrl"]
     },
-    "SlackHandler": { "additionalProperties": false, "type": "object", "title": "SlackHandler" },
+    "SlackHandler": {
+      "title": "SlackHandler",
+      "type": "object",
+      "properties": {
+        "token": { "type": "string", "description": "Access token" }
+      },
+      "additionalProperties": false
+    },
     "StripeHandler": {
       "additionalProperties": false,
       "type": "object",
