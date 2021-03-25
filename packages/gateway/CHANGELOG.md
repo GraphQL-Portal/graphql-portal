@@ -1,5 +1,16 @@
 # @graphql-portal/gateway
 
+## 0.17.2
+
+### Patch Changes
+
+- 8dc327e: fix: register only one metric handler
+- Updated dependencies [a4cfd75]
+  - @graphql-portal/config@0.10.0
+  - @graphql-portal/types@0.20.0
+  - @graphql-portal/dashboard@0.1.6
+  - @graphql-portal/logger@0.5.1
+
 ## 0.17.1
 
 ### Patch Changes

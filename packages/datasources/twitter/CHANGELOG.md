@@ -1,5 +1,11 @@
 # @graphql-portal/twitter
 
+## 0.1.2
+
+### Patch Changes
+
+- 7359d06: twiiter, ip-api resolve paths
+
 ## 0.1.1
 
 ### Patch Changes
