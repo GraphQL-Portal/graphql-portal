@@ -2,6 +2,7 @@
   "IPAPIHandler": {
     "additionalProperties": false,
     "type": "object",
-    "title": "IPAPIHandler"
+    "title": "IPAPIHandler",
+    "description": "IP Geolocation API"
   }
 }

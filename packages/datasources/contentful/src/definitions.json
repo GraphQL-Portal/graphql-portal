@@ -3,6 +3,7 @@
     "additionalProperties": false,
     "type": "object",
     "title": "ContentfulHandler",
+    "description": "API-first content platform to build digital experiences",
     "properties": {
       "token": {
         "type": "string",

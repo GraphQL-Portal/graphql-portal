@@ -3,6 +3,7 @@
     "additionalProperties": false,
     "type": "object",
     "title": "TwitterHandler",
+    "description": "An American microblogging and social networking service on which users post and interact with messages known as 'tweets'",
     "properties": {
       "authorization": {
         "type": "string",
