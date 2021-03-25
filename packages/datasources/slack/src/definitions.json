@@ -1,7 +1,14 @@
 {
   "SlackHandler": {
-    "additionalProperties": false,
+    "title": "SlackHandler",
     "type": "object",
-    "title": "SlackHandler"
+    "additionalProperties": false,
+    "properties": {
+      "token": {
+        "type": "string",
+        "description": "Slack API access token"
+      }
+    },
+    "required": ["token"]
   }
 }
