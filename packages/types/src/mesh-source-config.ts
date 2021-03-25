@@ -744,7 +744,7 @@ export interface ContentfulHandler {
 }
 export interface CrunchbaseHandler {
   /**
-   * Used to validate each developer's access to the API and ensure that any rate limits or quotas are respected
+   * Authentication API Key
    */
   userKey: string;
 }
@@ -758,7 +758,12 @@ export interface SalesforceHandler {
    */
   token?: string;
 }
-export interface SlackHandler {}
+export interface SlackHandler {
+  /**
+   * Slack API access token
+   */
+  token: string;
+}
 export interface StripeHandler {
   /**
    * Authentication token
@@ -767,7 +772,16 @@ export interface StripeHandler {
 }
 export interface TwitterHandler {
   /**
-   * You have to sign each API request by passing several generated keys and tokens
+   * Authorization header. Set up the following variables in order to run each request (depending on the authentication type used by the request you are sending):
+   *
+   * |Name|Description|
+   * |---|---|
+   * |`consumer_key`|Your consumer key|
+   * |`consumer_secret`|Your consumer secret|
+   * |`access_token`|Your access token|
+   * |`token_secret`|Your access token secret|
+   * |`bearer_token`|Your bearer token|
+   *
    */
   authorization: string;
 }

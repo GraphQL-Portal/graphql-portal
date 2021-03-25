@@ -6,7 +6,7 @@ const BASE_URL = 'https://slack.com/api';
 
 export default class SlackHandler extends OpenAPIHandler {
   public constructor({ name, config, cache }: GetMeshSourceOptions<YamlConfig.OpenapiHandler & { token: string }>) {
-    config.source = require.resolve('@graphql-portal/slack/src/definitions.json');
+    config.source = require.resolve('@graphql-portal/slack/src/source.json');
     config.baseUrl = BASE_URL;
     config.operationHeaders = {
       authorization: `Bearer ${config.token}`,
