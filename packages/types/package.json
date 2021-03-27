@@ -7,7 +7,7 @@
     "build": "tsc -b"
   },
   "dependencies": {
-    "ajv": "7.2.3"
+    "ajv": "7.2.4"
   },
   "publishConfig": {
     "access": "public"
