@@ -996,18 +996,18 @@
     "@graphql-tools/wrap" "7.0.5"
     fetchache "0.0.4"
 
-"@graphql-mesh/grpc@^0.9.1":
-  version "0.9.2"
-  resolved "https://registry.yarnpkg.com/@graphql-mesh/grpc/-/grpc-0.9.2.tgz#7a906901d06b70e429a74e3d6ccf3a6bcc80d091"
-  integrity sha512-4gCBRsclwMPuU/izZetS4ZS3OelEwXZ9e5rVb5AN9hvFyZ8O76qqNIWe/jgzusi0JuHKiBqCXT13wYYPitjPQw==
+"@graphql-mesh/grpc@^0.10.0":
+  version "0.10.0"
+  resolved "https://registry.yarnpkg.com/@graphql-mesh/grpc/-/grpc-0.10.0.tgz#516822bfc1d49f179452bece5520c13530137d65"
+  integrity sha512-mg68NvJQk5umEFJBuKZaqeLhYpm+rtBZicGN2aVj4tQSk6fAQWQvNaFrMpCiFWveQwldHko0u7me6fDZiqorBw==
   dependencies:
-    "@graphql-mesh/types" "0.35.1"
-    "@graphql-mesh/utils" "0.9.0"
-    "@grpc/grpc-js" "1.2.8"
+    "@graphql-mesh/types" "0.37.0"
+    "@graphql-mesh/utils" "0.9.3"
+    "@grpc/grpc-js" "^1.1.7"
     "@grpc/proto-loader" "0.5.6"
     camel-case "4.1.2"
-    graphql-compose "7.25.0"
-    graphql-scalars "1.8.0"
+    graphql-compose "7.25.1"
+    graphql-scalars "1.9.0"
     grpc-reflection-js "0.1.1"
     lodash "4.17.21"
     pascal-case "3.1.2"
@@ -1731,15 +1731,6 @@
   version "3.1.0"
   resolved "https://registry.yarnpkg.com/@graphql-typed-document-node/core/-/core-3.1.0.tgz#0eee6373e11418bfe0b5638f654df7a4ca6a3950"
   integrity sha512-wYn6r8zVZyQJ6rQaALBEln5B1pzxb9shV5Ef97kTvn6yVGrqyXVnDqnU24MXnFubR+rZjBY9NWuxX3FB2sTsjg==
-
-"@grpc/grpc-js@1.2.8":
-  version "1.2.8"
-  resolved "https://registry.yarnpkg.com/@grpc/grpc-js/-/grpc-js-1.2.8.tgz#7e1aab8fd4d576b8ee6e73bba475d94a67ffd07d"
-  integrity sha512-9C1xiCbnYe/3OFpSuRqz2JgFSOxv6+SlqFhXgRC1nHfXYbLnXvtmsI/NpaMs6k9ZNyV4gyaOOh5Z4McfegQGew==
-  dependencies:
-    "@types/node" ">=12.12.47"
-    google-auth-library "^6.1.1"
-    semver "^6.2.0"
 
 "@grpc/grpc-js@^1.1.7":
   version "1.2.10"
@@ -5538,6 +5529,14 @@ graphql-compose@7.25.0:
     graphql-type-json "0.3.2"
     object-path "0.11.5"
 
+graphql-compose@7.25.1:
+  version "7.25.1"
+  resolved "https://registry.yarnpkg.com/graphql-compose/-/graphql-compose-7.25.1.tgz#9d89f72781931590d4dfca6a709f381f2f76b873"
+  integrity sha512-TPXTe1BoQkMjp/MH93yA0SQo8PiXxJAv6Eo6K/+kpJELM9l2jZnd5PCduweuXFcKv+nH973wn/VYzYKDMQ9YoQ==
+  dependencies:
+    graphql-type-json "0.3.2"
+    object-path "0.11.5"
+
 graphql-cost-analysis@^1.0.3:
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/graphql-cost-analysis/-/graphql-cost-analysis-1.0.3.tgz#25b97c8e638c7e538af5ba9bcf6012cda74420ce"
@@ -5595,6 +5594,13 @@ graphql-scalars@1.8.0:
   version "1.8.0"
   resolved "https://registry.yarnpkg.com/graphql-scalars/-/graphql-scalars-1.8.0.tgz#bdbe78ef799fd18a6fded27c81bee711ca7b3204"
   integrity sha512-XBFQmvOFspiIj+qEQe7mPBN0abn7N8UkKHqJffMJgt7UQx+WExg0GaiJta5iTrFYl1y63EaFZnG4FtHbMZAD0Q==
+  dependencies:
+    tslib "~2.1.0"
+
+graphql-scalars@1.9.0:
+  version "1.9.0"
+  resolved "https://registry.yarnpkg.com/graphql-scalars/-/graphql-scalars-1.9.0.tgz#fd3171cafc6f51b71d58f6a8ff89ea97477c16d3"
+  integrity sha512-31bBDnHdBapb2wknLCjNzTSjKfVEtm+0HxI7DKM7jQ4Uipk1o1aMUCYCkYunmRDdgQaI03u1MD5KutLf7yHnvw==
   dependencies:
     tslib "~2.1.0"
 
