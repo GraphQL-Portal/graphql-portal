@@ -1,5 +1,11 @@
 # @graphql-portal/types
 
+## 0.21.0
+
+### Minor Changes
+
+- ddd0595: added handler descriptions, fixed weatherbit and stripe
+
 ## 0.20.0
 
 ### Minor Changes
