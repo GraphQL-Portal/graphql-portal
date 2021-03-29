@@ -1348,7 +1348,7 @@
     "@graphql-tools/utils" "7.7.1"
     object-hash "2.1.1"
 
-"@graphql-mesh/types@0.35.1", "@graphql-mesh/types@^0.35.0":
+"@graphql-mesh/types@0.35.1":
   version "0.35.1"
   resolved "https://registry.yarnpkg.com/@graphql-mesh/types/-/types-0.35.1.tgz#b2eec8ed26c8df25f9bbd72175c4d9e109dc9f36"
   integrity sha512-Y3GaZbzjQ3tlJ37PSiXep4hfsSYcazHkJGESf78R4gqKAf8UhaiKTFsu/UWw6l8/mQcvQp9wlByJz8nwn5LQVQ==
@@ -1358,7 +1358,7 @@
     "@graphql-typed-document-node/core" "3.1.0"
     fetchache "0.0.4"
 
-"@graphql-mesh/types@0.37.0":
+"@graphql-mesh/types@0.37.0", "@graphql-mesh/types@^0.37.0":
   version "0.37.0"
   resolved "https://registry.yarnpkg.com/@graphql-mesh/types/-/types-0.37.0.tgz#173c688f76e3f5018958c44107ba99f52640f15a"
   integrity sha512-8p9VyDcdSIRZ/AZ1cwiDc8hE0rzNfDBQAM1Bh5RrNroaMAkqEFM5LGnv+/nrWZNsUBQ5T3vUX5u+fVr5VzzN0A==
@@ -1711,15 +1711,6 @@
   version "7.5.0"
   resolved "https://registry.yarnpkg.com/@graphql-tools/utils/-/utils-7.5.0.tgz#8485d42eea0f723748dca4cc09344f032bd1e2fa"
   integrity sha512-8f//RSqHmKRdg9A3GHlZdxzlVfF/938ZD9edXLW7EriSABg1BXu3veru9W02VqORypArb2S/Tyeyvsk2gForqA==
-  dependencies:
-    "@ardatan/aggregate-error" "0.0.6"
-    camel-case "4.1.2"
-    tslib "~2.1.0"
-
-"@graphql-tools/utils@7.7.1", "@graphql-tools/utils@^7.7.0", "@graphql-tools/utils@^7.7.1":
-  version "7.7.1"
-  resolved "https://registry.yarnpkg.com/@graphql-tools/utils/-/utils-7.7.1.tgz#81f32cb4819b34b3a378d51ab2cd60935977f0b4"
-  integrity sha512-SFT4/dTfrwWer1wSOLU+jqgv3oa/xTR8q+MiNbE9nCH2FXyMsqIOaXKm9wHfKIWFWHozqBdcnwFkQZrdD7H2TQ==
   dependencies:
     "@ardatan/aggregate-error" "0.0.6"
     camel-case "4.1.2"
