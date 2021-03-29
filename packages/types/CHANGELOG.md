@@ -1,5 +1,11 @@
 # @graphql-portal/types
 
+## 0.20.0
+
+### Minor Changes
+
+- a4cfd75: add slack handler, small fixes
+
 ## 0.19.0
 
 ### Minor Changes
