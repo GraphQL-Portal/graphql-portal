@@ -1,5 +1,19 @@
 # @graphql-portal/config
 
+## 0.10.0
+
+### Minor Changes
+
+- a4cfd75: add slack handler, small fixes
+
+### Patch Changes
+
+- Updated dependencies [a4cfd75]
+  - @graphql-portal/slack@0.1.0
+  - @graphql-portal/types@0.20.0
+  - @graphql-portal/dashboard@0.1.6
+  - @graphql-portal/logger@0.5.1
+
 ## 0.9.4
 
 ### Patch Changes

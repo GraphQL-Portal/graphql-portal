@@ -1,14 +1,14 @@
 {
   "name": "@graphql-portal/twitter",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "license": "MIT",
   "main": "dist/src/index.js",
   "scripts": {
     "build": "tsc -b"
   },
   "dependencies": {
-    "@graphql-mesh/openapi": "^0.13.0",
-    "@graphql-mesh/types": "^0.35.0"
+    "@graphql-mesh/openapi": "^0.14.0",
+    "@graphql-mesh/types": "^0.37.0"
   },
   "publishConfig": {
     "access": "public"
