@@ -1,5 +1,11 @@
 # @graphql-portal/slack
 
+## 0.1.1
+
+### Patch Changes
+
+- ddd0595: added handler descriptions, fixed weatherbit and stripe
+
 ## 0.1.0
 
 ### Minor Changes

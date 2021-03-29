@@ -1,5 +1,20 @@
 # @graphql-portal/config
 
+## 0.11.0
+
+### Minor Changes
+
+- ddd0595: added handler descriptions, fixed weatherbit and stripe
+
+### Patch Changes
+
+- Updated dependencies [ddd0595]
+  - @graphql-portal/types@0.21.0
+  - @graphql-portal/contentful@0.0.4
+  - @graphql-portal/slack@0.1.1
+  - @graphql-portal/dashboard@0.1.7
+  - @graphql-portal/logger@0.5.2
+
 ## 0.10.0
 
 ### Minor Changes

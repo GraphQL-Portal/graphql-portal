@@ -1,5 +1,15 @@
 # @graphql-portal/twitter
 
+## 0.2.0
+
+### Minor Changes
+
+- 2771c74: fix twitter bearer token auth
+
+### Patch Changes
+
+- ddd0595: added handler descriptions, fixed weatherbit and stripe
+
 ## 0.1.2
 
 ### Patch Changes
