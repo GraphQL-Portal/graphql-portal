@@ -3,10 +3,11 @@
     "additionalProperties": false,
     "type": "object",
     "title": "StripeHandler",
+    "description": "Online payment processing for internet businesses",
     "properties": {
       "token": {
         "type": "string",
-        "description": "Authentication token"
+        "description": "Stripe secret key"
       }
     },
     "required": ["token"]

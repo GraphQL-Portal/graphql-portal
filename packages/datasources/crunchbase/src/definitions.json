@@ -3,6 +3,7 @@
     "additionalProperties": false,
     "type": "object",
     "title": "CrunchbaseHandler",
+    "description": "A platform for finding business information about private and public companies",
     "properties": {
       "userKey": {
         "type": "string",

@@ -5,15 +5,11 @@ const OpenAPIHandler = require('@graphql-mesh/openapi');
 const BASE_URL = 'https://api.twitter.com/2';
 
 export default class TwitterHandler extends OpenAPIHandler {
-  public constructor({
-    name,
-    config,
-    cache,
-  }: GetMeshSourceOptions<YamlConfig.OpenapiHandler & { authorization: string }>) {
+  public constructor({ name, config, cache }: GetMeshSourceOptions<YamlConfig.OpenapiHandler & { token: string }>) {
     config.source = require.resolve('@graphql-portal/twitter/src/source.json');
     config.baseUrl = BASE_URL;
     config.operationHeaders = config.schemaHeaders = {
-      authorization: config.authorization,
+      authorization: `Bearer ${config.token}`,
     };
 
     super({ name, config, cache });

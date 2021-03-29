@@ -3,6 +3,7 @@
     "title": "SlackHandler",
     "type": "object",
     "additionalProperties": false,
+    "description": "A proprietary business communication platform",
     "properties": {
       "token": {
         "type": "string",

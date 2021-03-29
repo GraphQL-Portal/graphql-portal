@@ -3,12 +3,13 @@
     "additionalProperties": false,
     "type": "object",
     "title": "TwitterHandler",
+    "description": "An American microblogging and social networking service on which users post and interact with messages known as 'tweets'",
     "properties": {
-      "authorization": {
+      "token": {
         "type": "string",
-        "description": "Authorization header. Set up the following variables in order to run each request (depending on the authentication type used by the request you are sending):\n\n|Name|Description|\n|---|---|\n|`consumer_key`|Your consumer key|\n|`consumer_secret`|Your consumer secret|\n|`access_token`|Your access token|\n|`token_secret`|Your access token secret|\n|`bearer_token`|Your bearer token|\n"
+        "description": "Your bearer token (wihout 'Bearer ' substring)"
       }
     },
-    "required": ["authorization"]
+    "required": ["token"]
   }
 }
