@@ -1132,20 +1132,20 @@
     pascal-case "3.1.2"
     url-join "4.0.1"
 
-"@graphql-mesh/openapi@^0.13.0", "@graphql-mesh/openapi@^0.13.2":
-  version "0.13.2"
-  resolved "https://registry.yarnpkg.com/@graphql-mesh/openapi/-/openapi-0.13.2.tgz#94892d9284034db8bbb7c2d12ab1bad2e6afc46a"
-  integrity sha512-o+6Ln8LGq2CXtmF+xscKyM+IEB+k45zmRkJnJsd14vxb82E1fO/bLzzWSHSNKD10uVBzD2asjXV9Z+36004+gw==
+"@graphql-mesh/openapi@^0.14.0":
+  version "0.14.2"
+  resolved "https://registry.yarnpkg.com/@graphql-mesh/openapi/-/openapi-0.14.2.tgz#a0e26e3b05191026fa5c748ab6af6d29d6fd64ab"
+  integrity sha512-w0gjO3rhBtWiye/68Q2LS2DkMmOLyDaMgfzf0wZOqxYyC8jnj+m3rtvYFiOKSxDTamzhxa1P+/1oaXs53MUrQg==
   dependencies:
-    "@graphql-mesh/types" "0.35.1"
-    "@graphql-mesh/utils" "0.9.0"
+    "@graphql-mesh/types" "0.37.0"
+    "@graphql-mesh/utils" "0.9.3"
     deep-equal "2.0.5"
     fetchache "0.0.4"
     form-urlencoded "4.2.1"
-    graphql-scalars "1.8.0"
-    graphql-subscriptions "1.2.0"
+    graphql-scalars "1.9.0"
+    graphql-subscriptions "1.2.1"
     json-ptr "2.0.0"
-    jsonpath-plus "5.0.3"
+    jsonpath-plus "5.0.4"
     lodash "4.17.21"
     pluralize "8.0.0"
     swagger2openapi "7.0.5"
@@ -7061,10 +7061,10 @@ jsonfile@^4.0.0:
   optionalDependencies:
     graceful-fs "^4.1.6"
 
-jsonpath-plus@5.0.3:
-  version "5.0.3"
-  resolved "https://registry.yarnpkg.com/jsonpath-plus/-/jsonpath-plus-5.0.3.tgz#502f0fc953d0f92428b2c2357c0c6809a803ec36"
-  integrity sha512-RDvpzY21CmKTvEfxuGqQmPqRTuzNOim7L+/TcsdBM8jguI5ok38t0p2eKr9GAsVkazrTyylpMZV/hKSQCWqx9g==
+jsonpath-plus@5.0.4:
+  version "5.0.4"
+  resolved "https://registry.yarnpkg.com/jsonpath-plus/-/jsonpath-plus-5.0.4.tgz#3b8ce2ea6904ee6c6750ed027fe8df31789b62e3"
+  integrity sha512-w3pI3PewtwIrrGRCFvTkCkKu8IrOwjsqoYRxvxuXQjPB0udEtAuBY0B6/SEztsxMmuIHVHGFQ0knVnTCPW9qYw==
 
 jsonwebtoken@^8.0.0, jsonwebtoken@^8.3.0, jsonwebtoken@^8.5.1:
   version "8.5.1"
