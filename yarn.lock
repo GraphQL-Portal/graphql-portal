@@ -1336,16 +1336,16 @@
     "@graphql-tools/resolvers-composition" "6.2.6"
     "@graphql-tools/schema" "7.1.3"
 
-"@graphql-mesh/transform-snapshot@^0.8.1":
-  version "0.8.1"
-  resolved "https://registry.yarnpkg.com/@graphql-mesh/transform-snapshot/-/transform-snapshot-0.8.1.tgz#4f6bea8d285f6292ca13e68fdf892497a2d696d4"
-  integrity sha512-gatLJZgYCi6uZ4/R0OQMGxm5hrNLVxLkg9+yibzbpppP+mzkrs67OQbW+tEZguHLm5Z62s3aFTNm+JfDpnU67A==
+"@graphql-mesh/transform-snapshot@^0.9.0":
+  version "0.9.2"
+  resolved "https://registry.yarnpkg.com/@graphql-mesh/transform-snapshot/-/transform-snapshot-0.9.2.tgz#50a32849483bf8f09ba267664f301b12a599112a"
+  integrity sha512-tu7tBXba0LCrPfwhAWVMU0DqnfI+8Wk+0CEowJVT1G2zrP6EU8PzG1A/uWfl7kKdinn8Kfb4iiKIOtDPzcvgfg==
   dependencies:
-    "@graphql-mesh/types" "0.35.1"
-    "@graphql-mesh/utils" "0.9.0"
+    "@graphql-mesh/types" "0.37.0"
+    "@graphql-mesh/utils" "0.9.3"
     "@graphql-tools/resolvers-composition" "6.2.6"
     "@graphql-tools/schema" "7.1.3"
-    "@graphql-tools/utils" "7.5.0"
+    "@graphql-tools/utils" "7.7.1"
     object-hash "2.1.1"
 
 "@graphql-mesh/types@0.35.1", "@graphql-mesh/types@^0.35.0":
@@ -1711,6 +1711,15 @@
   version "7.5.0"
   resolved "https://registry.yarnpkg.com/@graphql-tools/utils/-/utils-7.5.0.tgz#8485d42eea0f723748dca4cc09344f032bd1e2fa"
   integrity sha512-8f//RSqHmKRdg9A3GHlZdxzlVfF/938ZD9edXLW7EriSABg1BXu3veru9W02VqORypArb2S/Tyeyvsk2gForqA==
+  dependencies:
+    "@ardatan/aggregate-error" "0.0.6"
+    camel-case "4.1.2"
+    tslib "~2.1.0"
+
+"@graphql-tools/utils@7.7.1", "@graphql-tools/utils@^7.7.0", "@graphql-tools/utils@^7.7.1":
+  version "7.7.1"
+  resolved "https://registry.yarnpkg.com/@graphql-tools/utils/-/utils-7.7.1.tgz#81f32cb4819b34b3a378d51ab2cd60935977f0b4"
+  integrity sha512-SFT4/dTfrwWer1wSOLU+jqgv3oa/xTR8q+MiNbE9nCH2FXyMsqIOaXKm9wHfKIWFWHozqBdcnwFkQZrdD7H2TQ==
   dependencies:
     "@ardatan/aggregate-error" "0.0.6"
     camel-case "4.1.2"
