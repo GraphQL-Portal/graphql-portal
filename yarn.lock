@@ -1114,20 +1114,20 @@
     neo4j-driver "4.2.3"
     neo4j-graphql-js "2.19.2"
 
-"@graphql-mesh/odata@^0.8.1":
-  version "0.8.1"
-  resolved "https://registry.yarnpkg.com/@graphql-mesh/odata/-/odata-0.8.1.tgz#1151512c76c49a39a1698df736fd9b1dd848a8a6"
-  integrity sha512-qMuJ5PYw8FUNhRnlXNCFfVF+neDzA93FpC7bZnbInNghk85+yFSfDHGpd5dYfm5qY1u1dU56hz8kj+mWmgWkKw==
+"@graphql-mesh/odata@^0.9.0":
+  version "0.9.0"
+  resolved "https://registry.yarnpkg.com/@graphql-mesh/odata/-/odata-0.9.0.tgz#1b748d46ed13214050823ed66c7042c3ac7a5790"
+  integrity sha512-1FcJoytPhi4Cq125aQqQh9sIuaVA00BPc3BAc7jzK9gmZ+ZmkGpy58Wcm3K30FxhFMO215UIUsZCPlCax7rc4w==
   dependencies:
-    "@graphql-mesh/types" "0.35.1"
-    "@graphql-mesh/utils" "0.9.0"
-    "@graphql-tools/utils" "7.5.0"
+    "@graphql-mesh/types" "0.37.0"
+    "@graphql-mesh/utils" "0.9.3"
+    "@graphql-tools/utils" "7.7.1"
     dataloader "2.0.0"
-    fast-xml-parser "3.18.0"
+    fast-xml-parser "3.19.0"
     fetchache "0.0.4"
-    graphql-compose "7.25.0"
+    graphql-compose "7.25.1"
     graphql-parse-resolve-info "4.11.0"
-    graphql-scalars "1.7.1"
+    graphql-scalars "1.9.0"
     http-string-parser "0.0.6"
     pascal-case "3.1.2"
     url-join "4.0.1"
@@ -4975,10 +4975,10 @@ fast-text-encoding@^1.0.0:
   resolved "https://registry.yarnpkg.com/fast-text-encoding/-/fast-text-encoding-1.0.3.tgz#ec02ac8e01ab8a319af182dae2681213cfe9ce53"
   integrity sha512-dtm4QZH9nZtcDt8qJiOH9fcQd1NAgi+K1O2DbE6GG1PPCK/BWfOH3idCTRQ4ImXRUOyopDEgDEnVEE7Y/2Wrig==
 
-fast-xml-parser@3.18.0:
-  version "3.18.0"
-  resolved "https://registry.yarnpkg.com/fast-xml-parser/-/fast-xml-parser-3.18.0.tgz#b77f4a494cd64e6f44aadfa68fbde30cd922b2df"
-  integrity sha512-tRrwShhppv0K5GKEtuVs92W0VGDaVltZAwtHbpjNF+JOT7cjIFySBGTEOmdBslXYyWYaZwEX/g4Su8ZeKg0LKQ==
+fast-xml-parser@3.19.0:
+  version "3.19.0"
+  resolved "https://registry.yarnpkg.com/fast-xml-parser/-/fast-xml-parser-3.19.0.tgz#cb637ec3f3999f51406dd8ff0e6fc4d83e520d01"
+  integrity sha512-4pXwmBplsCPv8FOY1WRakF970TjNGnGnfbOnLqjlYvMiF1SR3yOHyxMR/YCXpPTOspNF5gwudqktIP4VsWkvBg==
 
 fastq@^1.6.0:
   version "1.11.0"
