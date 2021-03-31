@@ -11,9 +11,18 @@
       },
       "endpoint": {
         "type": "string",
-        "description": "A endpoint of your Contentful GraphQL API"
+        "description": "(Deprecated) Full endpoint including space ID and environment. More info: https://www.contentful.com/developers/docs/references/graphql/#/introduction/basic-api-information"
+      },
+      "space": {
+        "type": "string",
+        "description": "Your space ID. Wonder how to find it? Check https://www.contentful.com/help/find-space-id/"
+      },
+      "environment": {
+        "type": "string",
+        "description": "Your environment ID. What is it? Check https://www.contentful.com/faq/environments/",
+        "default": "master"
       }
     },
-    "required": ["token", "endpoint"]
+    "required": ["token"]
   }
 }

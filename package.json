@@ -10,8 +10,9 @@
     "generate-mesh-source-config": "json2ts -i packages/types/src/mesh-source-schema.json -o ./packages/types/src/mesh-source-config.ts --style.singleQuote --bannerComment \"/* eslint-disable */\"",
     "generate-api-def-config": "json2ts -i packages/types/src/api-def-schema.json -o ./packages/types/src/api-def-config.ts --style.singleQuote --bannerComment \"/* eslint-disable */\"",
     "generate-configs": "yarn generate-gateway-config && yarn generate-mesh-source-config && yarn generate-api-def-config",
-    "clear-dist": "rm -rf dist ./packages/config/dist ./packages/gateway/dist ./packages/types/dist ./packages/dashboard/dist ./packages/logger/dist",
+    "clear-dist": "rm -rf dist ./packages/datasources/dist ./packages/config/dist ./packages/gateway/dist ./packages/types/dist ./packages/dashboard/dist ./packages/logger/dist",
     "copy-graphql-files": "copyfiles -u 5 packages/gateway/src/server/control-api/*.gql packages/gateway/dist/src/server/control-api/",
+    "premesh-config-sync": "tsc -b ./packages/datasources/tsconfig.json",
     "mesh-config-sync": "ts-node ./packages/types/src/mesh-config-sync.ts && prettier --write ./packages/types/src/mesh-source-schema.json ./packages/types/src/api-def-schema.json",
     "prettier": "prettier --write \"./packages/**/*.ts\"",
     "prebuild": "yarn clear-dist && yarn mesh-config-sync && yarn generate-configs",
@@ -84,6 +85,11 @@
         "coverageDirectory": "../coverage",
         "collectCoverage": true,
         "coveragePathIgnorePatterns": [
+          "/node_modules/",
+          "/dist/",
+          ".dto.ts$"
+        ],
+        "modulePathIgnorePatterns": [
           "/node_modules/",
           "/dist/",
           ".dto.ts$"

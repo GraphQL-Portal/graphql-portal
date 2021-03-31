@@ -2,7 +2,7 @@
   "name": "@graphql-portal/slack",
   "version": "0.1.1",
   "license": "MIT",
-  "main": "dist/src/index.js",
+  "main": "dist/index.js",
   "scripts": {
     "build": "tsc -b"
   },

@@ -97,7 +97,11 @@
           "$ref": "#/definitions/HTTPSConfig",
           "description": "SSL Credentials for HTTPS Server\nIf this is provided, Mesh will be served via HTTPS"
         },
-        "endpoint": { "type": "string", "description": "Path to GraphQL Endpoint (default: /graphql)" }
+        "endpoint": { "type": "string", "description": "Path to GraphQL Endpoint (default: /graphql)" },
+        "browser": {
+          "description": "Path to the browser that will be used by `mesh serve` to open a playground window in development mode\nThis feature can be disable by passing `false` (Any of: String, Boolean)",
+          "anyOf": [{ "type": "string" }, { "type": "boolean" }]
+        }
       }
     },
     "CorsConfig": {
@@ -279,12 +283,12 @@
         "thrift": { "$ref": "#/definitions/ThriftHandler", "description": "Handler for OData" },
         "tuql": { "$ref": "#/definitions/TuqlHandler", "description": "Handler for SQLite database, based on `tuql`" },
         "ContentfulHandler": { "$ref": "#/definitions/ContentfulHandler" },
-        "CrunchbaseHandler": { "$ref": "#/definitions/CrunchbaseHandler" },
-        "SalesforceHandler": { "$ref": "#/definitions/SalesforceHandler" },
         "SlackHandler": { "$ref": "#/definitions/SlackHandler" },
         "StripeHandler": { "$ref": "#/definitions/StripeHandler" },
-        "TwitterHandler": { "$ref": "#/definitions/TwitterHandler" },
         "WeatherbitHandler": { "$ref": "#/definitions/WeatherbitHandler" },
+        "CrunchbaseHandler": { "$ref": "#/definitions/CrunchbaseHandler" },
+        "SalesforceHandler": { "$ref": "#/definitions/SalesforceHandler" },
+        "TwitterHandler": { "$ref": "#/definitions/TwitterHandler" },
         "IPAPIHandler": { "$ref": "#/definitions/IPAPIHandler" }
       }
     },
@@ -397,23 +401,10 @@
           "type": "string",
           "description": "Path to the introspection\nYou can seperately give schema introspection"
         },
-        "cacheIntrospection": {
-          "description": "Cache Introspection (Any of: GraphQLIntrospectionCachingOptions, Boolean)",
-          "anyOf": [{ "$ref": "#/definitions/GraphQLIntrospectionCachingOptions" }, { "type": "boolean" }]
-        },
         "multipart": { "type": "boolean", "description": "Enable multipart/formdata in order to support file uploads" },
         "batch": { "type": "boolean", "description": "Batch requests" }
       },
       "required": ["endpoint"]
-    },
-    "GraphQLIntrospectionCachingOptions": {
-      "additionalProperties": false,
-      "type": "object",
-      "title": "GraphQLIntrospectionCachingOptions",
-      "properties": {
-        "ttl": { "type": "integer", "description": "Time to live of introspection cache" },
-        "path": { "type": "string", "description": "Path to Introspection JSON File" }
-      }
     },
     "GrpcHandler": {
       "additionalProperties": false,
@@ -765,19 +756,9 @@
           "description": "Specifies whether relationships should always be included in the type definitions as [relationship](https://grandstack.io/docs/neo4j-graphql-js.html#relationship-types) types, even if the relationships do not have properties."
         },
         "database": { "type": "string", "description": "Specifies database name" },
-        "typeDefs": { "type": "string", "description": "Provide GraphQL Type Definitions instead of inferring" },
-        "cacheIntrospection": {
-          "description": "Cache Introspection (Any of: Neo4jIntrospectionCachingOptions, Boolean)",
-          "anyOf": [{ "$ref": "#/definitions/Neo4jIntrospectionCachingOptions" }, { "type": "boolean" }]
-        }
+        "typeDefs": { "type": "string", "description": "Provide GraphQL Type Definitions instead of inferring" }
       },
       "required": ["url", "username", "password"]
-    },
-    "Neo4jIntrospectionCachingOptions": {
-      "additionalProperties": false,
-      "type": "object",
-      "title": "Neo4jIntrospectionCachingOptions",
-      "properties": { "ttl": { "type": "integer", "description": "Time to live of introspection cache" } }
     },
     "ODataHandler": {
       "additionalProperties": false,
@@ -814,7 +795,11 @@
       "title": "OpenapiHandler",
       "properties": {
         "source": {
-          "type": "string",
+          "anyOf": [
+            { "type": "object", "additionalProperties": true },
+            { "type": "string" },
+            { "type": "array", "additionalItems": true }
+          ],
           "description": "A pointer to your API source - could be a local file, remote file or url endpoint"
         },
         "sourceFormat": {
@@ -920,10 +905,6 @@
         "options": {
           "description": "Extra Postgraphile options that will be added to the postgraphile constructor. It can either be an object or a string pointing to the object's path (e.g. \"./my-config#options\"). See the [postgraphile docs](https://www.graphile.org/postgraphile/usage-library/) for more information. (Any of: JSON, String)",
           "anyOf": [{ "type": "object", "properties": {} }, { "type": "string" }]
-        },
-        "cacheIntrospection": {
-          "description": "Cache Introspection (Any of: GraphQLIntrospectionCachingOptions, Boolean)",
-          "anyOf": [{ "$ref": "#/definitions/GraphQLIntrospectionCachingOptions" }, { "type": "boolean" }]
         },
         "subscriptions": {
           "type": "boolean",
@@ -1420,16 +1401,54 @@
       "additionalProperties": false,
       "type": "object",
       "title": "ContentfulHandler",
+      "description": "API-first content platform to build digital experiences",
       "properties": {
         "token": { "type": "string", "description": "Authentication token" },
-        "endpoint": { "type": "string", "description": "A endpoint of your Contentful GraphQL API" }
+        "endpoint": {
+          "type": "string",
+          "description": "(Deprecated) Full endpoint including space ID and environment. More info: https://www.contentful.com/developers/docs/references/graphql/#/introduction/basic-api-information"
+        },
+        "space": {
+          "type": "string",
+          "description": "Your space ID. Wonder how to find it? Check https://www.contentful.com/help/find-space-id/"
+        },
+        "environment": {
+          "type": "string",
+          "description": "Your environment ID. What is it? Check https://www.contentful.com/faq/environments/",
+          "default": "master"
+        }
       },
-      "required": ["token", "endpoint"]
+      "required": ["token"]
+    },
+    "SlackHandler": {
+      "title": "SlackHandler",
+      "type": "object",
+      "additionalProperties": false,
+      "description": "A proprietary business communication platform",
+      "properties": { "token": { "type": "string", "description": "Slack API access token" } },
+      "required": ["token"]
+    },
+    "StripeHandler": {
+      "additionalProperties": false,
+      "type": "object",
+      "title": "StripeHandler",
+      "description": "Online payment processing for internet businesses",
+      "properties": { "token": { "type": "string", "description": "Stripe secret key" } },
+      "required": ["token"]
+    },
+    "WeatherbitHandler": {
+      "additionalProperties": false,
+      "type": "object",
+      "title": "WeatherbitHandler",
+      "description": "Weather API to instantly access real-time and historical data",
+      "properties": { "token": { "type": "string", "description": "Weatherbit secret key" } },
+      "required": ["token"]
     },
     "CrunchbaseHandler": {
       "additionalProperties": false,
       "type": "object",
       "title": "CrunchbaseHandler",
+      "description": "A platform for finding business information about private and public companies",
       "properties": { "userKey": { "type": "string", "description": "Authentication API Key" } },
       "required": ["userKey"]
     },
@@ -1443,34 +1462,20 @@
       },
       "required": ["baseUrl"]
     },
-    "SlackHandler": {
-      "title": "SlackHandler",
-      "type": "object",
-      "additionalProperties": false,
-      "properties": { "token": { "type": "string", "description": "Slack API access token" } },
-      "required": ["token"]
-    },
-    "StripeHandler": {
-      "additionalProperties": false,
-      "type": "object",
-      "title": "StripeHandler",
-      "properties": { "token": { "type": "string", "description": "Authentication token" } },
-      "required": ["token"]
-    },
     "TwitterHandler": {
       "additionalProperties": false,
       "type": "object",
       "title": "TwitterHandler",
-      "properties": {
-        "authorization": {
-          "type": "string",
-          "description": "Authorization header. Set up the following variables in order to run each request (depending on the authentication type used by the request you are sending):\n\n|Name|Description|\n|---|---|\n|`consumer_key`|Your consumer key|\n|`consumer_secret`|Your consumer secret|\n|`access_token`|Your access token|\n|`token_secret`|Your access token secret|\n|`bearer_token`|Your bearer token|\n"
-        }
-      },
-      "required": ["authorization"]
+      "description": "An American microblogging and social networking service on which users post and interact with messages known as 'tweets'",
+      "properties": { "token": { "type": "string", "description": "Your bearer token (wihout 'Bearer ' substring)" } },
+      "required": ["token"]
     },
-    "WeatherbitHandler": { "additionalProperties": false, "type": "object", "title": "WeatherbitHandler" },
-    "IPAPIHandler": { "additionalProperties": false, "type": "object", "title": "IPAPIHandler" }
+    "IPAPIHandler": {
+      "additionalProperties": false,
+      "type": "object",
+      "title": "IPAPIHandler",
+      "description": "IP Geolocation API"
+    }
   },
   "properties": {
     "name": { "type": "string" },
@@ -1558,7 +1563,8 @@
           "items": { "$ref": "#/definitions/LiveQueryInvalidation" },
           "additionalItems": false,
           "description": "Live Query Invalidations"
-        }
+        },
+        "introspectionCache": { "type": "string", "description": "Path to the file containing the introspection cache" }
       }
     }
   },
