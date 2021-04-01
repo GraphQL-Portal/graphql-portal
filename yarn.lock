@@ -1343,7 +1343,7 @@
     "@graphql-typed-document-node/core" "3.1.0"
     fetchache "0.0.4"
 
-"@graphql-mesh/types@0.37.0", "@graphql-mesh/types@^0.37.0":
+"@graphql-mesh/types@0.37.0":
   version "0.37.0"
   resolved "https://registry.yarnpkg.com/@graphql-mesh/types/-/types-0.37.0.tgz#173c688f76e3f5018958c44107ba99f52640f15a"
   integrity sha512-8p9VyDcdSIRZ/AZ1cwiDc8hE0rzNfDBQAM1Bh5RrNroaMAkqEFM5LGnv+/nrWZNsUBQ5T3vUX5u+fVr5VzzN0A==
@@ -1352,6 +1352,16 @@
     "@graphql-tools/utils" "7.7.1"
     "@graphql-typed-document-node/core" "3.1.0"
     fetchache "0.0.4"
+
+"@graphql-mesh/types@0.38.0", "@graphql-mesh/types@^0.38.0":
+  version "0.38.0"
+  resolved "https://registry.yarnpkg.com/@graphql-mesh/types/-/types-0.38.0.tgz#9e37885f0ef93611a8f2cd4e077760de993cc77e"
+  integrity sha512-sruLz9/ZyrWdVQG3Otuf7gZswTUVWGczGyWfEhnVGmNPCMvS2QsA1lRsUMmyvPF0SIFW92VbRS9sUYegowUo6A==
+  dependencies:
+    "@graphql-tools/delegate" "7.1.1"
+    "@graphql-tools/utils" "7.7.1"
+    "@graphql-typed-document-node/core" "3.1.0"
+    fetchache "0.1.1"
 
 "@graphql-mesh/utils@0.9.0":
   version "0.9.0"
@@ -5006,6 +5016,14 @@ fetchache@0.0.4:
     cross-fetch "3.0.6"
     http-cache-semantics "4.1.0"
 
+fetchache@0.1.1:
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/fetchache/-/fetchache-0.1.1.tgz#013eef193b4a219a355dea5ca02a720565d8bcdc"
+  integrity sha512-ots7Jv408zPDxCaKGTeRajzuiullinmfzzLV/dA+U81BQTtbspCiy/GTHPekIIyWAkKvP/GYP0WVKzF6ljtdEg==
+  dependencies:
+    flatstr "1.0.12"
+    http-cache-semantics "4.1.0"
+
 figures@^3.2.0:
   version "3.2.0"
   resolved "https://registry.yarnpkg.com/figures/-/figures-3.2.0.tgz#625c18bd293c604dc4a8ddb2febf0c88341746af"
@@ -5095,6 +5113,11 @@ flat-cache@^3.0.4:
   dependencies:
     flatted "^3.1.0"
     rimraf "^3.0.2"
+
+flatstr@1.0.12:
+  version "1.0.12"
+  resolved "https://registry.yarnpkg.com/flatstr/-/flatstr-1.0.12.tgz#c2ba6a08173edbb6c9640e3055b95e287ceb5931"
+  integrity sha512-4zPxDyhCyiN2wIAtSLI6gc82/EjqZc1onI4Mz/l0pWrAlsSfYH/2ZIcU+e3oA2wDwbzIWNKwa23F8rh6+DRWkw==
 
 flatted@^3.1.0:
   version "3.1.1"
