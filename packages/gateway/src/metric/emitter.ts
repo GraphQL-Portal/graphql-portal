@@ -3,7 +3,7 @@ import { prefixLogger } from '@graphql-portal/logger';
 import { config } from '@graphql-portal/config';
 import { redis } from '../redis';
 import { MeshPubSub, ResolverData } from '@graphql-mesh/types';
-import { serializer, transformResolverData } from './utils';
+import { getSourceName, serializer, transformResolverData } from './utils';
 import { MetricsChannels, PubSubEvents } from '@graphql-portal/types';
 
 const logger = prefixLogger('analytics:metric-emitter');
@@ -16,6 +16,13 @@ const lpush = async (key: string, ...args: any[]): Promise<void> => {
   redis.lpush(key, ...args).catch((error: Error) => {
     logger.error(`Failed to write request data. \n Error: ${error} \n Data: ${args}`);
   });
+};
+
+const pubSubListenerWrapper = (emit: (...args: any[]) => any) => {
+  return (data: { resolverData: ResolverData }): void => {
+    if (!getSourceName(data.resolverData)) return; // do not emit resolver events without sourcename (nested queries)
+    emit(data);
+  };
 };
 
 const subscribe = async (pubsub: MeshPubSub): Promise<void> => {
@@ -104,22 +111,31 @@ const subscribe = async (pubsub: MeshPubSub): Promise<void> => {
     });
   }
 
-  await pubsub.subscribe(PubSubEvents.RESOLVER_CALLED, ({ resolverData }) => {
-    logger.debug(`PubSubEvents.RESOLVER_CALLED: ${JSON.stringify(resolverData)}`);
-    metricEmitter.emit(MetricsChannels.RESOLVER_CALLED, resolverData);
-  });
-  await pubsub.subscribe(PubSubEvents.RESOLVER_DONE, ({ resolverData, result }) => {
-    logger.debug(`PubSubEvents.RESOLVER_DONE: ${JSON.stringify(resolverData)}, ${JSON.stringify(result)}`);
-    if (/error/i.test(result?.constructor?.name)) {
-      metricEmitter.emit(MetricsChannels.RESOLVER_ERROR, resolverData, result);
-    } else {
-      metricEmitter.emit(MetricsChannels.RESOLVER_DONE, resolverData, result);
-    }
-  });
-  await pubsub.subscribe(PubSubEvents.RESOLVER_ERROR, ({ resolverData, error }) => {
-    logger.debug(`PubSubEvents.RESOLVER_ERROR: ${JSON.stringify(resolverData)}, ${error}`);
-    metricEmitter.emit(MetricsChannels.RESOLVER_ERROR, resolverData, error);
-  });
+  await pubsub.subscribe(
+    PubSubEvents.RESOLVER_CALLED,
+    pubSubListenerWrapper(({ resolverData }) => {
+      logger.debug(`PubSubEvents.RESOLVER_CALLED ${resolverData.context?.id || ''}`);
+      metricEmitter.emit(MetricsChannels.RESOLVER_CALLED, resolverData);
+    })
+  );
+  await pubsub.subscribe(
+    PubSubEvents.RESOLVER_DONE,
+    pubSubListenerWrapper(({ resolverData, result }) => {
+      logger.debug(`PubSubEvents.RESOLVER_DONE ${resolverData.context?.id || ''}`);
+      if (/error/i.test(result?.constructor?.name)) {
+        metricEmitter.emit(MetricsChannels.RESOLVER_ERROR, resolverData, result);
+      } else {
+        metricEmitter.emit(MetricsChannels.RESOLVER_DONE, resolverData, result);
+      }
+    })
+  );
+  await pubsub.subscribe(
+    PubSubEvents.RESOLVER_ERROR,
+    pubSubListenerWrapper(({ resolverData, error }) => {
+      logger.debug(`PubSubEvents.RESOLVER_ERROR ${resolverData.context?.id || ''}: ${error.message}`);
+      metricEmitter.emit(MetricsChannels.RESOLVER_ERROR, resolverData, error);
+    })
+  );
 };
 
 export default subscribe;
