@@ -10,7 +10,7 @@
     "@graphql-mesh/graphql": "^0.16.0"
   },
   "devDependencies": {
-    "@graphql-mesh/types": "0.37.0"
+    "@graphql-mesh/types": "0.38.0"
   },
   "publishConfig": {
     "access": "public"
