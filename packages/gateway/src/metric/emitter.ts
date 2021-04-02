@@ -9,10 +9,13 @@ import { MetricsChannels, PubSubEvents } from '@graphql-portal/types';
 const logger = prefixLogger('analytics:metric-emitter');
 export const metricEmitter = new EventEmitter();
 
-const lpush = (key: string, ...args: any[]): Promise<number | void> =>
+const lpush = async (key: string, ...args: any[]): Promise<void> => {
+  if (!key) return;
+  if (Object.values(MetricsChannels).includes(key as MetricsChannels) && !args[0]) return;
   redis.lpush(key, ...args).catch((error: Error) => {
     logger.error(`Failed to write request data. \n Error: ${error} \n Data: ${args}`);
   });
+};
 
 const pubSubListenerWrapper = (emit: (...args: any[]) => any) => {
   return (data: { resolverData: ResolverData }): void => {

@@ -1,5 +1,5 @@
-import { RequestHandler } from 'express';
 import { MetricsChannels } from '@graphql-portal/types';
+import { RequestHandler } from 'express';
 import { metricEmitter } from '../metric';
 
 export const logResponse: RequestHandler = (req, res, next) => {
