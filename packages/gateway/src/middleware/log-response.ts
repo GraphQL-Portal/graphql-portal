@@ -1,6 +1,9 @@
 import { MetricsChannels } from '@graphql-portal/types';
 import { RequestHandler } from 'express';
 import { metricEmitter } from '../metric';
+import { prefixLogger } from '@graphql-portal/logger';
+
+const logger = prefixLogger('metrics:log-response');
 
 export const logResponse: RequestHandler = (req, res, next) => {
   const oldWrite = res.write.bind(res);
@@ -22,6 +25,7 @@ export const logResponse: RequestHandler = (req, res, next) => {
     const buffer = Buffer.concat(chunks);
     const contentLength = buffer.byteLength;
     const responseBody = buffer.toString('utf8');
+    logger.debug(`req.id ${req.id} [${res.statusCode}]: ${contentLength}`);
     if (res.statusCode >= 400) {
       metricEmitter.emit(MetricsChannels.GOT_ERROR, req.id, responseBody, Date.now());
     } else {
