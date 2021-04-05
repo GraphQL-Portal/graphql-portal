@@ -20,7 +20,7 @@
     "postbuild": "yarn copy-graphql-files",
     "start": "yarn workspace @graphql-portal/gateway start",
     "lint": "eslint 'packages/**/*.ts' --fix",
-    "test": "jest --coverage",
+    "test": "jest --coverage --detectOpenHandles",
     "prerelease": "yarn build",
     "release": "changeset publish",
     "docs:build": "cd docs-website && yarn build",
