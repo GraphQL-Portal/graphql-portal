@@ -1,5 +1,11 @@
 # @graphql-portal/stripe
 
+## 0.2.1
+
+### Patch Changes
+
+- dd90089: use ESM imports for webpack compatibility
+
 ## 0.2.0
 
 ### Minor Changes

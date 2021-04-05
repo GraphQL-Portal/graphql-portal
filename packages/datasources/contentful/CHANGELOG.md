@@ -1,5 +1,11 @@
 # @graphql-portal/contentful
 
+## 0.1.1
+
+### Patch Changes
+
+- dd90089: use ESM imports for webpack compatibility
+
 ## 0.1.0
 
 ### Minor Changes
