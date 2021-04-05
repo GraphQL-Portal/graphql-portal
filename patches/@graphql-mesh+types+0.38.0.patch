@@ -1,8 +1,8 @@
 diff --git a/node_modules/@graphql-mesh/types/config-schema.json b/node_modules/@graphql-mesh/types/config-schema.json
-index 98790e6..d7b5252 100644
+index 5206e27..a08d96e 100644
 --- a/node_modules/@graphql-mesh/types/config-schema.json
 +++ b/node_modules/@graphql-mesh/types/config-schema.json
-@@ -592,6 +592,7 @@
+@@ -603,6 +603,7 @@
        "properties": {
          "endpoint": {
            "type": "string",
