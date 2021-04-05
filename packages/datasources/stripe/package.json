@@ -2,7 +2,7 @@
   "name": "@graphql-portal/stripe",
   "version": "0.1.0",
   "license": "MIT",
-  "main": "dist/src/index.js",
+  "main": "dist/index.js",
   "scripts": {
     "build": "tsc -b"
   },
@@ -10,7 +10,7 @@
     "@graphql-mesh/openapi": "^0.14.0"
   },
   "devDependencies": {
-    "@graphql-mesh/types": "0.37.0"
+    "@graphql-mesh/types": "0.38.0"
   },
   "publishConfig": {
     "access": "public"

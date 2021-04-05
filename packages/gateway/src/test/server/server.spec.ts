@@ -16,12 +16,16 @@ jest.mock('express', () =>
     return app;
   })
 );
-jest.mock('http', () => ({
-  createServer: jest.fn(() => {
-    server = { listen: jest.fn(), getConnections: jest.fn() };
-    return server;
-  }),
-}));
+jest.mock('http', () => {
+  const http = jest.requireActual('http');
+  return {
+    ...http,
+    createServer: jest.fn(() => {
+      server = { listen: jest.fn(), getConnections: jest.fn() };
+      return server;
+    }),
+  };
+});
 jest.mock('../../redis', () => {
   const onHandlers: any = {};
   const redisSubscriber = {

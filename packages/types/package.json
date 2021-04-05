@@ -7,6 +7,7 @@
     "build": "tsc -b"
   },
   "dependencies": {
+    "@graphql-portal/datasources": "^0.0.3",
     "ajv": "8.0.1"
   },
   "publishConfig": {

@@ -13,14 +13,13 @@ jest.mock('../../redis', () => ({
   },
 }));
 jest.mock('events', () => {
-  function eventEmitter(): any {}
-  eventEmitter.prototype.on = jest.fn();
-  eventEmitter.prototype.emit = jest.fn();
-  eventEmitter.prototype.listenerCount = jest.fn();
+  const events = jest.requireActual('events');
 
-  return {
-    EventEmitter: eventEmitter,
-  };
+  events.prototype.on = jest.fn();
+  events.prototype.emit = jest.fn();
+  events.prototype.listenerCount = jest.fn();
+
+  return events;
 });
 
 describe('hitRecord', () => {
@@ -32,10 +31,9 @@ describe('hitRecord', () => {
 
   it('should subcsribe on pubsub events', async () => {
     const subscribe = jest.fn();
-
+    ((emitter.on as any) as jest.SpyInstance).mockClear();
     await subscribeToRequestMetrics({ subscribe } as any);
 
-    expect(emitter.on).toBeCalledTimes(6);
     expect(emitter.on).toBeCalledTimes(6);
     expect(emitter.on).toHaveBeenNthCalledWith(1, MetricsChannels.GOT_REQUEST, expect.any(Function));
     expect(emitter.on).toHaveBeenNthCalledWith(2, MetricsChannels.RESOLVER_CALLED, expect.any(Function));
