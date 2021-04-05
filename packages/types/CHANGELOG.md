@@ -1,5 +1,11 @@
 # @graphql-portal/types
 
+## 0.22.1
+
+### Patch Changes
+
+- 2efdce4: update dependencies
+
 ## 0.22.0
 
 ### Minor Changes
