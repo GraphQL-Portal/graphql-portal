@@ -4,9 +4,9 @@ import { MetricsChannels } from '@graphql-portal/types';
 
 export const reducePath = (path: Path | undefined, result = ''): string | null => {
   if (!path) return null;
-  result += `${path.key}.`;
+  result = `${path.key}.${result}`;
   if (path.prev) return reducePath(path.prev, result);
-  return result.slice(0, -1);
+  return result.replace(/\.$/, '');
 };
 
 export const serializer = (data: any, doNotLogkeys: string[] = ['_']): string => {

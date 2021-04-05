@@ -1,5 +1,17 @@
 # @graphql-portal/logger
 
+## 0.6.0
+
+### Minor Changes
+
+- e96c1d4: added log_filter to reduce the amount of debug level logs
+
+### Patch Changes
+
+- Updated dependencies [e96c1d4]
+- Updated dependencies [6d198a7]
+  - @graphql-portal/types@0.22.0
+
 ## 0.5.2
 
 ### Patch Changes

@@ -106,6 +106,10 @@ export interface GatewayConfig {
    */
   log_level?: 'debug' | 'info' | 'warn' | 'error';
   /**
+   * Regexp that filters debug-level logs by context.
+   */
+  log_filter?: string;
+  /**
    * Configures sending of log messages to Datadog.
    */
   datadog_logging?: {

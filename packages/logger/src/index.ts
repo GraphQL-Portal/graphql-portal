@@ -25,6 +25,17 @@ const jsonFormat: winston.Logform.Format = format.combine(
   format.json()
 );
 
+const filterFormat = (regex: RegExp) =>
+  winston.format((info) => {
+    if (info.level !== 'debug') {
+      return info;
+    }
+    if (regex.test(info.prefix)) {
+      return info;
+    }
+    return false;
+  })();
+
 function createLogger(): winston.Logger {
   return winston.createLogger({
     transports: [
@@ -44,17 +55,29 @@ export const logger: winston.Logger = createLogger();
  * Winston.transports.Console is always on.
  */
 export async function configureLogger(
-  { log_format, log_level, datadog_logging, hostname, redis_logging }: GatewayConfig,
+  { log_format, log_level, datadog_logging, hostname, redis_logging, log_filter }: GatewayConfig,
   nodeId: string,
   redis?: Redis | Cluster
 ): Promise<void> {
   logger.clear();
 
+  let format = log_format === 'json' ? jsonFormat : consoleFormat;
+  if (log_filter) {
+    try {
+      const regex = new RegExp(log_filter);
+      if (regex) {
+        format = winston.format.combine(filterFormat(regex), format);
+      }
+    } catch (error) {
+      logger.warn(`log_filter is not set: ${error.message}`);
+    }
+  }
+
   // Add Console Transport. Always on.
   logger.add(
     new transports.Console({
       level: log_level,
-      format: log_format === 'json' ? jsonFormat : consoleFormat,
+      format,
     })
   );
 

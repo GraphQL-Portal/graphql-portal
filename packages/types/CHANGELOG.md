@@ -1,5 +1,17 @@
 # @graphql-portal/types
 
+## 0.22.0
+
+### Minor Changes
+
+- e96c1d4: added log_filter to reduce the amount of debug level logs
+- 6d198a7: fixed custom handlers validation, fixed patches
+
+### Patch Changes
+
+- Updated dependencies [6d198a7]
+  - @graphql-portal/datasources@0.1.0
+
 ## 0.21.0
 
 ### Minor Changes

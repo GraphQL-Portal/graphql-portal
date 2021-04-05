@@ -9,8 +9,16 @@
     "composite": true,
     "allowJs": false,
     "declaration": true,
-    "declarationMap": true
+    "declarationMap": true,
+    "paths": {
+      "@graphql-portal/datasources": ["../datasources/index"]
+    }
   },
+  "references": [
+    {
+      "path": "../datasources"
+    }
+  ],
   "include": ["src/**/*.ts", "src/**/*.json"],
   "exclude": ["node_modules", "dist"]
 }
