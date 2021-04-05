@@ -1168,14 +1168,13 @@
     "@n1ru4l/graphql-live-query" "0.7.1"
     "@n1ru4l/in-memory-live-query-store" "0.6.2"
 
-"@graphql-mesh/soap@^0.6.1":
-  version "0.6.1"
-  resolved "https://registry.yarnpkg.com/@graphql-mesh/soap/-/soap-0.6.1.tgz#215918cd8eb17a26eba301b9c477804dca3fb5ca"
-  integrity sha512-fJPAchC8/SNgxvt9n+U9azFlGuo6jnK5hTLaQR8PbHqgOdgx85h/6nh4XQAzOQO4wPj3udTshLT3mT6gosximw==
+"@graphql-mesh/soap@^0.7.0":
+  version "0.7.0"
+  resolved "https://registry.yarnpkg.com/@graphql-mesh/soap/-/soap-0.7.0.tgz#795ee6592fbe1e50bfe23f411deea97ee601527d"
+  integrity sha512-9ogf74AqJItnHqQadHiRmx7hQMOcVjYWWeKSl2dCQ/oIykqRVnH8S8/CC7bdCuk4jfP1gii37kKWe2wEReIHZw==
   dependencies:
-    "@graphql-mesh/types" "0.35.1"
-    "@graphql-mesh/utils" "0.9.0"
-    fetchache "0.0.4"
+    "@graphql-mesh/types" "0.38.0"
+    "@graphql-mesh/utils" "0.10.0"
     soap "0.36.0"
     soap-graphql "0.1.1"
 
@@ -2760,6 +2759,16 @@ ajv@8.0.5:
   version "8.0.5"
   resolved "https://registry.yarnpkg.com/ajv/-/ajv-8.0.5.tgz#f07d6fdeffcdbb80485570ce3f1bc845fcc812b9"
   integrity sha512-RkiLa/AeJx7+9OvniQ/qeWu0w74A8DiPPBclQ6ji3ZQkv5KamO+QGpqmi7O4JIw3rHGUXZ6CoP9tsAkn3gyazg==
+  dependencies:
+    fast-deep-equal "^3.1.1"
+    json-schema-traverse "^1.0.0"
+    require-from-string "^2.0.2"
+    uri-js "^4.2.2"
+
+ajv@8.0.2:
+  version "8.0.2"
+  resolved "https://registry.yarnpkg.com/ajv/-/ajv-8.0.2.tgz#1396e27f208ed56dd5638ab5a251edeb1c91d402"
+  integrity sha512-V0HGxJd0PiDF0ecHYIesTOqfd1gJguwQUOYfMfAWnRsWQEXfc5ifbUFhD3Wjc+O+y7VAqL+g07prq9gHQ/JOZQ==
   dependencies:
     fast-deep-equal "^3.1.1"
     json-schema-traverse "^1.0.0"
