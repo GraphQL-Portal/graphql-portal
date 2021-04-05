@@ -25,7 +25,7 @@ export class RedisTransport extends TransportStream {
   };
 
   private readonly redis: Redis | Cluster;
-  private readonly expire: number;
+  private interval: NodeJS.Timer;
 
   /**
    * Constructor function for Redis Transport.
@@ -35,7 +35,7 @@ export class RedisTransport extends TransportStream {
     super(opts);
     this.redis = opts.redis;
     this.metadata = opts.metadata;
-    this.expire = opts.expire;
+    this.startRemovingExpiredLogs(opts.expire);
   }
 
   public log(info: any, callback: any): void {
@@ -45,12 +45,19 @@ export class RedisTransport extends TransportStream {
 
     const timestamp = +new Date();
     const logEntry = stringify({ ...this.metadata, ...info, timestamp });
-    const key = `logs:${this.metadata.hostname}:${this.metadata.nodeId}:${+new Date()}`;
     this.redis
-      .multi()
-      .set(key, logEntry)
-      .expire(key, this.expire)
-      .publish(Channel.logsUpdated, logEntry)
-      .exec(callback);
+      .zadd(Channel.recentLogs, timestamp, logEntry)
+      .then(() => callback())
+      .catch(() => callback());
+  }
+
+  private startRemovingExpiredLogs(expirationTime: number): void {
+    if (this.interval) {
+      clearInterval(this.interval);
+    }
+    const expirationTimeInMs = expirationTime * 1000;
+    this.interval = setInterval(async () => {
+      await this.redis.zremrangebyscore(Channel.recentLogs, 0, +new Date() - expirationTimeInMs);
+    }, expirationTimeInMs);
   }
 }
