@@ -146,6 +146,10 @@ export interface GatewayConfig {
      * After the timeout has expired, the log will automatically be deleted (in seconds)
      */
     expire: number;
+    /**
+     * Sets the redis log level. Should not be set to 'debug' in production.
+     */
+    log_level?: 'debug' | 'info' | 'warn' | 'error';
   };
   /**
    * (Deprecated) Redis connection string in a format 'redis://localhost:6379'.

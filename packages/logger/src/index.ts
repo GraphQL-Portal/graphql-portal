@@ -77,6 +77,7 @@ export async function configureLogger(
     logger.add(
       new RedisTransport({
         redis,
+        level: redis_logging.log_level,
         expire: redis_logging.expire,
         metadata: {
           nodeId,
