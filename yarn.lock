@@ -974,15 +974,14 @@
     lodash "4.17.21"
     param-case "3.0.4"
 
-"@graphql-mesh/fhir@^0.9.9":
-  version "0.9.9"
-  resolved "https://registry.yarnpkg.com/@graphql-mesh/fhir/-/fhir-0.9.9.tgz#28816e40f359dff203a838ac029f7a994298abfa"
-  integrity sha512-s0/FTgx+dW0ebBQIcR2EGLYV2s64LVsOGmy1xqhNKX28v/L9UqdV2ZyGRe0cTeRdlQcu65jCRhxUakWOrOERbQ==
+"@graphql-mesh/fhir@^0.10.0":
+  version "0.10.0"
+  resolved "https://registry.yarnpkg.com/@graphql-mesh/fhir/-/fhir-0.10.0.tgz#0e2f570b317fcf5d62d5032a086fdfff5456a1af"
+  integrity sha512-x/27jsHlqjNvtDUXVr0wXj/SbIaQO+lzaO1CV5YqjWfEZ5tQ92gnYZixvshMDDgeWO5Y4mMuFDRGGjKr2kNT6Q==
   dependencies:
-    "@graphql-mesh/json-schema" "0.11.1"
-    "@graphql-mesh/types" "0.35.1"
-    "@graphql-mesh/utils" "0.9.0"
-    fetchache "0.0.4"
+    "@graphql-mesh/json-schema" "0.13.0"
+    "@graphql-mesh/types" "0.38.0"
+    "@graphql-mesh/utils" "0.10.0"
     url-join "4.0.1"
 
 "@graphql-mesh/graphql@^0.16.0":
@@ -1012,25 +1011,7 @@
     pascal-case "3.1.2"
     protobufjs "6.10.2"
 
-"@graphql-mesh/json-schema@0.11.1":
-  version "0.11.1"
-  resolved "https://registry.yarnpkg.com/@graphql-mesh/json-schema/-/json-schema-0.11.1.tgz#baad5a1c4870885d9765fdaa234271b772adf186"
-  integrity sha512-rIqxmLrixZDTxANGZxMnArnQlscuMyzsHRk9mGQ6ktnKpKGHqdl6IDZLs+c88kDaTijg2gi/sKDMGdqxLS6lEA==
-  dependencies:
-    "@ardatan/aggregate-error" "0.0.6"
-    "@graphql-mesh/types" "0.35.1"
-    "@graphql-mesh/utils" "0.9.0"
-    ajv "7.1.1"
-    fetchache "0.0.4"
-    graphql-compose "7.25.0"
-    graphql-scalars "1.7.1"
-    lodash "4.17.21"
-    object-hash "2.1.1"
-    pascal-case "3.1.2"
-    to-json-schema "0.2.5"
-    url-join "4.0.1"
-
-"@graphql-mesh/json-schema@^0.13.0":
+"@graphql-mesh/json-schema@0.13.0", "@graphql-mesh/json-schema@^0.13.0":
   version "0.13.0"
   resolved "https://registry.yarnpkg.com/@graphql-mesh/json-schema/-/json-schema-0.13.0.tgz#7a1c740dc92fe9ebcb4b5917eedf2b8639bae7ba"
   integrity sha512-WZ/1f6viEkmpivf83WPnD0SoA1bAYhRwhP8/pky547v5OBvdD/qshGLCCcV/7yjsK5lrWuCw16jp9++tFP5vFQ==
@@ -1351,7 +1332,7 @@
     "@graphql-typed-document-node/core" "3.1.0"
     fetchache "0.0.4"
 
-"@graphql-mesh/types@0.38.0":
+"@graphql-mesh/types@0.38.0", "@graphql-mesh/types@^0.38.0":
   version "0.38.0"
   resolved "https://registry.yarnpkg.com/@graphql-mesh/types/-/types-0.38.0.tgz#9e37885f0ef93611a8f2cd4e077760de993cc77e"
   integrity sha512-sruLz9/ZyrWdVQG3Otuf7gZswTUVWGczGyWfEhnVGmNPCMvS2QsA1lRsUMmyvPF0SIFW92VbRS9sUYegowUo6A==
@@ -2743,16 +2724,6 @@ aggregate-error@^3.0.0:
     clean-stack "^2.0.0"
     indent-string "^4.0.0"
 
-ajv@7.1.1:
-  version "7.1.1"
-  resolved "https://registry.yarnpkg.com/ajv/-/ajv-7.1.1.tgz#1e6b37a454021fa9941713f38b952fc1c8d32a84"
-  integrity sha512-ga/aqDYnUy/o7vbsRTFhhTsNeXiYb5JWDIcRIeZfwRNCefwjNTVYCGdGSUrEmiu3yDK3vFvNbgJxvrQW4JXrYQ==
-  dependencies:
-    fast-deep-equal "^3.1.1"
-    json-schema-traverse "^1.0.0"
-    require-from-string "^2.0.2"
-    uri-js "^4.2.2"
-
 ajv@7.2.4:
   version "7.2.4"
   resolved "https://registry.yarnpkg.com/ajv/-/ajv-7.2.4.tgz#8e239d4d56cf884bccca8cca362f508446dc160f"
@@ -2767,6 +2738,16 @@ ajv@8.0.1:
   version "8.0.1"
   resolved "https://registry.yarnpkg.com/ajv/-/ajv-8.0.1.tgz#dac101898a87f8ebb57fea69617e8096523c628c"
   integrity sha512-46ZA4TalFcLLqX1dEU3dhdY38wAtDydJ4e7QQTVekLUTzXkb1LfqU6VOBXC/a9wiv4T094WURqJH6ZitF92Kqw==
+  dependencies:
+    fast-deep-equal "^3.1.1"
+    json-schema-traverse "^1.0.0"
+    require-from-string "^2.0.2"
+    uri-js "^4.2.2"
+
+ajv@8.0.2:
+  version "8.0.2"
+  resolved "https://registry.yarnpkg.com/ajv/-/ajv-8.0.2.tgz#1396e27f208ed56dd5638ab5a251edeb1c91d402"
+  integrity sha512-V0HGxJd0PiDF0ecHYIesTOqfd1gJguwQUOYfMfAWnRsWQEXfc5ifbUFhD3Wjc+O+y7VAqL+g07prq9gHQ/JOZQ==
   dependencies:
     fast-deep-equal "^3.1.1"
     json-schema-traverse "^1.0.0"
