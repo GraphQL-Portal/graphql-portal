@@ -21,7 +21,7 @@
   ],
   "dependencies": {
     "@graphql-inspector/core": "^2.3.0",
-    "@graphql-mesh/fhir": "^0.9.9",
+    "@graphql-mesh/fhir": "^0.10.0",
     "@graphql-mesh/grpc": "^0.10.0",
     "@graphql-mesh/json-schema": "^0.13.0",
     "@graphql-mesh/graphql": "^0.16.0",
