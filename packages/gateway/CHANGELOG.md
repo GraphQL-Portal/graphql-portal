@@ -1,5 +1,20 @@
 # @graphql-portal/gateway
 
+## 0.17.4
+
+### Patch Changes
+
+- 9f3b5cb: fix dependencies, add debug logs
+- 4ee7c19: fix resolver methrics paths
+- 8b6687c: fix metric emitter: push request ID when request is completed, emit all resolver data
+- 7908242: update dependencies, don't emit empty and introspection metrics
+- Updated dependencies [e96c1d4]
+- Updated dependencies [6d198a7]
+  - @graphql-portal/logger@0.6.0
+  - @graphql-portal/types@0.22.0
+  - @graphql-portal/config@0.11.1
+  - @graphql-portal/dashboard@0.1.8
+
 ## 0.17.3
 
 ### Patch Changes

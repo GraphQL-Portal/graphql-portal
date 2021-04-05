@@ -89,6 +89,10 @@
       "description": "Sets the log level. Should not be set to 'debug' in production.",
       "default": "info"
     },
+    "log_filter": {
+      "type": "string",
+      "description": "Regexp that filters debug-level logs by context."
+    },
     "datadog_logging": {
       "$ref": "#/definitions/datadog_logging",
       "description": "Configures sending of log messages to Datadog."

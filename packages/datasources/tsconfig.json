@@ -11,6 +11,6 @@
     "declaration": true,
     "declarationMap": true
   },
-  "include": ["*.ts", "**/src/*.json"],
-  "exclude": ["node_modules", "dist"]
+  "include": ["index.ts", "**/*.ts", "**/*.json"],
+  "exclude": ["node_modules", "dist", "./package.json"]
 }

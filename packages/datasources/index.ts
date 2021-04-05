@@ -1,19 +1,35 @@
-import contentfulDefinition from './contentful/src/definitions.json';
-import slackDefinitions from './slack/src/definitions.json';
-import stripeDefinitions from './stripe/src/definitions.json';
-import weatherbitDefinitions from './weatherbit/src/definitions.json';
-import crunchbaseDefinitions from './crunchbase/src/definitions.json';
-import salesforceDefinitions from './salesforce/src/definitions.json';
-import twitteroDefinitions from './twitter/src/definitions.json';
-import ipApiDefinitions from './ip-api/src/definitions.json';
+import * as contentful from './contentful';
+import * as slack from './slack';
+import * as stripe from './stripe';
+import * as weatherbit from './weatherbit';
+import * as crunchbase from './crunchbase';
+import * as salesforce from './salesforce';
+import * as twitter from './twitter';
+import * as ipApi from './ip-api';
 
-export default {
-  ...contentfulDefinition,
-  ...crunchbaseDefinitions,
-  ...salesforceDefinitions,
-  ...slackDefinitions,
-  ...stripeDefinitions,
-  ...twitteroDefinitions,
-  ...weatherbitDefinitions,
-  ...ipApiDefinitions,
+type Validate = (name: string, config: any) => string | void;
+type CustomHandler = {
+  handler: any;
+  definitions: { [key: string]: any };
+  packageName: string;
+  validate?: Validate;
 };
+
+const handlers: CustomHandler[] = [contentful, slack, stripe, weatherbit, crunchbase, salesforce, twitter, ipApi];
+
+const definitions: { [key: string]: any } = handlers.reduce(
+  (result, handler) => ({ ...result, ...handler.definitions }),
+  {}
+);
+
+const packageHandler: { [key: string]: string } = handlers.reduce(
+  (result, handler) => ({ ...result, [handler.packageName]: handler.handler.name }),
+  {}
+);
+
+const packageValidation: { [key: string]: Validate } = handlers.reduce(
+  (result, handler) => ({ ...result, [handler.packageName]: handler.validate }),
+  {}
+);
+
+export { definitions, packageHandler, packageValidation };

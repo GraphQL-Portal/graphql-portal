@@ -10,8 +10,9 @@
     "generate-mesh-source-config": "json2ts -i packages/types/src/mesh-source-schema.json -o ./packages/types/src/mesh-source-config.ts --style.singleQuote --bannerComment \"/* eslint-disable */\"",
     "generate-api-def-config": "json2ts -i packages/types/src/api-def-schema.json -o ./packages/types/src/api-def-config.ts --style.singleQuote --bannerComment \"/* eslint-disable */\"",
     "generate-configs": "yarn generate-gateway-config && yarn generate-mesh-source-config && yarn generate-api-def-config",
-    "clear-dist": "rm -rf dist ./packages/config/dist ./packages/gateway/dist ./packages/types/dist ./packages/dashboard/dist ./packages/logger/dist",
+    "clear-dist": "rm -rf dist ./packages/datasources/dist ./packages/config/dist ./packages/gateway/dist ./packages/types/dist ./packages/dashboard/dist ./packages/logger/dist",
     "copy-graphql-files": "copyfiles -u 5 packages/gateway/src/server/control-api/*.gql packages/gateway/dist/src/server/control-api/",
+    "premesh-config-sync": "tsc -b ./packages/datasources/tsconfig.json",
     "mesh-config-sync": "ts-node ./packages/types/src/mesh-config-sync.ts && prettier --write ./packages/types/src/mesh-source-schema.json ./packages/types/src/api-def-schema.json",
     "prettier": "prettier --write \"./packages/**/*.ts\"",
     "prebuild": "yarn clear-dist && yarn mesh-config-sync && yarn generate-configs",
@@ -36,11 +37,15 @@
     "patch-package": "6.4.7",
     "postinstall-postinstall": "2.1.0"
   },
+  "resolutions": {
+    "**/xml-crypto": "2.1.0"
+  },
   "devDependencies": {
-    "@changesets/cli": "2.14.1",
+    "@changesets/cli": "2.15.0",
+    "@types/http-cache-semantics": "^4.0.0",
     "@types/jest": "26.0.22",
-    "@typescript-eslint/eslint-plugin": "4.19.0",
-    "@typescript-eslint/parser": "4.19.0",
+    "@typescript-eslint/eslint-plugin": "4.20.0",
+    "@typescript-eslint/parser": "4.20.0",
     "copyfiles": "2.4.1",
     "eslint": "7.23.0",
     "eslint-config-prettier": "8.1.0",
@@ -48,10 +53,10 @@
     "eslint-plugin-import": "2.22.1",
     "eslint-plugin-node": "11.1.0",
     "eslint-plugin-promise": "4.3.1",
-    "husky": "5.2.0",
+    "husky": "6.0.0",
     "jest": "26.6.3",
     "jest-runner-eslint": "0.10.0",
-    "json-schema-to-typescript": "10.1.3",
+    "json-schema-to-typescript": "10.1.4",
     "lint-staged": "10.5.4",
     "pinst": "2.1.6",
     "prettier": "2.2.1",
@@ -84,6 +89,11 @@
         "coverageDirectory": "../coverage",
         "collectCoverage": true,
         "coveragePathIgnorePatterns": [
+          "/node_modules/",
+          "/dist/",
+          ".dto.ts$"
+        ],
+        "modulePathIgnorePatterns": [
           "/node_modules/",
           "/dist/",
           ".dto.ts$"
