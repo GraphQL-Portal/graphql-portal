@@ -1186,20 +1186,20 @@
     soap "0.36.0"
     soap-graphql "0.1.1"
 
-"@graphql-mesh/thrift@^0.6.1":
-  version "0.6.1"
-  resolved "https://registry.yarnpkg.com/@graphql-mesh/thrift/-/thrift-0.6.1.tgz#62e8cc91c24aac2cd471c931d0e0a0fd6bfae2a4"
-  integrity sha512-g0HpGBIU2rdmsMVNvZhMRazixRz+jLyMPKeSOJorz143ZCHcYDsl6b0Kkv8k4J4raELYTG+1mAgbHTpAcB8TQw==
+"@graphql-mesh/thrift@^0.7.0":
+  version "0.7.0"
+  resolved "https://registry.yarnpkg.com/@graphql-mesh/thrift/-/thrift-0.7.0.tgz#b0780e052adce88cf19ac3d09a0cbb9ee532d832"
+  integrity sha512-KjetVmmJTX1E1kVxHg6Ppezv5OR7hCWZdX5hSmf0fvvaIcDFs3Ca8KnQqIN7ame980kOhTjuEAfttX4Cu+Xe6g==
   dependencies:
     "@ardatan/aggregate-error" "0.0.6"
     "@creditkarma/thrift-client" "0.16.1"
     "@creditkarma/thrift-parser" "1.2.0"
     "@creditkarma/thrift-server-core" "0.16.1"
-    "@graphql-mesh/types" "0.35.1"
-    "@graphql-mesh/utils" "0.9.0"
-    fetchache "0.0.4"
-    graphql-scalars "1.7.1"
-    thrift "0.14.0"
+    "@graphql-mesh/types" "0.38.0"
+    "@graphql-mesh/utils" "0.10.0"
+    fetchache "0.1.1"
+    graphql-scalars "1.9.0"
+    thrift "0.14.1"
     url-join "4.0.1"
 
 "@graphql-mesh/transform-cache@^0.8.34":
@@ -1351,7 +1351,7 @@
     "@graphql-typed-document-node/core" "3.1.0"
     fetchache "0.0.4"
 
-"@graphql-mesh/types@0.38.0":
+"@graphql-mesh/types@0.38.0", "@graphql-mesh/types@^0.38.0":
   version "0.38.0"
   resolved "https://registry.yarnpkg.com/@graphql-mesh/types/-/types-0.38.0.tgz#9e37885f0ef93611a8f2cd4e077760de993cc77e"
   integrity sha512-sruLz9/ZyrWdVQG3Otuf7gZswTUVWGczGyWfEhnVGmNPCMvS2QsA1lRsUMmyvPF0SIFW92VbRS9sUYegowUo6A==
@@ -2767,6 +2767,16 @@ ajv@8.0.1:
   version "8.0.1"
   resolved "https://registry.yarnpkg.com/ajv/-/ajv-8.0.1.tgz#dac101898a87f8ebb57fea69617e8096523c628c"
   integrity sha512-46ZA4TalFcLLqX1dEU3dhdY38wAtDydJ4e7QQTVekLUTzXkb1LfqU6VOBXC/a9wiv4T094WURqJH6ZitF92Kqw==
+  dependencies:
+    fast-deep-equal "^3.1.1"
+    json-schema-traverse "^1.0.0"
+    require-from-string "^2.0.2"
+    uri-js "^4.2.2"
+
+ajv@8.0.2:
+  version "8.0.2"
+  resolved "https://registry.yarnpkg.com/ajv/-/ajv-8.0.2.tgz#1396e27f208ed56dd5638ab5a251edeb1c91d402"
+  integrity sha512-V0HGxJd0PiDF0ecHYIesTOqfd1gJguwQUOYfMfAWnRsWQEXfc5ifbUFhD3Wjc+O+y7VAqL+g07prq9gHQ/JOZQ==
   dependencies:
     fast-deep-equal "^3.1.1"
     json-schema-traverse "^1.0.0"
@@ -10069,10 +10079,10 @@ thenify-all@^1.0.0:
   dependencies:
     any-promise "^1.0.0"
 
-thrift@0.14.0:
-  version "0.14.0"
-  resolved "https://registry.yarnpkg.com/thrift/-/thrift-0.14.0.tgz#ccec98c8f7c8e6df2b9449d208ce5ad68b8112b1"
-  integrity sha512-u5YR37xJzd4w5mZHanhNydiXzZHyQT2PeO6K+7R2TDPajymIAPp+10YjQiGvUJbLMf1qfgRqhcWnbJ7fjTJG6Q==
+thrift@0.14.1:
+  version "0.14.1"
+  resolved "https://registry.yarnpkg.com/thrift/-/thrift-0.14.1.tgz#8ee2ee28114a24c81289ea079781336419c2a17d"
+  integrity sha512-ztDCxvXvVjYMvflVwEsxi7hxxGuYaM/AkX2NMhTM2xaQnOEzBADlQsZSqtp+KCRbuqmCPQY1aRnOu3sdVmgdrA==
   dependencies:
     browser-or-node "^1.2.1"
     isomorphic-ws "^4.0.1"
