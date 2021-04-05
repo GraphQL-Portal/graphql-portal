@@ -1,5 +1,15 @@
 # @graphql-portal/ip-api
 
+## 0.1.0
+
+### Minor Changes
+
+- 6d198a7: fixed custom handlers validation, fixed patches
+
+### Patch Changes
+
+- 7908242: update dependencies, don't emit empty and introspection metrics
+
 ## 0.0.4
 
 ### Patch Changes
