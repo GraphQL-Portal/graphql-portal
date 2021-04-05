@@ -1131,16 +1131,15 @@
     pascal-case "3.1.2"
     url-join "4.0.1"
 
-"@graphql-mesh/openapi@^0.14.0":
-  version "0.14.2"
-  resolved "https://registry.yarnpkg.com/@graphql-mesh/openapi/-/openapi-0.14.2.tgz#a0e26e3b05191026fa5c748ab6af6d29d6fd64ab"
-  integrity sha512-w0gjO3rhBtWiye/68Q2LS2DkMmOLyDaMgfzf0wZOqxYyC8jnj+m3rtvYFiOKSxDTamzhxa1P+/1oaXs53MUrQg==
+"@graphql-mesh/openapi@^0.15.0":
+  version "0.15.0"
+  resolved "https://registry.yarnpkg.com/@graphql-mesh/openapi/-/openapi-0.15.0.tgz#7ee2bf53c60c0a8876efcced0e95d5d1698dc81c"
+  integrity sha512-6mMX9d0tDFWoHdXkrYxiNSvJKUDTwCKf2hjwuWDZEQpeC1Y9BglsSqPJmvVB+cCULu/lM66NtfFDU4a2O2ZnRg==
   dependencies:
-    "@graphql-mesh/types" "0.37.0"
-    "@graphql-mesh/utils" "0.9.3"
+    "@graphql-mesh/types" "0.38.0"
+    "@graphql-mesh/utils" "0.10.0"
     deep-equal "2.0.5"
-    fetchache "0.0.4"
-    form-urlencoded "4.2.1"
+    form-urlencoded "4.4.2"
     graphql-scalars "1.9.0"
     graphql-subscriptions "1.2.1"
     json-ptr "2.0.0"
@@ -5221,10 +5220,10 @@ form-data@~2.3.2:
     combined-stream "^1.0.6"
     mime-types "^2.1.12"
 
-form-urlencoded@4.2.1:
-  version "4.2.1"
-  resolved "https://registry.yarnpkg.com/form-urlencoded/-/form-urlencoded-4.2.1.tgz#264d0b4524a87332e94f606237493fb5d26dcd84"
-  integrity sha512-0eFJroOH2qaqc/630d4YZpmsyKmh6sfq/1z3YMXvFab0O6teGnf8640C7gufikwbQJFaC6nPlG4d/GiYVN+Dcw==
+form-urlencoded@4.4.2:
+  version "4.4.2"
+  resolved "https://registry.yarnpkg.com/form-urlencoded/-/form-urlencoded-4.4.2.tgz#92913ec8e7375824fa1cc2d13093c8d30a122a8f"
+  integrity sha512-6sZj0HI9tCcGuzC9W/nkHvNLAjOo1G/jjnNluChOGMwn75Po6g5nGYASxQUJeSQHLng1SpovGjQr1f4xz1PqQw==
 
 formidable@^1.2.2:
   version "1.2.2"
