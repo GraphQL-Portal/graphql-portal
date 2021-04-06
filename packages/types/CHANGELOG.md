@@ -1,5 +1,11 @@
 # @graphql-portal/types
 
+## 0.23.1
+
+### Patch Changes
+
+- 05c6ae2: update datasources dependency
+
 ## 0.23.0
 
 ### Minor Changes
