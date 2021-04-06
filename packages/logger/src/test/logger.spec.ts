@@ -2,6 +2,16 @@ import * as logger from '../index';
 import { GatewayConfig } from '@graphql-portal/types';
 import { Redis } from 'ioredis';
 
+jest.mock('@graphql-portal/logger/src/redis-winston-transport.ts', () => {
+  // eslint-disable-next-line @typescript-eslint/naming-convention
+  const TransportStream = require('winston-transport');
+  class RedisTransport extends TransportStream {}
+  RedisTransport.prototype.log = jest.fn();
+  return {
+    RedisTransport,
+  };
+});
+
 describe('logger', () => {
   describe('configureLogger', () => {
     const baseConfig: GatewayConfig = {

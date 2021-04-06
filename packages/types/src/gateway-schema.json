@@ -282,6 +282,12 @@
           "type": "number",
           "description": "After the timeout has expired, the log will automatically be deleted (in seconds)",
           "default": 30
+        },
+        "log_level": {
+          "type": "string",
+          "enum": ["debug", "info", "warn", "error"],
+          "description": "Sets the redis log level. Should not be set to 'debug' in production.",
+          "default": "info"
         }
       },
       "required": ["enabled", "expire"]
