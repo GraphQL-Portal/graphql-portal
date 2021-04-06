@@ -1,5 +1,11 @@
 # @graphql-portal/types
 
+## 0.23.0
+
+### Minor Changes
+
+- 737fc25: Redis log level
+
 ## 0.22.1
 
 ### Patch Changes

@@ -1,5 +1,16 @@
 # @graphql-portal/logger
 
+## 0.7.0
+
+### Minor Changes
+
+- 737fc25: Redis log level
+
+### Patch Changes
+
+- Updated dependencies [737fc25]
+  - @graphql-portal/types@0.23.0
+
 ## 0.6.1
 
 ### Patch Changes

@@ -1,5 +1,15 @@
 # @graphql-portal/gateway
 
+## 0.17.5
+
+### Patch Changes
+
+- Updated dependencies [737fc25]
+  - @graphql-portal/logger@0.7.0
+  - @graphql-portal/types@0.23.0
+  - @graphql-portal/config@0.11.2
+  - @graphql-portal/dashboard@0.1.9
+
 ## 0.17.4
 
 ### Patch Changes
