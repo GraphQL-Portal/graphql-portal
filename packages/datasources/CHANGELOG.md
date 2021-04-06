@@ -1,5 +1,11 @@
 # @graphql-portal/datasources
 
+## 0.1.1
+
+### Patch Changes
+
+- 39195b4: rebuild with fixed handlers
+
 ## 0.1.0
 
 ### Minor Changes
