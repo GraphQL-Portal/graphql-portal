@@ -4,4 +4,5 @@ export const logger = {
   debug: jest.fn(),
   error: jest.fn(),
 };
+
 export const prefixLogger = jest.fn().mockReturnValue(logger);
