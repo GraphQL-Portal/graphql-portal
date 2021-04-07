@@ -1,5 +1,11 @@
 # @graphql-portal/salesforce
 
+## 0.1.2
+
+### Patch Changes
+
+- 3c899e8: added salesforce description
+
 ## 0.1.1
 
 ### Patch Changes
