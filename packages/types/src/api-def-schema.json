@@ -1464,8 +1464,9 @@
       "additionalProperties": false,
       "type": "object",
       "title": "SalesforceHandler",
+      "description": "An American cloud-based software company that provides customer relationship management service.",
       "properties": {
-        "baseUrl": { "type": "string", "description": "A endpoint of your Salesforce API" },
+        "baseUrl": { "type": "string", "description": "An endpoint of your Salesforce API" },
         "token": { "type": "string", "description": "Authentication token" }
       },
       "required": ["baseUrl"]

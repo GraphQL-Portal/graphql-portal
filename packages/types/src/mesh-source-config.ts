@@ -775,9 +775,12 @@ export interface CrunchbaseHandler {
    */
   userKey: string;
 }
+/**
+ * An American cloud-based software company that provides customer relationship management service.
+ */
 export interface SalesforceHandler {
   /**
-   * A endpoint of your Salesforce API
+   * An endpoint of your Salesforce API
    */
   baseUrl: string;
   /**
