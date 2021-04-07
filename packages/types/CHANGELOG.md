@@ -1,5 +1,11 @@
 # @graphql-portal/types
 
+## 0.23.2
+
+### Patch Changes
+
+- 3c899e8: added salesforce description
+
 ## 0.23.1
 
 ### Patch Changes
