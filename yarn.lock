@@ -5681,7 +5681,7 @@ graphql-tools@^4.0.7, graphql-tools@^4.0.8:
     iterall "^1.1.3"
     uuid "^3.1.0"
 
-graphql-tools@^7.0.2:
+graphql-tools@^7.0.2, graphql-tools@^7.0.4:
   version "7.0.4"
   resolved "https://registry.yarnpkg.com/graphql-tools/-/graphql-tools-7.0.4.tgz#2ab8ee2afe1eb066f79fe8d0d643822d119d4ae3"
   integrity sha512-9tEqKSAprMQMCB8WzwQKudzTVl6a3nANR4rLL9VJbgGn+ULjZTxeW0lMA8gKfds5Cu4EtD/Esc8QRbEf3seY6g==
@@ -10791,7 +10791,7 @@ ws@^6.0.0:
   dependencies:
     async-limiter "~1.0.0"
 
-xml-crypto@2.1.0, xml-crypto@^2.0.0:
+xml-crypto@^2.0.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/xml-crypto/-/xml-crypto-2.1.0.tgz#58a94f552d40e52f87ab557aa49ce4ca1f574c9e"
   integrity sha512-vDYaNYe5nq5ofb+rqdlIuSjojIDhifBOX8bfUcjJK3pB50qz3Uz50voKklaARvEjkGdbIMnNpt39Glrjx4ieuw==

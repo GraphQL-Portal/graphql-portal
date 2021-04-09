@@ -1,11 +1,12 @@
+import * as cache from './cache';
 import * as contentful from './contentful';
+import * as crunchbase from './crunchbase';
+import * as ipApi from './ip-api';
+import * as salesforce from './salesforce';
 import * as slack from './slack';
 import * as stripe from './stripe';
-import * as weatherbit from './weatherbit';
-import * as crunchbase from './crunchbase';
-import * as salesforce from './salesforce';
 import * as twitter from './twitter';
-import * as ipApi from './ip-api';
+import * as weatherbit from './weatherbit';
 
 type Validate = (name: string, config: any) => string | void;
 type CustomHandler = {
@@ -15,7 +16,17 @@ type CustomHandler = {
   validate?: Validate;
 };
 
-const handlers: CustomHandler[] = [contentful, slack, stripe, weatherbit, crunchbase, salesforce, twitter, ipApi];
+const handlers: CustomHandler[] = [
+  cache,
+  contentful,
+  slack,
+  stripe,
+  weatherbit,
+  crunchbase,
+  salesforce,
+  twitter,
+  ipApi,
+];
 
 const definitions: { [key: string]: any } = handlers.reduce(
   (result, handler) => ({ ...result, ...handler.definitions }),

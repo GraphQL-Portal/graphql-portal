@@ -98,7 +98,7 @@ const subscribe = async (pubsub: MeshPubSub): Promise<void> => {
     );
 
     metricEmitter.on(MetricsChannels.GOT_ERROR, async (id: string, error: Error, date: number) => {
-      logger.debug(`MetricsChannels.GOT_ERROR: ${id}, ${error}`);
+      logger.debug(`MetricsChannels.GOT_ERROR: ${id}, ${error.toString().split('\n')[0]}`);
       await lpush(
         id,
         serializer({
