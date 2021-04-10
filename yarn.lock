@@ -10779,13 +10779,13 @@ ws@^6.0.0:
   dependencies:
     async-limiter "~1.0.0"
 
-xml-crypto@2.1.0, xml-crypto@^2.0.0:
-  version "2.1.0"
-  resolved "https://registry.yarnpkg.com/xml-crypto/-/xml-crypto-2.1.0.tgz#58a94f552d40e52f87ab557aa49ce4ca1f574c9e"
-  integrity sha512-vDYaNYe5nq5ofb+rqdlIuSjojIDhifBOX8bfUcjJK3pB50qz3Uz50voKklaARvEjkGdbIMnNpt39Glrjx4ieuw==
+xml-crypto@2.1.1, xml-crypto@^2.0.0:
+  version "2.1.1"
+  resolved "https://registry.yarnpkg.com/xml-crypto/-/xml-crypto-2.1.1.tgz#d1dfb4ee66f907c480379562cda130897dc05b99"
+  integrity sha512-M+m4+HIJa83lu/CnspQjA7ap8gmanNDxxRjSisU8mPD4bqhxbo5N2bdpvG2WgVYOrPpOIOq55iY8Cz8Ai40IeQ==
   dependencies:
     xmldom "0.5.0"
-    xpath "0.0.27"
+    xpath "0.0.32"
 
 xml-name-validator@^3.0.0:
   version "3.0.0"
@@ -10802,10 +10802,10 @@ xmldom@0.5.0:
   resolved "https://registry.yarnpkg.com/xmldom/-/xmldom-0.5.0.tgz#193cb96b84aa3486127ea6272c4596354cb4962e"
   integrity sha512-Foaj5FXVzgn7xFzsKeNIde9g6aFBxTPi37iwsno8QvApmtg7KYrr+OPyRHcJF7dud2a5nGRBXK3n0dL62Gf7PA==
 
-xpath@0.0.27:
-  version "0.0.27"
-  resolved "https://registry.yarnpkg.com/xpath/-/xpath-0.0.27.tgz#dd3421fbdcc5646ac32c48531b4d7e9d0c2cfa92"
-  integrity sha512-fg03WRxtkCV6ohClePNAECYsmpKKTv5L8y/X3Dn1hQrec3POx2jHZ/0P2qQ6HvsrU1BmeqXcof3NGGueG6LxwQ==
+xpath@0.0.32:
+  version "0.0.32"
+  resolved "https://registry.yarnpkg.com/xpath/-/xpath-0.0.32.tgz#1b73d3351af736e17ec078d6da4b8175405c48af"
+  integrity sha512-rxMJhSIoiO8vXcWvSifKqhvV96GjiD5wYb8/QHdoRyQvraTpp4IEv944nhGausZZ3u7dhQXteZuZbaqfpB7uYw==
 
 xss@^1.0.6:
   version "1.0.8"
