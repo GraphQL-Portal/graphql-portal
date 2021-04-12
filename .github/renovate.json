@@ -1,5 +1,5 @@
 {
-  "extends": ["config:base", "schedule:weekends"],
+  "extends": ["config:base", "schedule:weekends", ":automergeMinor", ":disableRateLimiting"],
   "automerge": true,
   "major": {
     "automerge": false
@@ -7,7 +7,8 @@
   "labels": ["dependencies"],
   "packageRules": [
     {
-      "matchSourceUrlPrefixes": ["https://github.com/Urigo/graphql-modules", "https://github.com/Urigo/graphql-mesh"]
+      "matchSourceUrlPrefixes": ["https://github.com/Urigo/graphql-modules", "https://github.com/Urigo/graphql-mesh"],
+      "groupName": "Mesh monorepo"
     }
   ]
 }
