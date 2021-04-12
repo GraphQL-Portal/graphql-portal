@@ -278,7 +278,6 @@
         "soap": { "$ref": "#/definitions/SoapHandler", "description": "Handler for SOAP" },
         "thrift": { "$ref": "#/definitions/ThriftHandler", "description": "Handler for OData" },
         "tuql": { "$ref": "#/definitions/TuqlHandler", "description": "Handler for SQLite database, based on `tuql`" },
-        "CacheHandler": { "$ref": "#/definitions/CacheHandler" },
         "ContentfulHandler": { "$ref": "#/definitions/ContentfulHandler" },
         "SlackHandler": { "$ref": "#/definitions/SlackHandler" },
         "StripeHandler": { "$ref": "#/definitions/StripeHandler" },
@@ -1399,22 +1398,6 @@
         "infile": {
           "type": "string",
           "description": "Path to the SQL Dump file if you want to build a in-memory database"
-        }
-      }
-    },
-    "CacheHandler": {
-      "additionalProperties": false,
-      "type": "object",
-      "title": "CacheHandler",
-      "description": "Allows you to invalidate cache set by CacheTransform",
-      "properties": {
-        "getResolverName": {
-          "type": "string",
-          "description": "Name for query to get cache. Defaults to 'getCacheByKey'"
-        },
-        "deleteResolverName": {
-          "type": "string",
-          "description": "Name for mutation to invalidate cache. Defaults to 'deleteCacheByKey'"
         }
       }
     },

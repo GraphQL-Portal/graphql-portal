@@ -29,7 +29,6 @@ export interface Handler {
   soap?: SoapHandler;
   thrift?: ThriftHandler;
   tuql?: TuqlHandler;
-  CacheHandler?: CacheHandler;
   ContentfulHandler?: ContentfulHandler;
   SlackHandler?: SlackHandler;
   StripeHandler?: StripeHandler;
@@ -718,19 +717,6 @@ export interface TuqlHandler {
    * Path to the SQL Dump file if you want to build a in-memory database
    */
   infile?: string;
-}
-/**
- * Allows you to invalidate cache set by CacheTransform
- */
-export interface CacheHandler {
-  /**
-   * Name for query to get cache. Defaults to 'getCacheByKey'
-   */
-  getResolverName?: string;
-  /**
-   * Name for mutation to invalidate cache. Defaults to 'deleteCacheByKey'
-   */
-  deleteResolverName?: string;
 }
 /**
  * API-first content platform to build digital experiences

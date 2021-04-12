@@ -1,6 +1,5 @@
 import { config } from '@graphql-portal/config';
 import { prefixLogger } from '@graphql-portal/logger';
-import { ApiDef } from '@graphql-portal/types';
 import { makeExecutableSchema } from '@graphql-tools/schema';
 import { Express } from 'express';
 import { graphqlHTTP } from 'express-graphql';
@@ -10,7 +9,7 @@ import path from 'path';
 
 const logger = prefixLogger('control-api');
 
-export default function setupControlApi(app: Express, apiDefs: ApiDef[]): void {
+export default function setupControlApi(app: Express): void {
   if (!config.gateway.enable_control_api) {
     logger.info('Control API is disabled.');
     return;
@@ -31,9 +30,6 @@ export default function setupControlApi(app: Express, apiDefs: ApiDef[]): void {
     endpoint,
     graphqlHTTP({
       schema,
-      context: {
-        apiDefs,
-      },
       graphiql: { headerEditorEnabled: true },
     })
   );

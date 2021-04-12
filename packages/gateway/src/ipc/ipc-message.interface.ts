@@ -1,4 +1,4 @@
-export type IPCEvent = 'config' | 'updateApi' | 'updateConfig';
+export type IPCEvent = 'config' | 'updateApi' | 'updateConfig' | 'invalidateCache';
 
 export interface IPCMessage {
   event: IPCEvent;

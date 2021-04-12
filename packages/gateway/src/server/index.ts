@@ -48,11 +48,7 @@ export async function startServer(): Promise<void> {
     app.use(cors(getCorsOptions()));
   }
 
-  // setting Control API for APIDefs
-  const apiDefsToControlApi = config.apiDefs.filter((apiDef) => apiDef.schema_updates_through_control_api);
-  if (config.gateway.enable_control_api && apiDefsToControlApi.length) {
-    setupControlApi(app, apiDefsToControlApi);
-  }
+  setupControlApi(app);
 
   setRouter(app, config.apiDefs);
 

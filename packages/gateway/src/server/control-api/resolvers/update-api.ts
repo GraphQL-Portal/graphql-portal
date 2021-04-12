@@ -1,20 +1,12 @@
-import { prefixLogger } from '@graphql-portal/logger';
+import { config } from '@graphql-portal/config';
 import { ApiDef } from '@graphql-portal/types';
 import { registerHandlers, spreadMessageToWorkers } from '../../../ipc/utils';
 import { updateApi as updateApiInRouter } from '../../router';
 
-const logger = prefixLogger('Query.updateApi');
-
-export default async function updateApi(
-  _: any,
-  args: { name: string },
-  { apiDefs }: { apiDefs: ApiDef[] }
-): Promise<boolean> {
-  const apiDef = apiDefs.find((apiDef) => apiDef.name === args.name);
-  if (!apiDef) {
-    logger.debug(`API to update was not found for name: ${args.name}`);
-    return false;
-  }
+export default async function updateApi(_: any, args: { name: string }): Promise<boolean> {
+  const apiDef = config.apiDefs.find((apiDef) => apiDef.name === args.name);
+  if (!apiDef) return false;
+  if (!apiDef.schema_updates_through_control_api) return false;
 
   spreadMessageToWorkers({ event: 'updateApi', data: apiDef });
   return true;

@@ -100,7 +100,7 @@ describe('Server', () => {
       expect(setRouter).toHaveBeenCalledWith(app, config.apiDefs);
       expect(redisSubscriber.subscribe).toHaveBeenCalledWith(Channel.apiDefsUpdated);
       expect(redisSubscriber.on).toHaveBeenCalledWith('message', expect.any(Function));
-      expect(setupControlApi).toHaveBeenCalledTimes(0);
+      expect(setupControlApi).toHaveBeenCalledTimes(1);
       expect(server.listen).toHaveBeenCalledWith(
         config.gateway.listen_port,
         config.gateway.hostname,
