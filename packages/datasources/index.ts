@@ -1,4 +1,3 @@
-import * as cache from './cache';
 import * as contentful from './contentful';
 import * as crunchbase from './crunchbase';
 import * as ipApi from './ip-api';
@@ -16,17 +15,7 @@ type CustomHandler = {
   validate?: Validate;
 };
 
-const handlers: CustomHandler[] = [
-  cache,
-  contentful,
-  slack,
-  stripe,
-  weatherbit,
-  crunchbase,
-  salesforce,
-  twitter,
-  ipApi,
-];
+const handlers: CustomHandler[] = [contentful, slack, stripe, weatherbit, crunchbase, salesforce, twitter, ipApi];
 
 const definitions: { [key: string]: any } = handlers.reduce(
   (result, handler) => ({ ...result, ...handler.definitions }),
