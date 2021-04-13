@@ -13,6 +13,7 @@ const prepareRequestContext: RequestHandler = function prepareRequestContext(req
     forwardHeaders: {},
     requestId: req.id,
     tracerSpan: span,
+    resolverSpans: {},
   };
 
   next();

@@ -31,8 +31,8 @@ export const logResponse: RequestHandler = (req, res, next) => {
     } else {
       metricEmitter.emit(MetricsChannels.SENT_RESPONSE, req.id, responseBody, contentLength, Date.now());
     }
-    req.context.tracerSpan.setTag('http.status', res.statusCode);
-    req.context.tracerSpan.finish();
+    req.context?.tracerSpan?.setTag('http.status', res.statusCode);
+    req.context?.tracerSpan?.finish();
   });
 
   next();

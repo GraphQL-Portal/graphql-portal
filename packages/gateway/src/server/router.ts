@@ -101,6 +101,7 @@ async function buildApi(toRouter: Router, apiDef: ApiDef, mesh?: IMesh): Promise
         forwardHeaders: req?.context?.forwardHeaders || {},
         requestId: req.id,
         tracerSpan: req?.context?.tracerSpan || {},
+        resolverSpans: req?.context?.resolverSpans || {},
       });
 
       return {

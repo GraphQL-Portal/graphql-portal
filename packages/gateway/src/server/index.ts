@@ -23,6 +23,7 @@ export interface Context {
   forwardHeaders: ForwardHeaders;
   requestId: string;
   tracerSpan: Span;
+  resolverSpans: { [path: string]: Span };
 }
 
 // Helper for metrics gathering
