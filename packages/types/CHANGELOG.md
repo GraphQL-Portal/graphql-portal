@@ -1,5 +1,16 @@
 # @graphql-portal/types
 
+## 0.24.0
+
+### Minor Changes
+
+- 51818a9: add Mutation.invalidateCache to control API
+
+### Patch Changes
+
+- Updated dependencies [51818a9]
+  - @graphql-portal/datasources@0.1.2
+
 ## 0.23.2
 
 ### Patch Changes
