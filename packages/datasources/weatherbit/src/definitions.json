@@ -2,6 +2,14 @@
   "WeatherbitHandler": {
     "additionalProperties": false,
     "type": "object",
-    "title": "WeatherbitHandler"
+    "title": "WeatherbitHandler",
+    "description": "Weather API to instantly access real-time and historical data",
+    "properties": {
+      "token": {
+        "type": "string",
+        "description": "Weatherbit secret key"
+      }
+    },
+    "required": ["token"]
   }
 }

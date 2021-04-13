@@ -55,13 +55,13 @@
       "path": "packages/datasources/crunchbase"
     },
     {
-      "path": "packages/datasources/fedex"
-    },
-    {
       "path": "packages/datasources/twitter"
     },
     {
       "path": "packages/datasources/salesforce"
+    },
+    {
+      "path": "packages/datasources/ip-api"
     }
   ],
   "exclude": ["node_modules", "dist", "*.d.ts"]

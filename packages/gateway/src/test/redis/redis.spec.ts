@@ -12,13 +12,13 @@ jest.mock('../../redis/ping', () => ({
 
 describe('Redis', () => {
   describe('setupRedis', () => {
-    const connectionString = 'redis://localhost:6379';
+    const options = { connection_string: 'redis://localhost:6379' };
 
-    it('should call connect with given connectionString, ping with the publisher and return the subscriber', async () => {
-      const result = await setupRedis(connectionString);
+    it('should call connect with given options, ping with the publisher and return the subscriber', async () => {
+      const result = await setupRedis(options);
 
       expect(mockConnect).toHaveBeenCalledTimes(2);
-      expect(mockConnect).toHaveBeenCalledWith(connectionString);
+      expect(mockConnect).toHaveBeenCalledWith(options, undefined);
       expect(mockPing).toHaveBeenCalledTimes(1);
       expect(mockPing).toHaveBeenCalledWith({ publisher: true });
       expect(result).toMatchObject({ publisher: false });

@@ -2,12 +2,18 @@ import { MetricsChannels } from '@graphql-portal/types';
 import { NextFunction, Request, Response } from 'express';
 import { Tracer } from 'opentracing';
 import assignRequestId from '../../middleware/assign-request-id';
+import { isIntrospectionRequest } from '../../middleware/utils';
 import { metricEmitter } from '../../metric';
 
 jest.mock('uuid', () => ({
   v4: () => 'requestId',
 }));
 jest.mock('../../tracer');
+
+jest.mock('../../middleware/utils', () => ({
+  isIntrospectionRequest: jest.fn().mockReturnValue(false),
+}));
+
 jest.mock('../../metric/emitter', () => ({
   metricEmitter: {
     on: jest.fn(),
@@ -43,6 +49,7 @@ describe('Assign reequest id MW', () => {
     expect(expressMw).toBeInstanceOf(Function);
 
     expressMw(mockRequest as Request, mockResponse as Response, nextFunction);
+    expect(isIntrospectionRequest).toBeCalled();
     expect(nextFunction).toBeCalled();
     expect(mockRequest.id).toBe('requestId');
     expect(metricEmitter.emit).toBeCalledTimes(1);
@@ -51,6 +58,7 @@ describe('Assign reequest id MW', () => {
       userAgent: mockRequest?.headers?.['user-agent'],
       ip: mockRequest.ip,
       request: mockRequest,
+      date: expect.any(Number),
     });
   });
 });

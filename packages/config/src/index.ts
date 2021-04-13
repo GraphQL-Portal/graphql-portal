@@ -1,9 +1,9 @@
 import { dashboard, initDashboard } from '@graphql-portal/dashboard';
 import { prefixLogger } from '@graphql-portal/logger';
-import { ApiDef, GatewayConfig } from '@graphql-portal/types';
+import { ApiDef, apiDefSchema, GatewayConfig } from '@graphql-portal/types';
 import cluster from 'cluster';
 import { customAlphabet } from 'nanoid';
-import { loadApiDefs as loadApiDefsFromFs } from './api-def.config';
+import { loadApiDefsFromFs, loadApiDefsFromGatewayConfig } from './api-def.config';
 import { loadConfig } from './gateway.config';
 import useEnv from './use-env';
 
@@ -22,7 +22,7 @@ export async function initConfig(): Promise<void> {
   config.nodeId = customAlphabet('0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz-', 11)();
   config.gateway = (await loadConfig()) as GatewayConfig;
   if (!config.gateway) {
-    throw new Error('Gateway config was not found at path "./config/gateway.yaml"');
+    throw new Error('Could not load Gateway configuration file.');
   }
   useEnv(config.gateway);
 }
@@ -46,9 +46,14 @@ export async function loadApiDefs(): Promise<boolean> {
     config.apiDefs = loaded.apiDefs;
     config.timestamp = +loaded.timestamp;
   } else {
-    config.apiDefs = await loadApiDefsFromFs(config.gateway);
+    if (config.gateway.apiDefs?.length && config.gateway.sources?.length) {
+      logger.info('Use API defs from config.gateway');
+      config.apiDefs = await loadApiDefsFromGatewayConfig(config.gateway);
+    } else {
+      config.apiDefs = await loadApiDefsFromFs(config.gateway);
+    }
     config.timestamp = Date.now();
-    useEnv(config.apiDefs);
+    useEnv(config.apiDefs, apiDefSchema);
   }
   return true;
 }

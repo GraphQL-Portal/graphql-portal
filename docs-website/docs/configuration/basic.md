@@ -20,7 +20,7 @@ Main configuration file of the Gateway is `gateway.json|yaml`, which should look
   "apis_path": "config/apidefs",
   "sources_path": "config/datasources",
   "middleware_path": "config/middlewares",
-  "redis_connection_string": "redis://localhost:6379",
+  "redis": { "connection_string": "redis://localhost:6379" },
   "use_dashboard_configs": false,
   "enable_control_api": false,
   "log_level": "debug"

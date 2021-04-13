@@ -2,6 +2,14 @@
   "StripeHandler": {
     "additionalProperties": false,
     "type": "object",
-    "title": "StripeHandler"
+    "title": "StripeHandler",
+    "description": "Online payment processing for internet businesses",
+    "properties": {
+      "token": {
+        "type": "string",
+        "description": "Stripe secret key"
+      }
+    },
+    "required": ["token"]
   }
 }

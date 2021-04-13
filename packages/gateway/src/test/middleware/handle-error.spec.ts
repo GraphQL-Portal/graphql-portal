@@ -41,6 +41,6 @@ describe('Handle error MW', () => {
     expect(responseJson).toBeCalledWith(error);
     expect(mockResponse.status).toBeCalledWith(error.statusCode);
     expect(metricEmitter.emit).toBeCalledTimes(1);
-    expect(metricEmitter.emit).toBeCalledWith(MetricsChannels.GOT_ERROR, mockRequest.id, error);
+    expect(metricEmitter.emit).toBeCalledWith(MetricsChannels.GOT_ERROR, mockRequest.id, error, expect.any(Number));
   });
 });

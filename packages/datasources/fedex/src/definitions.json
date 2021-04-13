@@ -1,7 +1,0 @@
-{
-  "FedexHandler": {
-    "additionalProperties": false,
-    "type": "object",
-    "title": "FedexHandler"
-  }
-}

@@ -1,7 +1,7 @@
 import { diff } from '@graphql-inspector/core';
 import { processConfig } from '@graphql-mesh/config';
 import { getMesh } from '@graphql-mesh/runtime';
-import { MeshPubSub } from '@graphql-mesh/types';
+import { KeyValueCache, MeshPubSub } from '@graphql-mesh/types';
 import { config } from '@graphql-portal/config';
 import { prefixLogger } from '@graphql-portal/logger';
 import { ApiDef } from '@graphql-portal/types';
@@ -15,12 +15,18 @@ interface IMesh {
   schema: GraphQLSchema;
   pubsub: MeshPubSub;
   contextBuilder: (initialContextValue?: any) => Promise<Record<string, any>>;
+  cache: KeyValueCache;
 }
 
 const logger = prefixLogger('router');
 
 let router: Router;
 export const apiSchema: { [apiName: string]: GraphQLSchema } = {};
+
+const apiMesh: { [apiName: string]: IMesh } = {};
+export const getApiMesh = (apiName: string): IMesh | undefined => {
+  return apiMesh[apiName];
+};
 
 export async function setRouter(app: Application, apiDefs: ApiDef[]): Promise<void> {
   await buildRouter(apiDefs);
@@ -44,17 +50,22 @@ export async function buildRouter(apiDefs: ApiDef[]): Promise<Router> {
   return router;
 }
 
-async function buildApi(toRouter: Router, apiDef: ApiDef, mesh?: IMesh) {
+async function buildApi(toRouter: Router, apiDef: ApiDef, mesh?: IMesh): Promise<void> {
   if (!mesh) {
     const customMiddlewares = await loadCustomMiddlewares();
-    [...defaultMiddlewares, ...customMiddlewares].map((mw) => {
+
+    // Loading middlewares
+    [...defaultMiddlewares, ...customMiddlewares].forEach((mw) => {
       const handler = mw(apiDef);
+
       function wrap(fn: RequestHandler): RequestHandler {
-        return (req, res, next) => {
-          const handleError = (error: Error) => {
+        return (req, res, next): void => {
+          const handleError = (error: Error): void => {
+            logger.debug(`Error in buildApi mw wrapper: ${JSON.stringify(error)}`);
             error.handlerName = handler.name;
             return next(error);
           };
+
           try {
             (fn(req, res, next) as any)?.catch(handleError);
           } catch (error) {
@@ -62,23 +73,26 @@ async function buildApi(toRouter: Router, apiDef: ApiDef, mesh?: IMesh) {
           }
         };
       }
+
       toRouter.use(apiDef.endpoint, wrap(handler));
     });
   }
 
+  // Setting up Mesh for the endpoint
   mesh = await getMeshForApiDef(apiDef, mesh);
   if (!mesh) {
-    logger.error(`Could not get schema for API, enpoint ${apiDef.endpoint} won't be added to the router`);
+    logger.error(`Could not get schema for API, endpoint ${apiDef.endpoint} won't be added to the router`);
     return;
   }
   const { schema, contextBuilder, pubsub } = mesh;
   apiSchema[apiDef.name] = schema;
 
-  if (config.gateway?.metrics?.enabled) {
+  if (config.gateway?.enable_metrics_recording) {
     await subscribeToRequestMetrics(pubsub);
   }
 
-  logger.info(`Loaded API ${apiDef.name} ➜ ${apiDef.endpoint}`);
+  const endpointUrl = `http://${config.gateway.hostname}:${config.gateway.listen_port}${apiDef.endpoint}`;
+  logger.info(`Loaded API ${apiDef.name} ➜ ${endpointUrl}`);
 
   toRouter.use(
     apiDef.endpoint,
@@ -98,7 +112,12 @@ async function buildApi(toRouter: Router, apiDef: ApiDef, mesh?: IMesh) {
   );
 }
 
-async function getMeshForApiDef(apiDef: ApiDef, mesh?: IMesh, retry = 5): Promise<IMesh | undefined> {
+export async function getMeshForApiDef(
+  apiDef: ApiDef,
+  mesh?: IMesh,
+  retry = 5,
+  errorHandler?: (error: Error) => any
+): Promise<IMesh | undefined> {
   if (mesh) {
     return mesh;
   }
@@ -106,12 +125,19 @@ async function getMeshForApiDef(apiDef: ApiDef, mesh?: IMesh, retry = 5): Promis
     const meshConfig = await processConfig({ sources: apiDef.sources, ...apiDef.mesh });
     mesh = await getMesh(meshConfig);
   } catch (error) {
-    logger.error(error);
+    if (errorHandler) {
+      errorHandler(error);
+    } else {
+      logger.error(error.stack);
+    }
     if (retry) {
       logger.warn('Failed to load schema, retrying after 5 seconds...');
       await new Promise((resolve) => setTimeout(resolve, 5000));
       return getMeshForApiDef(apiDef, mesh, retry - 1);
     }
+  }
+  if (mesh) {
+    apiMesh[apiDef.name] = mesh;
   }
   return mesh;
 }

@@ -1,5 +1,111 @@
 # @graphql-portal/dashboard
 
+## 0.1.10
+
+### Patch Changes
+
+- Updated dependencies [51818a9]
+  - @graphql-portal/types@0.24.0
+  - @graphql-portal/logger@0.7.3
+
+## 0.1.9
+
+### Patch Changes
+
+- Updated dependencies [737fc25]
+  - @graphql-portal/logger@0.7.0
+  - @graphql-portal/types@0.23.0
+
+## 0.1.8
+
+### Patch Changes
+
+- Updated dependencies [e96c1d4]
+- Updated dependencies [6d198a7]
+  - @graphql-portal/logger@0.6.0
+  - @graphql-portal/types@0.22.0
+
+## 0.1.7
+
+### Patch Changes
+
+- Updated dependencies [ddd0595]
+  - @graphql-portal/types@0.21.0
+  - @graphql-portal/logger@0.5.2
+
+## 0.1.6
+
+### Patch Changes
+
+- Updated dependencies [a4cfd75]
+  - @graphql-portal/types@0.20.0
+  - @graphql-portal/logger@0.5.1
+
+## 0.1.5
+
+### Patch Changes
+
+- Updated dependencies [b931565]
+  - @graphql-portal/logger@0.5.0
+  - @graphql-portal/types@0.19.0
+
+## 0.1.4
+
+### Patch Changes
+
+- Updated dependencies [20dc51d]
+  - @graphql-portal/types@0.18.0
+  - @graphql-portal/logger@0.4.1
+
+## 0.1.3
+
+### Patch Changes
+
+- d1a6115: add mesh packages, fix cors.origin, add apiDef.mesh to dashboard query
+- Updated dependencies [824f9f0]
+- Updated dependencies [d1a6115]
+  - @graphql-portal/logger@0.4.0
+  - @graphql-portal/types@0.17.0
+
+## 0.1.2
+
+### Patch Changes
+
+- c934fb5: fix query name
+
+## 0.1.1
+
+### Patch Changes
+
+- Updated dependencies [be1f437]
+- Updated dependencies [6341161]
+  - @graphql-portal/types@0.16.0
+
+## 0.1.0
+
+### Minor Changes
+
+- aeb892c: Add CORS documentation; servername config option; add servername, listenHostname and listenPort to ping
+
+### Patch Changes
+
+- Updated dependencies [aeb892c]
+  - @graphql-portal/types@0.15.0
+
+## 0.0.16
+
+### Patch Changes
+
+- Updated dependencies [d818162]
+  - @graphql-portal/types@0.14.0
+
+## 0.0.15
+
+### Patch Changes
+
+- Updated dependencies [97068da]
+  - @graphql-portal/types@0.13.0
+
 ## 0.0.14
 
 ### Patch Changes

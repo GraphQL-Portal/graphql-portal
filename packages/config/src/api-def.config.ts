@@ -12,6 +12,7 @@ import {
   validateApiDefConfig,
 } from '@graphql-portal/types';
 import findWorkspaceRoot from 'find-yarn-workspace-root';
+import * as path from 'path';
 
 const logger = prefixLogger('apiDefs-config');
 
@@ -51,33 +52,70 @@ export function apiDefConfigGuard(apiDef: any): apiDef is ApiDefConfig {
   return true;
 }
 
-export async function loadApiDefs(gatewayConfig: GatewayConfig): Promise<ApiDef[]> {
-  if (gatewayConfig.apis_path === '' || gatewayConfig.sources_path === '') {
+export async function loadApiDefsFromFs(gatewayConfig: GatewayConfig): Promise<ApiDef[]> {
+  if (!gatewayConfig.apis_path || !gatewayConfig.sources_path) {
     logger.warn('"apis_path" and "sources_path" cannot be empty, skipping loading of API Definitions.');
     return [];
   }
 
   const workspaceRoot: string =
     findWorkspaceRoot(process.cwd()) === null ? process.cwd() : (findWorkspaceRoot(process.cwd()) as string);
-  const apiConfigsDir = join(workspaceRoot, gatewayConfig.apis_path);
-  const sourceConfigsDir = join(workspaceRoot, gatewayConfig.sources_path);
+  const apiConfigsDir = join(workspaceRoot, <string>gatewayConfig.apis_path);
+  const sourceConfigsDir = join(workspaceRoot, <string>gatewayConfig.sources_path);
 
   const fileNames = await readdir(apiConfigsDir);
   const apiDefs = await Promise.all(
-    fileNames.map(async (name) => {
-      const apiPath = join(apiConfigsDir, name);
-      const file = await readFile(apiPath, 'utf8');
-      const apiConfig = parse(file);
+    fileNames
+      .filter((name) => ['.json', '.yaml', '.yml'].includes(path.extname(name)))
+      .map(async (name) => {
+        const apiPath = join(apiConfigsDir, name);
+        const file = await readFile(apiPath, 'utf8');
+        const apiConfig = parse(file);
+        if (!apiDefConfigGuard(apiConfig)) {
+          throw new Error(`API configuration file is not valid: ${apiPath}`);
+        }
+        if (!apiConfig.source_config_names?.length) {
+          throw new Error(`API should have some source_config_names: ${apiPath}`);
+        }
+
+        const sources = await Promise.all(
+          apiConfig.source_config_names.map((configName) => loadSourceConfig(join(sourceConfigsDir, configName)))
+        );
+        return {
+          ...apiConfig,
+          sources,
+          mesh: apiConfig.mesh || {},
+        };
+      })
+  );
+
+  return apiDefs;
+}
+
+export async function loadApiDefsFromGatewayConfig(gatewayConfig: GatewayConfig): Promise<ApiDef[]> {
+  const apiDefs = await Promise.all(
+    gatewayConfig.apiDefs!.map(async (apiConfig, i) => {
+      const apiPath = `gateway.apiDefs[${i}]`;
       if (!apiDefConfigGuard(apiConfig)) {
-        throw new Error(`API configuration file is not valid: ${apiPath}`);
+        throw new Error(`API configuration is not valid: ${apiPath}`);
       }
-      if (!apiConfig.source_config_names?.length) {
-        throw new Error(`API should have some source_config_names: ${apiPath}`);
+      if (!apiConfig.source_names?.length) {
+        throw new Error(`API should have some source_names: ${apiPath}`);
       }
 
       const sources = await Promise.all(
-        apiConfig.source_config_names.map((configName) => loadSourceConfig(join(sourceConfigsDir, configName)))
+        apiConfig.source_names!.map(async (sourceName) => {
+          const source = gatewayConfig.sources!.find((source) => source.name === sourceName);
+          if (!source) {
+            logger.warn(`Source "${sourceName}" was not found for ${apiPath}`);
+          }
+          if (!sourceConfigGuard(source)) {
+            throw new Error(`Source configuration is not valid: ${sourceName}`);
+          }
+          return source;
+        })
       );
+
       return {
         ...apiConfig,
         sources,

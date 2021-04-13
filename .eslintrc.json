@@ -1,14 +1,14 @@
 {
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
-    "project": "./tsconfig.json"
+    "project": "./tsconfig.json",
+    "createDefaultProgram": true
   },
   "extends": [
     "eslint:recommended",
     "standard",
     "prettier",
-    "plugin:@typescript-eslint/recommended",
-    "prettier/@typescript-eslint"
+    "plugin:@typescript-eslint/recommended"
   ],
   "plugins": ["@typescript-eslint"],
   "rules": {
@@ -68,5 +68,5 @@
     "es6": true,
     "node": true
   },
-  "ignorePatterns": ["dist", "node_modules", "examples", "scripts"]
+  "ignorePatterns": ["dist", "node_modules", "examples", "scripts", "packages/types/src/*-config.ts"]
 }

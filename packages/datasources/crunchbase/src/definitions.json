@@ -2,6 +2,14 @@
   "CrunchbaseHandler": {
     "additionalProperties": false,
     "type": "object",
-    "title": "CrunchbaseHandler"
+    "title": "CrunchbaseHandler",
+    "description": "A platform for finding business information about private and public companies",
+    "properties": {
+      "userKey": {
+        "type": "string",
+        "description": "Authentication API Key"
+      }
+    },
+    "required": ["userKey"]
   }
 }

@@ -1,9 +1,13 @@
 import { config, initConfig, loadApiDefs } from '@graphql-portal/config';
-import { configureLogger, logger } from '@graphql-portal/logger';
+import { configureLogger, prefixLogger } from '@graphql-portal/logger';
 import cluster from 'cluster';
 import { cpus } from 'os';
 import { applyRegisteredHandlers, getConfigFromMaster, spreadMessageToWorkers } from './ipc/utils';
+import setupRedis, { redis } from './redis';
+import RedisConnectionOptions from './redis/redis-connection.interface';
 import { startServer } from './server';
+
+const logger = prefixLogger('server');
 
 function handleStopSignal(): void {
   logger.info('Stop signal received');
@@ -13,15 +17,16 @@ function handleStopSignal(): void {
 async function start(): Promise<void> {
   if (cluster.isMaster) {
     await initConfig();
-    configureLogger(config.gateway);
+    await setupRedis(config.gateway.redis as RedisConnectionOptions, config.gateway.redis_connection_string);
+    await configureLogger(config.gateway, config.nodeId, redis);
     await loadApiDefs();
 
     const numCPUs: number = Number(config.gateway.pool_size) ? Number(config.gateway.pool_size) : cpus().length;
 
-    logger.info(`GraphQL Portal API Gateway v${process.env.npm_package_version}`);
-    logger.info(
-      `🔥 Starting GraphQL API Portal with ${numCPUs} worker(s) on: http://${config.gateway.hostname}:${config.gateway.listen_port}, nodeID: ${config.nodeId}`
-    );
+    const gatewayVersion = process.env?.npm_package_version ? `v${process.env.npm_package_version}` : '';
+    logger.info(`GraphQL Portal API Gateway ${gatewayVersion}`);
+    const gatewayUrl = `http://${config.gateway.hostname}:${config.gateway.listen_port}`;
+    logger.info(`🔥 Starting GraphQL API Portal with ${numCPUs} worker(s) on: ${gatewayUrl}, nodeID: ${config.nodeId}`);
 
     cluster.on('fork', (worker) => {
       logger.info(`forked worker ${worker.process.pid}`);
@@ -43,7 +48,8 @@ async function start(): Promise<void> {
     applyRegisteredHandlers();
   } else {
     await getConfigFromMaster();
-    configureLogger(config.gateway);
+    await setupRedis(config.gateway.redis as RedisConnectionOptions, config.gateway.redis_connection_string);
+    await configureLogger(config.gateway, config.nodeId, redis);
     applyRegisteredHandlers();
     await startServer();
   }

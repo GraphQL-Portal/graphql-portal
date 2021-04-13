@@ -10,7 +10,7 @@ export default class DashboardApi {
   private readonly http: AxiosInstance;
   private dashboardUrl = '';
 
-  constructor(gatewayConfig: GatewayConfig) {
+  public constructor(gatewayConfig: GatewayConfig) {
     if (!gatewayConfig.dashboard_config?.connection_string) {
       logger.warn(`Cannot set url: "${gatewayConfig.dashboard_config?.connection_string}", dashboard is disabled`);
       return new Proxy(this, {
@@ -30,10 +30,10 @@ export default class DashboardApi {
     });
   }
 
-  async loadApiDefs(): Promise<{ apiDefs: ApiDef[]; timestamp: number } | void> {
+  public async loadApiDefs(): Promise<{ apiDefs: ApiDef[]; timestamp: number } | void> {
     try {
       const { data } = await this.http.post(graphqlRoute, {
-        query: queries.getAllApiDefs,
+        query: queries.getAllApiDefsForGateway,
       });
 
       if (data.errors?.length) {
@@ -41,7 +41,7 @@ export default class DashboardApi {
       }
 
       logger.debug('Loaded API definitions from the dashboard');
-      return data.data?.getAllApiDefs;
+      return data.data?.getAllApiDefsForGateway;
     } catch (error) {
       logger.error(`Failed to load API configs from the dashboard: ${error.message}`);
     }

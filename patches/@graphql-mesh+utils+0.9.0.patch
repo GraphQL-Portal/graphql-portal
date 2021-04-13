@@ -1,0 +1,28 @@
+diff --git a/node_modules/@graphql-mesh/utils/index.cjs.js b/node_modules/@graphql-mesh/utils/index.cjs.js
+index 89fcaa1..fa8e478 100644
+--- a/node_modules/@graphql-mesh/utils/index.cjs.js
++++ b/node_modules/@graphql-mesh/utils/index.cjs.js
+@@ -80,14 +80,19 @@ async function readFileWithCache(filePath, cache, config) {
+ }
+ async function readUrlWithCache(path, cache, config) {
+     var _a;
+-    const { allowUnknownExtensions } = config || {};
++    const { allowUnknownExtensions, fallbackFormat } = config || {};
+     const response = await fetchache.fetchache(new fetchache.Request(path, config), cache);
+     const contentType = ((_a = response.headers) === null || _a === void 0 ? void 0 : _a.get('content-type')) || '';
+     const responseText = await response.text();
+-    if (/json$/.test(path) || contentType.startsWith('application/json')) {
++    if (/json$/.test(path) || contentType.startsWith('application/json') || fallbackFormat === 'json') {
+         return JSON.parse(responseText);
+-    }
+-    else if (/yaml$/.test(path) || /yml$/.test(path) || contentType.includes('yaml') || contentType.includes('yml')) {
++    } else if (
++        /yaml$/.test(path) ||
++        /yml$/.test(path) ||
++        contentType.includes('yaml') ||
++        contentType.includes('yml') ||
++        fallbackFormat === 'yaml'
++      ) {
+         return jsYaml.load(responseText);
+     }
+     else if (!allowUnknownExtensions) {

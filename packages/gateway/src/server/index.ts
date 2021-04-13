@@ -1,9 +1,10 @@
 import { config } from '@graphql-portal/config';
-import { logger } from '@graphql-portal/logger';
+import { prefixLogger } from '@graphql-portal/logger';
 import { Channel } from '@graphql-portal/types';
 import bodyParser from 'body-parser';
 import cookieParser from 'cookie-parser';
 import express from 'express';
+import cors from 'cors';
 import { graphqlUploadExpress } from 'graphql-upload';
 import { Span } from 'opentracing';
 import { createServer } from 'http';
@@ -11,9 +12,11 @@ import { getConfigFromMaster } from '../ipc/utils';
 import { promisify } from 'util';
 import { startPeriodicMetricsRecording } from '../metric';
 import { logResponse } from '../middleware';
-import setupRedis from '../redis';
+import { redisSubscriber } from '../redis';
 import setupControlApi from './control-api';
 import { setRouter, updateApi } from './router';
+
+const logger = prefixLogger('server');
 
 export type ForwardHeaders = Record<string, string>;
 export interface Context {
@@ -22,27 +25,32 @@ export interface Context {
   tracerSpan: Span;
 }
 
+// Helper for metrics gathering
 export const connections = {
-  get: async () => 0,
+  get: async (): Promise<number> => 0,
 };
 
 export async function startServer(): Promise<void> {
-  const redisSubscriber = await setupRedis(config.gateway.redis_connection_string);
-
   const app = express();
   const httpServer = createServer(app);
 
   connections.get = promisify(httpServer.getConnections.bind(httpServer));
 
-  app.use(bodyParser.json({ limit: config.gateway.request_size_limit || '10mb' }));
+  app.get('/health', (_, res) => res.sendStatus(200));
+
+  app.disable('x-powered-by');
+
+  app.use(bodyParser.json({ limit: config.gateway.request_size_limit || '100kb' }));
   app.use(cookieParser());
   app.use(graphqlUploadExpress());
   app.use(logResponse);
 
-  const apiDefsToControlApi = config.apiDefs.filter((apiDef) => apiDef.schema_updates_through_control_api);
-  if (apiDefsToControlApi.length) {
-    setupControlApi(app, apiDefsToControlApi);
+  // configure global CORS
+  if (config.gateway.use_dashboard_configs || config.gateway.cors?.enabled) {
+    app.use(cors(getCorsOptions()));
   }
+
+  setupControlApi(app);
 
   setRouter(app, config.apiDefs);
 
@@ -51,10 +59,14 @@ export async function startServer(): Promise<void> {
     if (channel !== Channel.apiDefsUpdated) {
       return;
     }
+
+    logger.info('Received "apiDefsUpdate" message from Dashboard via Redis.');
+
     if (+timestamp && +timestamp <= config.timestamp) {
-      logger.debug('Config is actual');
+      logger.info('New config is equal to the current one. Skipping update process.');
       return;
     }
+
     const { loaded } = await getConfigFromMaster();
     if (!loaded) return;
     await setRouter(app, config.apiDefs);
@@ -74,9 +86,31 @@ export async function startServer(): Promise<void> {
 
   httpServer.listen(config.gateway.listen_port, config.gateway.hostname, () => {});
 
-  if (config.gateway?.metrics?.enabled) {
+  if (config.gateway?.enable_metrics_recording) {
     startPeriodicMetricsRecording();
   }
 
   logger.info(`🐥 Started server in the worker process`);
+}
+
+/**
+ * Get and merge CORS options from various configs
+ */
+function getCorsOptions(): cors.CorsOptions {
+  const opts: cors.CorsOptions = {};
+  if (config.gateway.use_dashboard_configs && config.gateway.dashboard_config?.connection_string) {
+    opts.origin = [config.gateway.dashboard_config.connection_string];
+  }
+
+  if (config.gateway.cors?.enabled) {
+    const { enabled, origins, ...options } = config.gateway.cors;
+    const additionalOrigins = origins ?? [];
+
+    Object.assign(opts, options);
+    Array.isArray(opts.origin) ? opts.origin.push(...additionalOrigins) : (opts.origin = [...additionalOrigins]);
+    opts.origin = opts.origin.map((origin) => (typeof origin === 'string' ? origin.replace(/\/+$/, '') : origin));
+  }
+
+  logger.info(`Enabling CORS for following Origins: ${JSON.stringify(opts.origin)}`);
+  return opts;
 }

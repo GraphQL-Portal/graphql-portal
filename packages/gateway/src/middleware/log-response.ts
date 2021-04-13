@@ -1,6 +1,9 @@
-import { RequestHandler } from 'express';
 import { MetricsChannels } from '@graphql-portal/types';
+import { RequestHandler } from 'express';
 import { metricEmitter } from '../metric';
+import { prefixLogger } from '@graphql-portal/logger';
+
+const logger = prefixLogger('metrics:log-response');
 
 export const logResponse: RequestHandler = (req, res, next) => {
   const oldWrite = res.write.bind(res);
@@ -22,7 +25,12 @@ export const logResponse: RequestHandler = (req, res, next) => {
     const buffer = Buffer.concat(chunks);
     const contentLength = buffer.byteLength;
     const responseBody = buffer.toString('utf8');
-    metricEmitter.emit(MetricsChannels.SENT_RESPONSE, req.id, responseBody, contentLength);
+    logger.debug(`req.id ${req.id} [${res.statusCode}]: ${contentLength}`);
+    if (res.statusCode >= 400) {
+      metricEmitter.emit(MetricsChannels.GOT_ERROR, req.id, responseBody, Date.now());
+    } else {
+      metricEmitter.emit(MetricsChannels.SENT_RESPONSE, req.id, responseBody, contentLength, Date.now());
+    }
     req.context.tracerSpan.setTag('http.status', res.statusCode);
     req.context.tracerSpan.finish();
   });

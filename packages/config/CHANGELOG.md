@@ -1,5 +1,169 @@
 # @graphql-portal/config
 
+## 0.11.3
+
+### Patch Changes
+
+- Updated dependencies [51818a9]
+  - @graphql-portal/types@0.24.0
+  - @graphql-portal/dashboard@0.1.10
+  - @graphql-portal/logger@0.7.3
+
+## 0.11.2
+
+### Patch Changes
+
+- Updated dependencies [737fc25]
+  - @graphql-portal/logger@0.7.0
+  - @graphql-portal/types@0.23.0
+  - @graphql-portal/dashboard@0.1.9
+
+## 0.11.1
+
+### Patch Changes
+
+- Updated dependencies [e96c1d4]
+- Updated dependencies [6d198a7]
+- Updated dependencies [6d198a7]
+- Updated dependencies [7908242]
+  - @graphql-portal/logger@0.6.0
+  - @graphql-portal/types@0.22.0
+  - @graphql-portal/contentful@0.1.0
+  - @graphql-portal/slack@0.2.0
+  - @graphql-portal/dashboard@0.1.8
+
+## 0.11.0
+
+### Minor Changes
+
+- ddd0595: added handler descriptions, fixed weatherbit and stripe
+
+### Patch Changes
+
+- Updated dependencies [ddd0595]
+  - @graphql-portal/types@0.21.0
+  - @graphql-portal/contentful@0.0.4
+  - @graphql-portal/slack@0.1.1
+  - @graphql-portal/dashboard@0.1.7
+  - @graphql-portal/logger@0.5.2
+
+## 0.10.0
+
+### Minor Changes
+
+- a4cfd75: add slack handler, small fixes
+
+### Patch Changes
+
+- Updated dependencies [a4cfd75]
+  - @graphql-portal/slack@0.1.0
+  - @graphql-portal/types@0.20.0
+  - @graphql-portal/dashboard@0.1.6
+  - @graphql-portal/logger@0.5.1
+
+## 0.9.4
+
+### Patch Changes
+
+- Updated dependencies [b931565]
+  - @graphql-portal/logger@0.5.0
+  - @graphql-portal/types@0.19.0
+  - @graphql-portal/dashboard@0.1.5
+
+## 0.9.3
+
+### Patch Changes
+
+- Updated dependencies [4a0f4b3]
+  - @graphql-portal/contentful@0.0.3
+
+## 0.9.2
+
+### Patch Changes
+
+- c50438b: fix config
+- Updated dependencies [c50438b]
+  - @graphql-portal/types@0.18.2
+  - @graphql-portal/logger@0.4.3
+
+## 0.9.1
+
+### Patch Changes
+
+- a8ffe38: fix ajv errors output and merge default config
+- Updated dependencies [a8ffe38]
+  - @graphql-portal/types@0.18.1
+  - @graphql-portal/logger@0.4.2
+
+## 0.9.0
+
+### Minor Changes
+
+- 20dc51d: zero and single file config
+
+### Patch Changes
+
+- Updated dependencies [20dc51d]
+  - @graphql-portal/types@0.18.0
+  - @graphql-portal/dashboard@0.1.4
+  - @graphql-portal/logger@0.4.1
+
+## 0.8.2
+
+### Patch Changes
+
+- Updated dependencies [824f9f0]
+- Updated dependencies [d1a6115]
+  - @graphql-portal/logger@0.4.0
+  - @graphql-portal/types@0.17.0
+  - @graphql-portal/dashboard@0.1.3
+
+## 0.8.1
+
+### Patch Changes
+
+- f36fa72: Fix generation of gateway config + minor logger enhancement
+- Updated dependencies [f36fa72]
+  - @graphql-portal/logger@0.3.1
+  - @graphql-portal/types@0.16.2
+
+## 0.8.0
+
+### Minor Changes
+
+- be1f437: apis_path, middleware_path, sources_path are required only when use_dashboard_configs is false
+
+### Patch Changes
+
+- Updated dependencies [be1f437]
+- Updated dependencies [6341161]
+  - @graphql-portal/types@0.16.0
+  - @graphql-portal/dashboard@0.1.1
+
+## 0.7.3
+
+### Patch Changes
+
+- Updated dependencies [aeb892c]
+  - @graphql-portal/dashboard@0.1.0
+  - @graphql-portal/types@0.15.0
+
+## 0.7.2
+
+### Patch Changes
+
+- Updated dependencies [d818162]
+  - @graphql-portal/types@0.14.0
+  - @graphql-portal/dashboard@0.0.16
+
+## 0.7.1
+
+### Patch Changes
+
+- Updated dependencies [97068da]
+  - @graphql-portal/types@0.13.0
+  - @graphql-portal/dashboard@0.0.15
+
 ## 0.7.0
 
 ### Minor Changes

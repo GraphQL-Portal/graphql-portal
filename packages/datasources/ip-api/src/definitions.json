@@ -1,0 +1,8 @@
+{
+  "IPAPIHandler": {
+    "additionalProperties": false,
+    "type": "object",
+    "title": "IPAPIHandler",
+    "description": "IP Geolocation API"
+  }
+}

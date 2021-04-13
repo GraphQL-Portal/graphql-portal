@@ -1,16 +1,26 @@
 {
   "name": "@graphql-portal/logger",
-  "version": "0.3.0",
+  "version": "0.7.3",
   "license": "MIT",
   "main": "dist/src/index.js",
   "scripts": {
     "build": "tsc -b"
   },
   "dependencies": {
-    "winston": "^3.3.3"
+    "@graphql-portal/types": "0.24.0",
+    "chalk": "4.1.0",
+    "fast-safe-stringify": "^2.0.7",
+    "ioredis": "^4.23.0",
+    "winston": "3.3.3",
+    "winston-transport": "^4.4.0"
   },
   "publishConfig": {
     "access": "public"
   },
-  "keywords": ["graphql", "gateway", "dashboard", "graphql-gateway"]
+  "keywords": [
+    "graphql",
+    "gateway",
+    "dashboard",
+    "graphql-gateway"
+  ]
 }

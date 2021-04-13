@@ -85,7 +85,17 @@ module.exports = {
       ],
       copyright: `Copyright © ${new Date().getFullYear()} GraphQL Portal. Built with Docusaurus. From Paris with 💜`,
     },
+    algolia: {
+      apiKey: 'fb4728e0819fe7c2922c8a95bbcb28da',
+      indexName: 'graphql-portal',
+    },
   },
+  scripts: [
+    {
+      src: 'https://docs.graphql-portal.com/js/chat.js',
+      async: true,
+    },
+  ],
   presets: [
     [
       '@docusaurus/preset-classic',
@@ -93,7 +103,7 @@ module.exports = {
         docs: {
           sidebarPath: require.resolve('./sidebars.js'),
           // Please change this to your repo.
-          editUrl: 'https://github.com/graphql-portal/graphql-portal/edit/master/website/',
+          editUrl: 'https://github.com/graphql-portal/graphql-portal/edit/main/docs-website/',
           routeBasePath: '/',
         },
         theme: {

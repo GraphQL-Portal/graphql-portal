@@ -1,10 +1,11 @@
 export default {
-  getAllApiDefs: `query {
-    getAllApiDefs {
+  getAllApiDefsForGateway: `query {
+    getAllApiDefsForGateway {
       timestamp
       apiDefs {
         name
         endpoint
+        playground
         sources {
           name
           handler
@@ -14,6 +15,7 @@ export default {
           auth_tokens
           auth_header_name
         }
+        mesh
       }
     }
   }`,

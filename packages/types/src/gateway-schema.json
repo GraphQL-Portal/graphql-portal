@@ -4,51 +4,140 @@
   "type": "object",
   "additionalProperties": false,
   "properties": {
+    "apiDefs": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "sources": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
     "hostname": {
-      "type": "string"
+      "type": "string",
+      "description": "The hostname to bind the gateway node to.",
+      "default": "localhost"
     },
     "listen_port": {
-      "type": "integer"
+      "type": "integer",
+      "description": "The port on which the gateway will listen for the incoming connections.",
+      "default": 8080
+    },
+    "servername": {
+      "type": "string",
+      "description": "Should be set when used behind the load-balancer which has a _servername_ different from the gateway's _hostname_."
     },
     "pool_size": {
       "type": "integer",
-      "minimum": 1
+      "minimum": 1,
+      "description": "Number of worker processes to start. Ideally should be equal to the number of CPU Cores on the machine and should not be set to 1."
     },
     "apis_path": {
-      "type": "string"
+      "type": "string",
+      "description": "Path to the directory with API Definition files.",
+      "default": "./config/apis"
     },
     "middleware_path": {
-      "type": "string"
+      "type": "string",
+      "description": "Path to the custom middleware handlers.",
+      "default": "./config/middlewares"
     },
     "sources_path": {
-      "type": "string"
+      "type": "string",
+      "description": "Path to the data sources configuration files (yaml or json).",
+      "default": "./config/sources"
     },
     "use_dashboard_configs": {
-      "type": "boolean"
+      "type": "boolean",
+      "description": "If set to _true_, the gateway will try to connect to the dashboard using the credentials in _dashboard_config_ section and get the API configurations from there.",
+      "default": false
     },
     "dashboard_config": {
-      "$ref": "#/definitions/dashboard_config"
+      "$ref": "#/definitions/dashboard_config",
+      "description": "Configuration of the connection to GraphQL Portal Dashboard."
     },
     "enable_control_api": {
-      "type": "boolean"
+      "type": "boolean",
+      "description": "Enables or disables the Control API which is used to update GraphQL Schema definitions.",
+      "default": false
+    },
+    "enable_metrics_recording": {
+      "type": "boolean",
+      "description": "Enable or disable metrics recording to Redis",
+      "default": false
     },
     "control_api_config": {
-      "$ref": "#/definitions/control_api_config"
+      "$ref": "#/definitions/control_api_config",
+      "description": "Configuration of the Control API"
     },
-    "metrics": {
-      "$ref": "#/definitions/metrics"
+    "cors": {
+      "$ref": "#/definitions/cors",
+      "description": "Configuration of CORS requests."
     },
     "log_format": {
       "type": "string",
       "enum": ["text", "json"],
-      "default": "text"
+      "default": "text",
+      "description": "Sets the default (console) logging format. Can be 'text' or 'json'. JSON should be used while running in a Kubernetes pod."
     },
     "log_level": {
       "type": "string",
-      "enum": ["debug", "info", "warn", "error"]
+      "enum": ["debug", "info", "warn", "error"],
+      "description": "Sets the log level. Should not be set to 'debug' in production.",
+      "default": "info"
+    },
+    "log_filter": {
+      "type": "string",
+      "description": "Regexp that filters debug-level logs by context."
+    },
+    "datadog_logging": {
+      "$ref": "#/definitions/datadog_logging",
+      "description": "Configures sending of log messages to Datadog."
+    },
+    "redis_logging": {
+      "$ref": "#/definitions/redis_logging",
+      "description": "Configures sending of log messages to Redis."
     },
     "redis_connection_string": {
-      "type": "string"
+      "type": "string",
+      "description": "(Deprecated) Redis connection string in a format 'redis://localhost:6379'."
+    },
+    "redis": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "connection_string": {
+              "type": "string",
+              "description": "Redis connection string in a format 'redis://localhost:6379'.",
+              "default": "redis://localhost:6379"
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "is_cluster": {
+              "type": "boolean",
+              "default": false,
+              "description": "Is connection to cluster"
+            },
+            "cluster_nodes": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "description": "Cluster nodes in a format 'redis://localhost:6379'."
+              }
+            }
+          },
+          "additionalProperties": false
+        }
+      ],
+      "description": "Redis connection options"
     },
     "request_size_limit": {
       "oneOf": [
@@ -59,7 +148,7 @@
           "type": "number"
         }
       ],
-      "description": "Argument of the bytes package's method parse https://www.npmjs.com/package/bytes"
+      "description": "This value specifies an HTTP Request size limit for a particular API Definition. Accepts numeric (in bytes) or string values, i.e. 'b' for bytes, 'kb' for kilobytes and 'mb' for megabytes (f.e., '10kb' or '10mb')."
     }
   },
   "definitions": {
@@ -84,30 +173,125 @@
       "properties": {
         "endpoint": {
           "type": "string",
-          "pattern": "^/"
+          "pattern": "^/",
+          "default": "/control_api"
         }
       }
     },
-    "metrics": {
+    "cors": {
       "type": "object",
-      "description": "Used to specify GraphQL Portal metrics settings",
+      "description": "Configure CORS for all APIs in the gateway. CORS from Dashboard are enabled by default.",
       "additionalProperties": false,
       "properties": {
         "enabled": {
-          "type": "boolean"
+          "type": "boolean",
+          "default": false,
+          "description": "Enables CORS requests for all APIs. CORS requests from Dashboard are enabled by default."
+        },
+        "origins": {
+          "type": "array",
+          "description": "Configures the Access-Control-Allow-Origin CORS header. Expects an Array of valid origins.",
+          "items": {
+            "type": "string",
+            "pattern": "[^\\/]$"
+          }
+        },
+        "methods": {
+          "type": "array",
+          "description": "Configures the Access-Control-Allow-Methods CORS header. Expects an array of HTTP Methods.",
+          "items": {
+            "type": "string",
+            "enum": ["GET", "HEAD", "POST", "PUT", "PATCH", "DELETE"]
+          }
+        },
+        "allowedHeaders": {
+          "type": "array",
+          "description": "Configures the Access-Control-Allow-Headers CORS header. Expects and Array of headers.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "exposedHeaders": {
+          "type": "array",
+          "description": "Configures the Access-Control-Expose-Headers CORS header.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "credentials": {
+          "type": "boolean",
+          "description": "Configures the Access-Control-Allow-Credentials CORS header."
+        },
+        "maxAge": {
+          "type": "integer",
+          "description": "Configures the Access-Control-Max-Age CORS header."
+        },
+        "optionsSuccessStatus": {
+          "type": "integer",
+          "description": "Provides a status code to use for successful OPTIONS requests, since some legacy browsers (IE11, various SmartTVs) choke on 204."
         }
       }
+    },
+    "datadog_logging": {
+      "type": "object",
+      "description": "Configures sending of log messages to Datadog. If enabled will log to console and Datadog.",
+      "additionalProperties": false,
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "Enable or disable logging to Datadog. Defaults to false.",
+          "default": false
+        },
+        "apiKey": {
+          "type": "string",
+          "description": "Datadog API key of your application"
+        },
+        "host": {
+          "type": "string",
+          "description": "Host of the Datadog TCP (TLS) intake. Defaults to the US server (intake.logs.datadoghq.com)."
+        },
+        "port": {
+          "type": "number",
+          "description": "Port of the Datadog TCP (TLS) intake. Defaults to 10516."
+        },
+        "environment": {
+          "type": "string",
+          "description": "Adds an environment attribute to Datadog logs. Empty by default."
+        },
+        "tags": {
+          "type": "array",
+          "description": "Allows transport level tagging in Datadog. Each tag should follow the format <KEY>:<VALUE>. For more information see https://docs.datadoghq.com/getting_started/tagging/.",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": ["enabled", "apiKey"]
+    },
+    "redis_logging": {
+      "type": "object",
+      "description": "Configures sending of log messages to Redis. If enabled will log to console and Redis.",
+      "additionalProperties": false,
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "Enable or disable logging to Redis. Defaults to false.",
+          "default": false
+        },
+        "expire": {
+          "type": "number",
+          "description": "After the timeout has expired, the log will automatically be deleted (in seconds)",
+          "default": 30
+        },
+        "log_level": {
+          "type": "string",
+          "enum": ["debug", "info", "warn", "error"],
+          "description": "Sets the redis log level. Should not be set to 'debug' in production.",
+          "default": "info"
+        }
+      },
+      "required": ["enabled", "expire"]
     }
   },
-  "required": [
-    "hostname",
-    "listen_port",
-    "apis_path",
-    "middleware_path",
-    "sources_path",
-    "use_dashboard_configs",
-    "enable_control_api",
-    "log_level",
-    "redis_connection_string"
-  ]
+  "required": ["hostname", "listen_port"]
 }

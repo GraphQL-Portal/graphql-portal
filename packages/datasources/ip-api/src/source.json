@@ -1,0 +1,207 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "Free for non-commercial use, no API key required. Easy to integrate, available in JSON, XML, CSV, Newline, PHP. Serving more than 1 billion requests per day, trusted by thousands of businesses",
+    "version": "1.0.0",
+    "title": "IP-API",
+    "termsOfService": "https://ip-api.com/docs/legal",
+    "contact": {
+      "email": "contact@ip-api.com"
+    }
+  },
+  "schemes": ["http"],
+  "host": "ip-api.com",
+  "paths": {
+    "/json/{ip}": {
+      "get": {
+        "summary": "Get geolocation data by ip",
+        "operationId": "getJSONGeolocationDataByIp",
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "ip",
+            "in": "path",
+            "description": "The ip that needs to be fetched. Use 24.48.0.1 for testing",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "lang",
+            "in": "query",
+            "description": "Response language",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfull response",
+            "schema": {
+              "$ref": "#/definitions/Geolocation"
+            }
+          }
+        }
+      }
+    },
+    "/batch/": {
+      "post": {
+        "summary": "Query multiple IP addresses in one request.",
+        "operationId": "getBatchOfGeolocationDataByIps",
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "lang",
+            "in": "query",
+            "description": "Response language",
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Butch object",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Butch"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfull response",
+            "schema": {
+              "$ref": "#/definitions/ArrayOfGeolocations"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Geolocation": {
+      "type": "object",
+      "properties": {
+        "query": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string",
+          "enum": ["success", "fail"],
+          "format": "int64"
+        },
+        "message": {
+          "type": "string",
+          "description": "Included only when status is fail. Can be one of the following: private range, reserved range, invalid query"
+        },
+        "continentCode": {
+          "type": "string",
+          "description": "Two-letter continent code"
+        },
+        "country": {
+          "type": "string",
+          "description": "Country name"
+        },
+        "countryCode": {
+          "type": "string",
+          "description": "Two-letter country code ISO 3166-1 alpha-2"
+        },
+        "region": {
+          "type": "string",
+          "description": "Region/state short code (FIPS or ISO)"
+        },
+        "regionName": {
+          "type": "string",
+          "description": "Region/state"
+        },
+        "city": {
+          "type": "string",
+          "description": "City"
+        },
+        "district": {
+          "type": "string",
+          "description": "District (subdivision of city)"
+        },
+        "zip": {
+          "type": "string",
+          "description": "Zip code"
+        },
+        "lat": {
+          "type": "number",
+          "format": "float",
+          "description": "Latitude"
+        },
+        "lon": {
+          "type": "number",
+          "format": "float",
+          "description": "Longitude"
+        },
+        "timezone": {
+          "type": "string",
+          "description": "Timezone (tz)"
+        },
+        "offset": {
+          "type": "number",
+          "format": "integer",
+          "description": "Timezone UTC DST offset in seconds"
+        },
+        "currency": {
+          "type": "string",
+          "description": "National currency"
+        },
+        "isp": {
+          "type": "string",
+          "description": "ISP name"
+        },
+        "org": {
+          "type": "string",
+          "description": "Organization name"
+        },
+        "as": {
+          "type": "string",
+          "description": "AS number and organization, separated by space (RIR). Empty for IP blocks not being announced in BGP tables."
+        },
+        "asname": {
+          "type": "string",
+          "description": "AS name (RIR). Empty for IP blocks not being announced in BGP tables."
+        },
+        "reverse": {
+          "type": "string",
+          "description": "Reverse DNS of the IP (can delay response)"
+        },
+        "mobile": {
+          "type": "string",
+          "description": "Mobile (cellular) connection"
+        },
+        "proxy": {
+          "type": "string",
+          "description": "Proxy, VPN or Tor exit address"
+        },
+        "hosting": {
+          "type": "string",
+          "description": "Hosting, colocated or data center"
+        }
+      }
+    },
+    "ArrayOfGeolocations": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/Geolocation"
+      }
+    },
+    "Butch": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "query": {
+            "type": "string",
+            "description": "IPv4/IPv6 required"
+          },
+          "lang": {
+            "type": "string",
+            "description": "Response language optional"
+          }
+        },
+        "required": ["query"]
+      }
+    }
+  }
+}

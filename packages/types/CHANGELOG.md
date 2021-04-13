@@ -1,5 +1,144 @@
 # @graphql-portal/types
 
+## 0.24.0
+
+### Minor Changes
+
+- 51818a9: add Mutation.invalidateCache to control API
+
+### Patch Changes
+
+- Updated dependencies [51818a9]
+  - @graphql-portal/datasources@0.1.2
+
+## 0.23.2
+
+### Patch Changes
+
+- 3c899e8: added salesforce description
+
+## 0.23.1
+
+### Patch Changes
+
+- 05c6ae2: update datasources dependency
+
+## 0.23.0
+
+### Minor Changes
+
+- 737fc25: Redis log level
+
+## 0.22.1
+
+### Patch Changes
+
+- 2efdce4: update dependencies
+
+## 0.22.0
+
+### Minor Changes
+
+- e96c1d4: added log_filter to reduce the amount of debug level logs
+- 6d198a7: fixed custom handlers validation, fixed patches
+
+### Patch Changes
+
+- Updated dependencies [6d198a7]
+  - @graphql-portal/datasources@0.1.0
+
+## 0.21.0
+
+### Minor Changes
+
+- ddd0595: added handler descriptions, fixed weatherbit and stripe
+
+## 0.20.0
+
+### Minor Changes
+
+- a4cfd75: add slack handler, small fixes
+
+## 0.19.0
+
+### Minor Changes
+
+- b931565: Redis transport
+
+## 0.18.3
+
+### Patch Changes
+
+- 14461fb: sync config, print mesh error stack
+
+## 0.18.2
+
+### Patch Changes
+
+- c50438b: fix config
+
+## 0.18.1
+
+### Patch Changes
+
+- a8ffe38: fix ajv errors output and merge default config
+
+## 0.18.0
+
+### Minor Changes
+
+- 20dc51d: zero and single file config
+
+## 0.17.0
+
+### Minor Changes
+
+- 824f9f0: Add Datadog logger
+
+### Patch Changes
+
+- d1a6115: add mesh packages, fix cors.origin, add apiDef.mesh to dashboard query
+
+## 0.16.2
+
+### Patch Changes
+
+- f36fa72: Fix generation of gateway config + minor logger enhancement
+
+## 0.16.1
+
+### Patch Changes
+
+- 9c0aad8: Fix a strict validation mode error in ajv
+
+## 0.16.0
+
+### Minor Changes
+
+- be1f437: apis_path, middleware_path, sources_path are required only when use_dashboard_configs is false
+
+### Patch Changes
+
+- 6341161: Upgrading AJV validator to version 7.x
+
+## 0.15.0
+
+### Minor Changes
+
+- aeb892c: Add CORS documentation; servername config option; add servername, listenHostname and listenPort to ping
+
+## 0.14.0
+
+### Minor Changes
+
+- d818162: Add CORS support
+
+## 0.13.0
+
+### Minor Changes
+
+- 97068da: Add IP-API handler + fix error 500 in assign-request-id middleware
+
 ## 0.12.0
 
 ### Minor Changes

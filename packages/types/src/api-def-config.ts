@@ -4,13 +4,15 @@ export interface ApiDefConfig {
   name: string;
   endpoint: string;
   source_config_names?: string[];
+  source_names?: string[];
   schema_polling_interval?: number;
   schema_updates_through_control_api?: boolean;
+  invalidate_cache_through_control_api?: boolean;
   enable_ip_filtering?: boolean;
   allow_ips?: string[];
   deny_ips?: string[];
   /**
-   * Argument of the bytes package's method parse https://www.npmjs.com/package/bytes
+   * This value specifies an HTTP Request size limit for a particular API Definition. Accepts numeric (in bytes) or string values, i.e. 'b' for bytes, 'kb' for kilobytes and 'mb' for megabytes (f.e., '10kb' or '10mb').
    */
   request_size_limit?: string | number;
   /**
@@ -47,7 +49,12 @@ export interface ApiDefConfig {
     /**
      * Additional type definitions, or type definitions overrides you wish to add to the schema mesh
      */
-    additionalTypeDefs?: string;
+    additionalTypeDefs?:
+      | {
+          [k: string]: unknown;
+        }
+      | string
+      | unknown[];
     /**
      * Additional resolvers, or resolvers overrides you wish to add to the schema mesh (Any of: String, AdditionalStitchingResolverObject, AdditionalSubscriptionObject)
      */
@@ -61,8 +68,20 @@ export interface ApiDefConfig {
      * PubSub Implementation (Any of: String, PubSubConfig)
      */
     pubsub?: string | PubSubConfig;
+    /**
+     * Live Query Invalidations
+     */
+    liveQueryInvalidations?: LiveQueryInvalidation[];
+    /**
+     * Path to the file containing the introspection cache
+     */
+    introspectionCache?: string;
   };
 }
+/**
+ * Configuration for `mesh serve` command.
+ * Those commands won't be available in programmatic usage.
+ */
 export interface ServeConfig {
   /**
    * Spawn multiple server instances as node clusters (default: `1`) (Any of: Int, Boolean)
@@ -73,38 +92,55 @@ export interface ServeConfig {
    */
   port?: number | string;
   /**
+   * The binding hostname (default: `localhost`)
+   */
+  hostname?: string;
+  /**
    * Provide an example query or queries for GraphQL Playground
+   * The value can be the file path, glob expression for the file paths or the SDL.
+   * (.js, .jsx, .graphql, .gql, .ts and .tsx files are supported.
+   * But TypeScript support is only available if `ts-node` is installed and `ts-node/register` is added under `require` parameter)
    */
   exampleQuery?: string;
   cors?: CorsConfig;
   /**
-   * Any of: WebhookHandler, ExpressHandler
+   * Express/Connect compatible handlers and middlewares extend GraphQL Mesh HTTP Server (Any of: WebhookHandler, ExpressHandler)
    */
   handlers?: (WebhookHandler | ExpressHandler)[];
+  /**
+   * Path to your static files you want to be served with GraphQL Mesh HTTP Server
+   */
   staticFiles?: string;
   /**
-   * Show playground
+   * Show GraphiQL Playground
    */
   playground?: boolean;
-  /**
-   * Maximum File Size for GraphQL Upload (default: '100000000')
-   */
-  maxFileSize?: number;
-  /**
-   * Maximum number of files for GraphQL Upload (default: '10')
-   */
-  maxFiles?: number;
   /**
    * Controls the maximum request body size. If this is a number, then the value specifies the number of bytes; if it is a string, the value is passed to the bytes library for parsing. Defaults to '100kb'. (Any of: Int, String)
    */
   maxRequestBodySize?: number | string;
+  upload?: UploadOptions;
+  sslCredentials?: HTTPSConfig;
+  /**
+   * Path to GraphQL Endpoint (default: /graphql)
+   */
+  endpoint?: string;
+  /**
+   * Path to the browser that will be used by `mesh serve` to open a playground window in development mode
+   * This feature can be disable by passing `false` (Any of: String, Boolean)
+   */
+  browser?: string | boolean;
 }
+/**
+ * Configuration for CORS
+ */
 export interface CorsConfig {
   origin?:
     | {
         [k: string]: unknown;
       }
-    | string;
+    | string
+    | unknown[];
   allowedHeaders?: string[];
   exposedHeaders?: string[];
   credentials?: boolean;
@@ -113,17 +149,53 @@ export interface CorsConfig {
   optionsSuccessStatus?: number;
 }
 export interface WebhookHandler {
+  /**
+   * Path that remote API will ping
+   */
   path: string;
+  /**
+   * Name of the topic you want to pass incoming payload
+   */
   pubsubTopic: string;
+  /**
+   * Part of the object you want to pass (e.g. `data.messages`)
+   */
   payload?: string;
 }
 export interface ExpressHandler {
+  /**
+   * Path that the handler will control
+   */
   path: string;
+  /**
+   * Path of the handler's code
+   */
   handler: string;
   /**
-   * Allowed values: GET, POST, DELETE, PATCH
+   * HTTP Method that the handler will control (Allowed values: GET, POST, DELETE, PATCH)
    */
   method?: 'GET' | 'POST' | 'DELETE' | 'PATCH';
+}
+/**
+ * Configuration for GraphQL File Upload
+ */
+export interface UploadOptions {
+  /**
+   * Maximum File Size for GraphQL Upload (default: `100000000`)
+   */
+  maxFileSize?: number;
+  /**
+   * Maximum number of files for GraphQL Upload (default: `10`)
+   */
+  maxFiles?: number;
+}
+/**
+ * SSL Credentials for HTTPS Server
+ * If this is provided, Mesh will be served via HTTPS
+ */
+export interface HTTPSConfig {
+  key: string;
+  cert: string;
 }
 export interface Source {
   /**
@@ -154,13 +226,13 @@ export interface Handler {
   thrift?: ThriftHandler;
   tuql?: TuqlHandler;
   ContentfulHandler?: ContentfulHandler;
-  CrunchbaseHandler?: CrunchbaseHandler;
-  FedexHandler?: FedexHandler;
-  SalesforceHandler?: SalesforceHandler;
   SlackHandler?: SlackHandler;
   StripeHandler?: StripeHandler;
-  TwitterHandler?: TwitterHandler;
   WeatherbitHandler?: WeatherbitHandler;
+  CrunchbaseHandler?: CrunchbaseHandler;
+  SalesforceHandler?: SalesforceHandler;
+  TwitterHandler?: TwitterHandler;
+  IPAPIHandler?: IPAPIHandler;
   [k: string]: unknown;
 }
 export interface FhirHandler {
@@ -184,7 +256,8 @@ export interface GraphQLHandler {
     | {
         [k: string]: unknown;
       }
-    | string;
+    | string
+    | unknown[];
   /**
    * JSON object representing the Headers to add to the runtime of the API calls only for operation during runtime
    */
@@ -210,7 +283,8 @@ export interface GraphQLHandler {
     | {
         [k: string]: unknown;
       }
-    | string;
+    | string
+    | unknown[];
   /**
    * Path to a custom W3 Compatible WebSocket Implementation
    */
@@ -221,10 +295,6 @@ export interface GraphQLHandler {
    */
   introspection?: string;
   /**
-   * Cache Introspection (Any of: GraphQLIntrospectionCachingOptions, Boolean)
-   */
-  cacheIntrospection?: GraphQLIntrospectionCachingOptions | boolean;
-  /**
    * Enable multipart/formdata in order to support file uploads
    */
   multipart?: boolean;
@@ -232,16 +302,6 @@ export interface GraphQLHandler {
    * Batch requests
    */
   batch?: boolean;
-}
-export interface GraphQLIntrospectionCachingOptions {
-  /**
-   * Time to live of introspection cache
-   */
-  ttl?: number;
-  /**
-   * Path to Introspection JSON File
-   */
-  path?: string;
 }
 /**
  * Handler for gRPC and Protobuf schemas
@@ -310,7 +370,7 @@ export interface GrpcCredentialsSsl {
  * Handler for JSON Schema specification. Source could be a local json file, or a url to it.
  */
 export interface JsonSchemaHandler {
-  baseUrl: string;
+  baseUrl?: string;
   operationHeaders?: {
     [k: string]: unknown;
   };
@@ -323,7 +383,12 @@ export interface JsonSchemaHandler {
     | {
         [k: string]: unknown;
       }
-    | string;
+    | string
+    | unknown[];
+  /**
+   * Field name of your custom error object (default: 'message')
+   */
+  errorMessageField?: string;
 }
 export interface JsonSchemaOperation {
   field: string;
@@ -342,23 +407,27 @@ export interface JsonSchemaOperation {
     | {
         [k: string]: unknown;
       }
-    | string;
+    | string
+    | unknown[];
   requestSample?:
     | {
         [k: string]: unknown;
       }
-    | string;
+    | string
+    | unknown[];
   requestTypeName?: string;
   responseSample?:
     | {
         [k: string]: unknown;
       }
-    | string;
+    | string
+    | unknown[];
   responseSchema?:
     | {
         [k: string]: unknown;
       }
-    | string;
+    | string
+    | unknown[];
   responseTypeName?: string;
   argTypeMap?: {
     [k: string]: unknown;
@@ -512,7 +581,8 @@ export interface MySQLHandler {
     | {
         [k: string]: unknown;
       }
-    | string;
+    | string
+    | unknown[];
 }
 /**
  * Handler for Neo4j
@@ -542,16 +612,6 @@ export interface Neo4JHandler {
    * Provide GraphQL Type Definitions instead of inferring
    */
   typeDefs?: string;
-  /**
-   * Cache Introspection (Any of: Neo4jIntrospectionCachingOptions, Boolean)
-   */
-  cacheIntrospection?: Neo4JIntrospectionCachingOptions | boolean;
-}
-export interface Neo4JIntrospectionCachingOptions {
-  /**
-   * Time to live of introspection cache
-   */
-  ttl?: number;
 }
 /**
  * Handler for OData
@@ -585,6 +645,15 @@ export interface ODataHandler {
    * Use $expand for navigation props instead of seperate HTTP requests (Default: false)
    */
   expandNavProps?: boolean;
+  /**
+   * Custom Fetch
+   */
+  customFetch?:
+    | {
+        [k: string]: unknown;
+      }
+    | string
+    | unknown[];
 }
 /**
  * Handler for Swagger / OpenAPI 2/3 specification. Source could be a local json/swagger file, or a url to it.
@@ -593,7 +662,12 @@ export interface OpenapiHandler {
   /**
    * A pointer to your API source - could be a local file, remote file or url endpoint
    */
-  source: string;
+  source:
+    | {
+        [k: string]: unknown;
+      }
+    | string
+    | unknown[];
   /**
    * Format of the source file (Allowed values: json, yaml)
    */
@@ -628,7 +702,8 @@ export interface OpenapiHandler {
     | {
         [k: string]: unknown;
       }
-    | string;
+    | string
+    | unknown[];
   /**
    * Include HTTP Response details to the result object
    */
@@ -683,7 +758,8 @@ export interface PostGraphileHandler {
     | {
         [k: string]: unknown;
       }
-    | string;
+    | string
+    | unknown[];
   /**
    * Extra Postgraphile Plugins to append
    */
@@ -701,9 +777,13 @@ export interface PostGraphileHandler {
       }
     | string;
   /**
-   * Cache Introspection (Any of: GraphQLIntrospectionCachingOptions, Boolean)
+   * Enable GraphQL websocket transport support for subscriptions (default: true)
    */
-  cacheIntrospection?: GraphQLIntrospectionCachingOptions | boolean;
+  subscriptions?: boolean;
+  /**
+   * Enables live-query support via GraphQL subscriptions (sends updated payload any time nested collections/records change) (default: true)
+   */
+  live?: boolean;
 }
 /**
  * Handler for SOAP
@@ -715,6 +795,22 @@ export interface SoapHandler {
   wsdl: string;
   basicAuth?: SoapSecurityBasicAuthConfig;
   securityCert?: SoapSecurityCertificateConfig;
+  /**
+   * JSON object representing the Headers to add to the runtime of the API calls only for schema introspection
+   * You can also provide `.js` or `.ts` file path that exports schemaHeaders as an object
+   */
+  schemaHeaders?:
+    | {
+        [k: string]: unknown;
+      }
+    | string
+    | unknown[];
+  /**
+   * JSON object representing the Headers to add to the runtime of the API calls only for operation during runtime
+   */
+  operationHeaders?: {
+    [k: string]: unknown;
+  };
 }
 /**
  * Basic Authentication Configuration
@@ -818,28 +914,89 @@ export interface TuqlHandler {
    */
   infile?: string;
 }
+/**
+ * API-first content platform to build digital experiences
+ */
 export interface ContentfulHandler {
   /**
    * Authentication token
    */
   token: string;
   /**
-   * A endpoint of your Contentful GraphQL API
+   * (Deprecated) Full endpoint including space ID and environment. More info: https://www.contentful.com/developers/docs/references/graphql/#/introduction/basic-api-information
    */
-  endpoint: string;
+  endpoint?: string;
+  /**
+   * Your space ID. Wonder how to find it? Check https://www.contentful.com/help/find-space-id/
+   */
+  space?: string;
+  /**
+   * Your environment ID. What is it? Check https://www.contentful.com/faq/environments/
+   */
+  environment?: string;
 }
-export interface CrunchbaseHandler {}
-export interface FedexHandler {}
+/**
+ * A proprietary business communication platform
+ */
+export interface SlackHandler {
+  /**
+   * Slack API access token
+   */
+  token: string;
+}
+/**
+ * Online payment processing for internet businesses
+ */
+export interface StripeHandler {
+  /**
+   * Stripe secret key
+   */
+  token: string;
+}
+/**
+ * Weather API to instantly access real-time and historical data
+ */
+export interface WeatherbitHandler {
+  /**
+   * Weatherbit secret key
+   */
+  token: string;
+}
+/**
+ * A platform for finding business information about private and public companies
+ */
+export interface CrunchbaseHandler {
+  /**
+   * Authentication API Key
+   */
+  userKey: string;
+}
+/**
+ * An American cloud-based software company that provides customer relationship management service.
+ */
 export interface SalesforceHandler {
   /**
-   * A endpoint of your Salesforce API
+   * An endpoint of your Salesforce API
    */
   baseUrl: string;
+  /**
+   * Authentication token
+   */
+  token?: string;
 }
-export interface SlackHandler {}
-export interface StripeHandler {}
-export interface TwitterHandler {}
-export interface WeatherbitHandler {}
+/**
+ * An American microblogging and social networking service on which users post and interact with messages known as 'tweets'
+ */
+export interface TwitterHandler {
+  /**
+   * Your bearer token (wihout 'Bearer ' substring)
+   */
+  token: string;
+}
+/**
+ * IP Geolocation API
+ */
+export interface IPAPIHandler {}
 export interface Transform {
   /**
    * Transformer to apply caching for your data sources
@@ -848,14 +1005,33 @@ export interface Transform {
   encapsulate?: EncapsulateTransformObject;
   extend?: ExtendTransform;
   federation?: FederationTransform;
-  filterSchema?: string[];
+  /**
+   * Transformer to filter (white/black list) GraphQL types, fields and arguments (Any of: FilterSchemaTransform, Any)
+   */
+  filterSchema?:
+    | FilterSchemaTransform
+    | (
+        | {
+            [k: string]: unknown;
+          }
+        | string
+        | unknown[]
+      );
   mock?: MockingConfig;
   namingConvention?: NamingConventionTransformConfig;
   prefix?: PrefixTransformConfig;
   /**
-   * Transformer to apply rename of a GraphQL type
+   * Transformer to rename GraphQL types and fields (Any of: RenameTransform, Any)
    */
-  rename?: RenameTransformObject[];
+  rename?:
+    | RenameTransform
+    | (
+        | {
+            [k: string]: unknown;
+          }
+        | string
+        | unknown[]
+      );
   /**
    * Transformer to apply composition to resolvers
    */
@@ -932,12 +1108,14 @@ export interface ExtendTransform {
     | {
         [k: string]: unknown;
       }
-    | string;
+    | string
+    | unknown[];
   resolvers?:
     | {
         [k: string]: unknown;
       }
-    | string;
+    | string
+    | unknown[];
 }
 export interface FederationTransform {
   types?: FederationTransformType[];
@@ -976,6 +1154,16 @@ export interface ResolveReferenceObject {
   };
   resultSelectionSet?: string;
   resultDepth?: number;
+}
+export interface FilterSchemaTransform {
+  /**
+   * Specify to apply filter-schema transforms to bare schema or by wrapping original schema (Allowed values: bare, wrap)
+   */
+  mode?: 'bare' | 'wrap';
+  /**
+   * Array of filter rules
+   */
+  filters: string[];
 }
 /**
  * Mock configuration for your source
@@ -1095,6 +1283,16 @@ export interface PrefixTransformConfig {
    */
   includeRootOperations?: boolean;
 }
+export interface RenameTransform {
+  /**
+   * Specify to apply rename transforms to bare schema or by wrapping original schema (Allowed values: bare, wrap)
+   */
+  mode?: 'bare' | 'wrap';
+  /**
+   * Array of rename rules
+   */
+  renames: RenameTransformObject[];
+}
 export interface RenameTransformObject {
   from: RenameConfig;
   to: RenameConfig;
@@ -1125,7 +1323,8 @@ export interface ResolversCompositionTransformObject {
     | {
         [k: string]: unknown;
       }
-    | string;
+    | string
+    | unknown[];
 }
 /**
  * Configuration for Snapshot extension
@@ -1215,5 +1414,10 @@ export interface PubSubConfig {
     | {
         [k: string]: unknown;
       }
-    | string;
+    | string
+    | unknown[];
+}
+export interface LiveQueryInvalidation {
+  field: string;
+  invalidate: string[];
 }

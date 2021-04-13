@@ -4,7 +4,7 @@
 
 [![npm version](https://img.shields.io/npm/v/@graphql-portal/gateway?color=green)](https://www.npmjs.com/package/@graphql-portal/gateway)
 ![Test](https://github.com/graphql-portal/graphql-portal/workflows/Test/badge.svg)
-[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fcode-store-platform%2Fgraphql-portal.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2Fcode-store-platform%2Fgraphql-portal?ref=badge_shield)
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2FGraphQL-Portal%2Fgraphql-portal.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2FGraphQL-Portal%2Fgraphql-portal?ref=badge_shield)
 [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg)](https://github.com/prettier/prettier)
 [![from Paris with Love](https://img.shields.io/badge/from%20Paris%20with-%F0%9F%A4%8D-red)](https://shields.io/)
 
@@ -67,7 +67,7 @@ Once installed and configured, the Gateway allows you to:
 
 ## Quick Start
 
-TL;DR? The quickest way to launch GraphQL Portal (with Gateway and Dashboard) locally, is to use our [Docker Compose file](https://github.com:graphql-portal/graphql-portal-docker):
+TL;DR? The quickest way to launch GraphQL Portal (with Gateway and Dashboard) locally, is to use our [Docker Compose file](https://github.com/graphql-portal/graphql-portal-docker):
 ```shell
 git clone git@github.com:graphql-portal/graphql-portal-docker.git
 cd graphql-portal-docker
@@ -90,7 +90,7 @@ Unless installed via docker compose, you will need:
 
 ### Docker Compose
 
-Check out [our dedicated repository](https://github.com:graphql-portal/graphql-portal-docker) with docker compose files and examples of the configuration:
+Check out [our dedicated repository](https://github.com/graphql-portal/graphql-portal-docker) with docker compose files and examples of the configuration:
 ```shell
 git clone git@github.com:graphql-portal/graphql-portal-docker.git
 cd graphql-portal-docker
@@ -314,4 +314,4 @@ _Coming soon_
 
 ## License compatibility
 
-[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fcode-store-platform%2Fgraphql-portal.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2Fcode-store-platform%2Fgraphql-portal?ref=badge_large)
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2FGraphQL-Portal%2Fgraphql-portal.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2FGraphQL-Portal%2Fgraphql-portal?ref=badge_large)

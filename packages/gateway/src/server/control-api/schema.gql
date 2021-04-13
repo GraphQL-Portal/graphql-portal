@@ -1,3 +1,7 @@
 type Query {
   updateApi(name: String!): Boolean
 }
+
+type Mutation {
+  invalidateCache(apiDefName: String!, cacheKey: String!): Boolean
+}

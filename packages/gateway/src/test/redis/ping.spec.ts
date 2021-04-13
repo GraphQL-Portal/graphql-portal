@@ -2,6 +2,18 @@ import { ping } from '../../redis/ping';
 
 jest.useFakeTimers();
 
+jest.mock('@graphql-portal/config', () => ({
+  config: {
+    gateway: {
+      use_dashboard_configs: true,
+      redis: { connection_string: 'redis' },
+      listen_port: 8080,
+      hostname: 'localhost',
+    },
+  },
+  loadApiDefs: jest.fn().mockResolvedValue(true),
+}));
+
 describe('Redis', () => {
   describe('ping', () => {
     it('should call redis.publish each 5 seconds', async () => {

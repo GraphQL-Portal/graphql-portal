@@ -64,7 +64,9 @@ For example, lets take the following configuration file:
   "apis_path": "config/apidefs",
   "sources_path": "config/datasources",
   "middleware_path": "config/middlewares",
-  "redis_connection_string": "redis://localhost:6379",
+  "redis": {
+    "connection_string": "redis://localhost:6379"
+  },
   "use_dashboard_configs": false,
   "enable_control_api": false,
   "log_level": "@@LOG_LEVEL"
@@ -82,11 +84,16 @@ The hostname to bind the gateway node to.
 
 The port on which GraphQL Portal Gateway will listen for the incoming connections.
 
+## servername
+
+Optional string. This value should be set to the external server name when gateway is used behind the load-balancer 
+proxy.
+
 ## pool_size
 
-The size of the NodeJS Cluster pool, i.e. how many instances of the gateway are going to be launched on the same host.
+Optional number. The size of the NodeJS Cluster pool, i.e. how many instances of the gateway are going to be launched on the same host.
 It is recommended to keep this number equal to the number of CPU cores on the machine. Setting this value to 1 will 
-launch a single-instance gateway.
+launch a single-instance gateway. Setting it to 0 or removing it will use all the available CPU cores on the machine.
 
 ## use_dashboard_configs
 
@@ -145,16 +152,47 @@ the URL path on which to which the Control API will be bind.
 }
 ```
 
-## metrics
+## cors
 
-Optional. Enables metrics gathering. Disabled by default.
-```json
-{
-  "metrics": {
-    "enabled": false
-  }
-}
-```
+Optional. Enables and configures CORS requests.
+CORS requests from Dashboard are enabled by default when `use_dashboard_configs` is set to true.
+
+### enabled
+
+Boolean, `false` by default. Enables CORS configuration.
+
+### origins
+
+Array of strings. Configures the Access-Control-Allow-Origin CORS header. Expects an Array of valid origins.
+
+### methods
+
+Array of strings. Configures the Access-Control-Allow-Methods CORS header. Expects an array of HTTP Methods.
+
+### allowedHeaders
+
+Array of strings. Configures the Access-Control-Allow-Headers CORS header. Expects and Array of headers.
+
+### exposedHeaders
+
+Array of strings. Configures the Access-Control-Expose-Headers CORS header.
+
+### credentials
+
+Array of strings. Configures the Access-Control-Allow-Credentials CORS header.
+
+### maxAge
+
+Integer. Configures the Access-Control-Max-Age CORS header.
+
+### optionsSuccessStatus
+
+Integer. Provides a status code to use for successful OPTIONS requests, since some legacy browsers (IE11, various SmartTVs) 
+choke on 204.
+
+## enable_metrics_recording
+
+Boolean. Enables metrics gathering. Disabled by default.
 
 ## log_format
 
@@ -164,18 +202,76 @@ Optional. Can be `text` or `json`. Default value is `text`.
 
 Possible values are: 'debug' | 'info' | 'warn' | 'error'.
 
-## redis_connection_string
+## datadog_logging
+
+Configures sending of log messages to Datadog.
+
+### enabled
+
+Boolean. Enable or disable logging to Datadog. Defaults to false.
+
+### apiKey
+
+String. Datadog API key of your application.
+
+### host
+
+String. Host of the Datadog TCP (TLS) intake. Defaults to the US server (_intake.logs.datadoghq.com_).
+
+### port
+
+Number. Port of the Datadog TCP (TLS) intake. Defaults to _10516_.
+
+### environment
+
+String. Adds an environment attribute to Datadog logs. Empty by default.
+
+### tags
+
+Array of strings. Allows transport level tagging in Datadog. Each tag should follow the format `<KEY>:<VALUE>`. For more information see https://docs.datadoghq.com/getting_started/tagging/.
+
+## redis_logging
+
+Configures sending of log messages to Redis.
+
+### enabled
+
+Boolean. Enable or disable logging to Redis. Defaults to false.
+
+### expire
+
+Number. Timeout in seconds, after the timeout has expired, the log will automatically be deleted, 30 by default.
+
+## redis
+Redis connection options.
 
 Connection string specifying access to a Redis instance, for example:
 ```json
 {
-  "redis_connection_string": "redis://localhost:6379"
+  "redis_connection_string": "redis://localhost:6379",
+}
+```
+`redis_connection_string` is deprecated. **Use** `redis.connection_string` instead:
+```json
+{
+  "redis": {
+    "connection_string": "redis://localhost:6379",
+  }
+}
+```
+If you want to connect to a **Redis cluster**:
+```json
+{
+  "redis": {
+    "is_cluster": true,
+    "cluster_nodes": ["redis://localhost:7001", "redis://localhost:7002", "redis://localhost:7003"],
+  }
 }
 ```
 
 ## request_size_limit
 
-Optional. Default value is 10mb. This value specifies an HTTP Request size limit. Accepts numeric (in bytes) or string 
+Optional. Default value is 100kb. This value specifies an HTTP Request size limit. Accepts numeric (in bytes) or string 
 values. When string is used, the following abbreviations are used:
 * b for bytes
 * kb for kilobytes

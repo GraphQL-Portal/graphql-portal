@@ -3,7 +3,7 @@ import { MetricsChannels } from '@graphql-portal/types';
 import { metricEmitter } from '../metric';
 
 export const handleError: ErrorRequestHandler = (err, req, res, next) => {
-  metricEmitter.emit(MetricsChannels.GOT_ERROR, req.id, err);
+  metricEmitter.emit(MetricsChannels.GOT_ERROR, req.id, err, Date.now());
   if (res.headersSent) {
     return next(err);
   }

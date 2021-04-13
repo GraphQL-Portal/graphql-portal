@@ -1,16 +1,22 @@
 import { RequestHandler } from 'express';
-import * as uuid from 'uuid';
+import { v4 as uuidv4 } from 'uuid';
 import { MetricsChannels } from '@graphql-portal/types';
 import { metricEmitter } from '../metric';
+import { isIntrospectionRequest } from './utils';
+import { prefixLogger } from '@graphql-portal/logger';
+
+const logger = prefixLogger('metrics:assign-request-id');
 
 const assignRequestId: RequestHandler = (req, res, next) => {
-  req.id = uuid.v4();
-
+  req.id = uuidv4();
+  if (isIntrospectionRequest(req)) return next();
+  logger.debug(`req.id = ${req.id}`);
   const metricData = {
     query: req.body || '',
     userAgent: req.headers?.['user-agent'] || '',
     ip: req.ip,
     request: req,
+    date: Date.now(),
   };
 
   metricEmitter.emit(MetricsChannels.GOT_REQUEST, req.id, metricData);
