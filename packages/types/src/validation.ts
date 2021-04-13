@@ -46,7 +46,7 @@ export function validateApiDefConfig(apiDef: any): string | void {
 
 export function getAjvErrorsText(ajv: Ajv, errors: ErrorObject[], dataVar: string): string {
   const keys = errors
-    ?.map(error => Object.values(error.params))
+    ?.map((error) => Object.values(error.params))
     .filter(Boolean)
     .join(', ');
   let result = ajv.errorsText(errors, {

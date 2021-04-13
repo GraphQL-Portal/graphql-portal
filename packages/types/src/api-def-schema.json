@@ -1493,6 +1493,7 @@
     "source_names": { "type": "array", "items": { "type": "string" } },
     "schema_polling_interval": { "type": "integer" },
     "schema_updates_through_control_api": { "type": "boolean", "default": false },
+    "invalidate_cache_through_control_api": { "type": "boolean", "default": false },
     "enable_ip_filtering": { "type": "boolean" },
     "allow_ips": { "type": "array", "items": { "type": "string" } },
     "deny_ips": { "type": "array", "items": { "type": "string" } },

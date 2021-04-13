@@ -7,6 +7,7 @@ export interface ApiDefConfig {
   source_names?: string[];
   schema_polling_interval?: number;
   schema_updates_through_control_api?: boolean;
+  invalidate_cache_through_control_api?: boolean;
   enable_ip_filtering?: boolean;
   allow_ips?: string[];
   deny_ips?: string[];

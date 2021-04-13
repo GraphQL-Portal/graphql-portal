@@ -1,11 +1,11 @@
 import * as contentful from './contentful';
+import * as crunchbase from './crunchbase';
+import * as ipApi from './ip-api';
+import * as salesforce from './salesforce';
 import * as slack from './slack';
 import * as stripe from './stripe';
-import * as weatherbit from './weatherbit';
-import * as crunchbase from './crunchbase';
-import * as salesforce from './salesforce';
 import * as twitter from './twitter';
-import * as ipApi from './ip-api';
+import * as weatherbit from './weatherbit';
 
 type Validate = (name: string, config: any) => string | void;
 type CustomHandler = {

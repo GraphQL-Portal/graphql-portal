@@ -1,7 +1,7 @@
 import { diff } from '@graphql-inspector/core';
 import { processConfig } from '@graphql-mesh/config';
 import { getMesh } from '@graphql-mesh/runtime';
-import { MeshPubSub } from '@graphql-mesh/types';
+import { KeyValueCache, MeshPubSub } from '@graphql-mesh/types';
 import { config } from '@graphql-portal/config';
 import { prefixLogger } from '@graphql-portal/logger';
 import { ApiDef } from '@graphql-portal/types';
@@ -15,12 +15,18 @@ interface IMesh {
   schema: GraphQLSchema;
   pubsub: MeshPubSub;
   contextBuilder: (initialContextValue?: any) => Promise<Record<string, any>>;
+  cache: KeyValueCache;
 }
 
 const logger = prefixLogger('router');
 
 let router: Router;
 export const apiSchema: { [apiName: string]: GraphQLSchema } = {};
+
+const apiMesh: { [apiName: string]: IMesh } = {};
+export const getApiMesh = (apiName: string): IMesh | undefined => {
+  return apiMesh[apiName];
+};
 
 export async function setRouter(app: Application, apiDefs: ApiDef[]): Promise<void> {
   await buildRouter(apiDefs);
@@ -128,6 +134,9 @@ export async function getMeshForApiDef(
       await new Promise((resolve) => setTimeout(resolve, 5000));
       return getMeshForApiDef(apiDef, mesh, retry - 1);
     }
+  }
+  if (mesh) {
+    apiMesh[apiDef.name] = mesh;
   }
   return mesh;
 }
