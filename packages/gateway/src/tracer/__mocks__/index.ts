@@ -1,3 +1,7 @@
 import { Tracer } from 'opentracing';
 
-export const tracer = new Tracer();
+let tracer = new Tracer();
+
+function initTracer() {}
+
+export { tracer, initTracer };

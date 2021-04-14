@@ -1,16 +1,26 @@
-import { initTracer as initJaegerTracer } from 'jaeger-client';
+import { initTracer as initJaegerTracer, JaegerTracer } from 'jaeger-client';
 import { prefixLogger } from '@graphql-portal/logger';
+import { Config } from '@graphql-portal/config';
 
-export const tracer = initJaegerTracer(
-  {
-    serviceName: 'graphql-portal',
-    sampler: {
-      type: 'const',
-      param: 1,
+let tracer: JaegerTracer;
+
+function initTracer(config: Config) {
+  const { host, port } = config?.gateway?.tracing || {};
+  tracer = initJaegerTracer(
+    {
+      serviceName: 'graphql-portal',
+      sampler: {
+        type: 'const',
+        param: 1,
+      },
+      reporter: {
+        logSpans: true,
+        agentHost: host,
+        agentPort: port,
+      },
     },
-    reporter: {
-      logSpans: true,
-    },
-  },
-  { logger: prefixLogger('jaeger') }
-);
+    { logger: prefixLogger('jaeger') }
+  );
+}
+
+export { tracer, initTracer };

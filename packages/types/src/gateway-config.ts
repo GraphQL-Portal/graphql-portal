@@ -180,4 +180,17 @@ export interface GatewayConfig {
    * This value specifies an HTTP Request size limit for a particular API Definition. Accepts numeric (in bytes) or string values, i.e. 'b' for bytes, 'kb' for kilobytes and 'mb' for megabytes (f.e., '10kb' or '10mb').
    */
   request_size_limit?: string | number;
+  /**
+   * Configure Jaeger agent endpoint
+   */
+  tracing?: {
+    /**
+     * The host of your Jaeger agent. Defaults to 'localhost'
+     */
+    host?: boolean & string;
+    /**
+     * The port of your Jaeger agent. Defaults to 6832
+     */
+    port?: number;
+  };
 }

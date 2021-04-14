@@ -19,7 +19,7 @@ jest.mock('../../metric/emitter', () => ({
   },
 }));
 
-describe('Assign reequest id MW', () => {
+describe('Assign request id MW', () => {
   let mockRequest: Partial<Request>;
   const nextFunction: NextFunction = jest.fn();
   let mockResponse: Partial<Response>;
