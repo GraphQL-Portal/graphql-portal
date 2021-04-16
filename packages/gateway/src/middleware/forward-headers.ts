@@ -4,10 +4,10 @@ import { prefixLogger } from '@graphql-portal/logger';
 import { tracer } from '../tracer';
 
 const prepareRequestContext: RequestHandler = function prepareRequestContext(req, res, next) {
-  const span = tracer.startSpan(req.path);
-  span.setTag('http.method', req.method);
-  span.setTag('http.url', req.url);
-  span.setTag('http.content-type', req.headers['content-type']);
+  const span = tracer?.startSpan(req.path);
+  span?.setTag('http.method', req.method);
+  span?.setTag('http.url', req.url);
+  span?.setTag('http.content-type', req.headers['content-type']);
 
   req.context = {
     forwardHeaders: {},

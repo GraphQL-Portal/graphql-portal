@@ -22,8 +22,8 @@ const assignRequestId: RequestHandler = (req, res, next) => {
 
   metricEmitter.emit(MetricsChannels.GOT_REQUEST, req.id, metricData);
 
-  req.context.tracerSpan.setTag('requestId', req.id);
-  req.context.tracerSpan.log({
+  req.context.tracerSpan?.setTag('requestId', req.id);
+  req.context.tracerSpan?.log({
     userAgent: metricData.userAgent,
     ip: metricData.ip,
   });

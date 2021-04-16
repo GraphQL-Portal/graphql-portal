@@ -185,12 +185,21 @@ export interface GatewayConfig {
    */
   tracing?: {
     /**
-     * The host of your Jaeger agent. Defaults to 'localhost'
+     * Allows to enable/disable the tracing at all
      */
-    host?: boolean & string;
+    enable?: boolean;
     /**
-     * The port of your Jaeger agent. Defaults to 6832
+     * Configures sending of traces to Jaeger
      */
-    port?: number;
+    jaeger?: {
+      /**
+       * The host of your Jaeger agent. Defaults to 'localhost'
+       */
+      host?: string;
+      /**
+       * The port of your Jaeger agent. Defaults to 6832
+       */
+      port?: number;
+    };
   };
 }

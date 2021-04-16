@@ -30,6 +30,7 @@ const pubSubListenerWrapper = (emit: (...args: any[]) => any) => {
 };
 
 const traceResolverStart = (resolverData: ResolverDataWithContext): void => {
+  if (!tracer) return;
   const fieldPath = reducePath(resolverData.info?.path);
   if (!fieldPath) return;
   const resolverSpan = tracer.startSpan(`resolver of ${fieldPath}`, { childOf: resolverData.context!.tracerSpan });
@@ -37,6 +38,7 @@ const traceResolverStart = (resolverData: ResolverDataWithContext): void => {
 };
 
 const traceResolverFinish = (error: Error | null, resolverData: ResolverDataWithContext): void => {
+  if (!tracer) return;
   const fieldPath = reducePath(resolverData.info?.path);
   if (!fieldPath) return;
   const resolverSpan = resolverData.context!.resolverSpans[fieldPath];

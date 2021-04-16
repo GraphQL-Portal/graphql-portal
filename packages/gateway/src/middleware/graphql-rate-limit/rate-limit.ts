@@ -46,7 +46,7 @@ const rateLimitMiddleware = (apiDef: ApiDef): RequestHandler => {
     if (isIntrospectionRequest(req)) {
       return next();
     }
-    const span = tracer.startSpan(`rateLimit middleware`, { childOf: req.context?.tracerSpan });
+    const span = tracer?.startSpan(`rateLimit middleware`, { childOf: req.context?.tracerSpan });
 
     const schema = apiSchema[apiDef.name];
     let query: DocumentNode;
@@ -54,8 +54,8 @@ const rateLimitMiddleware = (apiDef: ApiDef): RequestHandler => {
       query = parse(body.query);
     } catch (error) {
       logger.error(error.message);
-      span.log({ error });
-      span.finish();
+      span?.log({ error });
+      span?.finish();
       return next();
     }
     const typeInfo = new TypeInfo(schema);
@@ -95,8 +95,8 @@ const rateLimitMiddleware = (apiDef: ApiDef): RequestHandler => {
     }
     logger.debug(`request ${req.id} from ${req.ip}: totalCost ${totalCost}`);
     await requestCostTool.saveCost(req, cost);
-    span.log({ cost });
-    span.finish();
+    span?.log({ cost });
+    span?.finish();
     return next();
   };
 };

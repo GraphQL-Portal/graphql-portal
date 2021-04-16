@@ -155,15 +155,14 @@
       "description": "Configure Jaeger agent endpoint",
       "additionalProperties": false,
       "properties": {
-        "host": {
-          "type": "string",
+        "enable": {
+          "type": "boolean",
           "default": false,
-          "description": "The host of your Jaeger agent. Defaults to 'localhost'"
+          "description": "Allows to enable/disable the tracing at all"
         },
-        "port": {
-          "type": "number",
-          "description": "The port of your Jaeger agent. Defaults to 6832",
-          "minimum": 0
+        "jaeger": {
+          "$ref": "#/definitions/jaeger_tracing",
+          "description": "Configures sending of traces to Jaeger"
         }
       }
     }
@@ -308,6 +307,21 @@
         }
       },
       "required": ["enabled", "expire"]
+    },
+    "jaeger_tracing": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "host": {
+          "type": "string",
+          "description": "The host of your Jaeger agent. Defaults to 'localhost'"
+        },
+        "port": {
+          "type": "number",
+          "description": "The port of your Jaeger agent. Defaults to 6832",
+          "minimum": 0
+        }
+      }
     }
   },
   "required": ["hostname", "listen_port"]

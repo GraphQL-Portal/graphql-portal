@@ -2,10 +2,14 @@ import { initTracer as initJaegerTracer, JaegerTracer } from 'jaeger-client';
 import { prefixLogger } from '@graphql-portal/logger';
 import { Config } from '@graphql-portal/config';
 
-let tracer: JaegerTracer;
+let tracer: JaegerTracer | undefined;
 
-function initTracer(config: Config) {
-  const { host, port } = config?.gateway?.tracing || {};
+function initTracer(config: Config): void {
+  const tracing = config?.gateway?.tracing || {};
+  if (!tracing.enable) return;
+
+  if (!tracing.jaeger) return;
+  const { host, port } = tracing.jaeger;
   tracer = initJaegerTracer(
     {
       serviceName: 'graphql-portal',
