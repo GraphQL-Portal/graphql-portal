@@ -1,5 +1,11 @@
 # @graphql-portal/types
 
+## 0.25.0
+
+### Minor Changes
+
+- 5ed49bc: add config.gateway.tracer{host, port} to configure jaeger agent connection
+
 ## 0.24.0
 
 ### Minor Changes
