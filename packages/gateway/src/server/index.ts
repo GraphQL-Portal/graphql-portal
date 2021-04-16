@@ -9,7 +9,7 @@ import { graphqlUploadExpress } from 'graphql-upload';
 import { createServer } from 'http';
 import { Span } from 'opentracing';
 import { promisify } from 'util';
-import { getConfigFromMaster } from '../ipc/utils';
+// import { getConfigFromMaster } from '../ipc/utils';
 import { startPeriodicMetricsRecording } from '../metric';
 import { logResponse } from '../middleware';
 import { redisSubscriber } from '../redis';
@@ -68,8 +68,8 @@ export async function startServer(): Promise<void> {
       return;
     }
 
-    const { loaded } = await getConfigFromMaster();
-    if (!loaded) return;
+    // const { loaded } = await getConfigFromMaster();
+    // if (!loaded) return;
     await setRouter(app, config.apiDefs);
   });
 

@@ -1,7 +1,7 @@
 import { dashboard, initDashboard } from '@graphql-portal/dashboard';
 import { prefixLogger } from '@graphql-portal/logger';
 import { ApiDef, apiDefSchema, GatewayConfig } from '@graphql-portal/types';
-import cluster from 'cluster';
+// import cluster from 'cluster';
 import { customAlphabet } from 'nanoid';
 import { loadApiDefsFromFs, loadApiDefsFromGatewayConfig } from './api-def.config';
 import { loadConfig } from './gateway.config';
@@ -28,9 +28,9 @@ export async function initConfig(): Promise<void> {
 }
 
 export async function loadApiDefs(): Promise<boolean> {
-  if (cluster.isWorker) {
-    return false;
-  }
+  // if (cluster.isWorker) {
+  //   return false;
+  // }
 
   config.apiDefs = config.apiDefs ?? [];
 

@@ -1,4 +1,4 @@
-import cluster from 'cluster';
+// import cluster from 'cluster';
 import { prefixLogger } from '@graphql-portal/logger';
 import IORedis, { Cluster } from 'ioredis';
 import connect from './connect';
@@ -27,6 +27,7 @@ export default async function setupRedis(
       logger.info(`  ${node}`);
     }
   }
-  if (cluster.isMaster) ping(redis);
+  // if (cluster.isMaster)
+  ping(redis);
   return redisSubscriber;
 }
