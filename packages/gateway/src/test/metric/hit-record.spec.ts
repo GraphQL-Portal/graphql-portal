@@ -5,6 +5,7 @@ import { redis } from '../../redis';
 import { connections as connectionsTool } from '../../server';
 import * as ByteTool from '../../utils/byte.tool';
 
+jest.mock('../../tracer');
 jest.mock('@graphql-portal/config', () => ({
   config: {
     nodeId: 'nodeId',

@@ -3,6 +3,7 @@ import { NextFunction, Request, Response } from 'express';
 import { GraphQLSchema } from 'graphql';
 import rateLimit from '../../middleware/graphql-rate-limit/rate-limit';
 
+jest.mock('../../tracer');
 jest.mock('../../server/router', () => ({
   apiSchema: {
     api: new GraphQLSchema({}),

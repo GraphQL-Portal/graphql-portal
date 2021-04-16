@@ -11,13 +11,23 @@ const assignRequestId: RequestHandler = (req, res, next) => {
   if (isIntrospectionRequest(req)) return next();
   req.id = uuidv4();
   logger.debug(`req.id = ${req.id}`);
-  metricEmitter.emit(MetricsChannels.GOT_REQUEST, req.id, {
+
+  const metricData = {
     query: req.body || '',
     userAgent: req.headers?.['user-agent'] || '',
     ip: req.ip,
     request: req,
     date: Date.now(),
+  };
+
+  metricEmitter.emit(MetricsChannels.GOT_REQUEST, req.id, metricData);
+
+  req.context.tracerSpan?.setTag('requestId', req.id);
+  req.context.tracerSpan?.log({
+    userAgent: metricData.userAgent,
+    ip: metricData.ip,
   });
+
   next();
 };
 

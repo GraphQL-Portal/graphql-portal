@@ -1,13 +1,17 @@
-import { EventEmitter } from 'events';
-import { prefixLogger } from '@graphql-portal/logger';
-import { config } from '@graphql-portal/config';
-import { redis } from '../redis';
 import { MeshPubSub, ResolverData } from '@graphql-mesh/types';
-import { getSourceName, serializer, transformResolverData } from './utils';
+import { config } from '@graphql-portal/config';
+import { prefixLogger } from '@graphql-portal/logger';
 import { MetricsChannels, PubSubEvents } from '@graphql-portal/types';
+import { EventEmitter } from 'events';
+import { redis } from '../redis';
+import { Context } from '../server';
+import { tracer } from '../tracer';
+import { getSourceName, reducePath, serializer, transformResolverData } from './utils';
 
 const logger = prefixLogger('analytics:metric-emitter');
 export const metricEmitter = new EventEmitter();
+
+type ResolverDataWithContext = ResolverData<any, any, Context, any>;
 
 const lpush = async (key: string, ...args: any[]): Promise<void> => {
   if (!key) return;
@@ -19,10 +23,30 @@ const lpush = async (key: string, ...args: any[]): Promise<void> => {
 };
 
 const pubSubListenerWrapper = (emit: (...args: any[]) => any) => {
-  return (data: { resolverData: ResolverData }): void => {
+  return (data: { resolverData: ResolverDataWithContext }): void => {
     if (!getSourceName(data.resolverData)) return; // do not emit resolver events without sourcename (nested queries)
     emit(data);
   };
+};
+
+const traceResolverStart = (resolverData: ResolverDataWithContext): void => {
+  if (!tracer) return;
+  const fieldPath = reducePath(resolverData.info?.path);
+  if (!fieldPath) return;
+  const resolverSpan = tracer.startSpan(`resolver of ${fieldPath}`, { childOf: resolverData.context!.tracerSpan });
+  resolverData.context!.resolverSpans[fieldPath] = resolverSpan;
+};
+
+const traceResolverFinish = (error: Error | null, resolverData: ResolverDataWithContext): void => {
+  if (!tracer) return;
+  const fieldPath = reducePath(resolverData.info?.path);
+  if (!fieldPath) return;
+  const resolverSpan = resolverData.context!.resolverSpans[fieldPath];
+  if (!resolverSpan) return;
+  if (error) {
+    resolverSpan.log({ error });
+  }
+  resolverSpan.finish();
 };
 
 const subscribe = async (pubsub: MeshPubSub): Promise<void> => {
@@ -47,37 +71,31 @@ const subscribe = async (pubsub: MeshPubSub): Promise<void> => {
     });
 
     metricEmitter.on(MetricsChannels.RESOLVER_CALLED, (resolverData: ResolverData) => {
-      logger.debug(`MetricsChannels.RESOLVER_CALLED: ${JSON.stringify(resolverData)}`);
-      lpush(
-        resolverData.context.requestId,
-        serializer({
-          ...transformResolverData(MetricsChannels.RESOLVER_CALLED, resolverData),
-          info: resolverData.info,
-          args: resolverData.args,
-        })
-      );
+      const data = serializer({
+        ...transformResolverData(MetricsChannels.RESOLVER_CALLED, resolverData),
+        info: resolverData.info,
+        args: resolverData.args,
+      });
+      logger.debug(`MetricsChannels.RESOLVER_CALLED: ${data}`);
+      lpush(resolverData.context.requestId, data);
     });
 
     metricEmitter.on(MetricsChannels.RESOLVER_DONE, (resolverData: ResolverData, result: any) => {
-      logger.debug(`MetricsChannels.RESOLVER_DONE: ${JSON.stringify(resolverData)}, ${JSON.stringify(result)}`);
-      lpush(
-        resolverData.context.requestId,
-        serializer({
-          ...transformResolverData(MetricsChannels.RESOLVER_DONE, resolverData),
-          result,
-        })
-      );
+      const data = serializer({
+        ...transformResolverData(MetricsChannels.RESOLVER_DONE, resolverData),
+        result,
+      });
+      logger.debug(`MetricsChannels.RESOLVER_DONE: ${data}`);
+      lpush(resolverData.context.requestId, data);
     });
 
     metricEmitter.on(MetricsChannels.RESOLVER_ERROR, (resolverData: ResolverData, error: Error) => {
-      logger.debug(`MetricsChannels.RESOLVER_ERROR: ${JSON.stringify(resolverData)}, ${error}`);
-      lpush(
-        resolverData.context.requestId,
-        serializer({
-          ...transformResolverData(MetricsChannels.RESOLVER_ERROR, resolverData),
-          error,
-        })
-      );
+      const data = serializer({
+        ...transformResolverData(MetricsChannels.RESOLVER_ERROR, resolverData),
+        error,
+      });
+      logger.debug(`MetricsChannels.RESOLVER_ERROR: ${data}`);
+      lpush(resolverData.context.requestId, data);
     });
 
     metricEmitter.on(
@@ -116,6 +134,7 @@ const subscribe = async (pubsub: MeshPubSub): Promise<void> => {
     pubSubListenerWrapper(({ resolverData }) => {
       logger.debug(`PubSubEvents.RESOLVER_CALLED ${resolverData.context?.id || ''}`);
       metricEmitter.emit(MetricsChannels.RESOLVER_CALLED, resolverData);
+      traceResolverStart(resolverData);
     })
   );
   await pubsub.subscribe(
@@ -127,6 +146,7 @@ const subscribe = async (pubsub: MeshPubSub): Promise<void> => {
       } else {
         metricEmitter.emit(MetricsChannels.RESOLVER_DONE, resolverData, result);
       }
+      traceResolverFinish(null, resolverData);
     })
   );
   await pubsub.subscribe(
@@ -134,6 +154,7 @@ const subscribe = async (pubsub: MeshPubSub): Promise<void> => {
     pubSubListenerWrapper(({ resolverData, error }) => {
       logger.debug(`PubSubEvents.RESOLVER_ERROR ${resolverData.context?.id || ''}: ${error.message}`);
       metricEmitter.emit(MetricsChannels.RESOLVER_ERROR, resolverData, error);
+      traceResolverFinish(error, resolverData);
     })
   );
 };

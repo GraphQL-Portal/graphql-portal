@@ -3,6 +3,7 @@ import { MetricsChannels } from '@graphql-portal/types';
 import { metricEmitter } from '../../metric';
 import { handleError } from '../../middleware';
 
+jest.mock('../../tracer');
 jest.mock('../../metric/emitter', () => ({
   metricEmitter: {
     emit: jest.fn(),

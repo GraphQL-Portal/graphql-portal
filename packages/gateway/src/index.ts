@@ -6,6 +6,7 @@ import { applyRegisteredHandlers, getConfigFromMaster, spreadMessageToWorkers } 
 import setupRedis, { redis } from './redis';
 import RedisConnectionOptions from './redis/redis-connection.interface';
 import { startServer } from './server';
+import { initTracer } from './tracer';
 
 const logger = prefixLogger('server');
 
@@ -50,6 +51,7 @@ async function start(): Promise<void> {
     await getConfigFromMaster();
     await setupRedis(config.gateway.redis as RedisConnectionOptions, config.gateway.redis_connection_string);
     await configureLogger(config.gateway, config.nodeId, redis);
+    initTracer(config);
     applyRegisteredHandlers();
     await startServer();
   }

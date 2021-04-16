@@ -13,6 +13,7 @@ import {
 } from 'graphql';
 import CostAnalysis from 'graphql-cost-analysis/dist/costAnalysis';
 import depthLimit from 'graphql-depth-limit';
+import { tracer } from '../../tracer';
 import { apiSchema } from '../../server/router';
 import { isIntrospectionRequest, throwError } from '../utils';
 import RequestCostTool from './request-cost.tool';
@@ -45,6 +46,7 @@ const rateLimitMiddleware = (apiDef: ApiDef): RequestHandler => {
     if (isIntrospectionRequest(req)) {
       return next();
     }
+    const span = tracer?.startSpan(`rateLimit middleware`, { childOf: req.context?.tracerSpan });
 
     const schema = apiSchema[apiDef.name];
     let query: DocumentNode;
@@ -52,6 +54,8 @@ const rateLimitMiddleware = (apiDef: ApiDef): RequestHandler => {
       query = parse(body.query);
     } catch (error) {
       logger.error(error.message);
+      span?.log({ error });
+      span?.finish();
       return next();
     }
     const typeInfo = new TypeInfo(schema);
@@ -63,7 +67,7 @@ const rateLimitMiddleware = (apiDef: ApiDef): RequestHandler => {
     };
     depthLimit(maxDepth, {}, setDepth)(validationContext);
     if (Number.isNaN(depth)) {
-      return throwError(new GraphQLError(`The query exceeds maximum operation depth of ${maxDepth}`));
+      return throwError(new GraphQLError(`The query exceeds maximum operation depth of ${maxDepth}`), undefined, span);
     }
     logger.debug(`request ${req.id} from ${req.ip}: depth ${depth}`);
 
@@ -74,7 +78,7 @@ const rateLimitMiddleware = (apiDef: ApiDef): RequestHandler => {
     visit(query, visitWithTypeInfo(typeInfo, visitor as Visitor<any>));
     const { cost } = visitor;
     if (cost > maxCost) {
-      return throwError(new GraphQLError(`The query exceeds maximum complexity of ${maxCost}`));
+      return throwError(new GraphQLError(`The query exceeds maximum complexity of ${maxCost}`), undefined, span);
     }
     logger.debug(`request ${req.id} from ${req.ip}: cost ${cost}`);
 
@@ -85,11 +89,14 @@ const rateLimitMiddleware = (apiDef: ApiDef): RequestHandler => {
     if (totalCost > costRate) {
       return throwError(
         new GraphQLError(`Too many requests. Exceeded complexity limit of ${costRate} per ${costRatePer} seconds`),
-        429
+        429,
+        span
       );
     }
     logger.debug(`request ${req.id} from ${req.ip}: totalCost ${totalCost}`);
     await requestCostTool.saveCost(req, cost);
+    span?.log({ cost });
+    span?.finish();
     return next();
   };
 };

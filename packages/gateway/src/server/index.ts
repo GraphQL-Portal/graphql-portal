@@ -3,12 +3,13 @@ import { prefixLogger } from '@graphql-portal/logger';
 import { Channel } from '@graphql-portal/types';
 import bodyParser from 'body-parser';
 import cookieParser from 'cookie-parser';
-import express from 'express';
 import cors from 'cors';
+import express from 'express';
 import { graphqlUploadExpress } from 'graphql-upload';
 import { createServer } from 'http';
-import { getConfigFromMaster } from '../ipc/utils';
+import { Span } from 'opentracing';
 import { promisify } from 'util';
+import { getConfigFromMaster } from '../ipc/utils';
 import { startPeriodicMetricsRecording } from '../metric';
 import { logResponse } from '../middleware';
 import { redisSubscriber } from '../redis';
@@ -21,6 +22,8 @@ export type ForwardHeaders = Record<string, string>;
 export interface Context {
   forwardHeaders: ForwardHeaders;
   requestId: string;
+  tracerSpan?: Span;
+  resolverSpans: { [path: string]: Span };
 }
 
 // Helper for metrics gathering

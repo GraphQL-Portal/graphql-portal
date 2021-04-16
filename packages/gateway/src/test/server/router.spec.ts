@@ -8,6 +8,7 @@ import supertest from 'supertest';
 import subscribeToRequestMetrics from '../../metric/emitter';
 import { buildRouter, setRouter } from '../../server/router';
 
+jest.mock('../../tracer');
 jest.mock('@graphql-portal/config', () => ({
   config: {
     gateway: {

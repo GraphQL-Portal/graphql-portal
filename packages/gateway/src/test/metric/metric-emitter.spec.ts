@@ -2,6 +2,7 @@ import { EventEmitter } from 'events';
 import { subscribeToRequestMetrics } from '../../metric';
 import { MetricsChannels, PubSubEvents } from '@graphql-portal/types';
 
+jest.mock('../../tracer');
 jest.mock('@graphql-portal/config', () => ({
   config: {
     nodeId: 'nodeId',
