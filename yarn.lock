@@ -2283,7 +2283,7 @@
   dependencies:
     "@types/istanbul-lib-report" "*"
 
-"@types/jaeger-client@^3.15.4":
+"@types/jaeger-client@3.15.4":
   version "3.15.4"
   resolved "https://registry.yarnpkg.com/@types/jaeger-client/-/jaeger-client-3.15.4.tgz#7c7548c1bbdfbdb819df63afb230998ed2e298dc"
   integrity sha512-DdA3jLT6VoAnn9/AI7DBOSXSFFM839f1dXvf/wTWcofs8ajcclEexGPEbELYfC3XuoEIWLPd7OmrqF/6mp4n/A==
