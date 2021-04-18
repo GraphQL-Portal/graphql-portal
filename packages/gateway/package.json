@@ -83,7 +83,7 @@
   "devDependencies": {
     "@types/bytes": "3.1.0",
     "@types/cors": "2.8.10",
-    "@types/jaeger-client": "^3.15.4",
+    "@types/jaeger-client": "3.15.4",
     "@types/request-ip": "0.0.35",
     "@types/supertest": "2.0.11",
     "ioredis-mock": "5.5.2",
