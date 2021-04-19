@@ -1331,7 +1331,7 @@
     "@graphql-typed-document-node/core" "3.1.0"
     fetchache "0.0.4"
 
-"@graphql-mesh/types@0.38.0", "@graphql-mesh/types@^0.38.0":
+"@graphql-mesh/types@0.38.0":
   version "0.38.0"
   resolved "https://registry.yarnpkg.com/@graphql-mesh/types/-/types-0.38.0.tgz#9e37885f0ef93611a8f2cd4e077760de993cc77e"
   integrity sha512-sruLz9/ZyrWdVQG3Otuf7gZswTUVWGczGyWfEhnVGmNPCMvS2QsA1lRsUMmyvPF0SIFW92VbRS9sUYegowUo6A==
@@ -1341,7 +1341,7 @@
     "@graphql-typed-document-node/core" "3.1.0"
     fetchache "0.1.1"
 
-"@graphql-mesh/types@0.39.0":
+"@graphql-mesh/types@0.39.0", "@graphql-mesh/types@^0.39.0":
   version "0.39.0"
   resolved "https://registry.yarnpkg.com/@graphql-mesh/types/-/types-0.39.0.tgz#ba598953fd7f8a0c64ae8042c2720cdabf1bdb23"
   integrity sha512-Er6N2jzHTDk0tgVqOcBlbGsagfi88UOWg071oj466p4ku0g7DSDs+0VhlrHEGDiXDsum/wgUvIgJo57V/mRSfA==
