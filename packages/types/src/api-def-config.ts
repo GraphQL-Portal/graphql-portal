@@ -72,10 +72,6 @@ export interface ApiDefConfig {
      * Live Query Invalidations
      */
     liveQueryInvalidations?: LiveQueryInvalidation[];
-    /**
-     * Path to the file containing the introspection cache
-     */
-    introspectionCache?: string;
   };
 }
 /**
@@ -125,11 +121,6 @@ export interface ServeConfig {
    * Path to GraphQL Endpoint (default: /graphql)
    */
   endpoint?: string;
-  /**
-   * Path to the browser that will be used by `mesh serve` to open a playground window in development mode
-   * This feature can be disable by passing `false` (Any of: String, Boolean)
-   */
-  browser?: string | boolean;
 }
 /**
  * Configuration for CORS
@@ -295,6 +286,10 @@ export interface GraphQLHandler {
    */
   introspection?: string;
   /**
+   * Cache Introspection (Any of: GraphQLIntrospectionCachingOptions, Boolean)
+   */
+  cacheIntrospection?: GraphQLIntrospectionCachingOptions | boolean;
+  /**
    * Enable multipart/formdata in order to support file uploads
    */
   multipart?: boolean;
@@ -302,6 +297,16 @@ export interface GraphQLHandler {
    * Batch requests
    */
   batch?: boolean;
+}
+export interface GraphQLIntrospectionCachingOptions {
+  /**
+   * Time to live of introspection cache
+   */
+  ttl?: number;
+  /**
+   * Path to Introspection JSON File
+   */
+  path?: string;
 }
 /**
  * Handler for gRPC and Protobuf schemas
@@ -612,6 +617,16 @@ export interface Neo4JHandler {
    * Provide GraphQL Type Definitions instead of inferring
    */
   typeDefs?: string;
+  /**
+   * Cache Introspection (Any of: Neo4jIntrospectionCachingOptions, Boolean)
+   */
+  cacheIntrospection?: Neo4JIntrospectionCachingOptions | boolean;
+}
+export interface Neo4JIntrospectionCachingOptions {
+  /**
+   * Time to live of introspection cache
+   */
+  ttl?: number;
 }
 /**
  * Handler for OData
@@ -645,15 +660,6 @@ export interface ODataHandler {
    * Use $expand for navigation props instead of seperate HTTP requests (Default: false)
    */
   expandNavProps?: boolean;
-  /**
-   * Custom Fetch
-   */
-  customFetch?:
-    | {
-        [k: string]: unknown;
-      }
-    | string
-    | unknown[];
 }
 /**
  * Handler for Swagger / OpenAPI 2/3 specification. Source could be a local json/swagger file, or a url to it.
@@ -662,12 +668,7 @@ export interface OpenapiHandler {
   /**
    * A pointer to your API source - could be a local file, remote file or url endpoint
    */
-  source:
-    | {
-        [k: string]: unknown;
-      }
-    | string
-    | unknown[];
+  source: string;
   /**
    * Format of the source file (Allowed values: json, yaml)
    */
@@ -776,6 +777,10 @@ export interface PostGraphileHandler {
         [k: string]: unknown;
       }
     | string;
+  /**
+   * Cache Introspection (Any of: GraphQLIntrospectionCachingOptions, Boolean)
+   */
+  cacheIntrospection?: GraphQLIntrospectionCachingOptions | boolean;
   /**
    * Enable GraphQL websocket transport support for subscriptions (default: true)
    */

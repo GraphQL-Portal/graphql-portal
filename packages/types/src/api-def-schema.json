@@ -97,11 +97,7 @@
           "$ref": "#/definitions/HTTPSConfig",
           "description": "SSL Credentials for HTTPS Server\nIf this is provided, Mesh will be served via HTTPS"
         },
-        "endpoint": { "type": "string", "description": "Path to GraphQL Endpoint (default: /graphql)" },
-        "browser": {
-          "description": "Path to the browser that will be used by `mesh serve` to open a playground window in development mode\nThis feature can be disable by passing `false` (Any of: String, Boolean)",
-          "anyOf": [{ "type": "string" }, { "type": "boolean" }]
-        }
+        "endpoint": { "type": "string", "description": "Path to GraphQL Endpoint (default: /graphql)" }
       }
     },
     "CorsConfig": {
@@ -401,10 +397,23 @@
           "type": "string",
           "description": "Path to the introspection\nYou can seperately give schema introspection"
         },
+        "cacheIntrospection": {
+          "description": "Cache Introspection (Any of: GraphQLIntrospectionCachingOptions, Boolean)",
+          "anyOf": [{ "$ref": "#/definitions/GraphQLIntrospectionCachingOptions" }, { "type": "boolean" }]
+        },
         "multipart": { "type": "boolean", "description": "Enable multipart/formdata in order to support file uploads" },
         "batch": { "type": "boolean", "description": "Batch requests" }
       },
       "required": ["endpoint"]
+    },
+    "GraphQLIntrospectionCachingOptions": {
+      "additionalProperties": false,
+      "type": "object",
+      "title": "GraphQLIntrospectionCachingOptions",
+      "properties": {
+        "ttl": { "type": "integer", "description": "Time to live of introspection cache" },
+        "path": { "type": "string", "description": "Path to Introspection JSON File" }
+      }
     },
     "GrpcHandler": {
       "additionalProperties": false,
@@ -756,9 +765,19 @@
           "description": "Specifies whether relationships should always be included in the type definitions as [relationship](https://grandstack.io/docs/neo4j-graphql-js.html#relationship-types) types, even if the relationships do not have properties."
         },
         "database": { "type": "string", "description": "Specifies database name" },
-        "typeDefs": { "type": "string", "description": "Provide GraphQL Type Definitions instead of inferring" }
+        "typeDefs": { "type": "string", "description": "Provide GraphQL Type Definitions instead of inferring" },
+        "cacheIntrospection": {
+          "description": "Cache Introspection (Any of: Neo4jIntrospectionCachingOptions, Boolean)",
+          "anyOf": [{ "$ref": "#/definitions/Neo4jIntrospectionCachingOptions" }, { "type": "boolean" }]
+        }
       },
       "required": ["url", "username", "password"]
+    },
+    "Neo4jIntrospectionCachingOptions": {
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Neo4jIntrospectionCachingOptions",
+      "properties": { "ttl": { "type": "integer", "description": "Time to live of introspection cache" } }
     },
     "ODataHandler": {
       "additionalProperties": false,
@@ -785,14 +804,6 @@
         "expandNavProps": {
           "type": "boolean",
           "description": "Use $expand for navigation props instead of seperate HTTP requests (Default: false)"
-        },
-        "customFetch": {
-          "anyOf": [
-            { "type": "object", "additionalProperties": true },
-            { "type": "string" },
-            { "type": "array", "additionalItems": true }
-          ],
-          "description": "Custom Fetch"
         }
       },
       "required": ["baseUrl"]
@@ -803,11 +814,7 @@
       "title": "OpenapiHandler",
       "properties": {
         "source": {
-          "anyOf": [
-            { "type": "object", "additionalProperties": true },
-            { "type": "string" },
-            { "type": "array", "additionalItems": true }
-          ],
+          "type": "string",
           "description": "A pointer to your API source - could be a local file, remote file or url endpoint"
         },
         "sourceFormat": {
@@ -913,6 +920,10 @@
         "options": {
           "description": "Extra Postgraphile options that will be added to the postgraphile constructor. It can either be an object or a string pointing to the object's path (e.g. \"./my-config#options\"). See the [postgraphile docs](https://www.graphile.org/postgraphile/usage-library/) for more information. (Any of: JSON, String)",
           "anyOf": [{ "type": "object", "properties": {} }, { "type": "string" }]
+        },
+        "cacheIntrospection": {
+          "description": "Cache Introspection (Any of: GraphQLIntrospectionCachingOptions, Boolean)",
+          "anyOf": [{ "$ref": "#/definitions/GraphQLIntrospectionCachingOptions" }, { "type": "boolean" }]
         },
         "subscriptions": {
           "type": "boolean",
@@ -1573,8 +1584,7 @@
           "items": { "$ref": "#/definitions/LiveQueryInvalidation" },
           "additionalItems": false,
           "description": "Live Query Invalidations"
-        },
-        "introspectionCache": { "type": "string", "description": "Path to the file containing the introspection cache" }
+        }
       }
     }
   },
