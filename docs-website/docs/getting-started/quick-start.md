@@ -6,7 +6,7 @@ title: 'Quick Start'
 TL;DR? The quickest way to launch GraphQL Portal (with Gateway and Dashboard) 
 locally, is to use our [Docker Compose file](https://github.com/graphql-portal/graphql-portal-docker):
 ```shell
-git clone git@github.com:graphql-portal/graphql-portal-docker.git
+git clone git@github.com:GraphQL-Portal/graphql-portal-docker.git
 cd graphql-portal-docker
 ```
 
