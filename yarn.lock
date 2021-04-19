@@ -1289,13 +1289,13 @@
     "@graphql-tools/utils" "7.5.0"
     "@graphql-tools/wrap" "7.0.5"
 
-"@graphql-mesh/transform-resolvers-composition@^0.8.1":
-  version "0.8.1"
-  resolved "https://registry.yarnpkg.com/@graphql-mesh/transform-resolvers-composition/-/transform-resolvers-composition-0.8.1.tgz#54c7461dc0c8b177d031da708b937d73559f5fe4"
-  integrity sha512-gP/EQ2r5VzyLAixM9sVBCXZgTT68cDsPdrgrJD3pxDeKu65VWJewzY1Q5rztita/4fSuCnzXtYLJMR52uFkDSA==
+"@graphql-mesh/transform-resolvers-composition@^0.9.0":
+  version "0.9.0"
+  resolved "https://registry.yarnpkg.com/@graphql-mesh/transform-resolvers-composition/-/transform-resolvers-composition-0.9.0.tgz#9193ccc220a9cd573db0a49ebe22bab177ada57a"
+  integrity sha512-jwVebuzAEW1b8hD/hFurmfghl5uuNTTznJOxN0/B+ogbXb6QRwLTL2869xQWjFuigFiT+/+YDE5WkSECcfHT6A==
   dependencies:
-    "@graphql-mesh/types" "0.35.1"
-    "@graphql-mesh/utils" "0.9.0"
+    "@graphql-mesh/types" "0.39.0"
+    "@graphql-mesh/utils" "0.10.0"
     "@graphql-tools/resolvers-composition" "6.2.6"
     "@graphql-tools/schema" "7.1.3"
 
