@@ -69,7 +69,7 @@ Once installed and configured, the Gateway allows you to:
 
 TL;DR? The quickest way to launch GraphQL Portal (with Gateway and Dashboard) locally, is to use our [Docker Compose file](https://github.com/graphql-portal/graphql-portal-docker):
 ```shell
-git clone git@github.com:graphql-portal/graphql-portal-docker.git
+git clone git@github.com:GraphQL-Portal/graphql-portal-docker.git
 cd graphql-portal-docker
 
 docker-compose -f docker-compose.yml up
@@ -92,7 +92,7 @@ Unless installed via docker compose, you will need:
 
 Check out [our dedicated repository](https://github.com/graphql-portal/graphql-portal-docker) with docker compose files and examples of the configuration:
 ```shell
-git clone git@github.com:graphql-portal/graphql-portal-docker.git
+git clone git@github.com:GraphQL-Portal/graphql-portal-docker.git
 cd graphql-portal-docker
 
 docker-compose -f docker-compose.yml up
