@@ -1,5 +1,11 @@
 # @graphql-portal/types
 
+## 0.26.0
+
+### Minor Changes
+
+- 1ea95f9: sync mesh types
+
 ## 0.25.0
 
 ### Minor Changes
