@@ -156,13 +156,25 @@
       "additionalProperties": false,
       "properties": {
         "enable": {
-          "type": "boolean",
           "default": false,
-          "description": "Allows to enable/disable the tracing at all"
+          "description": "Allows to enable/disable the tracing at all",
+          "oneOf": [
+            {
+              "type": "string",
+              "enum": ["jaeger", "datadog"]
+            },
+            {
+              "type": "boolean"
+            }
+          ]
         },
         "jaeger": {
           "$ref": "#/definitions/jaeger_tracing",
           "description": "Configures sending of traces to Jaeger"
+        },
+        "datadog": {
+          "$ref": "#/definitions/datadog_tracing",
+          "description": "Configures sending of traces to Datadog"
         }
       }
     }
@@ -319,6 +331,21 @@
         "port": {
           "type": "number",
           "description": "The port of your Jaeger agent. Defaults to 6832",
+          "minimum": 0
+        }
+      }
+    },
+    "datadog_tracing": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "host": {
+          "type": "string",
+          "description": "The host of your Datadog agent. Defaults to 'localhost'"
+        },
+        "port": {
+          "type": "number",
+          "description": "The port of your Datadog agent. Defaults to 8126",
           "minimum": 0
         }
       }
