@@ -286,3 +286,51 @@ Example:
   "request_size_limit": "20mb"
 }
 ```
+
+## tracing
+
+Optional. Configures tracing provides.
+Currently available providers:
+* Jaeger
+* Datadog
+
+### enable
+
+Boolean or name of provider in lowercase (`"jaeger"` or `"datadog"`). Enable or disable tracing. Defaults to false.
+
+### jaeger
+
+Optional. Configures sending of traces to Jaeger.
+
+##### host
+
+The host of your Jaeger agent. Defaults to "localhost".
+
+##### port
+
+The port of your Jaeger agent. Defaults to 6832.
+
+### datadog
+
+Optional. Configures sending of traces to Datadog.
+
+##### host
+
+The host of your Datadog agent. Defaults to localhost.
+
+##### port
+
+The port of your Datadog agent. Defaults to 8126.
+
+Example:
+```json
+{
+  "tracing": {
+    "enable": "jaeger",
+    "jaeger": {
+      "host": "@@JAEGER_AGENT_HOST",
+      "port": "@@JAEGER_AGENT_PORT",
+    },
+  }
+}
+```
