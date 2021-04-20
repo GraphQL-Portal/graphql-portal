@@ -181,7 +181,7 @@ export interface GatewayConfig {
    */
   request_size_limit?: string | number;
   /**
-   * Configure Jaeger agent endpoint
+   * Configure agent endpoint
    */
   tracing?: {
     /**

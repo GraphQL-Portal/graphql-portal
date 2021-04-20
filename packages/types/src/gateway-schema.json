@@ -152,7 +152,7 @@
     },
     "tracing": {
       "type": "object",
-      "description": "Configure Jaeger agent endpoint",
+      "description": "Configure agent endpoint",
       "additionalProperties": false,
       "properties": {
         "enable": {
