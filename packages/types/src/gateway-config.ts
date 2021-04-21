@@ -181,13 +181,13 @@ export interface GatewayConfig {
    */
   request_size_limit?: string | number;
   /**
-   * Configure Jaeger agent endpoint
+   * Configure agent endpoint
    */
   tracing?: {
     /**
      * Allows to enable/disable the tracing at all
      */
-    enable?: boolean;
+    enable?: ('jaeger' | 'datadog') | boolean;
     /**
      * Configures sending of traces to Jaeger
      */
@@ -198,6 +198,19 @@ export interface GatewayConfig {
       host?: string;
       /**
        * The port of your Jaeger agent. Defaults to 6832
+       */
+      port?: number;
+    };
+    /**
+     * Configures sending of traces to Datadog
+     */
+    datadog?: {
+      /**
+       * The host of your Datadog agent. Defaults to 'localhost'
+       */
+      host?: string;
+      /**
+       * The port of your Datadog agent. Defaults to 8126
        */
       port?: number;
     };
