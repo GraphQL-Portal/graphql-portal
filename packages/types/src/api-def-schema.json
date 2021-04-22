@@ -285,7 +285,13 @@
         "CrunchbaseHandler": { "$ref": "#/definitions/CrunchbaseHandler" },
         "SalesforceHandler": { "$ref": "#/definitions/SalesforceHandler" },
         "TwitterHandler": { "$ref": "#/definitions/TwitterHandler" },
-        "IPAPIHandler": { "$ref": "#/definitions/IPAPIHandler" }
+        "IPAPIHandler": { "$ref": "#/definitions/IPAPIHandler" },
+        "FusionCreatorAccountInformationUSHandler": {
+          "$ref": "#/definitions/FusionCreatorAccountInformationUSHandler"
+        },
+        "FusionCreatorAccountInformationPSD2STETHandler": {
+          "$ref": "#/definitions/FusionCreatorAccountInformationPSD2STETHandler"
+        }
       }
     },
     "AdditionalStitchingResolverObject": {
@@ -1495,6 +1501,20 @@
       "type": "object",
       "title": "IPAPIHandler",
       "description": "IP Geolocation API"
+    },
+    "FusionCreatorAccountInformationPSD2STETHandler": {
+      "additionalProperties": false,
+      "type": "object",
+      "title": "FusionCreatorAccountInformationPSD2STETHandler",
+      "description": "Retrieve set of account list, balances and account history e.g. for external aggregation purposes based on consent given by the customer. (PSD2 AISP scenario - STET standard)"
+    },
+    "FusionCreatorAccountInformationUSHandler": {
+      "additionalProperties": false,
+      "type": "object",
+      "title": "FusionCreatorAccountInformationUSHandler",
+      "properties": { "token": { "type": "string", "description": "Access token (with prefix)" } },
+      "required": ["token"],
+      "description": "Provides methods for interacting with data on the core banking system and third party vendors."
     }
   },
   "properties": {
