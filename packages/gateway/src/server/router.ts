@@ -4,12 +4,12 @@ import { getMesh } from '@graphql-mesh/runtime';
 import { KeyValueCache, MeshPubSub } from '@graphql-mesh/types';
 import { config } from '@graphql-portal/config';
 import { prefixLogger } from '@graphql-portal/logger';
-import { ApiDef } from '@graphql-portal/types';
+import { ApiDef, WebhookEvents } from '@graphql-portal/types';
 import { Application, Request, RequestHandler, Router } from 'express';
 import { graphqlHTTP } from 'express-graphql';
 import { GraphQLSchema } from 'graphql';
 import { subscribeToRequestMetrics } from '../metric';
-import { setupWebhooks, WebhookEvents, webhooks } from '../webhooks';
+import { setupWebhooks, webhooks } from '../webhooks';
 import { defaultMiddlewares, loadCustomMiddlewares, handleError, prepareRequestContext } from '../middleware';
 
 interface IMesh {

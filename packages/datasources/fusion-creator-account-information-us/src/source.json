@@ -386,7 +386,7 @@
             "schema": {
               "type": "array",
               "items": {
-                "$ref": "#/definitions/Details"
+                "$ref": "#/definitions/Detail"
               }
             }
           },
@@ -598,7 +598,7 @@
                 "details": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/definitions/Details"
+                    "$ref": "#/definitions/Detail"
                   }
                 }
               }
@@ -1247,7 +1247,7 @@
             "details": {
               "type": "array",
               "items": {
-                "$ref": "#/definitions/Details"
+                "$ref": "#/definitions/Detail"
               }
             },
             "statementDeliveryOption": {
@@ -1499,9 +1499,9 @@
         }
       }
     },
-    "Details": {
+    "Detail": {
       "description": "Defines a label and value for a detail item.",
-      "title": "Details",
+      "title": "Detail",
       "type": "object",
       "properties": {
         "value": {
