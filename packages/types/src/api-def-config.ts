@@ -73,15 +73,19 @@ export interface ApiDefConfig {
      * Live Query Invalidations
      */
     liveQueryInvalidations?: LiveQueryInvalidation[];
+    /**
+     * Path to the file containing the introspection cache
+     */
+    introspectionCache?: string;
   };
 }
 export interface Webhook {
   /**
-   * event that remote API will ping
+   * Name of the event you want to subscribe
    */
   event: 'schema_changed';
   /**
-   * Name of the topic you want to pass incoming payload
+   * URL that remote API will ping
    */
   url: string;
 }
@@ -132,6 +136,11 @@ export interface ServeConfig {
    * Path to GraphQL Endpoint (default: /graphql)
    */
   endpoint?: string;
+  /**
+   * Path to the browser that will be used by `mesh serve` to open a playground window in development mode
+   * This feature can be disable by passing `false` (Any of: String, Boolean)
+   */
+  browser?: string | boolean;
 }
 /**
  * Configuration for CORS
@@ -299,10 +308,6 @@ export interface GraphQLHandler {
    */
   introspection?: string;
   /**
-   * Cache Introspection (Any of: GraphQLIntrospectionCachingOptions, Boolean)
-   */
-  cacheIntrospection?: GraphQLIntrospectionCachingOptions | boolean;
-  /**
    * Enable multipart/formdata in order to support file uploads
    */
   multipart?: boolean;
@@ -310,16 +315,6 @@ export interface GraphQLHandler {
    * Batch requests
    */
   batch?: boolean;
-}
-export interface GraphQLIntrospectionCachingOptions {
-  /**
-   * Time to live of introspection cache
-   */
-  ttl?: number;
-  /**
-   * Path to Introspection JSON File
-   */
-  path?: string;
 }
 /**
  * Handler for gRPC and Protobuf schemas
@@ -630,16 +625,6 @@ export interface Neo4JHandler {
    * Provide GraphQL Type Definitions instead of inferring
    */
   typeDefs?: string;
-  /**
-   * Cache Introspection (Any of: Neo4jIntrospectionCachingOptions, Boolean)
-   */
-  cacheIntrospection?: Neo4JIntrospectionCachingOptions | boolean;
-}
-export interface Neo4JIntrospectionCachingOptions {
-  /**
-   * Time to live of introspection cache
-   */
-  ttl?: number;
 }
 /**
  * Handler for OData
@@ -681,7 +666,12 @@ export interface OpenapiHandler {
   /**
    * A pointer to your API source - could be a local file, remote file or url endpoint
    */
-  source: string;
+  source:
+    | {
+        [k: string]: unknown;
+      }
+    | string
+    | unknown[];
   /**
    * Format of the source file (Allowed values: json, yaml)
    */
@@ -790,10 +780,6 @@ export interface PostGraphileHandler {
         [k: string]: unknown;
       }
     | string;
-  /**
-   * Cache Introspection (Any of: GraphQLIntrospectionCachingOptions, Boolean)
-   */
-  cacheIntrospection?: GraphQLIntrospectionCachingOptions | boolean;
   /**
    * Enable GraphQL websocket transport support for subscriptions (default: true)
    */

@@ -1146,7 +1146,7 @@
     postgraphile "4.11.0"
     postgraphile-core "4.11.2"
 
-"@graphql-mesh/runtime@0.13.2", "@graphql-mesh/runtime@^0.13.0":
+"@graphql-mesh/runtime@0.13.2":
   version "0.13.2"
   resolved "https://registry.yarnpkg.com/@graphql-mesh/runtime/-/runtime-0.13.2.tgz#06e7f873554cdc4926955dbfd4b002834a53808a"
   integrity sha512-Va0bal9TPCelF5/OMyM3lXiXQwm5Rjfk8Y5T7jOPWyBHAMZdT4BeV0u4oRrrCVgl1fcMyrPbsORyddm75B+AXQ==
@@ -1160,6 +1160,22 @@
     "@graphql-tools/wrap" "7.0.5"
     "@n1ru4l/graphql-live-query" "0.7.1"
     "@n1ru4l/in-memory-live-query-store" "0.6.2"
+
+"@graphql-mesh/runtime@^0.13.0":
+  version "0.13.4"
+  resolved "https://registry.yarnpkg.com/@graphql-mesh/runtime/-/runtime-0.13.4.tgz#672f3da052f8a8f454255232a9f75855cb0d87cf"
+  integrity sha512-49Y9zLG0EQwHzsR/4s3GFUx0VPBMe2M/mtau+YKv3AKV7mzZeuxhZuw9CRhOhYEvYUMW1FLbxyjxcHTXkU7gAQ==
+  dependencies:
+    "@graphql-mesh/types" "0.39.0"
+    "@graphql-mesh/utils" "0.10.0"
+    "@graphql-tools/delegate" "7.1.2"
+    "@graphql-tools/resolvers-composition" "6.2.6"
+    "@graphql-tools/schema" "7.1.3"
+    "@graphql-tools/utils" "7.7.3"
+    "@graphql-tools/wrap" "7.0.5"
+    "@n1ru4l/graphql-live-query" "0.7.1"
+    "@n1ru4l/in-memory-live-query-store" "0.6.3"
+    graphql-jit "0.5.0"
 
 "@graphql-mesh/soap@^0.7.0":
   version "0.7.0"
@@ -1326,7 +1342,7 @@
     "@graphql-typed-document-node/core" "3.1.0"
     fetchache "0.0.4"
 
-"@graphql-mesh/types@0.37.0":
+"@graphql-mesh/types@0.37.0", "@graphql-mesh/types@^0.37.0":
   version "0.37.0"
   resolved "https://registry.yarnpkg.com/@graphql-mesh/types/-/types-0.37.0.tgz#173c688f76e3f5018958c44107ba99f52640f15a"
   integrity sha512-8p9VyDcdSIRZ/AZ1cwiDc8hE0rzNfDBQAM1Bh5RrNroaMAkqEFM5LGnv+/nrWZNsUBQ5T3vUX5u+fVr5VzzN0A==
@@ -1346,7 +1362,7 @@
     "@graphql-typed-document-node/core" "3.1.0"
     fetchache "0.1.1"
 
-"@graphql-mesh/types@0.39.0", "@graphql-mesh/types@^0.39.0":
+"@graphql-mesh/types@0.39.0":
   version "0.39.0"
   resolved "https://registry.yarnpkg.com/@graphql-mesh/types/-/types-0.39.0.tgz#ba598953fd7f8a0c64ae8042c2720cdabf1bdb23"
   integrity sha512-Er6N2jzHTDk0tgVqOcBlbGsagfi88UOWg071oj466p4ku0g7DSDs+0VhlrHEGDiXDsum/wgUvIgJo57V/mRSfA==
@@ -2010,6 +2026,15 @@
   integrity sha512-KdTTWtERVV8MhDk/g1/tUTPgtt9uDHqmvamn9ymlmksia1/33u/KoGTcDwSmIXpsBdRVsx1+libYE1xGlnYxsg==
   dependencies:
     "@graphql-tools/wrap" "^7.0.3"
+    "@n1ru4l/graphql-live-query" "0.7.1"
+    "@n1ru4l/push-pull-async-iterable-iterator" "^2.0.0"
+
+"@n1ru4l/in-memory-live-query-store@0.6.3":
+  version "0.6.3"
+  resolved "https://registry.yarnpkg.com/@n1ru4l/in-memory-live-query-store/-/in-memory-live-query-store-0.6.3.tgz#96b97eb1ac009d627c481c1e48b0f2fc9eac60db"
+  integrity sha512-A6gvdzo3hKkdHrLSw2hIgfWBd5hwX0cFHfdv+95iskdWcM9lUyQA9op0VzYB74z/87plDTmaNpa1VJduE+kotg==
+  dependencies:
+    "@graphql-tools/utils" "^7.7.1"
     "@n1ru4l/graphql-live-query" "0.7.1"
     "@n1ru4l/push-pull-async-iterable-iterator" "^2.0.0"
 
@@ -11173,7 +11198,7 @@ ws@^6.0.0:
   dependencies:
     async-limiter "~1.0.0"
 
-xml-crypto@^2.0.0:
+xml-crypto@2.1.1, xml-crypto@^2.0.0:
   version "2.1.1"
   resolved "https://registry.yarnpkg.com/xml-crypto/-/xml-crypto-2.1.1.tgz#d1dfb4ee66f907c480379562cda130897dc05b99"
   integrity sha512-M+m4+HIJa83lu/CnspQjA7ap8gmanNDxxRjSisU8mPD4bqhxbo5N2bdpvG2WgVYOrPpOIOq55iY8Cz8Ai40IeQ==
