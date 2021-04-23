@@ -4,6 +4,16 @@
   "type": "object",
   "additionalProperties": false,
   "definitions": {
+    "Webhook": {
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Webhook",
+      "properties": {
+        "event": { "type": "string", "enum":["schema_changed"], "description": "event that remote API will ping" },
+        "url": { "type": "string", "description": "Name of the topic you want to pass incoming payload" }
+      },
+      "required": ["event", "url"]
+    },
     "Cache": {
       "additionalProperties": true,
       "type": "object",
@@ -1549,6 +1559,10 @@
       },
       "required": ["auth_tokens"],
       "additionalProperties": false
+    },
+    "webhooks": {
+      "type": "array",
+      "items": { "$ref": "#/definitions/Webhook" }
     },
     "playground": { "type": "boolean", "default": true },
     "mesh": {

@@ -34,6 +34,7 @@ export interface ApiDefConfig {
     auth_header_name?: string;
     auth_tokens: string[];
   };
+  webhooks?: Webhook[];
   playground?: boolean;
   mesh?: {
     serve?: ServeConfig;
@@ -73,6 +74,16 @@ export interface ApiDefConfig {
      */
     liveQueryInvalidations?: LiveQueryInvalidation[];
   };
+}
+export interface Webhook {
+  /**
+   * event that remote API will ping
+   */
+  event: 'schema_changed';
+  /**
+   * Name of the topic you want to pass incoming payload
+   */
+  url: string;
 }
 /**
  * Configuration for `mesh serve` command.
@@ -224,6 +235,8 @@ export interface Handler {
   SalesforceHandler?: SalesforceHandler;
   TwitterHandler?: TwitterHandler;
   IPAPIHandler?: IPAPIHandler;
+  FusionCreatorAccountInformationUSHandler?: FusionCreatorAccountInformationUSHandler;
+  FusionCreatorAccountInformationPSD2STETHandler?: FusionCreatorAccountInformationPSD2STETHandler;
   [k: string]: unknown;
 }
 export interface FhirHandler {
@@ -1002,6 +1015,19 @@ export interface TwitterHandler {
  * IP Geolocation API
  */
 export interface IPAPIHandler {}
+/**
+ * Provides methods for interacting with data on the core banking system and third party vendors.
+ */
+export interface FusionCreatorAccountInformationUSHandler {
+  /**
+   * Access token (with prefix)
+   */
+  token: string;
+}
+/**
+ * Retrieve set of account list, balances and account history e.g. for external aggregation purposes based on consent given by the customer. (PSD2 AISP scenario - STET standard)
+ */
+export interface FusionCreatorAccountInformationPSD2STETHandler {}
 export interface Transform {
   /**
    * Transformer to apply caching for your data sources
