@@ -38,7 +38,7 @@
     "postinstall-postinstall": "2.1.0"
   },
   "resolutions": {
-    "**/xml-crypto": "2.1.1"
+    "**/xml-crypto": "2.1.2"
   },
   "devDependencies": {
     "@changesets/cli": "2.16.0",
