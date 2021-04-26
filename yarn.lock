@@ -6261,16 +6261,16 @@ inherits@2.0.3:
   resolved "https://registry.yarnpkg.com/inherits/-/inherits-2.0.3.tgz#633c2c83e3da42a502f52466022480f4208261de"
   integrity sha1-Yzwsg+PaQqUC9SRmAiSA9CCCYd4=
 
-ioredis-mock@5.5.2:
-  version "5.5.2"
-  resolved "https://registry.yarnpkg.com/ioredis-mock/-/ioredis-mock-5.5.2.tgz#e7a8621a2cd11a2a82a9aed41f82d545673a8612"
-  integrity sha512-hGbXu+5agBbJ7RJQS6aGCiooKqMdJc5p4EbN5lSRUlOfeo8nFn5gfH8bKHWEobOjTLVWeUbDiEAEBQ5N0g9CnQ==
+ioredis-mock@5.5.4:
+  version "5.5.4"
+  resolved "https://registry.yarnpkg.com/ioredis-mock/-/ioredis-mock-5.5.4.tgz#404faffb700b70cd8e0082c8159fa6003b7ab33d"
+  integrity sha512-u8AT/Y0RrlRSJKvd2zoJPdU6svA3kkMS3sRwakjdEahZgOiDo/yZ8urM91citQDNkcgbOXnSUwK9JBu3vtzOCg==
   dependencies:
     fengari "^0.1.4"
     fengari-interop "^0.1.2"
-    lodash "^4.17.20"
+    lodash "^4.17.21"
     minimatch "^3.0.4"
-    standard-as-callback "^2.0.1"
+    standard-as-callback "^2.1.0"
 
 ioredis@^4.19.4, ioredis@^4.23.0:
   version "4.23.0"
@@ -10079,6 +10079,11 @@ standard-as-callback@^2.0.1:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/standard-as-callback/-/standard-as-callback-2.0.1.tgz#ed8bb25648e15831759b6023bdb87e6b60b38126"
   integrity sha512-NQOxSeB8gOI5WjSaxjBgog2QFw55FV8TkS6Y07BiB3VJ8xNTvUYm0wl0s8ObgQ5NhdpnNfigMIKjgPESzgr4tg==
+
+standard-as-callback@^2.1.0:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/standard-as-callback/-/standard-as-callback-2.1.0.tgz#8953fc05359868a77b5b9739a665c5977bb7df45"
+  integrity sha512-qoRRSyROncaz1z0mvYqIE4lCd9p2R90i6GxW3uZv5ucSu8tU7B5HXUP1gG8pVZsYNVaXjk8ClXHPttLyxAL48A==
 
 static-extend@^0.1.1:
   version "0.1.2"
