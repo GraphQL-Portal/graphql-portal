@@ -1,0 +1,15 @@
+{
+  "FusionCreatorAccountInformationUSHandler": {
+    "additionalProperties": false,
+    "type": "object",
+    "title": "FusionCreatorAccountInformationUSHandler",
+    "description": "Provides methods for interacting with data on the core banking system and third party vendors.",
+    "properties": {
+      "token": {
+        "type": "string",
+        "description": "Access token (with prefix)"
+      }
+    },
+    "required": ["token"]
+  }
+}

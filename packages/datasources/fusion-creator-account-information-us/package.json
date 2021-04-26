@@ -1,6 +1,6 @@
 {
-  "name": "@graphql-portal/twitter",
-  "version": "0.3.1",
+  "name": "@graphql-portal/fusion-creator-account-information-us",
+  "version": "0.1.1",
   "license": "MIT",
   "main": "dist/index.js",
   "scripts": {
@@ -8,6 +8,9 @@
   },
   "dependencies": {
     "@graphql-mesh/openapi": "^0.16.0",
+    "graphql": "^15.4.0"
+  },
+  "devDependencies": {
     "@graphql-mesh/types": "0.39.0"
   },
   "publishConfig": {

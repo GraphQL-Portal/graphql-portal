@@ -37,6 +37,8 @@ export interface Handler {
   SalesforceHandler?: SalesforceHandler;
   TwitterHandler?: TwitterHandler;
   IPAPIHandler?: IPAPIHandler;
+  FusionCreatorAccountInformationUSHandler?: FusionCreatorAccountInformationUSHandler;
+  FusionCreatorAccountInformationPSD2STETHandler?: FusionCreatorAccountInformationPSD2STETHandler;
   [k: string]: unknown;
 }
 export interface FhirHandler {
@@ -99,10 +101,6 @@ export interface GraphQLHandler {
    */
   introspection?: string;
   /**
-   * Cache Introspection (Any of: GraphQLIntrospectionCachingOptions, Boolean)
-   */
-  cacheIntrospection?: GraphQLIntrospectionCachingOptions | boolean;
-  /**
    * Enable multipart/formdata in order to support file uploads
    */
   multipart?: boolean;
@@ -110,16 +108,6 @@ export interface GraphQLHandler {
    * Batch requests
    */
   batch?: boolean;
-}
-export interface GraphQLIntrospectionCachingOptions {
-  /**
-   * Time to live of introspection cache
-   */
-  ttl?: number;
-  /**
-   * Path to Introspection JSON File
-   */
-  path?: string;
 }
 /**
  * Handler for gRPC and Protobuf schemas
@@ -430,16 +418,6 @@ export interface Neo4JHandler {
    * Provide GraphQL Type Definitions instead of inferring
    */
   typeDefs?: string;
-  /**
-   * Cache Introspection (Any of: Neo4jIntrospectionCachingOptions, Boolean)
-   */
-  cacheIntrospection?: Neo4JIntrospectionCachingOptions | boolean;
-}
-export interface Neo4JIntrospectionCachingOptions {
-  /**
-   * Time to live of introspection cache
-   */
-  ttl?: number;
 }
 /**
  * Handler for OData
@@ -473,6 +451,15 @@ export interface ODataHandler {
    * Use $expand for navigation props instead of seperate HTTP requests (Default: false)
    */
   expandNavProps?: boolean;
+  /**
+   * Custom Fetch
+   */
+  customFetch?:
+    | {
+        [k: string]: unknown;
+      }
+    | string
+    | unknown[];
 }
 /**
  * Handler for Swagger / OpenAPI 2/3 specification. Source could be a local json/swagger file, or a url to it.
@@ -481,7 +468,12 @@ export interface OpenapiHandler {
   /**
    * A pointer to your API source - could be a local file, remote file or url endpoint
    */
-  source: string;
+  source:
+    | {
+        [k: string]: unknown;
+      }
+    | string
+    | unknown[];
   /**
    * Format of the source file (Allowed values: json, yaml)
    */
@@ -590,10 +582,6 @@ export interface PostGraphileHandler {
         [k: string]: unknown;
       }
     | string;
-  /**
-   * Cache Introspection (Any of: GraphQLIntrospectionCachingOptions, Boolean)
-   */
-  cacheIntrospection?: GraphQLIntrospectionCachingOptions | boolean;
   /**
    * Enable GraphQL websocket transport support for subscriptions (default: true)
    */
@@ -815,6 +803,19 @@ export interface TwitterHandler {
  * IP Geolocation API
  */
 export interface IPAPIHandler {}
+/**
+ * Provides methods for interacting with data on the core banking system and third party vendors.
+ */
+export interface FusionCreatorAccountInformationUSHandler {
+  /**
+   * Access token (with prefix)
+   */
+  token: string;
+}
+/**
+ * Retrieve set of account list, balances and account history e.g. for external aggregation purposes based on consent given by the customer. (PSD2 AISP scenario - STET standard)
+ */
+export interface FusionCreatorAccountInformationPSD2STETHandler {}
 export interface Transform {
   /**
    * Transformer to apply caching for your data sources
@@ -851,9 +852,17 @@ export interface Transform {
         | unknown[]
       );
   /**
-   * Transformer to apply composition to resolvers
+   * Transformer to apply composition to resolvers (Any of: ResolversCompositionTransform, Any)
    */
-  resolversComposition?: ResolversCompositionTransformObject[];
+  resolversComposition?:
+    | ResolversCompositionTransform
+    | (
+        | {
+            [k: string]: unknown;
+          }
+        | string
+        | unknown[]
+      );
   snapshot?: SnapshotTransformConfig;
   [k: string]: unknown;
 }
@@ -1126,6 +1135,16 @@ export interface RenameTransformObject {
 export interface RenameConfig {
   type?: string;
   field?: string;
+}
+export interface ResolversCompositionTransform {
+  /**
+   * Specify to apply resolvers-composition transforms to bare schema or by wrapping original schema (Allowed values: bare, wrap)
+   */
+  mode?: 'bare' | 'wrap';
+  /**
+   * Array of resolver/composer to apply
+   */
+  compositions: ResolversCompositionTransformObject[];
 }
 export interface ResolversCompositionTransformObject {
   /**

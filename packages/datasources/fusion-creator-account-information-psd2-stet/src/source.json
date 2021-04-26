@@ -1,0 +1,1398 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "Retrieve set of account list, balances and account history e.g. for external aggregation purposes based on consent given by the customer. (PSD2 AISP scenario - STET standard)",
+    "version": "1.3.0",
+    "title": "Account Information (PSD2, STET)",
+    "x-finastra-short-description": "Retrieve set of account list, balances and account history e.g. for external aggregation purposes based on consent given by the customer. (PSD2 AISP scenario - STET standard)",
+    "x-finastra-category": "Consumer Banking",
+    "x-finastra-subcategory": "Account Information",
+    "x-finastra-tags": ["Fusion Digital Channels", "Account", "Excluding North America"],
+    "x-finastra-channel-type": "DIGITAL",
+    "x-finastra-maturity-level": "GA",
+    "x-finastra-audience": "PUBLIC",
+    "x-finastra-implementability": "RESTRICTED",
+    "x-finastra-icon": "Icons_11o.svg",
+    "x-finastra-data-classification": ["Restricted"],
+    "x-finastra-commitId": "cd53d9029b3df76f7925dfce66bf4197cb5d25d9",
+    "contact": {
+      "name": "API Support",
+      "url": "https://community.fusionfabric.cloud/index.html"
+    }
+  },
+  "basePath": "/retail/psd2/stet/aisp/v1.3",
+  "tags": [
+    {
+      "name": "AISP",
+      "description": "An Account Information Service Provider (AISP) is a trusted third-party entity (data processor) that can connect (via an external application) to the Customer bank account and use that bank account information to provide a service. These APIs enable consent-based access to account list, balances and transaction history."
+    },
+    {
+      "name": "Consents",
+      "description": ""
+    }
+  ],
+  "paths": {
+    "/accounts": {
+      "get": {
+        "tags": ["AISP"],
+        "summary": "Customer gives authorization for external access to his account information",
+        "description": "Retrieves all accounts information that the Bank's Customer (PSU - Payment Service User) authorize for the third-party provider (AISP) to access. The consent is given in form of a token provided by the Bank.",
+        "operationId": "accountsGet_1",
+        "consumes": ["application/json"],
+        "produces": ["application/json;charset=utf-8", "application/hal+json;charset=utf-8"],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "Access token to be passed as a header",
+            "required": true,
+            "type": "string",
+            "x-finastra-data-classification": ["Restricted"]
+          },
+          {
+            "name": "Consent-ID",
+            "in": "header",
+            "description": "Consent-ID to be passed as a header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "PSU-Account-Consent-Responsibility",
+            "in": "header",
+            "description": "This header specifies which party has been mandated by the PSU for guaranteeing the respect of the PSU's choices on accessibility scope on each individual account. The AISP must use one the following values - BY-AISP: means that the AISP has been mandated by the PSU on the detailed account access management. Thus the ASPSP is not obliged to check whether or not a given AISP request is authorized. - BY-ASPSP: means that the ASPSP is obliged to guarantee the respect of the detailed account access grants given by the PSU to the AISP and thus to check every request from the AISP.",
+            "required": true,
+            "type": "string",
+            "enum": ["BY-AISP", "BY-ASPSP"],
+            "x-finastra-data-classification": ["Restricted"]
+          },
+          {
+            "name": "X-Request-ID",
+            "in": "header",
+            "description": "Correlation header to be set in a request and retrieved in the relevant response",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "PSU-IP-Address",
+            "in": "header",
+            "description": "IP address used by the PSU's terminal when connecting to the TPP",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "PSU-IP-Port",
+            "in": "header",
+            "description": "IP port used by the PSU's terminal when connecting to the TPP",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "PSU-HTTP-Method",
+            "in": "header",
+            "description": "Http method for the most relevant PSU's terminal request to the TTP",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "PSU-Date",
+            "in": "header",
+            "description": "Timestamp of the most relevant PSU's terminal request to the TTP",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "PSU-GEO-Location",
+            "in": "header",
+            "description": "Geographical location of the PSU as provided by the PSU mobile terminal if any to the TPP",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "PSU-User-Agent",
+            "in": "header",
+            "description": "\"User-Agent\" header field sent by the PSU terminal when connecting to the TPP ",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "PSU-Referer",
+            "in": "header",
+            "description": "\"Referer\" header field sent by the PSU terminal when connecting to the TPP. Notice that an initial typo in RFC 1945 specifies that \"referer\" (incorrect spelling) is to be used. The correct spelling \"referrer\" can be used but might not be understood. ",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "PSU-Accept",
+            "in": "header",
+            "description": "\"Accept\" header field sent by the PSU terminal when connecting to the TPP ",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "PSU-Accept-Charset",
+            "in": "header",
+            "description": "\"Accept-Charset\" header field sent by the PSU terminal when connecting to the TPP ",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "PSU-Accept-Encoding",
+            "in": "header",
+            "description": "\"Accept-Encoding\" header field sent by the PSU terminal when connecting to the TPP ",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "PSU-Accept-Language",
+            "in": "header",
+            "description": "\"Accept-Language\" header field sent by the PSU terminal when connecting to the TPP ",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The ASPSP return a PSU context  - listing the accounts that have been made available to the AISP by the PSU and,  - for each of these accounts, the further transactions that have been enabled by the PSU through HYPERMEDIA links. ",
+            "schema": {
+              "$ref": "#/definitions/HalAccounts"
+            }
+          },
+          "204": {
+            "description": "No content.",
+            "schema": {
+              "$ref": "#/definitions/HalAccounts"
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "401": {
+            "description": "Unauthorized, authentication failure.",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          },
+          "403": {
+            "description": "Forbidden, authentication successful but access to resource is not allowed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          },
+          "404": {
+            "description": "Not found, no account available.",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          },
+          "405": {
+            "description": "Method Not Allowed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          },
+          "406": {
+            "description": "Not Acceptable.",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          },
+          "408": {
+            "description": "Request Timeout.",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          },
+          "429": {
+            "description": "Too many requests.",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          },
+          "500": {
+            "description": "Internal server error.",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          },
+          "503": {
+            "description": "Service unavailable.",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        },
+        "x-finastra-data-classification": ["Restricted"]
+      }
+    },
+    "/accounts/{accountResourceId}/balances": {
+      "get": {
+        "tags": ["AISP"],
+        "summary": "Retrieve account balance - following customer's consent",
+        "description": "Retrieves account/s balance of bank customer (PSU) through an account resource identification (ID).",
+        "operationId": "accountsBalancesGet",
+        "consumes": ["application/json"],
+        "produces": ["application/json;charset=utf-8", "application/hal+json;charset=utf-8"],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "Access token to be passed as a header",
+            "required": true,
+            "type": "string",
+            "x-finastra-data-classification": ["Restricted"]
+          },
+          {
+            "name": "Consent-ID",
+            "in": "header",
+            "description": "Consent-ID to be passed as a header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "accountResourceId",
+            "in": "path",
+            "description": "Identification of account resource to fetch",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "PSU-Account-Consent-Responsibility",
+            "in": "header",
+            "description": "This header specifies which party has been mandated by the PSU for guaranteeing the respect of the PSU's choices on accessibility scope on each individual account. The AISP must use one the following values - BY-AISP: means that the AISP has been mandated by the PSU on the detailed account access management. Thus the ASPSP is not obliged to check whether or not a given AISP request is authorized. - BY-ASPSP: means that the ASPSP is obliged to guarantee the respect of the detailed account access grants given by the PSU to the AISP and thus to check every request from the AISP. ",
+            "required": true,
+            "type": "string",
+            "enum": ["BY-AISP", "BY-ASPSP"],
+            "x-finastra-data-classification": ["Restricted"]
+          },
+          {
+            "name": "X-Request-ID",
+            "in": "header",
+            "description": "Correlation header to be set in a request and retrieved in the relevant response ",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "PSU-IP-Address",
+            "in": "header",
+            "description": "IP address used by the PSU's terminal when connecting to the TPP",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "PSU-IP-Port",
+            "in": "header",
+            "description": "IP port used by the PSU's terminal when connecting to the TPP",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "PSU-HTTP-Method",
+            "in": "header",
+            "description": "Http method for the most relevant PSU's terminal request to the TTP",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "PSU-Date",
+            "in": "header",
+            "description": "Timestamp of the most relevant PSU's terminal request to the TTP",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "PSU-GEO-Location",
+            "in": "header",
+            "description": "Geographical location of the PSU as provided by the PSU mobile terminal if any to the TPP",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "PSU-User-Agent",
+            "in": "header",
+            "description": "\"User-Agent\" header field sent by the PSU terminal when connecting to the TPP ",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "PSU-Referer",
+            "in": "header",
+            "description": "\"Referer\" header field sent by the PSU terminal when connecting to the TPP. Notice that an initial typo in RFC 1945 specifies that \"referer\" (incorrect spelling) is to be used. The correct spelling \"referrer\" can be used but might not be understood. ",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "PSU-Accept",
+            "in": "header",
+            "description": "\"Accept\" header field sent by the PSU terminal when connecting to the TPP ",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "PSU-Accept-Charset",
+            "in": "header",
+            "description": "\"Accept-Charset\" header field sent by the PSU terminal when connecting to the TPP ",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "PSU-Accept-Encoding",
+            "in": "header",
+            "description": "\"Accept-Encoding\" header field sent by the PSU terminal when connecting to the TPP ",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "PSU-Accept-Language",
+            "in": "header",
+            "description": "\"Accept-Language\" header field sent by the PSU terminal when connecting to the TPP ",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The ASPSP answers with a list of account balances",
+            "schema": {
+              "$ref": "#/definitions/HalBalances"
+            }
+          },
+          "204": {
+            "description": "No content.",
+            "schema": {
+              "$ref": "#/definitions/HalBalances"
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "401": {
+            "description": "Unauthorized, authentication failure.",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          },
+          "403": {
+            "description": "Forbidden, authentication successful but access to resource is not allowed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          },
+          "404": {
+            "description": "Not found, no account available.",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          },
+          "405": {
+            "description": "Method Not Allowed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          },
+          "406": {
+            "description": "Not Acceptable.",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          },
+          "408": {
+            "description": "Request Timeout.",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          },
+          "429": {
+            "description": "Too many requests.",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          },
+          "500": {
+            "description": "Internal server error.",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          },
+          "503": {
+            "description": "Service unavailable.",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        },
+        "x-finastra-data-classification": ["Restricted"]
+      }
+    },
+    "/accounts/{accountResourceId}/transactions": {
+      "get": {
+        "tags": ["AISP"],
+        "summary": "Retrieve transactions history following customer's consent",
+        "description": "Retrieves account/s transaction history of bank customer (PSU) through an account resource identification (ID).Date range filter can be used to specify the result",
+        "operationId": "accountsTransactionsGet",
+        "consumes": ["application/json"],
+        "produces": ["application/json;charset=utf-8", "application/hal+json;charset=utf-8"],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "Access token to be passed as a header",
+            "required": true,
+            "type": "string",
+            "x-finastra-data-classification": ["Restricted"]
+          },
+          {
+            "name": "Consent-ID",
+            "in": "header",
+            "description": "Consent-ID to be passed as a header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "accountResourceId",
+            "in": "path",
+            "description": "Identification of account resource to fetch",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "PSU-Account-Consent-Responsibility",
+            "in": "header",
+            "description": "This header specifies which party has been mandated by the PSU for guaranteeing the respect of the PSU's choices on accessibility scope on each individual account. The AISP must use one the following values - BY-AISP: means that the AISP has been mandated by the PSU on the detailed account access management. Thus the ASPSP is not obliged to check whether or not a given AISP request is authorized. - BY-ASPSP: means that the ASPSP is obliged to guarantee the respect of the detailed account access grants given by the PSU to the AISP and thus to check every request from the AISP. ",
+            "required": true,
+            "type": "string",
+            "enum": ["BY-AISP", "BY-ASPSP"],
+            "x-finastra-data-classification": ["Restricted"]
+          },
+          {
+            "name": "X-Request-ID",
+            "in": "header",
+            "description": "Correlation header to be set in a request and retrieved in the relevant response ",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "dateTo",
+            "in": "query",
+            "description": "Inclusive minimal imputation date of the transactions.         Transactions having an imputation date equal to this parameter are included within the result. ",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "dateFrom",
+            "in": "query",
+            "description": "Exclusive maximal imputation date of the transactions.         Transactions having an imputation date equal to this parameter are not included within the result. ",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "afterEntryReference",
+            "in": "query",
+            "description": "Specifies the value on which the result has to be computed.         Only the transaction having a technical identification greater than this value must be included within the result ",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "PSU-IP-Address",
+            "in": "header",
+            "description": "IP address used by the PSU's terminal when connecting to the TPP",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "PSU-IP-Port",
+            "in": "header",
+            "description": "IP port used by the PSU's terminal when connecting to the TPP",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "PSU-HTTP-Method",
+            "in": "header",
+            "description": "Http method for the most relevant PSU's terminal request to the TTP",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "PSU-Date",
+            "in": "header",
+            "description": "Timestamp of the most relevant PSU's terminal request to the TTP",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "PSU-GEO-Location",
+            "in": "header",
+            "description": "Geographical location of the PSU as provided by the PSU mobile terminal if any to the TPP",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "PSU-User-Agent",
+            "in": "header",
+            "description": "\"User-Agent\" header field sent by the PSU terminal when connecting to the TPP ",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "PSU-Referer",
+            "in": "header",
+            "description": "\"Referer\" header field sent by the PSU terminal when connecting to the TPP. Notice that an initial typo in RFC 1945 specifies that \"referer\" (incorrect spelling) is to be used. The correct spelling \"referrer\" can be used but might not be understood. ",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "PSU-Accept",
+            "in": "header",
+            "description": "\"Accept\" header field sent by the PSU terminal when connecting to the TPP ",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "PSU-Accept-Charset",
+            "in": "header",
+            "description": "\"Accept-Charset\" header field sent by the PSU terminal when connecting to the TPP ",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "PSU-Accept-Encoding",
+            "in": "header",
+            "description": "\"Accept-Encoding\" header field sent by the PSU terminal when connecting to the TPP ",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "PSU-Accept-Language",
+            "in": "header",
+            "description": "\"Accept-Language\" header field sent by the PSU terminal when connecting to the TPP ",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Complete transactions response",
+            "schema": {
+              "$ref": "#/definitions/HalTransactions"
+            }
+          },
+          "204": {
+            "description": "No content.",
+            "schema": {
+              "$ref": "#/definitions/HalTransactions"
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "401": {
+            "description": "Unauthorized, authentication failure.",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          },
+          "403": {
+            "description": "Forbidden, authentication successful but access to resource is not allowed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          },
+          "404": {
+            "description": "Not found, no account available.",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          },
+          "405": {
+            "description": "Method Not Allowed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          },
+          "406": {
+            "description": "Not Acceptable.",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          },
+          "408": {
+            "description": "Request Timeout.",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          },
+          "429": {
+            "description": "Too many requests.",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          },
+          "500": {
+            "description": "Internal server error.",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          },
+          "503": {
+            "description": "Service unavailable.",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        },
+        "x-finastra-data-classification": ["Restricted"]
+      }
+    },
+    "/consents": {
+      "post": {
+        "tags": ["Consents"],
+        "summary": "Create new consent",
+        "description": "Create a new consent to be authorized by the Bank Customer (PSU)",
+        "operationId": "consentsPost",
+        "consumes": ["application/json"],
+        "produces": ["application/json;charset=utf-8"],
+        "parameters": [
+          {
+            "name": "ConsentRequest",
+            "in": "body",
+            "description": "Consent Request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ConsentRequest"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "Access token to be passed as a header",
+            "required": true,
+            "type": "string",
+            "x-finastra-data-classification": ["Restricted"]
+          },
+          {
+            "name": "X-Request-ID",
+            "in": "header",
+            "description": "Correlation header to be set in a request and retrieved in the relevant response ",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "The consent approval information returned by the ASPSP to the AISP. ",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "Contains the URL at which the newly created consent resource can be found."
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Consent"
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "401": {
+            "description": "Unauthorized, authentication failure.",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          },
+          "403": {
+            "description": "Forbidden, authentication successful but access to resource is not allowed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          },
+          "406": {
+            "description": "Not Acceptable.",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          },
+          "408": {
+            "description": "Request Timeout.",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          },
+          "429": {
+            "description": "Too many requests.",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          },
+          "500": {
+            "description": "Internal server error.",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          },
+          "503": {
+            "description": "Service unavailable.",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        },
+        "x-finastra-data-classification": ["Restricted"]
+      },
+      "get": {
+        "tags": ["Consents"],
+        "summary": "Retrieve valid Bank customer's consents",
+        "description": "Retrieves all valid consents given by the Bank Customer (PSU).",
+        "operationId": "consentsGet",
+        "produces": ["application/json;charset=utf-8"],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "Access token to be passed as a header",
+            "required": true,
+            "type": "string",
+            "x-finastra-data-classification": ["Restricted"]
+          },
+          {
+            "name": "X-Request-ID",
+            "in": "header",
+            "description": "Correlation header to be set in a request and retrieved in the relevant response ",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The consent resources. ",
+            "schema": {
+              "$ref": "#/definitions/ConsentCollection"
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "401": {
+            "description": "Unauthorized, authentication failure.",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          },
+          "403": {
+            "description": "Forbidden, authentication successful but access to resource is not allowed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          },
+          "406": {
+            "description": "Not Acceptable.",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          },
+          "408": {
+            "description": "Request Timeout.",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          },
+          "429": {
+            "description": "Too many requests.",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          },
+          "500": {
+            "description": "Internal server error.",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          },
+          "503": {
+            "description": "Service unavailable.",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        },
+        "x-finastra-data-classification": ["Restricted"]
+      }
+    },
+    "/consents/{consentId}": {
+      "get": {
+        "tags": ["Consents"],
+        "summary": "Retrieve consent",
+        "description": "Retrieves specific valid consent given by the Bank Customer (PSU) through a consent identification (ID).",
+        "operationId": "consentGet",
+        "produces": ["application/json;charset=utf-8"],
+        "parameters": [
+          {
+            "name": "consentId",
+            "in": "path",
+            "description": "Consent ID",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "Access token to be passed as a header",
+            "required": true,
+            "type": "string",
+            "x-finastra-data-classification": ["Restricted"]
+          },
+          {
+            "name": "X-Request-ID",
+            "in": "header",
+            "description": "Correlation header to be set in a request and retrieved in the relevant response ",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The consent resource. ",
+            "schema": {
+              "$ref": "#/definitions/Consent"
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "401": {
+            "description": "Unauthorized, authentication failure.",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          },
+          "403": {
+            "description": "Forbidden, authentication successful but access to resource is not allowed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          },
+          "404": {
+            "description": "Consent not found with the supplied ID.",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          },
+          "406": {
+            "description": "Not Acceptable.",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          },
+          "408": {
+            "description": "Request Timeout.",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          },
+          "429": {
+            "description": "Too many requests.",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          },
+          "500": {
+            "description": "Internal server error.",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          },
+          "503": {
+            "description": "Service unavailable.",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        },
+        "x-finastra-data-classification": ["Restricted"]
+      }
+    }
+  },
+  "securityDefinitions": {
+    "Oauth2": {
+      "description": "In order to access the PSU's account information, the AISP needs to get an authorization code grant OAUTH2 token. \n",
+      "type": "oauth2",
+      "authorizationUrl": "https://api.fusionfabric.cloud/login/v1/sandbox/oidc/authorize",
+      "tokenUrl": "https://api.fusionfabric.cloud/login/v1/sandbox/oidc/token",
+      "flow": "accessCode",
+      "scopes": {}
+    }
+  },
+  "security": [
+    {
+      "Oauth2": []
+    }
+  ],
+  "definitions": {
+    "AccountIdentification": {
+      "type": "object",
+      "properties": {
+        "iban": {
+          "type": "string",
+          "description": "ISO20022: International Bank Account Number (IBAN) - identification used internationally by financial institutions to uniquely identify the account of a customer.   Further specifications of the format and content of the IBAN can be found in the standard ISO 13616 \"Banking and related financial services - International Bank Account Number (IBAN)\" version 1997-10-01, or later revisions. ",
+          "x-finastra-data-classification": ["Restricted"]
+        },
+        "other": {
+          "$ref": "#/definitions/GenericIdentification"
+        }
+      },
+      "description": "Unique and unambiguous identification for the account between the account owner and the account servicer.",
+      "title": "AccountIdentification"
+    },
+    "AccountLinks": {
+      "type": "object",
+      "properties": {
+        "balances": {
+          "$ref": "#/definitions/GenericLink"
+        },
+        "transactions": {
+          "$ref": "#/definitions/GenericLink"
+        }
+      },
+      "description": "links that can be used for further navigation when browsing Account Information at one account level - balances: link to the balances of a given account - transactions: link to the transactions of a given account",
+      "title": "lAccountLinks"
+    },
+    "AccountResource": {
+      "type": "object",
+      "required": ["_links", "cashAccountType", "currency", "name", "resourceId"],
+      "properties": {
+        "_links": {
+          "$ref": "#/definitions/AccountLinks"
+        },
+        "accountId": {
+          "$ref": "#/definitions/AccountIdentification"
+        },
+        "balances": {
+          "type": "array",
+          "description": "list of balances provided by the ASPSP",
+          "items": {
+            "$ref": "#/definitions/BalanceResource"
+          }
+        },
+        "bicFi": {
+          "type": "string",
+          "description": "ISO20022: Code allocated to a financial institution by the ISO 9362 Registration Authority as described in ISO 9362 \"Banking - Banking telecommunication messages - Business identification code (BIC)\". "
+        },
+        "cashAccountType": {
+          "type": "string",
+          "description": "Specifies the type of the account - CACC: Cash account ",
+          "enum": ["CACC"]
+        },
+        "currency": {
+          "type": "string",
+          "description": "Currency used for the account"
+        },
+        "details": {
+          "type": "string",
+          "description": "Specifications that might be provided by the ASPSP - characteristics of the account - characteristics of the relevant card "
+        },
+        "linkedAccount": {
+          "type": "string",
+          "description": "Case of a set of pending card transactions, the APSP will provide the relevant cash account the card is set up on.",
+          "x-finastra-data-classification": ["Restricted"]
+        },
+        "name": {
+          "type": "string",
+          "description": "Label of the PSU account In case of a delayed debit card transaction set, the name shall specify the holder name and the imputation date "
+        },
+        "product": {
+          "type": "string",
+          "description": "Product Name of the Bank for this account, proprietary definition "
+        },
+        "psuStatus": {
+          "type": "string",
+          "description": "Relationship between the PSU and the account - Account Holder - Co-account Holder - Attorney"
+        },
+        "resourceId": {
+          "type": "string",
+          "description": "Identification of the account as defined as a resource by the ASPSP"
+        },
+        "usage": {
+          "type": "string",
+          "description": "Specifies the usage of the account - PRIV: private personal account - ORGA: professional account ",
+          "enum": ["PRIV", "ORGA"]
+        }
+      },
+      "description": "PSU account that is made available to the TPP",
+      "title": "AccountResource"
+    },
+    "AmountType": {
+      "type": "object",
+      "required": ["amount", "currency"],
+      "properties": {
+        "amount": {
+          "type": "string",
+          "description": "ISO20022: Amount of money to be moved between the debtor and creditor, before deduction of charges, expressed in the currency as ordered by the initiating party. "
+        },
+        "currency": {
+          "type": "string",
+          "description": "ISO20022: Specifies the currency of the to be transferred amount, which is different from the currency of the debtor's account. A code allocated to a currency by a Maintenance Agency under an international identification scheme, as described in the latest edition of the international standard ISO 4217 \"Codes for the representation of currencies and funds\".  "
+        }
+      },
+      "description": "ISO20022: structure aiming to carry either an instructed amount or equivalent amount. Both structures embed the amount and the currency to be used.  API: only instructed amount can be used ",
+      "title": "AmountType"
+    },
+    "BalanceResource": {
+      "type": "object",
+      "required": ["balanceAmount", "balanceType", "name"],
+      "properties": {
+        "balanceAmount": {
+          "$ref": "#/definitions/AmountType"
+        },
+        "balanceType": {
+          "type": "string",
+          "enum": ["CLBD", "XPCD", "VALU", "OTHR"]
+        },
+        "lastChangeDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp of the last change of the balance amount"
+        },
+        "lastCommittedTransaction": {
+          "type": "string",
+          "description": "Identification of the last committed transaction. This is actually useful for instant balance. "
+        },
+        "name": {
+          "type": "string",
+          "description": "Label of the balance"
+        },
+        "referenceDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Reference date for the balance"
+        }
+      },
+      "description": "Structure of an account balance",
+      "title": "BalanceResource"
+    },
+    "BalancesLinks": {
+      "type": "object",
+      "required": ["self"],
+      "properties": {
+        "parent-list": {
+          "$ref": "#/definitions/GenericLink"
+        },
+        "self": {
+          "$ref": "#/definitions/GenericLink"
+        },
+        "transactions": {
+          "$ref": "#/definitions/GenericLink"
+        }
+      },
+      "description": "links that can be used for further navigation when browsing Account Information at one account level - self: link to the balances of a given account - parent-list: link to the list of all available accounts - transactions: link to the transactions of a given account ",
+      "title": "BalancesLinks"
+    },
+    "ErrorModel": {
+      "type": "object",
+      "required": ["message", "status"],
+      "properties": {
+        "error": {
+          "type": "string",
+          "description": "HTTP error text"
+        },
+        "message": {
+          "type": "string",
+          "description": "HTTP textual reason phrase"
+        },
+        "path": {
+          "type": "string",
+          "description": "Relevant path that was used"
+        },
+        "status": {
+          "type": "integer",
+          "format": "int32",
+          "description": "HTTP error code"
+        },
+        "timestamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "current timestamp"
+        }
+      },
+      "description": "Generic error report structure",
+      "title": "ErrorModel"
+    },
+    "GenericIdentification": {
+      "type": "object",
+      "required": ["identification", "issuer", "schemeName"],
+      "properties": {
+        "identification": {
+          "type": "string",
+          "description": "API: alias of an account "
+        },
+        "issuer": {
+          "type": "string",
+          "description": "ISO20022: Entity that assigns the identification. this could a country code or any organisation name or identifier that can be recognized by both parties "
+        },
+        "schemeName": {
+          "type": "string",
+          "description": "Name of the identification scheme. Possible values for the scheme name, partially based on ISO20022 external code list, are the following: - BANK (BankPartyIdentification): Unique and unambiguous assignment made by a specific bank or similar financial institution to identify a relationship as defined between the bank and its client.  - COID (CountryIdentificationCode) : Country authority given organisation identification (e.g., corporate registration number) - SREN (SIREN): The SIREN number is a 9 digit code assigned by INSEE, the French National Institute for Statistics and Economic Studies, to identify an organisation in France. - SRET (SIRET): The SIRET number is a 14 digit code assigned by INSEE, the French National Institute for Statistics and Economic Studies, to identify an organisation unit in France. It consists of the SIREN number, followed by a five digit classification number, to identify the local geographical unit of that entity. - NIDN (NationalIdentityNumber): Number assigned by an authority to identify the national identity number of a person. Other values are also permitted, for instance: - OAUT (OAUTH2): OAUTH2 access token that is owned by the PISP being also an AISP and that can be used in order to identify the PSU - CPAN (CardPan): Card PAN "
+        }
+      },
+      "description": "ISO20022: Unique identification of an account, a person or an organisation, as assigned by an issuer.",
+      "title": "GenericIdentification"
+    },
+    "GenericLink": {
+      "type": "object",
+      "required": ["href"],
+      "properties": {
+        "href": {
+          "type": "string",
+          "description": "URI to be used"
+        },
+        "templated": {
+          "type": "boolean",
+          "example": false,
+          "description": "specifies \"true\" if href is a URI template, i.e. with parameters. Otherwise, this property is absent or set to false"
+        }
+      },
+      "description": "hypertext reference",
+      "title": "GenericLink"
+    },
+    "HalAccounts": {
+      "type": "object",
+      "required": ["_links", "accounts"],
+      "properties": {
+        "_links": {
+          "$ref": "#/definitions/PaginationLinks"
+        },
+        "accounts": {
+          "type": "array",
+          "description": "List of PSU account that are made available to the TPP",
+          "items": {
+            "$ref": "#/definitions/AccountResource"
+          },
+          "x-finastra-data-classification": ["Restricted"]
+        }
+      },
+      "description": "HYPERMEDIA structure used for returning the list of the available accounts to the AISP",
+      "title": "HalAccounts"
+    },
+    "HalBalances": {
+      "type": "object",
+      "required": ["_links", "balances"],
+      "properties": {
+        "_links": {
+          "$ref": "#/definitions/BalancesLinks"
+        },
+        "balances": {
+          "type": "array",
+          "description": "List of account balances",
+          "items": {
+            "$ref": "#/definitions/BalanceResource"
+          }
+        }
+      },
+      "description": "HYPERMEDIA structure used for returning the list of the relevant balances for a given account to the AISP",
+      "title": "HalBalances"
+    },
+    "HalTransactions": {
+      "type": "object",
+      "required": ["_links", "transactions"],
+      "properties": {
+        "_links": {
+          "$ref": "#/definitions/TransactionsLinks"
+        },
+        "transactions": {
+          "type": "array",
+          "description": "List of transactions",
+          "items": {
+            "$ref": "#/definitions/Transaction"
+          }
+        }
+      },
+      "description": "HYPERMEDIA structure used for returning the list of the transactions for a given account to the AISP",
+      "title": "HalTransactions"
+    },
+    "PaginationLinks": {
+      "type": "object",
+      "required": ["self"],
+      "properties": {
+        "first": {
+          "$ref": "#/definitions/GenericLink"
+        },
+        "last": {
+          "$ref": "#/definitions/GenericLink"
+        },
+        "next": {
+          "$ref": "#/definitions/GenericLink"
+        },
+        "prev": {
+          "$ref": "#/definitions/GenericLink"
+        },
+        "self": {
+          "$ref": "#/definitions/GenericLink"
+        }
+      },
+      "description": "Links that can be used for further navigation when browsing Account Information at top level - self: link to the list of all available accounts",
+      "title": "PaginationLinks"
+    },
+    "Transaction": {
+      "type": "object",
+      "required": ["bookingDate", "creditDebitIndicator", "remittanceInformation", "status", "transactionAmount"],
+      "properties": {
+        "bookingDate": {
+          "type": "string",
+          "description": "Booking date of the transaction on the account"
+        },
+        "creditDebitIndicator": {
+          "type": "string",
+          "description": "Accounting flow of the transaction - CRDT: Credit type transaction - DBIT: Debit type transaction ",
+          "enum": ["CRDT", "DBIT"]
+        },
+        "entryReference": {
+          "type": "string",
+          "description": "Technical incremental identification of the transaction. "
+        },
+        "remittanceInformation": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "resourceId": {
+          "type": "string",
+          "description": "Identification of the transaction as defined as a resource by the ASPSP"
+        },
+        "status": {
+          "type": "string",
+          "enum": ["BOOK", "PDNG", "OTHR"]
+        },
+        "transactionAmount": {
+          "$ref": "#/definitions/AmountType"
+        }
+      },
+      "description": "structure of a transaction",
+      "title": "Transaction"
+    },
+    "TransactionsLinks": {
+      "type": "object",
+      "required": ["self"],
+      "properties": {
+        "balances": {
+          "$ref": "#/definitions/GenericLink"
+        },
+        "first": {
+          "$ref": "#/definitions/GenericLink"
+        },
+        "last": {
+          "$ref": "#/definitions/GenericLink"
+        },
+        "next": {
+          "$ref": "#/definitions/GenericLink"
+        },
+        "parent-list": {
+          "$ref": "#/definitions/GenericLink"
+        },
+        "prev": {
+          "$ref": "#/definitions/GenericLink"
+        },
+        "self": {
+          "$ref": "#/definitions/GenericLink"
+        }
+      },
+      "description": "links that can be used for further navigation when browsing Account Information at one account level - self: link to the transactions of a given account - parent-list: link to the list of all available accounts - balances: link to the balances of a given account - first: link to the first page of the transactions result - last: link to the last page of the transactions result - next: link to the next page of the transactions result - prev: link to the previous page of the transactions result",
+      "title": "TransactionsLinks"
+    },
+    "Accreditation": {
+      "description": "",
+      "title": "Accreditation",
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": ["AccountBalance", "AccountHistory"]
+        },
+        "maxBackDays": {
+          "description": "Only for AccountHistory. This property designates the maximum number of days back at which account transactions can be returned relative to the current date.",
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "AccountAuthorization": {
+      "description": "An account authorization consisting of the account's ID and the approved accreditations by the PSU at the ASPSP.",
+      "title": "AccountAuthorization",
+      "type": "object",
+      "properties": {
+        "accountId": {
+          "$ref": "#/definitions/AccountIdentification"
+        },
+        "accreditations": {
+          "description": "The approved accreditations for this account.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Accreditation"
+          },
+          "x-finastra-data-classification": ["Restricted"]
+        }
+      }
+    },
+    "ConsentStatus": {
+      "description": "Status of the consent resource.",
+      "title": "ConsentStatus",
+      "type": "string",
+      "enum": ["APPROVED", "PENDING", "EXPIRED"]
+    },
+    "Consent": {
+      "description": "The approved or unapproved consent of the PSU.",
+      "title": "Consent",
+      "type": "object",
+      "properties": {
+        "consentId": {
+          "description": "The ID of the consent.",
+          "type": "string"
+        },
+        "consentStatus": {
+          "$ref": "#/definitions/ConsentStatus"
+        },
+        "approvalUrl": {
+          "description": "The URL of the web page of the ASPSP at which the PSU can fill in and approve the consent. This is only present if the consent is in PENDING state.",
+          "type": "string"
+        },
+        "authorizedAccounts": {
+          "type": "array",
+          "description": "All of the consented accounts along with fine-grained accreditations. This is only present after the consent was successfully approved.",
+          "items": {
+            "$ref": "#/definitions/AccountAuthorization"
+          },
+          "x-finastra-data-classification": ["Restricted"]
+        }
+      },
+      "required": ["consentId", "consentStatus"]
+    },
+    "ConsentCollection": {
+      "description": "Contains the consents of a given PSU.",
+      "title": "ConsentCollection",
+      "type": "object",
+      "properties": {
+        "items": {
+          "type": "array",
+          "description": "The consent collection.",
+          "items": {
+            "$ref": "#/definitions/Consent"
+          }
+        }
+      }
+    },
+    "ConsentRequest": {
+      "description": "A consent request to be used with a redirect based approach.",
+      "title": "ConsentRequest",
+      "type": "object",
+      "required": ["redirectUrl"],
+      "properties": {
+        "redirectUrl": {
+          "description": "An URL of the AISP to which the ASPSP will redirect after a successful or failed consent approval.",
+          "type": "string"
+        }
+      }
+    }
+  },
+  "host": "api.fusionfabric.cloud",
+  "schemes": ["https"]
+}

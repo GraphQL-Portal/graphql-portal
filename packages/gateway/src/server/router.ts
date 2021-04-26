@@ -4,11 +4,12 @@ import { getMesh } from '@graphql-mesh/runtime';
 import { KeyValueCache, MeshPubSub } from '@graphql-mesh/types';
 import { config } from '@graphql-portal/config';
 import { prefixLogger } from '@graphql-portal/logger';
-import { ApiDef } from '@graphql-portal/types';
+import { ApiDef, WebhookEvent } from '@graphql-portal/types';
 import { Application, Request, RequestHandler, Router } from 'express';
 import { graphqlHTTP } from 'express-graphql';
 import { GraphQLSchema } from 'graphql';
 import { subscribeToRequestMetrics } from '../metric';
+import { setupWebhooks, webhooks } from '../webhooks';
 import { defaultMiddlewares, loadCustomMiddlewares, handleError, prepareRequestContext } from '../middleware';
 
 interface IMesh {
@@ -32,6 +33,7 @@ export async function setRouter(app: Application, apiDefs: ApiDef[]): Promise<vo
   await buildRouter(apiDefs);
   app.use((req, res, next) => router(req, res, next));
   app.use(handleError);
+  setupWebhooks(apiDefs);
 }
 
 export async function buildRouter(apiDefs: ApiDef[]): Promise<Router> {
@@ -169,4 +171,6 @@ export async function updateApi(apiDef: ApiDef): Promise<void> {
     (layer) => layer.name === 'graphqlMiddleware' && layer.regexp.test(apiDef.endpoint)
   );
   router.stack.splice(oldLayerIndex, 1, routerWithNewApi.stack[0]);
+
+  webhooks.triggerForApi(apiDef.name, WebhookEvent.SCHEMA_CHANGED);
 }
