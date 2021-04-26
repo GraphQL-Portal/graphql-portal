@@ -1,5 +1,11 @@
 # @graphql-portal/twitter
 
+## 0.3.2
+
+### Patch Changes
+
+- f68856c: webhooks, fusion fabric data connectors, downgrade types
+
 ## 0.3.1
 
 ### Patch Changes
