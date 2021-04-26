@@ -4,7 +4,7 @@ import { getMesh } from '@graphql-mesh/runtime';
 import { KeyValueCache, MeshPubSub } from '@graphql-mesh/types';
 import { config } from '@graphql-portal/config';
 import { prefixLogger } from '@graphql-portal/logger';
-import { ApiDef, WebhookEvents } from '@graphql-portal/types';
+import { ApiDef, WebhookEvent } from '@graphql-portal/types';
 import { Application, Request, RequestHandler, Router } from 'express';
 import { graphqlHTTP } from 'express-graphql';
 import { GraphQLSchema } from 'graphql';
@@ -167,10 +167,10 @@ export async function updateApi(apiDef: ApiDef): Promise<void> {
   const routerWithNewApi = Router();
   await buildApi(routerWithNewApi, apiDef, mesh);
 
-  webhooks.triggerForApi(apiDef.name, WebhookEvents.SCHEMA_CHANGED);
-
   const oldLayerIndex = router.stack.findIndex(
     (layer) => layer.name === 'graphqlMiddleware' && layer.regexp.test(apiDef.endpoint)
   );
   router.stack.splice(oldLayerIndex, 1, routerWithNewApi.stack[0]);
+
+  webhooks.triggerForApi(apiDef.name, WebhookEvent.SCHEMA_CHANGED);
 }

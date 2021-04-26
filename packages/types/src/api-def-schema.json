@@ -1577,7 +1577,7 @@
             "enum": ["schema_changed"],
             "description": "Name of the event you want to subscribe"
           },
-          "url": { "type": "string", "description": "URL that remote API will ping" }
+          "url": { "type": "string", "pattern": "^https?://.*$", "description": "URL that remote API will ping" }
         },
         "required": ["event", "url"]
       }

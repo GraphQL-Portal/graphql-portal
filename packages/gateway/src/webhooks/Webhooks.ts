@@ -2,17 +2,17 @@ import https from 'https';
 import { promisify } from 'util';
 import Events from 'events';
 import { prefixLogger } from '@graphql-portal/logger';
-import { ApiDef, WebhookEvents } from '@graphql-portal/types';
+import { ApiDef, WebhookEvent } from '@graphql-portal/types';
 
 export type RemoveEventListener = (() => void) | null;
 
-class Webhooks {
+export class Webhooks {
   private readonly hooks: {
-    [key: string]: {
+    [apiName: string]: {
       // key equal to api name
-      [key: string]: {
+      [eventName: string]: {
         // key equal to event name
-        [key: string]: RemoveEventListener; // key equal to url
+        [url: string]: RemoveEventListener; // key equal to url
       };
     };
   } = {};
@@ -21,18 +21,18 @@ class Webhooks {
   private readonly logger = prefixLogger('webhooks');
   private readonly request = promisify(https.request);
 
-  public static getEventName(apiName: string, event: WebhookEvents, url: string): string {
+  public static getEventName(apiName: string, event: WebhookEvent, url: string): string {
     return `${apiName}-${event}-${url}`;
   }
 
-  private getApiEventHooks(apiName: string, event: WebhookEvents): { [key: string]: RemoveEventListener } {
+  private getApiEventHooks(apiName: string, event: WebhookEvent): { [key: string]: RemoveEventListener } {
     const apiHooks = this.hooks[apiName] || (this.hooks[apiName] = {});
     const apiEventHooks = apiHooks[event] || (apiHooks[event] = {});
     return apiEventHooks;
   }
 
-  public add(apiName: string, event: WebhookEvents, url: string): void {
-    if (!Object.values(WebhookEvents).includes(event)) {
+  public add(apiName: string, event: WebhookEvent, url: string): void {
+    if (!Object.values(WebhookEvent).includes(event)) {
       this.logger.warn(`Unknown event: ${event}, apiName: ${apiName}. Returning...`);
       return;
     }
@@ -64,7 +64,7 @@ class Webhooks {
     this.emitter.on(eventName, listener);
   }
 
-  public remove(apiName: string, event: WebhookEvents, url: string): void {
+  public remove(apiName: string, event: WebhookEvent, url: string): void {
     this.logger.debug(`Removing hook. Event: ${event}, URL: ${url}`);
 
     const apiEventHooks = this.getApiEventHooks(apiName, event);
@@ -75,7 +75,7 @@ class Webhooks {
     }
   }
 
-  public async triggerForApi(apiName: string, event: WebhookEvents): Promise<void> {
+  public async triggerForApi(apiName: string, event: WebhookEvent): Promise<void> {
     const events = this.getApiEventHooks(apiName, event);
     const urls = Object.keys(events);
 
@@ -93,7 +93,7 @@ export const setupWebhooks = (apiDefs: ApiDef[]): void => {
   apiDefs.forEach((api) => {
     if (!api.webhooks?.length) return;
     api.webhooks.forEach(({ event, url }) => {
-      webhooks.add(api.name, event as WebhookEvents, url);
+      webhooks.add(api.name, event as WebhookEvent, url);
     });
   });
 };
