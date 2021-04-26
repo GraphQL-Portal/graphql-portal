@@ -658,6 +658,15 @@ export interface ODataHandler {
    * Use $expand for navigation props instead of seperate HTTP requests (Default: false)
    */
   expandNavProps?: boolean;
+  /**
+   * Custom Fetch
+   */
+  customFetch?:
+    | {
+        [k: string]: unknown;
+      }
+    | string
+    | unknown[];
 }
 /**
  * Handler for Swagger / OpenAPI 2/3 specification. Source could be a local json/swagger file, or a url to it.
@@ -1050,9 +1059,17 @@ export interface Transform {
         | unknown[]
       );
   /**
-   * Transformer to apply composition to resolvers
+   * Transformer to apply composition to resolvers (Any of: ResolversCompositionTransform, Any)
    */
-  resolversComposition?: ResolversCompositionTransformObject[];
+  resolversComposition?:
+    | ResolversCompositionTransform
+    | (
+        | {
+            [k: string]: unknown;
+          }
+        | string
+        | unknown[]
+      );
   snapshot?: SnapshotTransformConfig;
   [k: string]: unknown;
 }
@@ -1325,6 +1342,16 @@ export interface RenameTransformObject {
 export interface RenameConfig {
   type?: string;
   field?: string;
+}
+export interface ResolversCompositionTransform {
+  /**
+   * Specify to apply resolvers-composition transforms to bare schema or by wrapping original schema (Allowed values: bare, wrap)
+   */
+  mode?: 'bare' | 'wrap';
+  /**
+   * Array of resolver/composer to apply
+   */
+  compositions: ResolversCompositionTransformObject[];
 }
 export interface ResolversCompositionTransformObject {
   /**
