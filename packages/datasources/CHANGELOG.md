@@ -1,5 +1,11 @@
 # @graphql-portal/datasources
 
+## 0.1.3
+
+### Patch Changes
+
+- f68856c: webhooks, fusion fabric data connectors, downgrade types
+
 ## 0.1.2
 
 ### Patch Changes

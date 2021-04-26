@@ -1,5 +1,11 @@
 # @graphql-portal/stripe
 
+## 0.2.2
+
+### Patch Changes
+
+- f68856c: webhooks, fusion fabric data connectors, downgrade types
+
 ## 0.2.1
 
 ### Patch Changes

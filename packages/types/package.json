@@ -1,13 +1,13 @@
 {
   "name": "@graphql-portal/types",
-  "version": "0.26.0",
+  "version": "0.27.0",
   "license": "MIT",
   "main": "dist/src/index.js",
   "scripts": {
     "build": "tsc -b"
   },
   "dependencies": {
-    "@graphql-portal/datasources": "^0.1.2",
+    "@graphql-portal/datasources": "^0.1.3",
     "ajv": "8.1.0"
   },
   "publishConfig": {

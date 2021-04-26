@@ -1,5 +1,17 @@
 # @graphql-portal/types
 
+## 0.27.0
+
+### Minor Changes
+
+- 7040868: Added datadog tracing provider
+- f68856c: webhooks, fusion fabric data connectors, downgrade types
+
+### Patch Changes
+
+- Updated dependencies [f68856c]
+  - @graphql-portal/datasources@0.1.3
+
 ## 0.26.0
 
 ### Minor Changes
