@@ -1,5 +1,11 @@
 # @graphql-portal/datasources
 
+## 0.1.4
+
+### Patch Changes
+
+- f1264ce: type fix
+
 ## 0.1.3
 
 ### Patch Changes
