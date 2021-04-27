@@ -62,6 +62,12 @@
     },
     {
       "path": "packages/datasources/ip-api"
+    },
+    {
+      "path": "packages/datasources/fusion-creator-account-information-us"
+    },
+    {
+      "path": "packages/datasources/fusion-creator-account-information-psd2-stet"
     }
   ],
   "exclude": ["node_modules", "dist", "*.d.ts"]
