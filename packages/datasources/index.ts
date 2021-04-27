@@ -6,8 +6,8 @@ import * as slack from './slack';
 import * as stripe from './stripe';
 import * as twitter from './twitter';
 import * as weatherbit from './weatherbit';
-import * as fusionCreatorAccoutInforimationUS from './fusion-creator-account-information-us';
-import * as fusionCreatorAccoutInforimationPSD2STET from './fusion-creator-account-information-psd2-stet';
+import * as fusionCreatorAccountInformationUS from './fusion-creator-account-information-us';
+import * as fusionCreatorAccountInformationPSD2STET from './fusion-creator-account-information-psd2-stet';
 
 type Validate = (name: string, config: any) => string | void;
 type CustomHandler = {
@@ -26,8 +26,8 @@ const handlers: CustomHandler[] = [
   salesforce,
   twitter,
   ipApi,
-  fusionCreatorAccoutInforimationUS,
-  fusionCreatorAccoutInforimationPSD2STET,
+  fusionCreatorAccountInformationUS,
+  fusionCreatorAccountInformationPSD2STET,
 ];
 
 const definitions: { [key: string]: any } = handlers.reduce(
