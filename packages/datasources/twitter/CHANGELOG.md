@@ -1,5 +1,11 @@
 # @graphql-portal/twitter
 
+## 0.3.3
+
+### Patch Changes
+
+- e96ef42: Update dependencies
+
 ## 0.3.2
 
 ### Patch Changes

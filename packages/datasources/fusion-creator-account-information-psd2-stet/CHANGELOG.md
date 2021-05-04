@@ -1,5 +1,11 @@
 # @graphql-portal/fusion-creator-account-information-psd2-stet
 
+## 0.2.3
+
+### Patch Changes
+
+- e96ef42: Update dependencies
+
 ## 0.2.2
 
 ### Patch Changes

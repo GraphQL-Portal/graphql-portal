@@ -1,5 +1,11 @@
 # @graphql-portal/gateway
 
+## 0.20.1
+
+### Patch Changes
+
+- e96ef42: Update dependencies
+
 ## 0.20.0
 
 ### Minor Changes
