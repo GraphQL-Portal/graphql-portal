@@ -1,5 +1,11 @@
 # @graphql-portal/contentful
 
+## 0.1.3
+
+### Patch Changes
+
+- e96ef42: Update dependencies
+
 ## 0.1.2
 
 ### Patch Changes
