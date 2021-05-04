@@ -1114,22 +1114,23 @@
     neo4j-driver "4.2.3"
     neo4j-graphql-js "2.19.2"
 
-"@graphql-mesh/odata@^0.10.0":
-  version "0.10.1"
-  resolved "https://registry.yarnpkg.com/@graphql-mesh/odata/-/odata-0.10.1.tgz#ca25e64202c6116ca801c51ff2cb58d227955227"
-  integrity sha512-HEGiltTEdgdAM85oVOtpjGgu4R0DzA3BPJW3ZhN2pAuv4oh/6GhSMxtTd/hHosTV8tZ+xn1wCCa2c4t2txxAjw==
+"@graphql-mesh/odata@^0.11.0":
+  version "0.11.0"
+  resolved "https://registry.yarnpkg.com/@graphql-mesh/odata/-/odata-0.11.0.tgz#d95c15a1c182de8447ea9ce8da397cb4c85c58a7"
+  integrity sha512-wshtntk1cpSSF90sywcZ8JispiXyKyl8Y+W02XN8dQB31BXEgBTTr4t5mUsPrIcDtpm07SjHdWZ4zISViJEWbg==
   dependencies:
     "@graphql-mesh/types" "0.39.0"
-    "@graphql-mesh/utils" "0.10.0"
-    "@graphql-tools/utils" "7.7.3"
+    "@graphql-mesh/utils" "0.11.0"
+    "@graphql-tools/utils" "7.8.0"
     cross-fetch "3.1.4"
     dataloader "2.0.0"
     fast-xml-parser "3.19.0"
     graphql-compose "7.25.1"
     graphql-parse-resolve-info "4.11.0"
-    graphql-scalars "1.9.0"
+    graphql-scalars "1.9.3"
     http-string-parser "0.0.6"
     pascal-case "3.1.2"
+    undici "3.3.6"
     url-join "4.0.1"
 
 "@graphql-mesh/openapi@^0.16.0":
@@ -10733,6 +10734,11 @@ underscore@~1.7.0:
   version "1.7.0"
   resolved "https://registry.yarnpkg.com/underscore/-/underscore-1.7.0.tgz#6bbaf0877500d36be34ecaa584e0db9fef035209"
   integrity sha1-a7rwh3UA02vjTsqlhODbn+8DUgk=
+
+undici@3.3.6:
+  version "3.3.6"
+  resolved "https://registry.yarnpkg.com/undici/-/undici-3.3.6.tgz#06d3b97b7eeff46bce6f8a71079c09f64dd59dc1"
+  integrity sha512-/j3YTZ5AobMB4ZrTY72mzM54uFUX32v0R/JRW9G2vOyF1uSKYAx+WT8dMsAcRS13TOFISv094TxIyWYk+WEPsA==
 
 union-value@^1.0.0:
   version "1.0.1"
