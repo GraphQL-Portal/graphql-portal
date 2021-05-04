@@ -1086,18 +1086,17 @@
     graphql-compose-mongoose "9.2.2"
     graphql-compose-pagination "8.0.2"
 
-"@graphql-mesh/mysql@^0.9.0":
-  version "0.9.2"
-  resolved "https://registry.yarnpkg.com/@graphql-mesh/mysql/-/mysql-0.9.2.tgz#1c62b67f965221d29039d8cd9cc42abcafd80a71"
-  integrity sha512-Vj+o5yanPgiOc6dDIS/iNqkxkA1HOot6+0rcxcqnF9+8j2DgsHkkqvfKcdGuCn6xbApZykGRMRYNtibXz1BK4w==
+"@graphql-mesh/mysql@^0.10.0":
+  version "0.10.0"
+  resolved "https://registry.yarnpkg.com/@graphql-mesh/mysql/-/mysql-0.10.0.tgz#3d6df2f43ca396bf86d76bf32b0bdf7553a000e5"
+  integrity sha512-4JaoCnpXoV/6TwF57QQ04bbPaPZkZvVw3RfuwHPb312IWbaK1sAGhYndld9iNYXbM92y3mYlzv8HRXNtJiGYqA==
   dependencies:
     "@graphql-mesh/types" "0.39.0"
-    "@graphql-mesh/utils" "0.10.0"
+    "@graphql-mesh/utils" "0.11.0"
     camel-case "4.1.2"
     graphql-compose "7.25.1"
     graphql-fields "2.0.3"
-    graphql-jit "0.5.0"
-    graphql-scalars "1.9.0"
+    graphql-scalars "1.9.3"
     mysql "2.18.1"
     mysql-utilities "1.1.2"
     pascal-case "3.1.2"
