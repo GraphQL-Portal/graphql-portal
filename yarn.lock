@@ -1150,15 +1150,14 @@
     swagger2openapi "7.0.5"
     url-join "4.0.1"
 
-"@graphql-mesh/postgraphile@^0.11.0":
-  version "0.11.4"
-  resolved "https://registry.yarnpkg.com/@graphql-mesh/postgraphile/-/postgraphile-0.11.4.tgz#2c291e1b4950a117f2bf40e3f407e7e2086c56fb"
-  integrity sha512-ywTuHfdJpG2vAefriEX5n9oHJACuhMEPy4Lmkdgt/GhgXXeprNoE2+PGceXltPx9G/5D40dt3RLoEqzdj0mqoQ==
+"@graphql-mesh/postgraphile@^0.12.0":
+  version "0.12.0"
+  resolved "https://registry.yarnpkg.com/@graphql-mesh/postgraphile/-/postgraphile-0.12.0.tgz#0d66d92355dc856ebbf3666c49bf0582c4b346e6"
+  integrity sha512-2t094xQ1eum0KRV8+f49gUQ2GqxEIVv+BMA+g/ZNNt+8P/jrKtVtSbqVypL403ydKeizLo1xvINLQsDtTDmpGQ==
   dependencies:
     "@graphql-mesh/types" "0.39.0"
-    "@graphql-mesh/utils" "0.10.0"
-    graphql-jit "0.5.0"
-    pg "^8.5.1"
+    "@graphql-mesh/utils" "0.11.0"
+    pg "^8.6.0"
     postgraphile "4.11.0"
     postgraphile-core "4.11.2"
 
@@ -8725,7 +8724,7 @@ pg-types@^2.1.0, pg-types@^2.2.0:
     postgres-date "~1.0.4"
     postgres-interval "^1.1.0"
 
-"pg@>=6.1.0 <9", pg@^8.5.1:
+"pg@>=6.1.0 <9", pg@^8.6.0:
   version "8.6.0"
   resolved "https://registry.yarnpkg.com/pg/-/pg-8.6.0.tgz#e222296b0b079b280cce106ea991703335487db2"
   integrity sha512-qNS9u61lqljTDFvmk/N66EeGq3n6Ujzj0FFyNMGQr6XuEv4tgNTXvJQTfJdcvGit5p5/DWPu+wj920hAJFI+QQ==
