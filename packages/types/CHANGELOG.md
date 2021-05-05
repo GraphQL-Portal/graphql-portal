@@ -1,5 +1,13 @@
 # @graphql-portal/types
 
+## 0.27.1
+
+### Patch Changes
+
+- 7e8ff93: fusion fabric token moved to headers
+- Updated dependencies [7e8ff93]
+  - @graphql-portal/datasources@0.1.5
+
 ## 0.27.0
 
 ### Minor Changes

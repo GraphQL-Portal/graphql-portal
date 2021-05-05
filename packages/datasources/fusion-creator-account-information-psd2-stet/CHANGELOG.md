@@ -1,5 +1,11 @@
 # @graphql-portal/fusion-creator-account-information-psd2-stet
 
+## 0.2.4
+
+### Patch Changes
+
+- 7e8ff93: fusion fabric token moved to headers
+
 ## 0.2.3
 
 ### Patch Changes
