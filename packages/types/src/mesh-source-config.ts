@@ -815,7 +815,12 @@ export interface FusionCreatorAccountInformationUSHandler {
 /**
  * Retrieve set of account list, balances and account history e.g. for external aggregation purposes based on consent given by the customer. (PSD2 AISP scenario - STET standard)
  */
-export interface FusionCreatorAccountInformationPSD2STETHandler {}
+export interface FusionCreatorAccountInformationPSD2STETHandler {
+  /**
+   * Access token (with prefix)
+   */
+  token: string;
+}
 export interface Transform {
   /**
    * Transformer to apply caching for your data sources

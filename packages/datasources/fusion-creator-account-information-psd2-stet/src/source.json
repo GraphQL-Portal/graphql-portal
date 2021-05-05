@@ -42,14 +42,6 @@
         "produces": ["application/json;charset=utf-8", "application/hal+json;charset=utf-8"],
         "parameters": [
           {
-            "name": "Authorization",
-            "in": "header",
-            "description": "Access token to be passed as a header",
-            "required": true,
-            "type": "string",
-            "x-finastra-data-classification": ["Restricted"]
-          },
-          {
             "name": "Consent-ID",
             "in": "header",
             "description": "Consent-ID to be passed as a header",
@@ -233,14 +225,6 @@
         "consumes": ["application/json"],
         "produces": ["application/json;charset=utf-8", "application/hal+json;charset=utf-8"],
         "parameters": [
-          {
-            "name": "Authorization",
-            "in": "header",
-            "description": "Access token to be passed as a header",
-            "required": true,
-            "type": "string",
-            "x-finastra-data-classification": ["Restricted"]
-          },
           {
             "name": "Consent-ID",
             "in": "header",
@@ -432,14 +416,6 @@
         "consumes": ["application/json"],
         "produces": ["application/json;charset=utf-8", "application/hal+json;charset=utf-8"],
         "parameters": [
-          {
-            "name": "Authorization",
-            "in": "header",
-            "description": "Access token to be passed as a header",
-            "required": true,
-            "type": "string",
-            "x-finastra-data-classification": ["Restricted"]
-          },
           {
             "name": "Consent-ID",
             "in": "header",
@@ -664,14 +640,6 @@
             }
           },
           {
-            "name": "Authorization",
-            "in": "header",
-            "description": "Access token to be passed as a header",
-            "required": true,
-            "type": "string",
-            "x-finastra-data-classification": ["Restricted"]
-          },
-          {
             "name": "X-Request-ID",
             "in": "header",
             "description": "Correlation header to be set in a request and retrieved in the relevant response ",
@@ -747,14 +715,6 @@
         "operationId": "consentsGet",
         "produces": ["application/json;charset=utf-8"],
         "parameters": [
-          {
-            "name": "Authorization",
-            "in": "header",
-            "description": "Access token to be passed as a header",
-            "required": true,
-            "type": "string",
-            "x-finastra-data-classification": ["Restricted"]
-          },
           {
             "name": "X-Request-ID",
             "in": "header",
@@ -833,14 +793,6 @@
             "description": "Consent ID",
             "required": true,
             "type": "string"
-          },
-          {
-            "name": "Authorization",
-            "in": "header",
-            "description": "Access token to be passed as a header",
-            "required": true,
-            "type": "string",
-            "x-finastra-data-classification": ["Restricted"]
           },
           {
             "name": "X-Request-ID",
