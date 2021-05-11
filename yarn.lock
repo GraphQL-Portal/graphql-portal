@@ -4305,10 +4305,10 @@ date-fns@2.21.3:
   resolved "https://registry.yarnpkg.com/date-fns/-/date-fns-2.21.3.tgz#8f5f6889d7a96bbcc1f0ea50239b397a83357f9b"
   integrity sha512-HeYdzCaFflc1i4tGbj7JKMjM4cKGYoyxwcIIkHzNgCkX8xXDNJDZXgDDVchIWpN4eQc3lH37WarduXFZJOtxfw==
 
-dd-trace@^0.32.1:
-  version "0.32.2"
-  resolved "https://registry.yarnpkg.com/dd-trace/-/dd-trace-0.32.2.tgz#c5844f75f3c15bf88f4992b266def062a254102a"
-  integrity sha512-BvbCDOvrgn9qcYl+asl+RJL0vI5Gssf8TSwbmjKK4zWP/aQwjZeFd/AMfWfnAjaETnPbN2bYIOT+yjGxlX029g==
+dd-trace@^0.33.0:
+  version "0.33.2"
+  resolved "https://registry.yarnpkg.com/dd-trace/-/dd-trace-0.33.2.tgz#a3a93f6a0ad190081fb21ddb039fb965618c7df3"
+  integrity sha512-PXn58Nj2Y/rnnj46cgKHhqBBHCRJfAj8HcOtBDp5K6OQbl1BYFRgX9j+xe39zZj+QE9wpRvWbp9A5xRFN2r72A==
   dependencies:
     "@types/node" "^10.12.18"
     form-data "^3.0.0"
@@ -4328,12 +4328,10 @@ dd-trace@^0.32.1:
     path-to-regexp "^0.1.2"
     performance-now "^2.1.0"
     protobufjs "^6.9.0"
-    require-in-the-middle "^2.2.2"
     semver "^5.5.0"
     shimmer "1.2.1"
     source-map "^0.7.3"
     source-map-resolve "^0.6.0"
-    url-parse "^1.4.3"
 
 debug@2.6.9, debug@^2.2.0, debug@^2.3.3, debug@^2.5.2, debug@^2.6.9:
   version "2.6.9"
@@ -9478,14 +9476,6 @@ require-from-string@^2.0.2:
   resolved "https://registry.yarnpkg.com/require-from-string/-/require-from-string-2.0.2.tgz#89a7fdd938261267318eafe14f9c32e598c36909"
   integrity sha512-Xf0nWe6RseziFMu+Ap9biiUbmplq6S9/p+7w7YXP/JBHhrUDDUhwa+vANyubuqfZWTveU//DYVGsDG7RKL/vEw==
 
-require-in-the-middle@^2.2.2:
-  version "2.2.2"
-  resolved "https://registry.yarnpkg.com/require-in-the-middle/-/require-in-the-middle-2.2.2.tgz#1d3124709cf43bf2c1f225082e6d8394e2f9d4f4"
-  integrity sha512-XxtlrdTCRsr+/8WnWfqz2pFZ0SoUnrOJCFc4gJbUViZ2/3P0+zwWNi4+cV4bPfEJZVAAcxel3j/oCmwnjPvnfA==
-  dependencies:
-    module-details-from-path "^1.0.3"
-    resolve "^1.5.0"
-
 require-main-filename@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/require-main-filename/-/require-main-filename-2.0.0.tgz#d0b329ecc7cc0f61649f62215be69af54aa8989b"
@@ -9518,7 +9508,7 @@ resolve-url@^0.2.1:
   resolved "https://registry.yarnpkg.com/resolve-url/-/resolve-url-0.2.1.tgz#2c637fe77c893afd2a663fe21aa9080068e2052a"
   integrity sha1-LGN/53yJOv0qZj/iGqkIAGjiBSo=
 
-resolve@^1.10.0, resolve@^1.10.1, resolve@^1.13.1, resolve@^1.17.0, resolve@^1.18.1, resolve@^1.5.0:
+resolve@^1.10.0, resolve@^1.10.1, resolve@^1.13.1, resolve@^1.17.0, resolve@^1.18.1:
   version "1.20.0"
   resolved "https://registry.yarnpkg.com/resolve/-/resolve-1.20.0.tgz#629a013fb3f70755d6f0b7935cc1c2c5378b1975"
   integrity sha512-wENBPt4ySzg4ybFQW2TT1zMQucPK95HSh/nq2CFTZVOGut2+pQvSsgtda4d26YrYcr067wjbmzOG8byDPBX63A==
