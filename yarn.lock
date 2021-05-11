@@ -1253,15 +1253,15 @@
     "@graphql-tools/wrap" "7.0.5"
     micromatch "4.0.4"
 
-"@graphql-mesh/transform-mock@^0.8.1":
-  version "0.8.6"
-  resolved "https://registry.yarnpkg.com/@graphql-mesh/transform-mock/-/transform-mock-0.8.6.tgz#b2d7bb9e0118db5818a495d52f50b3237147bfb4"
-  integrity sha512-Uuvq9Bk0nm0waLd+jNkkVavVSyjfUT77i3t/JqTwVoaO1lwZTtgIyIwhpT5dsHxyQtdRwXYRflDVrjGCKs7seg==
+"@graphql-mesh/transform-mock@^0.9.0":
+  version "0.9.5"
+  resolved "https://registry.yarnpkg.com/@graphql-mesh/transform-mock/-/transform-mock-0.9.5.tgz#91fa75cb83d697ad78ff6f07ce48101f5e034f50"
+  integrity sha512-Za1+uTz/UWZnDB/5q35wDOozRbmCp52X/l6fYTmeX10zWJZAWQXf5IBCgTFnXaIYRQfbcMpEKcWmfxgvyB5nQg==
   dependencies:
-    "@graphql-mesh/types" "0.39.0"
-    "@graphql-mesh/utils" "0.10.0"
-    "@graphql-tools/mock" "8.1.1"
-    "@graphql-tools/utils" "7.7.3"
+    "@graphql-mesh/types" "0.42.0"
+    "@graphql-mesh/utils" "0.11.4"
+    "@graphql-tools/mock" "8.1.2"
+    "@graphql-tools/utils" "7.9.1"
     faker "5.5.3"
 
 "@graphql-mesh/transform-naming-convention@^0.6.34":
@@ -1618,16 +1618,16 @@
     "@graphql-tools/utils" "^7.7.0"
     tslib "~2.2.0"
 
-"@graphql-tools/mock@8.1.1":
-  version "8.1.1"
-  resolved "https://registry.yarnpkg.com/@graphql-tools/mock/-/mock-8.1.1.tgz#f261f19225216bf874baaedc84e323a4f1ec8a3c"
-  integrity sha512-EOKONEp6d5hOzN5jj1/tFjf9uL5PUYBu79beEeDTo0Iwr9RtSaOeVZ67UwGhO781TkAeMPtz6sp7VFjwzhBWcQ==
+"@graphql-tools/mock@8.1.2":
+  version "8.1.2"
+  resolved "https://registry.yarnpkg.com/@graphql-tools/mock/-/mock-8.1.2.tgz#c227144260c7ee3410dd47fba1d73d1ee0b75950"
+  integrity sha512-tgvy/NYZzd9D/UHMkmTE+XWHCYL01pDaNKBtKb37Pr1UOlPXtLhSQtqRPvvXIg+VUW5yK4pRlC9Xcxm0ZAKXhA==
   dependencies:
     "@graphql-tools/schema" "^7.0.0"
     "@graphql-tools/utils" "^7.0.0"
     fast-json-stable-stringify "^2.1.0"
     ts-is-defined "^1.0.0"
-    tslib "~2.1.0"
+    tslib "~2.2.0"
 
 "@graphql-tools/mock@^7.0.0":
   version "7.0.0"
