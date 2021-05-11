@@ -69,7 +69,7 @@
     "graphql": "15.5.0",
     "graphql-cost-analysis": "^1.0.3",
     "graphql-depth-limit": "^1.1.0",
-    "graphql-upload": "^11.0.0",
+    "graphql-upload": "^12.0.0",
     "ioredis": "^4.19.4",
     "jaeger-client": "^3.18.1",
     "opentracing": "^0.14.5",
