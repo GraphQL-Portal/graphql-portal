@@ -1,0 +1,40 @@
+diff --git a/node_modules/@graphql-mesh/postgraphile/index.cjs.js b/node_modules/@graphql-mesh/postgraphile/index.cjs.js
+index 2be2474..881342d 100644
+--- a/node_modules/@graphql-mesh/postgraphile/index.cjs.js
++++ b/node_modules/@graphql-mesh/postgraphile/index.cjs.js
+@@ -38,12 +38,13 @@ class PostGraphileHandler {
+         const appendPlugins = await Promise.all((this.config.appendPlugins || []).map(pluginName => utils.loadFromModuleExportExpression(pluginName, { cwd: this.baseDir })));
+         const skipPlugins = await Promise.all((this.config.skipPlugins || []).map(pluginName => utils.loadFromModuleExportExpression(pluginName, { cwd: this.baseDir })));
+         const options = await utils.loadFromModuleExportExpression(this.config.options, { cwd: this.baseDir });
++        const readCache = Object.keys(cachedIntrospection).length ? cachedIntrospection : false;
+         const builder = await postgraphileCore.getPostGraphileBuilder(pgPool, this.config.schemaName || 'public', {
+             dynamicJson: true,
+             subscriptions: 'subscriptions' in this.config ? this.config.subscriptions : true,
+             live: 'live' in this.config ? this.config.live : true,
+-            readCache: cachedIntrospection,
+-            writeCache: !cachedIntrospection && dummyCacheFilePath,
++            readCache,
++            writeCache: !readCache && dummyCacheFilePath,
+             setWriteCacheCallback: fn => {
+                 writeCache = fn;
+             },
+diff --git a/node_modules/@graphql-mesh/postgraphile/index.esm.js b/node_modules/@graphql-mesh/postgraphile/index.esm.js
+index a78fcfa..d943f1c 100644
+--- a/node_modules/@graphql-mesh/postgraphile/index.esm.js
++++ b/node_modules/@graphql-mesh/postgraphile/index.esm.js
+@@ -36,12 +36,13 @@ class PostGraphileHandler {
+         const appendPlugins = await Promise.all((this.config.appendPlugins || []).map(pluginName => loadFromModuleExportExpression(pluginName, { cwd: this.baseDir })));
+         const skipPlugins = await Promise.all((this.config.skipPlugins || []).map(pluginName => loadFromModuleExportExpression(pluginName, { cwd: this.baseDir })));
+         const options = await loadFromModuleExportExpression(this.config.options, { cwd: this.baseDir });
++        const readCache = Object.keys(cachedIntrospection).length ? cachedIntrospection : false;
+         const builder = await getPostGraphileBuilder(pgPool, this.config.schemaName || 'public', {
+             dynamicJson: true,
+             subscriptions: 'subscriptions' in this.config ? this.config.subscriptions : true,
+             live: 'live' in this.config ? this.config.live : true,
+-            readCache: cachedIntrospection,
+-            writeCache: !cachedIntrospection && dummyCacheFilePath,
++            readCache: readCache,
++            writeCache: !readCache && dummyCacheFilePath,
+             setWriteCacheCallback: fn => {
+                 writeCache = fn;
+             },
