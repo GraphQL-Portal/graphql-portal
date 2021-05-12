@@ -20,7 +20,11 @@
     "react-dom": "17.0.2"
   },
   "resolutions": {
-    "**/is-svg": "4.3.1"
+    "**/is-svg": "4.3.1",
+    "url-parse": "1.5.0",
+    "lodash": "4.17.21",
+    "underscore": "1.12.1",
+    "trim": "0.0.3"
   },
   "browserslist": {
     "production": [
