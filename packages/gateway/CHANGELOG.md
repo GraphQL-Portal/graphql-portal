@@ -1,5 +1,19 @@
 # @graphql-portal/gateway
 
+## 0.21.0
+
+### Minor Changes
+
+- 1f920db: FusionCreator token changed to authorizationHeader, forward headers
+
+### Patch Changes
+
+- Updated dependencies [1f920db]
+  - @graphql-portal/types@1.0.0
+  - @graphql-portal/config@0.11.7
+  - @graphql-portal/dashboard@0.1.14
+  - @graphql-portal/logger@0.7.8
+
 ## 0.20.1
 
 ### Patch Changes
