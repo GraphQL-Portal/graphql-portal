@@ -1518,7 +1518,9 @@
       "type": "object",
       "title": "FusionCreatorAccountInformationUSHandler",
       "description": "Provides methods for interacting with data on the core banking system and third party vendors.",
-      "properties": { "token": { "type": "string", "description": "Access token (with prefix)" } },
+      "properties": {
+        "authorizationHeader": { "type": "string", "description": "Authorization header to forward" }
+      },
       "required": ["token"]
     },
     "FusionCreatorAccountInformationPSD2STETHandler": {
@@ -1526,8 +1528,10 @@
       "type": "object",
       "title": "FusionCreatorAccountInformationPSD2STETHandler",
       "description": "Retrieve set of account list, balances and account history e.g. for external aggregation purposes based on consent given by the customer. (PSD2 AISP scenario - STET standard)",
-      "properties": { "token": { "type": "string", "description": "Access token (with prefix)" } },
-      "required": ["token"]
+      "properties": {
+        "authorizationHeader": { "type": "string", "description": "Authorization header to forward" }
+      },
+      "required": ["authorizationHeader"]
     }
   },
   "type": "object",
