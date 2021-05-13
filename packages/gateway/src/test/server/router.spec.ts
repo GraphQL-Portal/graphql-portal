@@ -7,6 +7,7 @@ import { GraphQLSchema } from 'graphql';
 import supertest from 'supertest';
 import subscribeToRequestMetrics from '../../metric/emitter';
 import { buildRouter, setRouter } from '../../server/router';
+import { enqueuePublishApiDefStatusUpdated } from '../../redis/publish-api-def-status-updated';
 
 jest.mock('../../tracer');
 jest.mock('@graphql-portal/config', () => ({
@@ -18,6 +19,11 @@ jest.mock('@graphql-portal/config', () => ({
 }));
 jest.mock('@graphql-mesh/config', () => ({
   processConfig: jest.fn(),
+}));
+jest.mock('../../redis/publish-api-def-status-updated', () => ({
+  __esModule: true,
+  publishApiDefStatusUpdated: jest.fn(),
+  enqueuePublishApiDefStatusUpdated: jest.fn(),
 }));
 jest.mock('@graphql-mesh/runtime', () => ({
   getMesh: jest.fn().mockImplementation(() => ({
@@ -61,6 +67,7 @@ describe('Server', () => {
         expect(getMesh).toHaveBeenCalledTimes(1);
         expect(graphqlHTTP).toHaveBeenCalledTimes(1);
         expect(subscribeToRequestMetrics).toBeCalledTimes(1);
+        expect(enqueuePublishApiDefStatusUpdated).toBeCalledTimes(1);
       });
     });
 
