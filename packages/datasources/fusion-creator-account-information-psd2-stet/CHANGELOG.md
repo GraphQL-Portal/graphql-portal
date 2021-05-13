@@ -1,5 +1,11 @@
 # @graphql-portal/fusion-creator-account-information-psd2-stet
 
+## 1.0.0
+
+### Major Changes
+
+- 1f920db: FusionCreator token changed to authorizationHeader, forward headers
+
 ## 0.2.4
 
 ### Patch Changes
