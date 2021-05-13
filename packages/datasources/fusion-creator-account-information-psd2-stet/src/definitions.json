@@ -5,11 +5,11 @@
     "title": "FusionCreatorAccountInformationPSD2STETHandler",
     "description": "Retrieve set of account list, balances and account history e.g. for external aggregation purposes based on consent given by the customer. (PSD2 AISP scenario - STET standard)",
     "properties": {
-      "token": {
+      "authorizationHeader": {
         "type": "string",
-        "description": "Access token (with prefix)"
+        "description": "Authorization header to forward"
       }
     },
-    "required": ["token"]
+    "required": ["authorizationHeader"]
   }
 }

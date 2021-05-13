@@ -10,7 +10,7 @@ const prepareRequestContext: RequestHandler = function prepareRequestContext(req
   span?.setTag('http.content-type', req.headers['content-type']);
 
   req.context = {
-    forwardHeaders: {},
+    forwardHeaders: req.headers,
     requestId: req.id,
     tracerSpan: span,
     resolverSpans: {},

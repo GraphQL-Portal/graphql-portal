@@ -9,11 +9,11 @@ export default class FusionCreatorAccountInformationUSHandler extends OpenAPIHan
     config,
     cache,
     pubsub,
-  }: GetMeshSourceOptions<YamlConfig.OpenapiHandler & { token: string }>) {
+  }: GetMeshSourceOptions<YamlConfig.OpenapiHandler & { authorizationHeader: string }>) {
     config.source = require.resolve('@graphql-portal/fusion-creator-account-information-us/src/source.json');
     config.baseUrl = BASE_URL;
     config.schemaHeaders = config.operationHeaders = {
-      Authorization: config.token,
+      Authorization: `Bearer {context.forwardHeaders['${config.authorizationHeader}']}`,
     };
 
     super({ name, config, cache, pubsub });

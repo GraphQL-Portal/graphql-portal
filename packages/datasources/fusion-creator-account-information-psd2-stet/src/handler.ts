@@ -9,11 +9,11 @@ export default class FusionCreatorAccountInformationPSD2STET extends OpenAPIHand
     config,
     cache,
     pubsub,
-  }: GetMeshSourceOptions<YamlConfig.OpenapiHandler & { token: string }>) {
+  }: GetMeshSourceOptions<YamlConfig.OpenapiHandler & { authorizationHeader: string }>) {
     config.source = require.resolve('@graphql-portal/fusion-creator-account-information-psd2-stet/src/source.json');
     config.baseUrl = BASE_URL;
     config.schemaHeaders = config.operationHeaders = {
-      Authorization: config.token,
+      Authorization: `Bearer {context.forwardHeaders['${config.authorizationHeader}']}`,
     };
 
     super({ name, config, cache, pubsub });

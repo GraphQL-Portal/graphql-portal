@@ -5,9 +5,9 @@
     "title": "FusionCreatorAccountInformationUSHandler",
     "description": "Provides methods for interacting with data on the core banking system and third party vendors.",
     "properties": {
-      "token": {
+      "authorizationHeader": {
         "type": "string",
-        "description": "Access token (with prefix)"
+        "description": "Authorization header to forward"
       }
     },
     "required": ["token"]

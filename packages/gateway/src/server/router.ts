@@ -101,7 +101,7 @@ async function buildApi(toRouter: Router, apiDef: ApiDef, mesh?: IMesh): Promise
     graphqlHTTP(async (req: Request) => {
       const context = await contextBuilder({
         forwardHeaders: req?.context?.forwardHeaders || {},
-        requestId: req.id,
+        requestId: req?.id,
         tracerSpan: req?.context?.tracerSpan || {},
         resolverSpans: req?.context?.resolverSpans || {},
       });
