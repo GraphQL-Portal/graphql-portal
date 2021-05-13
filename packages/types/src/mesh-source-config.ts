@@ -810,7 +810,7 @@ export interface FusionCreatorAccountInformationUSHandler {
   /**
    * Authorization header to forward
    */
-  authorizationHeader?: string;
+  authorizationHeader: string;
 }
 /**
  * Retrieve set of account list, balances and account history e.g. for external aggregation purposes based on consent given by the customer. (PSD2 AISP scenario - STET standard)

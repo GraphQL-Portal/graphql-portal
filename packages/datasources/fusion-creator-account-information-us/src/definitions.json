@@ -10,6 +10,6 @@
         "description": "Authorization header to forward"
       }
     },
-    "required": ["token"]
+    "required": ["authorizationHeader"]
   }
 }
