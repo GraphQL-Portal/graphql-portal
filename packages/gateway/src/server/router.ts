@@ -4,12 +4,13 @@ import { getMesh } from '@graphql-mesh/runtime';
 import { KeyValueCache, MeshPubSub } from '@graphql-mesh/types';
 import { config } from '@graphql-portal/config';
 import { prefixLogger } from '@graphql-portal/logger';
-import { ApiDef, WebhookEvent } from '@graphql-portal/types';
+import { ApiDef, ApiDefStatus, WebhookEvent } from '@graphql-portal/types';
 import { Application, Request, RequestHandler, Router } from 'express';
 import { graphqlHTTP } from 'express-graphql';
 import { GraphQLSchema } from 'graphql';
 import { subscribeToRequestMetrics } from '../metric';
 import { setupWebhooks, webhooks } from '../webhooks';
+import { publishApiDefStatusUpdated, enqueuePublishApiDefStatusUpdated } from '../redis/publish-api-def-status-updated';
 import { defaultMiddlewares, loadCustomMiddlewares, handleError, prepareRequestContext } from '../middleware';
 
 interface IMesh {
@@ -33,7 +34,9 @@ export async function setRouter(app: Application, apiDefs: ApiDef[]): Promise<vo
   await buildRouter(apiDefs);
   app.use((req, res, next) => router(req, res, next));
   app.use(handleError);
+
   setupWebhooks(apiDefs);
+  await publishApiDefStatusUpdated();
 }
 
 export async function buildRouter(apiDefs: ApiDef[]): Promise<Router> {
@@ -83,6 +86,8 @@ async function buildApi(toRouter: Router, apiDef: ApiDef, mesh?: IMesh): Promise
   // Setting up Mesh for the endpoint
   mesh = await getMeshForApiDef(apiDef, mesh);
   if (!mesh) {
+    await enqueuePublishApiDefStatusUpdated(apiDef.name, ApiDefStatus.DECLINED);
+
     logger.error(`Could not get schema for API, endpoint ${apiDef.endpoint} won't be added to the router`);
     return;
   }
@@ -113,6 +118,8 @@ async function buildApi(toRouter: Router, apiDef: ApiDef, mesh?: IMesh): Promise
       };
     })
   );
+
+  await enqueuePublishApiDefStatusUpdated(apiDef.name, ApiDefStatus.READY);
 }
 
 export async function getMeshForApiDef(
