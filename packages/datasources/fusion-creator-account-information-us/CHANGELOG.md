@@ -1,5 +1,11 @@
 # @graphql-portal/fusion-creator-account-information-us
 
+## 1.0.1
+
+### Patch Changes
+
+- 27bab9a: required fusion creator props fix
+
 ## 1.0.0
 
 ### Major Changes

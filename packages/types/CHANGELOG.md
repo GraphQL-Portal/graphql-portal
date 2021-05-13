@@ -1,5 +1,11 @@
 # @graphql-portal/types
 
+## 1.1.1
+
+### Patch Changes
+
+- 27bab9a: required fusion creator props fix
+
 ## 1.1.0
 
 ### Minor Changes
