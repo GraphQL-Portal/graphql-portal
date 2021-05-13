@@ -808,18 +808,18 @@ export interface IPAPIHandler {}
  */
 export interface FusionCreatorAccountInformationUSHandler {
   /**
-   * Access token (with prefix)
+   * Authorization header to forward
    */
-  token: string;
+  authorizationHeader?: string;
 }
 /**
  * Retrieve set of account list, balances and account history e.g. for external aggregation purposes based on consent given by the customer. (PSD2 AISP scenario - STET standard)
  */
 export interface FusionCreatorAccountInformationPSD2STETHandler {
   /**
-   * Access token (with prefix)
+   * Authorization header to forward
    */
-  token: string;
+  authorizationHeader: string;
 }
 export interface Transform {
   /**
