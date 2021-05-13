@@ -1,5 +1,11 @@
 # @graphql-portal/types
 
+## 1.1.0
+
+### Minor Changes
+
+- c0894a9: Publish api def status
+
 ## 1.0.0
 
 ### Major Changes

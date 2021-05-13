@@ -1,5 +1,17 @@
 # @graphql-portal/gateway
 
+## 0.22.0
+
+### Minor Changes
+
+- c0894a9: Publish api def status
+
+### Patch Changes
+
+- Updated dependencies [c0894a9]
+  - @graphql-portal/types@1.1.0
+  - @graphql-portal/logger@0.7.9
+
 ## 0.21.0
 
 ### Minor Changes
