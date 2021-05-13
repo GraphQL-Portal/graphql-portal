@@ -18,7 +18,7 @@ import { setRouter, updateApi } from './router';
 
 const logger = prefixLogger('server');
 
-export type ForwardHeaders = Record<string, string>;
+export type ForwardHeaders = Record<string, undefined | string | string[]>;
 export interface Context {
   forwardHeaders: ForwardHeaders;
   requestId: string;
