@@ -1,5 +1,11 @@
 # @graphql-portal/fusion-creator-account-information-us
 
+## 1.0.0
+
+### Major Changes
+
+- 1f920db: FusionCreator token changed to authorizationHeader, forward headers
+
 ## 0.2.3
 
 ### Patch Changes

@@ -1,6 +1,6 @@
 {
   "name": "@graphql-portal/fusion-creator-account-information-us",
-  "version": "0.2.3",
+  "version": "1.0.0",
   "license": "MIT",
   "main": "dist/index.js",
   "scripts": {

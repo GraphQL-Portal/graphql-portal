@@ -1,5 +1,11 @@
 # @graphql-portal/types
 
+## 1.0.0
+
+### Major Changes
+
+- 1f920db: FusionCreator token changed to authorizationHeader, forward headers
+
 ## 0.27.1
 
 ### Patch Changes
