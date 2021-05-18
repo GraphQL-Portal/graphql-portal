@@ -1159,7 +1159,7 @@
     "@docsearch/css" "3.0.0-alpha.36"
     algoliasearch "^4.0.0"
 
-"@docusaurus/core@2.0.0-beta.0", "@docusaurus/core@^2.0.0":
+"@docusaurus/core@2.0.0-beta.0", "@docusaurus/core@^2.0.0-beta":
   version "2.0.0-beta.0"
   resolved "https://registry.yarnpkg.com/@docusaurus/core/-/core-2.0.0-beta.0.tgz#05506ee02e7d40e9f4c8d7b4f918d26d3b191159"
   integrity sha512-xWwpuEwFRKJmZvNGOpr/dyRDnx/psckLPsozQTg2hu3u81Wqu9gigWgYK/C2fPlEjxMcVw0/2WH+zwpbyWmF2Q==
@@ -1375,7 +1375,7 @@
     sitemap "^6.3.6"
     tslib "^2.1.0"
 
-"@docusaurus/preset-classic@^2.0.0":
+"@docusaurus/preset-classic@^2.0.0-beta":
   version "2.0.0-beta.0"
   resolved "https://registry.yarnpkg.com/@docusaurus/preset-classic/-/preset-classic-2.0.0-beta.0.tgz#79eb4366e6b5eb7061370019127e40172432d770"
   integrity sha512-cFpR0UaAeUt5qVx1bpidhlar6tiRNITIQlxP4bOVsjbxVTZhZ/cNuIz7C+2zFPCuKIflGXdTIQOrucPmd7z51Q==
