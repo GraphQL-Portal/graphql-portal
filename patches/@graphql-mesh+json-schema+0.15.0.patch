@@ -1,0 +1,94 @@
+diff --git a/node_modules/@graphql-mesh/json-schema/index.cjs.js b/node_modules/@graphql-mesh/json-schema/index.cjs.js
+index 30813ef..01837b6 100644
+--- a/node_modules/@graphql-mesh/json-schema/index.cjs.js
++++ b/node_modules/@graphql-mesh/json-schema/index.cjs.js
+@@ -647,6 +647,7 @@ class JsonSchemaHandler {
+         };
+     }
+     async isGeneratedJSONSchemaValid({ samplePath, schemaPath }) {
++        if (this.parseString(samplePath)) return false;
+         if (schemaPath || (!utils.isUrl(schemaPath) && (await utils.pathExists(schemaPath)))) {
+             const [schemaFileStat, sampleFileStat] = await Promise.all([stat(schemaPath), stat(samplePath)]);
+             if (schemaFileStat.mtime > sampleFileStat.mtime) {
+@@ -660,7 +661,7 @@ class JsonSchemaHandler {
+             if (samplePath in this.introspectionCache.schemaCache) {
+                 return this.introspectionCache.schemaCache[samplePath];
+             }
+-            const sample = await utils.readFileOrUrlWithCache(samplePath, this.cache, { cwd: this.baseDir });
++            const sample = await this.getSample(samplePath);
+             const schema = toJsonSchema(sample, {
+                 required: false,
+                 objects: {
+@@ -683,6 +684,25 @@ class JsonSchemaHandler {
+         }
+         return null;
+     }
++    async getSample(samplePath) {
++        let sample = this.parseString(samplePath);
++        if (!sample) {
++            sample = await utils.readFileOrUrlWithCache(samplePath, this.cache, {
++                cwd: this.baseDir,
++                headers: this.config.schemaHeaders
++            });
++        }
++        return sample;
++    }
++    parseString(jsonString) {
++        let data;
++        try {
++            data = JSON.parse(jsonString);
++        } catch (error) {
++            data = null;
++        }
++        return data;
++    }
+ }
+ 
+ module.exports = JsonSchemaHandler;
+diff --git a/node_modules/@graphql-mesh/json-schema/index.esm.js b/node_modules/@graphql-mesh/json-schema/index.esm.js
+index 4fd6eaf..30c65fa 100644
+--- a/node_modules/@graphql-mesh/json-schema/index.esm.js
++++ b/node_modules/@graphql-mesh/json-schema/index.esm.js
+@@ -643,6 +643,7 @@ class JsonSchemaHandler {
+         };
+     }
+     async isGeneratedJSONSchemaValid({ samplePath, schemaPath }) {
++        if (this.parseString(samplePath)) return false;
+         if (schemaPath || (!isUrl(schemaPath) && (await pathExists(schemaPath)))) {
+             const [schemaFileStat, sampleFileStat] = await Promise.all([stat(schemaPath), stat(samplePath)]);
+             if (schemaFileStat.mtime > sampleFileStat.mtime) {
+@@ -656,7 +657,7 @@ class JsonSchemaHandler {
+             if (samplePath in this.introspectionCache.schemaCache) {
+                 return this.introspectionCache.schemaCache[samplePath];
+             }
+-            const sample = await readFileOrUrlWithCache(samplePath, this.cache, { cwd: this.baseDir });
++            const sample = await this.getSample(samplePath);
+             const schema = toJsonSchema(sample, {
+                 required: false,
+                 objects: {
+@@ -679,6 +680,25 @@ class JsonSchemaHandler {
+         }
+         return null;
+     }
++    async getSample(samplePath) {
++        let sample = this.parseString(samplePath);
++        if (!sample) {
++            sample = await utils.readFileOrUrlWithCache(samplePath, this.cache, {
++                cwd: this.baseDir,
++                headers: this.config.schemaHeaders
++            });
++        }
++        return sample;
++    }
++    parseString(jsonString) {
++        let data;
++        try {
++            data = JSON.parse(jsonString);
++        } catch (error) {
++            data = null;
++        }
++        return data;
++    }
+ }
+ 
+ export default JsonSchemaHandler;

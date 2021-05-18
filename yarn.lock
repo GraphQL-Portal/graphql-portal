@@ -1022,7 +1022,7 @@
     pascal-case "3.1.2"
     protobufjs "6.10.2"
 
-"@graphql-mesh/json-schema@0.13.1", "@graphql-mesh/json-schema@^0.13.0":
+"@graphql-mesh/json-schema@0.13.1":
   version "0.13.1"
   resolved "https://registry.yarnpkg.com/@graphql-mesh/json-schema/-/json-schema-0.13.1.tgz#abe3210c883e1f0d04db56d5bf754a57f0aff1d8"
   integrity sha512-9PdEhB5mEVedcLSt4DSDKFecEJ5wlpr5V5PlFt3NFFcMZ9kFhNJLPNRB+ECpicx/JDKfkSbeFVSr0yWDsuExlg==
@@ -1036,6 +1036,24 @@
     lodash "4.17.21"
     object-hash "2.1.1"
     pascal-case "3.1.2"
+    to-json-schema "0.2.5"
+    url-join "4.0.1"
+
+"@graphql-mesh/json-schema@^0.15.0":
+  version "0.15.0"
+  resolved "https://registry.yarnpkg.com/@graphql-mesh/json-schema/-/json-schema-0.15.0.tgz#4f97039ae753fb50025ee1f30d962206a5f10730"
+  integrity sha512-gQA9j6JhBRs3VtYmpo9xFSIxXC0RTFmmOG4jjsA4cULLqa9IAjTNFyI+C88f/Sa9N8Q86mlmF5vDeCtM3TZkWA==
+  dependencies:
+    "@ardatan/aggregate-error" "0.0.6"
+    "@graphql-mesh/types" "0.42.0"
+    "@graphql-mesh/utils" "0.11.4"
+    ajv "8.3.0"
+    graphql-compose "8.1.0"
+    graphql-scalars "1.9.3"
+    lodash "4.17.21"
+    object-hash "2.1.1"
+    pascal-case "3.1.2"
+    qs "6.10.1"
     to-json-schema "0.2.5"
     url-join "4.0.1"
 
@@ -2564,6 +2582,11 @@
   version "2.4.0"
   resolved "https://registry.yarnpkg.com/@types/normalize-package-data/-/normalize-package-data-2.4.0.tgz#e486d0d97396d79beedd0a6e33f4534ff6b4973e"
   integrity sha512-f5j5b/Gf71L+dbqxIpQ4Z2WlmI/mPJ0fOkGGmFgtb6sAu97EPczzbS3/tJKxmcYDj55OX6ssqwDAWOHIYDRDGA==
+
+"@types/object-path@^0.11.0":
+  version "0.11.0"
+  resolved "https://registry.yarnpkg.com/@types/object-path/-/object-path-0.11.0.tgz#0b744309b2573dc8bf867ef589b6288be998e602"
+  integrity sha512-/tuN8jDbOXcPk+VzEVZzzAgw1Byz7s/itb2YI10qkSyy6nykJH02DuhfrflxVdAdE7AZ91h5X6Cn0dmVdFw2TQ==
 
 "@types/parse-json@^4.0.0":
   version "4.0.0"
@@ -5832,6 +5855,15 @@ graphql-compose@7.25.1:
   resolved "https://registry.yarnpkg.com/graphql-compose/-/graphql-compose-7.25.1.tgz#9d89f72781931590d4dfca6a709f381f2f76b873"
   integrity sha512-TPXTe1BoQkMjp/MH93yA0SQo8PiXxJAv6Eo6K/+kpJELM9l2jZnd5PCduweuXFcKv+nH973wn/VYzYKDMQ9YoQ==
   dependencies:
+    graphql-type-json "0.3.2"
+    object-path "0.11.5"
+
+graphql-compose@8.1.0:
+  version "8.1.0"
+  resolved "https://registry.yarnpkg.com/graphql-compose/-/graphql-compose-8.1.0.tgz#d58375ba59a1471c2bbe17ad817c6d33bffa1ba9"
+  integrity sha512-vaoD/4m4biGYIUmIPzYPAq0DgQ4cPvcOtuf4lDPD6IxX+o6oQS8BPWIXPIBa3C9VPriNzpUapiOCQYQvAN+2iA==
+  dependencies:
+    "@types/object-path" "^0.11.0"
     graphql-type-json "0.3.2"
     object-path "0.11.5"
 
@@ -9222,17 +9254,17 @@ q@^1.5.0:
   resolved "https://registry.yarnpkg.com/q/-/q-1.5.1.tgz#7e32f75b41381291d04611f1bf14109ac00651d7"
   integrity sha1-fjL3W0E4EpHQRhHxvxQQmsAGUdc=
 
-qs@6.7.0:
-  version "6.7.0"
-  resolved "https://registry.yarnpkg.com/qs/-/qs-6.7.0.tgz#41dc1a015e3d581f1621776be31afb2876a9b1bc"
-  integrity sha512-VCdBRNFTX1fyE7Nb6FYoURo/SPe62QCaAyzJvUjwRaIsc+NePBEniHlvxFmmX56+HZphIGtV0XeCirBtpDrTyQ==
-
-qs@^6.9.4:
+qs@6.10.1, qs@^6.9.4:
   version "6.10.1"
   resolved "https://registry.yarnpkg.com/qs/-/qs-6.10.1.tgz#4931482fa8d647a5aab799c5271d2133b981fb6a"
   integrity sha512-M528Hph6wsSVOBiYUnGf+K/7w0hNshs/duGsNXPUCLH5XAqjEtiPGwNONLV0tBH8NoGb0mvD5JubnUTrujKDTg==
   dependencies:
     side-channel "^1.0.4"
+
+qs@6.7.0:
+  version "6.7.0"
+  resolved "https://registry.yarnpkg.com/qs/-/qs-6.7.0.tgz#41dc1a015e3d581f1621776be31afb2876a9b1bc"
+  integrity sha512-VCdBRNFTX1fyE7Nb6FYoURo/SPe62QCaAyzJvUjwRaIsc+NePBEniHlvxFmmX56+HZphIGtV0XeCirBtpDrTyQ==
 
 qs@~6.5.2:
   version "6.5.2"
