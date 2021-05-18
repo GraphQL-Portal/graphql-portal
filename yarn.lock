@@ -6384,15 +6384,14 @@ inherits@2.0.3:
   resolved "https://registry.yarnpkg.com/inherits/-/inherits-2.0.3.tgz#633c2c83e3da42a502f52466022480f4208261de"
   integrity sha1-Yzwsg+PaQqUC9SRmAiSA9CCCYd4=
 
-ioredis-mock@5.5.5:
-  version "5.5.5"
-  resolved "https://registry.yarnpkg.com/ioredis-mock/-/ioredis-mock-5.5.5.tgz#dec9fedd238c6ab9f56c026fc366533144f8a256"
-  integrity sha512-7SxCAwNtDLC8IFDptqIhOC7ajp3fciVtCrXOEOkpyjPboAGRQkJbnpNPy1NYORoWi+0/iOtUPUQckSKtSQj4DA==
+ioredis-mock@5.5.6:
+  version "5.5.6"
+  resolved "https://registry.yarnpkg.com/ioredis-mock/-/ioredis-mock-5.5.6.tgz#0f575af4cc1321785d9a3627619fa37763424afa"
+  integrity sha512-MP9e7jigywcDMuY5nUBzeHlXFPjzGK+73jHfuFI2/pnzU/68X/cN3LwvwZ908HYQLk+wDiCAIS6ttgO/Vh5VBQ==
   dependencies:
     fengari "^0.1.4"
     fengari-interop "^0.1.2"
     lodash "^4.17.21"
-    minimatch "^3.0.4"
     standard-as-callback "^2.1.0"
 
 ioredis@^4.19.4, ioredis@^4.23.0:
