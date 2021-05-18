@@ -1,5 +1,11 @@
 # @graphql-portal/gateway
 
+## 0.22.1
+
+### Patch Changes
+
+- f1985bf: deps update
+
 ## 0.22.0
 
 ### Minor Changes

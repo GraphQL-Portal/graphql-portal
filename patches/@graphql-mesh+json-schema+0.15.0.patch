@@ -1,31 +1,31 @@
 diff --git a/node_modules/@graphql-mesh/json-schema/index.cjs.js b/node_modules/@graphql-mesh/json-schema/index.cjs.js
-index f357434..3076846 100644
+index 30813ef..fc6b248 100644
 --- a/node_modules/@graphql-mesh/json-schema/index.cjs.js
 +++ b/node_modules/@graphql-mesh/json-schema/index.cjs.js
-@@ -633,7 +633,10 @@ class JsonSchemaHandler {
+@@ -660,7 +660,10 @@ class JsonSchemaHandler {
              if (samplePath in this.introspectionCache.schemaCache) {
                  return this.introspectionCache.schemaCache[samplePath];
              }
 -            const sample = await utils.readFileOrUrlWithCache(samplePath, this.cache, { cwd: this.baseDir });
 +            const sample = await utils.readFileOrUrlWithCache(samplePath, this.cache, {
 +                cwd: this.baseDir,
-+                headers: this.config.schemaHeaders
++                headers: this.config.schemaHeaders,
 +            });
              const schema = toJsonSchema(sample, {
                  required: false,
                  objects: {
 diff --git a/node_modules/@graphql-mesh/json-schema/index.esm.js b/node_modules/@graphql-mesh/json-schema/index.esm.js
-index 7b53653..ea846c3 100644
+index 4fd6eaf..3b8cdc5 100644
 --- a/node_modules/@graphql-mesh/json-schema/index.esm.js
 +++ b/node_modules/@graphql-mesh/json-schema/index.esm.js
-@@ -629,7 +629,10 @@ class JsonSchemaHandler {
+@@ -656,7 +656,10 @@ class JsonSchemaHandler {
              if (samplePath in this.introspectionCache.schemaCache) {
                  return this.introspectionCache.schemaCache[samplePath];
              }
 -            const sample = await readFileOrUrlWithCache(samplePath, this.cache, { cwd: this.baseDir });
 +            const sample = await readFileOrUrlWithCache(samplePath, this.cache, {
 +                cwd: this.baseDir,
-+                headers: this.config.schemaHeaders
++                headers: this.config.schemaHeaders,
 +            });
              const schema = toJsonSchema(sample, {
                  required: false,
