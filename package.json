@@ -39,7 +39,7 @@
   },
   "resolutions": {
     "**/xml-crypto": "2.1.2",
-    "json-ptr": "2.1.0",
+    "json-ptr": "2.2.0",
     "date-fns": "2.21.1"
   },
   "devDependencies": {
