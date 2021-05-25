@@ -269,7 +269,7 @@ Once the server is launched, you can open the dashboard by going to http://local
 
 
 ## Authentication
-If you want enable manual authentication you have to specify these environment varibales:
+If you want enable manual authentication, you have to specify these environment variables as signup requires confirmation codes:
 
 ```shell
 # replace the following values with those relevant to your sendgrid account and environment
@@ -279,6 +279,7 @@ SENDGRID_RESET_PASSWORD_TEMPLATE="your_reset_password_template_id" \
 SENDGRID_API_KEY="your_api_key" \
 CLIENT_HOST="dashboard_frontend_host" \
 HOST="dashboard_backend_host" \
+PUBLIC_HOST="dashboard_public_host" \
 ```
 
 You can use the following variables data in your dynamic templates:
