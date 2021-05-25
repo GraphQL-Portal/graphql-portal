@@ -16,11 +16,22 @@ export const serializer = (data: any, doNotLogkeys: string[] = ['_']): string =>
   });
 };
 
-export const getSourceName = ({ info }: ResolverData): string | undefined => {
-  return (info?.returnType as any)?.extensions?.federation?.serviceName;
+export const getSourceName = ({ context }: ResolverData): string | null => {
+  for (const [key, value] of Object.entries(context)) {
+    if ((value as any)?.rawSource?.name) return key;
+  }
+  return null;
 };
 
-export const transformResolverData = (event: MetricsChannels, data: ResolverData) => {
+export const transformResolverData = (
+  event: MetricsChannels,
+  data: ResolverData
+): {
+  event: MetricsChannels;
+  path: string | null;
+  source: string | null;
+  date: number;
+} => {
   return {
     event,
     path: reducePath(data.info?.path),
