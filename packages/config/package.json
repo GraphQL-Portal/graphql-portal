@@ -1,6 +1,6 @@
 {
   "name": "@graphql-portal/config",
-  "version": "0.11.7",
+  "version": "0.11.8",
   "license": "MIT",
   "main": "dist/src/index.js",
   "scripts": {
@@ -9,9 +9,9 @@
   "dependencies": {
     "@graphql-portal/contentful": "^0.1.2",
     "@graphql-portal/dashboard": "^0.1.14",
-    "@graphql-portal/logger": "^0.7.8",
+    "@graphql-portal/logger": "^0.7.11",
     "@graphql-portal/slack": "^0.2.2",
-    "@graphql-portal/types": "^1.0.0",
+    "@graphql-portal/types": "^1.1.2",
     "ajv": "8.5.0",
     "cosmiconfig": "^7.0.0",
     "find-yarn-workspace-root": "^2.0.0",

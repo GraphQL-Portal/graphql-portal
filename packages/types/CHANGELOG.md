@@ -1,5 +1,11 @@
 # @graphql-portal/types
 
+## 1.1.2
+
+### Patch Changes
+
+- 2ad4780: Dependencies update
+
 ## 1.1.1
 
 ### Patch Changes
