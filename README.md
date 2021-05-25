@@ -269,7 +269,7 @@ Once the server is launched, you can open the dashboard by going to http://local
 
 
 ## Authentication
-If you want enable manual authentication, you have to specify these environment variables as signup requires confirmation codes:
+If you want enable manual authentication you have to specify these environment variables as signup requires confirmation codes:
 
 ```shell
 # replace the following values with those relevant to your sendgrid account and environment
