@@ -8,7 +8,10 @@
   "packageRules": [
     {
       "matchSourceUrlPrefixes": ["https://github.com/Urigo/graphql-modules", "https://github.com/Urigo/graphql-mesh"],
-      "groupName": "Mesh monorepo"
+      "groupName": "Mesh monorepo",
+      "excludePackageNames": [
+        "date-fns"
+      ]
     }
   ]
 }
