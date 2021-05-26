@@ -1,5 +1,15 @@
 # @graphql-portal/gateway
 
+## 0.22.2
+
+### Patch Changes
+
+- 0b0bc1a: getSourceName fixed
+- Updated dependencies [2ad4780]
+  - @graphql-portal/config@0.11.8
+  - @graphql-portal/types@1.1.2
+  - @graphql-portal/logger@0.7.11
+
 ## 0.22.1
 
 ### Patch Changes
