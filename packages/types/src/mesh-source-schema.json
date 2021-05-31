@@ -183,6 +183,12 @@
           "items": { "$ref": "#/definitions/Transform" },
           "additionalItems": false,
           "description": "List of transforms to apply to the current API source, before unifying it with the rest of the sources"
+        },
+        "typeMerging": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/MergedTypeConfig" },
+          "additionalItems": false,
+          "description": "Type Merging Configuration\nhttps://www.graphql-tools.com/docs/stitch-type-merging"
         }
       },
       "required": ["name", "handler"]
@@ -358,6 +364,58 @@
       },
       "required": ["field", "invalidate"]
     },
+    "MergedTypeConfig": {
+      "additionalProperties": false,
+      "type": "object",
+      "title": "MergedTypeConfig",
+      "properties": {
+        "typeName": { "type": "string" },
+        "fieldName": { "type": "string" },
+        "args": {
+          "anyOf": [
+            { "type": "object", "additionalProperties": true },
+            { "type": "string" },
+            { "type": "array", "additionalItems": true }
+          ]
+        },
+        "argsFromKeys": {
+          "anyOf": [
+            { "type": "object", "additionalProperties": true },
+            { "type": "string" },
+            { "type": "array", "additionalItems": true }
+          ]
+        },
+        "selectionSet": { "type": "string" },
+        "fields": { "type": "array", "items": { "$ref": "#/definitions/MergedFieldConfig" }, "additionalItems": false },
+        "key": {
+          "anyOf": [
+            { "type": "object", "additionalProperties": true },
+            { "type": "string" },
+            { "type": "array", "additionalItems": true }
+          ]
+        },
+        "canonical": { "type": "boolean" },
+        "resolve": {
+          "description": "Any of: String, AdditionalStitchingResolverObject, AdditionalSubscriptionObject",
+          "anyOf": [
+            { "type": "string" },
+            { "$ref": "#/definitions/AdditionalStitchingResolverObject" },
+            { "$ref": "#/definitions/AdditionalSubscriptionObject" }
+          ]
+        }
+      }
+    },
+    "MergedFieldConfig": {
+      "additionalProperties": false,
+      "type": "object",
+      "title": "MergedFieldConfig",
+      "properties": {
+        "fieldName": { "type": "string" },
+        "selectionSet": { "type": "string" },
+        "computed": { "type": "boolean" },
+        "canonical": { "type": "boolean" }
+      }
+    },
     "FhirHandler": {
       "additionalProperties": false,
       "type": "object",
@@ -406,6 +464,10 @@
           "description": "Path to a custom W3 Compatible Fetch Implementation"
         },
         "webSocketImpl": { "type": "string", "description": "Path to a custom W3 Compatible WebSocket Implementation" },
+        "useWebSocketLegacyProtocol": {
+          "type": "boolean",
+          "description": "Use legacy web socket protocol `graphql-ws` instead of the more current standard `graphql-transport-ws`"
+        },
         "introspection": {
           "type": "string",
           "description": "Path to the introspection\nYou can seperately give schema introspection"
@@ -1219,6 +1281,14 @@
           "items": { "$ref": "#/definitions/MockingFieldConfig" },
           "additionalItems": false,
           "description": "Mock configurations"
+        },
+        "initializeStore": {
+          "anyOf": [
+            { "type": "object", "additionalProperties": true },
+            { "type": "string" },
+            { "type": "array", "additionalItems": true }
+          ],
+          "description": "The path to the code runs before the store is attached to the schema"
         }
       }
     },
@@ -1239,9 +1309,37 @@
         "custom": {
           "type": "string",
           "description": "Custom mocking\nIt can be a module or json file.\nBoth \"moduleName#exportName\" or only \"moduleName\" would work"
+        },
+        "length": {
+          "type": "integer",
+          "description": "Length of the mock list\nFor the list types `[ObjectType]`, how many `ObjectType` you want to return?\ndefault: 2"
+        },
+        "store": { "$ref": "#/definitions/GetFromMockStoreConfig", "description": "Get the data from the mock store" },
+        "updateStore": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/UpdateMockStoreConfig" },
+          "additionalItems": false,
+          "description": "Update the data on the mock store"
         }
       },
       "required": ["apply"]
+    },
+    "GetFromMockStoreConfig": {
+      "additionalProperties": false,
+      "type": "object",
+      "title": "GetFromMockStoreConfig",
+      "properties": { "type": { "type": "string" }, "key": { "type": "string" }, "fieldName": { "type": "string" } }
+    },
+    "UpdateMockStoreConfig": {
+      "additionalProperties": false,
+      "type": "object",
+      "title": "UpdateMockStoreConfig",
+      "properties": {
+        "type": { "type": "string" },
+        "key": { "type": "string" },
+        "fieldName": { "type": "string" },
+        "value": { "type": "string" }
+      }
     },
     "NamingConventionTransformConfig": {
       "additionalProperties": false,
