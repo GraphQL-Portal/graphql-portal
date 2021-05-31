@@ -1,5 +1,11 @@
 # @graphql-portal/types
 
+## 1.1.3
+
+### Patch Changes
+
+- fe64eef: Custom handlers added to deps
+
 ## 1.1.2
 
 ### Patch Changes

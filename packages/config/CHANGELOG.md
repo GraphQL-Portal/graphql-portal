@@ -1,5 +1,14 @@
 # @graphql-portal/config
 
+## 0.11.9
+
+### Patch Changes
+
+- fe64eef: Custom handlers added to deps
+- Updated dependencies [fe64eef]
+  - @graphql-portal/types@1.1.3
+  - @graphql-portal/logger@0.7.12
+
 ## 0.11.8
 
 ### Patch Changes
