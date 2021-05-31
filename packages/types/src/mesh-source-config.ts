@@ -96,6 +96,10 @@ export interface GraphQLHandler {
    */
   webSocketImpl?: string;
   /**
+   * Use legacy web socket protocol `graphql-ws` instead of the more current standard `graphql-transport-ws`
+   */
+  useWebSocketLegacyProtocol?: boolean;
+  /**
    * Path to the introspection
    * You can seperately give schema introspection
    */
@@ -1015,6 +1019,15 @@ export interface MockingConfig {
    * Mock configurations
    */
   mocks?: MockingFieldConfig[];
+  /**
+   * The path to the code runs before the store is attached to the schema
+   */
+  initializeStore?:
+    | {
+        [k: string]: unknown;
+      }
+    | string
+    | unknown[];
 }
 export interface MockingFieldConfig {
   /**
@@ -1041,6 +1054,31 @@ export interface MockingFieldConfig {
    * Both "moduleName#exportName" or only "moduleName" would work
    */
   custom?: string;
+  /**
+   * Length of the mock list
+   * For the list types `[ObjectType]`, how many `ObjectType` you want to return?
+   * default: 2
+   */
+  length?: number;
+  store?: GetFromMockStoreConfig;
+  /**
+   * Update the data on the mock store
+   */
+  updateStore?: UpdateMockStoreConfig[];
+}
+/**
+ * Get the data from the mock store
+ */
+export interface GetFromMockStoreConfig {
+  type?: string;
+  key?: string;
+  fieldName?: string;
+}
+export interface UpdateMockStoreConfig {
+  type?: string;
+  key?: string;
+  fieldName?: string;
+  value?: string;
 }
 /**
  * Transformer to apply naming convention to GraphQL Types
