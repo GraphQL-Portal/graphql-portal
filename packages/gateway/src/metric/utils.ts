@@ -47,12 +47,10 @@ export const transformResolverData = (
   event: MetricsChannels;
   path: string | null;
   source: string | null;
-  date: number;
 } => {
   return {
     event,
     path: reducePath(data.info?.path),
     source: getSourceName(data),
-    date: Date.now(),
   };
 };
