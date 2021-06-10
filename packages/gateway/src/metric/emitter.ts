@@ -70,29 +70,32 @@ const subscribe = async (pubsub: MeshPubSub): Promise<void> => {
       );
     });
 
-    metricEmitter.on(MetricsChannels.RESOLVER_CALLED, (resolverData: ResolverData) => {
+    metricEmitter.on(MetricsChannels.RESOLVER_CALLED, (date: number, resolverData: ResolverData) => {
       const data = serializer({
         ...transformResolverData(MetricsChannels.RESOLVER_CALLED, resolverData),
         info: resolverData.info,
         args: resolverData.args,
+        date,
       });
       logger.debug(`MetricsChannels.RESOLVER_CALLED: ${data}`);
       lpush(resolverData.context.requestId, data);
     });
 
-    metricEmitter.on(MetricsChannels.RESOLVER_DONE, (resolverData: ResolverData, result: any) => {
+    metricEmitter.on(MetricsChannels.RESOLVER_DONE, (date: number, resolverData: ResolverData, result: any) => {
       const data = serializer({
         ...transformResolverData(MetricsChannels.RESOLVER_DONE, resolverData),
         result,
+        date,
       });
       logger.debug(`MetricsChannels.RESOLVER_DONE: ${data}`);
       lpush(resolverData.context.requestId, data);
     });
 
-    metricEmitter.on(MetricsChannels.RESOLVER_ERROR, (resolverData: ResolverData, error: Error) => {
+    metricEmitter.on(MetricsChannels.RESOLVER_ERROR, (date: number, resolverData: ResolverData, error: Error) => {
       const data = serializer({
         ...transformResolverData(MetricsChannels.RESOLVER_ERROR, resolverData),
         error,
+        date,
       });
       logger.debug(`MetricsChannels.RESOLVER_ERROR: ${data}`);
       lpush(resolverData.context.requestId, data);
@@ -133,7 +136,8 @@ const subscribe = async (pubsub: MeshPubSub): Promise<void> => {
     PubSubEvents.RESOLVER_CALLED,
     pubSubListenerWrapper(({ resolverData }) => {
       logger.debug(`PubSubEvents.RESOLVER_CALLED ${resolverData.context?.id || ''}`);
-      metricEmitter.emit(MetricsChannels.RESOLVER_CALLED, resolverData);
+      const date = Date.now();
+      metricEmitter.emit(MetricsChannels.RESOLVER_CALLED, date, resolverData);
       traceResolverStart(resolverData);
     })
   );
@@ -141,10 +145,11 @@ const subscribe = async (pubsub: MeshPubSub): Promise<void> => {
     PubSubEvents.RESOLVER_DONE,
     pubSubListenerWrapper(({ resolverData, result }) => {
       logger.debug(`PubSubEvents.RESOLVER_DONE ${resolverData.context?.id || ''}`);
+      const date = Date.now();
       if (/error/i.test(result?.constructor?.name)) {
-        metricEmitter.emit(MetricsChannels.RESOLVER_ERROR, resolverData, result);
+        metricEmitter.emit(MetricsChannels.RESOLVER_ERROR, date, resolverData, result);
       } else {
-        metricEmitter.emit(MetricsChannels.RESOLVER_DONE, resolverData, result);
+        metricEmitter.emit(MetricsChannels.RESOLVER_DONE, date, resolverData, result);
       }
       traceResolverFinish(null, resolverData);
     })
@@ -152,8 +157,9 @@ const subscribe = async (pubsub: MeshPubSub): Promise<void> => {
   await pubsub.subscribe(
     PubSubEvents.RESOLVER_ERROR,
     pubSubListenerWrapper(({ resolverData, error }) => {
+      const date = Date.now();
       logger.debug(`PubSubEvents.RESOLVER_ERROR ${resolverData.context?.id || ''}: ${error.message}`);
-      metricEmitter.emit(MetricsChannels.RESOLVER_ERROR, resolverData, error);
+      metricEmitter.emit(MetricsChannels.RESOLVER_ERROR, date, resolverData, error);
       traceResolverFinish(error, resolverData);
     })
   );
