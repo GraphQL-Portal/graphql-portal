@@ -16,10 +16,27 @@ export const serializer = (data: any, doNotLogkeys: string[] = ['_']): string =>
   });
 };
 
-export const getSourceName = ({ context }: ResolverData): string | null => {
-  for (const [key, value] of Object.entries(context)) {
-    if ((value as any)?.rawSource?.name) return key;
+export const getSourceName = ({ context, info }: ResolverData): string | null => {
+  const fieldName = info?.fieldName;
+
+  if (!context || !fieldName) return null;
+
+  const sources = Object.values(context).reduce<unknown[]>((acc, { rawSource }) => {
+    if (rawSource?.name) acc.push(rawSource);
+    return acc;
+  }, []);
+
+  for (const source of sources) {
+    const queries = (source as any).schema?._queryType?._fields || {};
+    const mutations = (source as any).schema?._mutationType?._fields || {};
+    const fields = { ...queries, ...mutations };
+    const fieldNames = Object.keys(fields);
+
+    if (fieldNames.includes(fieldName)) {
+      return (source as any).name;
+    }
   }
+
   return null;
 };
 
@@ -30,12 +47,10 @@ export const transformResolverData = (
   event: MetricsChannels;
   path: string | null;
   source: string | null;
-  date: number;
 } => {
   return {
     event,
     path: reducePath(data.info?.path),
     source: getSourceName(data),
-    date: Date.now(),
   };
 };

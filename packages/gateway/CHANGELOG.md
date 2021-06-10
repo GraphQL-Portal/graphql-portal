@@ -1,5 +1,11 @@
 # @graphql-portal/gateway
 
+## 0.22.3
+
+### Patch Changes
+
+- f3bcee9: fix getSourceName
+
 ## 0.22.2
 
 ### Patch Changes
