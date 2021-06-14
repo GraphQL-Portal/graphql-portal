@@ -2601,10 +2601,10 @@
   dependencies:
     "@types/istanbul-lib-report" "*"
 
-"@types/jaeger-client@3.18.0":
-  version "3.18.0"
-  resolved "https://registry.yarnpkg.com/@types/jaeger-client/-/jaeger-client-3.18.0.tgz#7c8f4759959e021af651b315ea355a60fdc61a63"
-  integrity sha512-RbQvsCpapGqnuC4jVycOH/AthHr9Ze5hzbjdHclVRta29rsrA/0iHVJCsNi+nQ/iGJ3r6bQSJjp7uE29Xd+EdA==
+"@types/jaeger-client@3.18.1":
+  version "3.18.1"
+  resolved "https://registry.yarnpkg.com/@types/jaeger-client/-/jaeger-client-3.18.1.tgz#e8e600470387feaa7dae418d3da77488028b5223"
+  integrity sha512-uSMcoWsB6tlUzqwLcwamgrSmVt1u8kNYdjPtZCcpxT4/7deVKMP5YNvQg3kz6u8OkrozWa4MEv41zDnbH484Ww==
   dependencies:
     "@types/node" "*"
     opentracing "~0.14.3"
