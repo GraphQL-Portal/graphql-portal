@@ -1261,21 +1261,6 @@
     postgraphile "4.11.0"
     postgraphile-core "4.11.2"
 
-"@graphql-mesh/runtime@0.16.6":
-  version "0.16.6"
-  resolved "https://registry.yarnpkg.com/@graphql-mesh/runtime/-/runtime-0.16.6.tgz#c90d6b73e12dc702832cee4bed7d7204d7445572"
-  integrity sha512-G4l5heMstQAmvGdxaCOIqJQmBQXaPX8OFSfC2j+rlN6sSiQIAnlzh2NbNjA+zhR5J7z5n3xabFl0ikmFdBRmUw==
-  dependencies:
-    "@graphql-mesh/types" "0.42.0"
-    "@graphql-mesh/utils" "0.12.0"
-    "@graphql-tools/delegate" "7.1.5"
-    "@graphql-tools/resolvers-composition" "6.2.8"
-    "@graphql-tools/schema" "7.1.5"
-    "@graphql-tools/utils" "7.10.0"
-    "@graphql-tools/wrap" "7.0.8"
-    "@n1ru4l/graphql-live-query" "0.7.1"
-    "@n1ru4l/in-memory-live-query-store" "0.6.4"
-
 "@graphql-mesh/runtime@0.17.0":
   version "0.17.0"
   resolved "https://registry.yarnpkg.com/@graphql-mesh/runtime/-/runtime-0.17.0.tgz#a2e33e30ace3ef44795aac83249b17366e7f44c0"
@@ -2273,15 +2258,6 @@
   version "0.7.1"
   resolved "https://registry.yarnpkg.com/@n1ru4l/graphql-live-query/-/graphql-live-query-0.7.1.tgz#c020d017c3ed6bcfdde49a7106ba035e4d0774f5"
   integrity sha512-5kJPe2FkPNsCGu9tocKIzUSNO986qAqdnbk8hIFqWlpVPBAmEAOYb1mr6PA18FYAlu7ojWm9Hm13k29aj2GGlQ==
-
-"@n1ru4l/in-memory-live-query-store@0.6.4":
-  version "0.6.4"
-  resolved "https://registry.yarnpkg.com/@n1ru4l/in-memory-live-query-store/-/in-memory-live-query-store-0.6.4.tgz#91b65efcf3ddcd382b64d2b5e6fc4a4c033d7ab6"
-  integrity sha512-GrBBCBU2Nxkti3Doqw/+Crw6RzC8BsnO7v6tzRubC41INfLPgSHmIbaoADevLlNSrD6qPVC8nJpXPcIpbDyRfw==
-  dependencies:
-    "@graphql-tools/utils" "^7.7.1"
-    "@n1ru4l/graphql-live-query" "0.7.1"
-    "@n1ru4l/push-pull-async-iterable-iterator" "^2.1.4"
 
 "@n1ru4l/in-memory-live-query-store@0.6.5":
   version "0.6.5"
