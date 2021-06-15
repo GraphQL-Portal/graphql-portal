@@ -6,12 +6,12 @@ import { config } from '@graphql-portal/config';
 import { prefixLogger } from '@graphql-portal/logger';
 import { ApiDef, ApiDefStatus, WebhookEvent } from '@graphql-portal/types';
 import { Application, Request, RequestHandler, Router } from 'express';
-import { graphqlHTTP } from 'express-graphql';
 import { GraphQLSchema } from 'graphql';
 import { subscribeToRequestMetrics } from '../metric';
 import { setupWebhooks, webhooks } from '../webhooks';
 import { publishApiDefStatusUpdated, enqueuePublishApiDefStatusUpdated } from '../redis/publish-api-def-status-updated';
 import { defaultMiddlewares, loadCustomMiddlewares, handleError, prepareRequestContext } from '../middleware';
+import { graphqlHandler, playgroundMiddlewareFactory } from './mesh';
 
 interface IMesh {
   schema: GraphQLSchema;
@@ -101,9 +101,17 @@ async function buildApi(toRouter: Router, apiDef: ApiDef, mesh?: IMesh): Promise
   const endpointUrl = `http://${config.gateway.hostname}:${config.gateway.listen_port}${apiDef.endpoint}`;
   logger.info(`Loaded API ${apiDef.name} ➜ ${endpointUrl}`);
 
-  toRouter.use(
-    apiDef.endpoint,
-    graphqlHTTP(async (req: Request) => {
+  if (apiDef.playground) {
+    const playgroundMiddleware = playgroundMiddlewareFactory({
+      baseDir: __dirname,
+      exampleQuery: '',
+      graphqlPath: apiDef.endpoint,
+    });
+    toRouter.get(apiDef.endpoint, playgroundMiddleware);
+  }
+  const $mesh: IMesh = {
+    ...mesh,
+    contextBuilder: async (req: Request) => {
       const context = await contextBuilder({
         forwardHeaders: req?.context?.forwardHeaders || {},
         requestId: req?.id,
@@ -116,8 +124,10 @@ async function buildApi(toRouter: Router, apiDef: ApiDef, mesh?: IMesh): Promise
         context,
         graphiql: apiDef.playground ? { headerEditorEnabled: true } : false,
       };
-    })
-  );
+    },
+  };
+
+  toRouter.use(apiDef.endpoint, graphqlHandler($mesh as any));
 
   await enqueuePublishApiDefStatusUpdated(apiDef.name, ApiDefStatus.READY);
 }
