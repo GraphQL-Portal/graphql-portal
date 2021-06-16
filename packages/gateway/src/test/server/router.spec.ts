@@ -2,8 +2,10 @@ import { processConfig } from '@graphql-mesh/config';
 import { getMesh } from '@graphql-mesh/runtime';
 import { ApiDef } from '@graphql-portal/types';
 import express from 'express';
-import { graphqlHTTP } from 'express-graphql';
+import { graphqlHandler, playgroundMiddlewareFactory } from '../../server/mesh';
 import { GraphQLSchema } from 'graphql';
+import ws from 'ws';
+import { useServer } from 'graphql-ws/lib/use/ws';
 import supertest from 'supertest';
 import subscribeToRequestMetrics from '../../metric/emitter';
 import { buildRouter, setRouter } from '../../server/router';
@@ -16,6 +18,9 @@ jest.mock('@graphql-portal/config', () => ({
       enable_metrics_recording: true,
     },
   },
+}));
+jest.mock('ws', () => ({
+  Server: jest.fn(),
 }));
 jest.mock('@graphql-mesh/config', () => ({
   processConfig: jest.fn(),
@@ -31,8 +36,14 @@ jest.mock('@graphql-mesh/runtime', () => ({
     contextBuilder: 'contextBuilder',
   })),
 }));
-jest.mock('express-graphql', () => ({
-  graphqlHTTP: jest.fn().mockReturnValue((req: any, res: express.Response) => {
+jest.mock('graphql-ws/lib/use/ws', () => ({
+  useServer: jest.fn(),
+}));
+jest.mock('../../server/mesh', () => ({
+  graphqlHandler: jest.fn().mockReturnValue((req: any, res: express.Response) => {
+    res.end('response');
+  }),
+  playgroundMiddlewareFactory: jest.fn().mockReturnValue((req: any, res: express.Response) => {
     res.end('response');
   }),
 }));
@@ -49,6 +60,7 @@ describe('Server', () => {
     const apiDef: ApiDef = {
       sources: [],
       endpoint: '/endpoint',
+      playground: true,
     } as any;
 
     describe('buildRouter', () => {
@@ -65,7 +77,10 @@ describe('Server', () => {
         expect(result.stack.find((layer) => layer.regexp.test(apiDef.endpoint))).toBeDefined();
         expect(processConfig).toHaveBeenCalledTimes(1);
         expect(getMesh).toHaveBeenCalledTimes(1);
-        expect(graphqlHTTP).toHaveBeenCalledTimes(1);
+        expect(graphqlHandler).toHaveBeenCalledTimes(1);
+        expect(playgroundMiddlewareFactory).toHaveBeenCalledTimes(1);
+        expect(useServer).toHaveBeenCalledTimes(1);
+        expect(ws.Server).toBeCalledTimes(1);
         expect(subscribeToRequestMetrics).toBeCalledTimes(1);
         expect(enqueuePublishApiDefStatusUpdated).toBeCalledTimes(1);
       });
