@@ -4,6 +4,8 @@ import { ApiDef } from '@graphql-portal/types';
 import express from 'express';
 import { graphqlHandler, playgroundMiddlewareFactory } from '../../server/mesh';
 import { GraphQLSchema } from 'graphql';
+import ws from 'ws';
+import { useServer } from 'graphql-ws/lib/use/ws';
 import supertest from 'supertest';
 import subscribeToRequestMetrics from '../../metric/emitter';
 import { buildRouter, setRouter } from '../../server/router';
@@ -16,6 +18,9 @@ jest.mock('@graphql-portal/config', () => ({
       enable_metrics_recording: true,
     },
   },
+}));
+jest.mock('ws', () => ({
+  Server: jest.fn(),
 }));
 jest.mock('@graphql-mesh/config', () => ({
   processConfig: jest.fn(),
@@ -30,6 +35,9 @@ jest.mock('@graphql-mesh/runtime', () => ({
     schema: new GraphQLSchema({}),
     contextBuilder: 'contextBuilder',
   })),
+}));
+jest.mock('graphql-ws/lib/use/ws', () => ({
+  useServer: jest.fn(),
 }));
 jest.mock('../../server/mesh', () => ({
   graphqlHandler: jest.fn().mockReturnValue((req: any, res: express.Response) => {
@@ -71,6 +79,8 @@ describe('Server', () => {
         expect(getMesh).toHaveBeenCalledTimes(1);
         expect(graphqlHandler).toHaveBeenCalledTimes(1);
         expect(playgroundMiddlewareFactory).toHaveBeenCalledTimes(1);
+        expect(useServer).toHaveBeenCalledTimes(1);
+        expect(ws.Server).toBeCalledTimes(1);
         expect(subscribeToRequestMetrics).toBeCalledTimes(1);
         expect(enqueuePublishApiDefStatusUpdated).toBeCalledTimes(1);
       });

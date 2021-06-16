@@ -1,17 +1,20 @@
 import { diff } from '@graphql-inspector/core';
 import { processConfig } from '@graphql-mesh/config';
-import { getMesh } from '@graphql-mesh/runtime';
+import { getMesh, MeshInstance } from '@graphql-mesh/runtime';
 import { KeyValueCache, MeshPubSub } from '@graphql-mesh/types';
 import { config } from '@graphql-portal/config';
 import { prefixLogger } from '@graphql-portal/logger';
 import { ApiDef, ApiDefStatus, WebhookEvent } from '@graphql-portal/types';
 import { Application, Request, RequestHandler, Router } from 'express';
 import { GraphQLSchema } from 'graphql';
+import { useServer } from 'graphql-ws/lib/use/ws';
+import ws from 'ws';
 import { subscribeToRequestMetrics } from '../metric';
 import { setupWebhooks, webhooks } from '../webhooks';
 import { publishApiDefStatusUpdated, enqueuePublishApiDefStatusUpdated } from '../redis/publish-api-def-status-updated';
 import { defaultMiddlewares, loadCustomMiddlewares, handleError, prepareRequestContext } from '../middleware';
 import { graphqlHandler, playgroundMiddlewareFactory } from './mesh';
+import { httpServer } from './index';
 
 interface IMesh {
   schema: GraphQLSchema;
@@ -109,7 +112,7 @@ async function buildApi(toRouter: Router, apiDef: ApiDef, mesh?: IMesh): Promise
     });
     toRouter.get(apiDef.endpoint, playgroundMiddleware);
   }
-  const $mesh: IMesh = {
+  const $mesh: MeshInstance = {
     ...mesh,
     contextBuilder: async (req: Request) => {
       const context = await contextBuilder({
@@ -125,9 +128,11 @@ async function buildApi(toRouter: Router, apiDef: ApiDef, mesh?: IMesh): Promise
         graphiql: apiDef.playground ? { headerEditorEnabled: true } : false,
       };
     },
-  };
+  } as any;
 
-  toRouter.use(apiDef.endpoint, graphqlHandler($mesh as any));
+  toRouter.use(apiDef.endpoint, graphqlHandler($mesh));
+
+  setupWSServer(apiDef.endpoint, $mesh);
 
   await enqueuePublishApiDefStatusUpdated(apiDef.name, ApiDefStatus.READY);
 }
@@ -190,4 +195,23 @@ export async function updateApi(apiDef: ApiDef): Promise<void> {
   router.stack.splice(oldLayerIndex, 1, routerWithNewApi.stack[0]);
 
   webhooks.triggerForApi(apiDef.name, WebhookEvent.SCHEMA_CHANGED);
+}
+
+function setupWSServer(endpoint: string, mesh: MeshInstance): ws.Server {
+  const wsServer = new ws.Server({
+    path: endpoint,
+    server: httpServer,
+  });
+
+  useServer(
+    {
+      schema: () => mesh.schema,
+      execute: (args: any) => mesh.execute(args.document, args.variableValues, args.contextValue, args.rootValue),
+      subscribe: (args: any) => mesh.subscribe(args.document, args.variableValues, args.contextValue, args.rootValue),
+      context: async (ctx) => mesh.contextBuilder(ctx.extra.request),
+    },
+    wsServer
+  );
+
+  return wsServer;
 }

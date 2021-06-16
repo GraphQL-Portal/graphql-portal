@@ -1,4 +1,4 @@
-import { getMesh } from '@graphql-mesh/runtime';
+import { MeshInstance } from '@graphql-mesh/runtime';
 import { RequestHandler } from 'express';
 import { flatString, jsonFlatStringify } from '@graphql-mesh/utils';
 import { getGraphQLParameters, processRequest, shouldRenderGraphiQL } from 'graphql-helix';
@@ -33,7 +33,7 @@ function normalizeGraphQLError(error: GraphQLError) {
   };
 }
 
-export const graphqlHandler = (mesh$: ReturnType<typeof getMesh>): RequestHandler =>
+export const graphqlHandler = (mesh$: MeshInstance): RequestHandler =>
   function (req, res, next): void {
     // Create a generic Request object that can be consumed by Graphql Helix's API
     const request = {
@@ -52,7 +52,7 @@ export const graphqlHandler = (mesh$: ReturnType<typeof getMesh>): RequestHandle
 
       Promise.resolve()
         .then(async function () {
-          const { schema, execute, subscribe, contextBuilder } = await mesh$;
+          const { schema, execute, subscribe, contextBuilder } = mesh$;
 
           // Validate and execute the query
           const result = await processRequest({

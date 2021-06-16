@@ -6,7 +6,7 @@ import cookieParser from 'cookie-parser';
 import cors from 'cors';
 import express from 'express';
 import { graphqlUploadExpress } from 'graphql-upload';
-import { createServer } from 'http';
+import { createServer, Server } from 'http';
 import { Span } from 'opentracing';
 import { promisify } from 'util';
 import { getConfigFromMaster } from '../ipc/utils';
@@ -31,9 +31,11 @@ export const connections = {
   get: async (): Promise<number> => 0,
 };
 
+export let httpServer: Server;
+
 export async function startServer(): Promise<void> {
   const app = express();
-  const httpServer = createServer(app);
+  httpServer = createServer(app);
 
   connections.get = promisify(httpServer.getConnections.bind(httpServer));
 
