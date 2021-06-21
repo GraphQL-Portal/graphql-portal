@@ -1,5 +1,11 @@
 # @graphql-portal/gateway
 
+## 0.23.0
+
+### Minor Changes
+
+- e1e7543: Subscriptions enabled
+
 ## 0.22.3
 
 ### Patch Changes
