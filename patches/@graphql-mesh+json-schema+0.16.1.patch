@@ -1,8 +1,8 @@
 diff --git a/node_modules/@graphql-mesh/json-schema/index.cjs.js b/node_modules/@graphql-mesh/json-schema/index.cjs.js
-index 30813ef..01837b6 100644
+index 731a664..19c3dd6 100644
 --- a/node_modules/@graphql-mesh/json-schema/index.cjs.js
 +++ b/node_modules/@graphql-mesh/json-schema/index.cjs.js
-@@ -647,6 +647,7 @@ class JsonSchemaHandler {
+@@ -649,6 +649,7 @@ class JsonSchemaHandler {
          };
      }
      async isGeneratedJSONSchemaValid({ samplePath, schemaPath }) {
@@ -10,7 +10,7 @@ index 30813ef..01837b6 100644
          if (schemaPath || (!utils.isUrl(schemaPath) && (await utils.pathExists(schemaPath)))) {
              const [schemaFileStat, sampleFileStat] = await Promise.all([stat(schemaPath), stat(samplePath)]);
              if (schemaFileStat.mtime > sampleFileStat.mtime) {
-@@ -660,7 +661,7 @@ class JsonSchemaHandler {
+@@ -662,7 +663,7 @@ class JsonSchemaHandler {
              if (samplePath in this.introspectionCache.schemaCache) {
                  return this.introspectionCache.schemaCache[samplePath];
              }
@@ -19,7 +19,7 @@ index 30813ef..01837b6 100644
              const schema = toJsonSchema(sample, {
                  required: false,
                  objects: {
-@@ -683,6 +684,25 @@ class JsonSchemaHandler {
+@@ -685,6 +686,25 @@ class JsonSchemaHandler {
          }
          return null;
      }
@@ -46,10 +46,10 @@ index 30813ef..01837b6 100644
  
  module.exports = JsonSchemaHandler;
 diff --git a/node_modules/@graphql-mesh/json-schema/index.esm.js b/node_modules/@graphql-mesh/json-schema/index.esm.js
-index 4fd6eaf..30c65fa 100644
+index 48d24c9..5a70576 100644
 --- a/node_modules/@graphql-mesh/json-schema/index.esm.js
 +++ b/node_modules/@graphql-mesh/json-schema/index.esm.js
-@@ -643,6 +643,7 @@ class JsonSchemaHandler {
+@@ -645,6 +645,7 @@ class JsonSchemaHandler {
          };
      }
      async isGeneratedJSONSchemaValid({ samplePath, schemaPath }) {
@@ -57,7 +57,7 @@ index 4fd6eaf..30c65fa 100644
          if (schemaPath || (!isUrl(schemaPath) && (await pathExists(schemaPath)))) {
              const [schemaFileStat, sampleFileStat] = await Promise.all([stat(schemaPath), stat(samplePath)]);
              if (schemaFileStat.mtime > sampleFileStat.mtime) {
-@@ -656,7 +657,7 @@ class JsonSchemaHandler {
+@@ -658,7 +659,7 @@ class JsonSchemaHandler {
              if (samplePath in this.introspectionCache.schemaCache) {
                  return this.introspectionCache.schemaCache[samplePath];
              }
@@ -66,7 +66,7 @@ index 4fd6eaf..30c65fa 100644
              const schema = toJsonSchema(sample, {
                  required: false,
                  objects: {
-@@ -679,6 +680,25 @@ class JsonSchemaHandler {
+@@ -681,6 +682,25 @@ class JsonSchemaHandler {
          }
          return null;
      }
