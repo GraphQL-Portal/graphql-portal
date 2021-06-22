@@ -1,0 +1,13 @@
+diff --git a/node_modules/@graphql-mesh/neo4j/index.cjs.js b/node_modules/@graphql-mesh/neo4j/index.cjs.js
+index 769ab6d..b6d9918 100644
+--- a/node_modules/@graphql-mesh/neo4j/index.cjs.js
++++ b/node_modules/@graphql-mesh/neo4j/index.cjs.js
+@@ -43,7 +43,7 @@ class Neo4JHandler {
+                 });
+             }
+         }
+-        return this.introspectionCache.typeDefs;
++        return this.introspectionCache.typeDefs.typeDefs;
+     }
+     async getMeshSource() {
+         const typeDefs = await this.getCachedTypeDefs();
