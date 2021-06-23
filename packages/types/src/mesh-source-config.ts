@@ -806,7 +806,17 @@ export interface TwitterHandler {
 /**
  * IP Geolocation API
  */
-export interface IPAPIHandler {}
+export interface IPAPIHandler {
+  /**
+   * A pointer to IP API source
+   */
+  source?: string;
+  /**
+   * Specifies the URL on which all paths will be based on.
+   * Overrides the server object in the OAS.
+   */
+  baseUrl?: string;
+}
 /**
  * Provides methods for interacting with data on the core banking system and third party vendors.
  */
