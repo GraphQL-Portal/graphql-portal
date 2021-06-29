@@ -2620,10 +2620,10 @@
   resolved "https://registry.yarnpkg.com/@types/range-parser/-/range-parser-1.2.3.tgz#7ee330ba7caafb98090bece86a5ee44115904c2c"
   integrity sha512-ewFXqrQHlFsgc09MK5jP5iR7vumV/BYayNC6PgJO2LPe8vrnNFyjQjSppfEngITi0qvfKtzFvgKymGheFM9UOA==
 
-"@types/request-ip@0.0.35":
-  version "0.0.35"
-  resolved "https://registry.yarnpkg.com/@types/request-ip/-/request-ip-0.0.35.tgz#c30e832533296151c221532c48c10591b7edd468"
-  integrity sha512-FtI7lv1EDaZnWmaCU7ZTwfOpW76EioocaWyiSeWdfW1cDPZYzzij781A5O/UeHQUN9yjtjEcD3StTzZjKG0XEA==
+"@types/request-ip@0.0.36":
+  version "0.0.36"
+  resolved "https://registry.yarnpkg.com/@types/request-ip/-/request-ip-0.0.36.tgz#47795c858209a890d822602f6b4da1fb3043d647"
+  integrity sha512-hZr7pI0zkpt9NgqetiA2PCw4hUSzS87wcz07zVO+Bj338nhmgs19f0v53MPuj7ltlI3K9WEOwGo0Ny5yIgLV6A==
   dependencies:
     "@types/node" "*"
 
