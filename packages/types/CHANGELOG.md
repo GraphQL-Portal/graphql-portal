@@ -1,5 +1,11 @@
 # @graphql-portal/types
 
+## 1.1.4
+
+### Patch Changes
+
+- 8675fbb: fix ip-api definitions
+
 ## 1.1.3
 
 ### Patch Changes

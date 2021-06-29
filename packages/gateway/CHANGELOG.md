@@ -1,5 +1,14 @@
 # @graphql-portal/gateway
 
+## 0.23.1
+
+### Patch Changes
+
+- e837b11: patch neo4j
+- Updated dependencies [8675fbb]
+  - @graphql-portal/types@1.1.4
+  - @graphql-portal/logger@0.7.13
+
 ## 0.23.0
 
 ### Minor Changes
