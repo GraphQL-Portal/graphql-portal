@@ -1,5 +1,11 @@
 # @graphql-portal/ip-api
 
+## 0.1.4
+
+### Patch Changes
+
+- 8675fbb: fix ip-api definitions
+
 ## 0.1.3
 
 ### Patch Changes
