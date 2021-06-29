@@ -1,6 +1,6 @@
 {
   "name": "@graphql-portal/gateway",
-  "version": "0.23.0",
+  "version": "0.23.1",
   "license": "MIT",
   "author": "code.store",
   "main": "dist/src/index.js",
@@ -52,8 +52,8 @@
     "@graphql-mesh/utils": "^0.12.0",
     "@graphql-portal/config": "^0.11.8",
     "@graphql-portal/dashboard": "^0.1.14",
-    "@graphql-portal/logger": "^0.7.11",
-    "@graphql-portal/types": "^1.1.2",
+    "@graphql-portal/logger": "^0.7.13",
+    "@graphql-portal/types": "^1.1.4",
     "@graphql-tools/code-file-loader": "^6.3.1",
     "@graphql-tools/graphql-file-loader": "^6.2.7",
     "@graphql-tools/load": "^6.2.8",

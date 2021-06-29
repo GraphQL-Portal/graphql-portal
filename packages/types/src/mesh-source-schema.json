@@ -1609,7 +1609,14 @@
       "additionalProperties": false,
       "type": "object",
       "title": "IPAPIHandler",
-      "description": "IP Geolocation API"
+      "description": "IP Geolocation API",
+      "properties": {
+        "source": { "type": "string", "description": "A pointer to IP API source" },
+        "baseUrl": {
+          "type": "string",
+          "description": "Specifies the URL on which all paths will be based on.\nOverrides the server object in the OAS."
+        }
+      }
     },
     "FusionCreatorAccountInformationUSHandler": {
       "additionalProperties": false,
