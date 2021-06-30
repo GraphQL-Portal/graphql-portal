@@ -1,0 +1,13 @@
+diff --git a/node_modules/@graphql-mesh/openapi/index.cjs.js b/node_modules/@graphql-mesh/openapi/index.cjs.js
+index 008d359..412d533 100644
+--- a/node_modules/@graphql-mesh/openapi/index.cjs.js
++++ b/node_modules/@graphql-mesh/openapi/index.cjs.js
+@@ -4854,7 +4854,7 @@ class OpenAPIHandler {
+             fetch = await utils.loadFromModuleExportExpression(customFetch, { defaultExportName: 'default', cwd: this.baseDir });
+         }
+         else {
+-            fetch = utils.getCachedFetch(this.cache);
++            fetch = utils.getCachedFetch(this.cache, this.config.rejectUnauthorized);
+         }
+         const spec = await this.getCachedSpec(fetch);
+         const baseUrlFactory = utils.getInterpolatedStringFactory(baseUrl);

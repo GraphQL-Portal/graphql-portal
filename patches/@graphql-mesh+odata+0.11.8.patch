@@ -1,0 +1,13 @@
+diff --git a/node_modules/@graphql-mesh/odata/index.cjs.js b/node_modules/@graphql-mesh/odata/index.cjs.js
+index c605e5e..09c27d5 100644
+--- a/node_modules/@graphql-mesh/odata/index.cjs.js
++++ b/node_modules/@graphql-mesh/odata/index.cjs.js
+@@ -129,7 +129,7 @@ class ODataHandler {
+                     : this.config.customFetch;
+         }
+         else {
+-            fetch = utils.getCachedFetch(this.cache);
++            fetch = utils.getCachedFetch(this.cache, this.config.rejectUnauthorized);
+         }
+         const { baseUrl, operationHeaders } = this.config;
+         const schemaComposer = new graphqlCompose.SchemaComposer();

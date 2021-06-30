@@ -1,0 +1,15 @@
+diff --git a/node_modules/@graphql-mesh/graphql/index.cjs.js b/node_modules/@graphql-mesh/graphql/index.cjs.js
+index b2c8478..6ff8b36 100644
+--- a/node_modules/@graphql-mesh/graphql/index.cjs.js
++++ b/node_modules/@graphql-mesh/graphql/index.cjs.js
+@@ -20,8 +20,8 @@ class GraphQLHandler {
+         this.introspectionCache = introspectionCache;
+     }
+     async getMeshSource() {
+-        const { endpoint, schemaHeaders: configHeaders, introspection } = this.config;
+-        const customFetch = utils.getCachedFetch(this.cache);
++        const { endpoint, schemaHeaders: configHeaders, introspection, rejectUnauthorized } = this.config;
++        const customFetch = utils.getCachedFetch(this.cache, rejectUnauthorized);
+         if (endpoint.endsWith('.js') || endpoint.endsWith('.ts')) {
+             // Loaders logic should be here somehow
+             const schemaOrStringOrDocumentNode = await utils.loadFromModuleExportExpression(endpoint, { cwd: this.baseDir });
