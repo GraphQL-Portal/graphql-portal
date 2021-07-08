@@ -212,11 +212,21 @@ vim packages/backend/config/env/production.json
       "email": "@@DEFAULT_ADMIN_EMAIL",
       "password": "@@DEFAULT_ADMIN_PASSWORD"
     },
-    "sendgrid": {
-      "senderEmail": "@@SENDGRID_SENDER_EMAIL",
-      "confirmationTemplateId": "@@SENDGRID_CONFIRMATION_TEMPLATE",
-      "resetPasswordTemplateId": "@@SENDGRID_RESET_PASSWORD_TEMPLATE",
-      "apiKey": "@@SENDGRID_API_KEY"
+    "mail": {
+      "driver": "@@MAIL_DRIVER",
+      "from": "@@MAIL_FROM",
+      "sendgrid": {
+        "apiKey": "@@SENDGRID_API_KEY"
+      },
+      "smtp": {
+        "host": "@@SMTP_HOST",
+        "port": "@@SMTP_PORT",
+        "auth": {
+          "user": "@@SMTP_USER",
+          "pass": "@@SMTP_PASS",
+        },
+        "secure": "@@SMTP_SECURE",
+      },
     },
     "metrics": {
       "enabled": "@@METRICS_ENABLED",
@@ -269,22 +279,48 @@ Once the server is launched, you can open the dashboard by going to http://local
 
 
 ## Authentication
-If you want enable manual authentication you have to specify these environment variables as signup requires confirmation codes:
+You can use `DEFAULT_ADMIN_EMAIL` and `DEFAULT_ADMIN_PASSWORD` for sign-in as admin or create a new account manually with "user" role.
+By default users do not receive email with reset password instructions or sign-up confimation, you are able to see them only in your application logs.
 
+Provide corresponding environment variables for enabling one of mail services.
+Sendgrid example:
 ```shell
-# replace the following values with those relevant to your sendgrid account and environment
-SENDGRID_SENDER_EMAIL="no-reply@example.com" \
-SENDGRID_CONFIRMATION_TEMPLATE="your_confirmation_template_id" \
-SENDGRID_RESET_PASSWORD_TEMPLATE="your_reset_password_template_id" \
+# replace the following values with those relevant to your environment and sendgrid account
+MAIL_DRIVER="sendgrid" \
+MAIL_FROM="no-reply@example.com" \
 SENDGRID_API_KEY="your_api_key" \
-CLIENT_HOST="dashboard_frontend_host" \
-HOST="dashboard_backend_host" \
 PUBLIC_HOST="dashboard_public_host" \
+CLIENT_HOST="dashboard_frontend_host" \
+```
+SMTP example:
+```shell
+# replace the following values with those relevant to your environment and smtp configuration
+MAIL_DRIVER="smtp" \
+MAIL_FROM="no-reply@example.com" \
+SMTP_HOST="smtp_host" \
+SMTP_PORT="smtp_port" \
+SMTP_USER="smtp_user" \
+SMTP_PASS="smtp_pass" \
+SMTP_SECURE="smtp_secure" \
+PUBLIC_HOST="dashboard_public_host" \
+CLIENT_HOST="dashboard_frontend_host" \
 ```
 
-You can use the following variables data in your dynamic templates:
-* Confirmation template: `confirmationUrl`, `firstName`;
-* Reset password template: `resetPasswordUrl`, `firstName`;
+## Mail
+* mail:from – The email address of the sender. All email addresses can be plain ‘sender@server.com’. 
+* mail:driver – The driver property defines the default driver to use for sending emails. Should be equal to `smtp` or `sendgrd`.
+* mail:sendgrid – Sendgrid driver config options.
+* mail:smtp – Sendgrid driver config options.
+
+### Sendgrid
+* sendgrid:apiKey – Sendgrid API Key (defaults to "SG.example").
+
+### SMTP
+* smtp:host - is the hostname or IP address to connect to (defaults to "smtp.sendgrid.net").
+* smtp:port - is the port to connect to (defaults to "587").
+* smtp:secure - if true the connection will use TLS when connecting to server. If false (the default) then TLS is used if server supports the STARTTLS extension. In most cases set this value to true if you are connecting to port 465. For port 587 or 25 keep it false.
+* smtp:auth:user - is the username (defaults to "apikey").
+* smtp:auth:pass - is the password for the user (defaults to "SG.example").
 
 ## Metrics
 * metrics:enabled – enable metrics recording to mongo; (default = true).
