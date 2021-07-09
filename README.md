@@ -316,7 +316,7 @@ CLIENT_HOST="dashboard_frontend_host" \
 
 ## Mail
 * mail:from – The email address of the sender. All email addresses can be plain ‘sender@server.com’. 
-* mail:driver – The driver property defines the default driver to use for sending emails. Should be equal to `smtp` or `sendgrd`.
+* mail:driver – The driver property defines the default driver to use for sending emails. Should be equal to `smtp` or `sendgrid`.
 * mail:sendgrid – Sendgrid driver config options.
 * mail:smtp – Sendgrid driver config options.
 
