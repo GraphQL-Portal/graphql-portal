@@ -1,5 +1,12 @@
 # @graphql-portal/types
 
+## 1.2.0
+
+### Minor Changes
+
+- b39cc29: rejectUnauthorized field for connectors, patches
+- 74ea83f: useEnv added boolean support, schema updated
+
 ## 1.1.4
 
 ### Patch Changes
