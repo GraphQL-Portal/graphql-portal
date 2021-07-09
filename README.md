@@ -213,8 +213,8 @@ vim packages/backend/config/env/production.json
       "password": "@@DEFAULT_ADMIN_PASSWORD"
     },
     "sendgrid": {
-      "senderEmail": "@@SENDGRID_SENDER_EMAIL", // Deprecated, use config:application:mail:from instead
-      "apiKey": "@@SENDGRID_API_KEY" // Deprecated, use config:application:sendgrid:apiKey instead
+      "senderEmail": "@@SENDGRID_SENDER_EMAIL",
+      "apiKey": "@@SENDGRID_API_KEY"
     },
     "mail": {
       "driver": "@@MAIL_DRIVER",
@@ -310,6 +310,10 @@ PUBLIC_HOST="dashboard_public_host" \
 CLIENT_HOST="dashboard_frontend_host" \
 ```
 
+## Sendgrid [DEPRECATED]. Use `Mail` config option instead
+* sendgrid:senderEmail – The email address of the sender. All email addresses can be plain ‘sender@server.com’. 
+* sendgrid:apiKey – Sendgrid API Key.
+
 ## Mail
 * mail:from – The email address of the sender. All email addresses can be plain ‘sender@server.com’. 
 * mail:driver – The driver property defines the default driver to use for sending emails. Should be equal to `smtp` or `sendgrd`.
@@ -317,14 +321,14 @@ CLIENT_HOST="dashboard_frontend_host" \
 * mail:smtp – Sendgrid driver config options.
 
 ### Sendgrid
-* sendgrid:apiKey – Sendgrid API Key (defaults to "SG.example").
+* mail:sendgrid:apiKey – Sendgrid API Key.
 
 ### SMTP
-* smtp:host - is the hostname or IP address to connect to (defaults to "smtp.sendgrid.net").
-* smtp:port - is the port to connect to (defaults to "587").
-* smtp:secure - if true the connection will use TLS when connecting to server. If false (the default) then TLS is used if server supports the STARTTLS extension. In most cases set this value to true if you are connecting to port 465. For port 587 or 25 keep it false.
-* smtp:auth:user - is the username (defaults to "apikey").
-* smtp:auth:pass - is the password for the user (defaults to "SG.example").
+* mail:smtp:host - is the hostname or IP address to connect to (defaults to "smtp.sendgrid.net").
+* mail:smtp:port - is the port to connect to (defaults to "587").
+* mail:smtp:secure - if true the connection will use TLS when connecting to server. If false (the default) then TLS is used if server supports the STARTTLS extension. In most cases set this value to true if you are connecting to port 465. For port 587 or 25 keep it false.
+* mail:smtp:auth:user - is the username (defaults to "apikey").
+* mail:smtp:auth:pass - is the password for the user (defaults to "SG.example").
 
 ## Metrics
 * metrics:enabled – enable metrics recording to mongo; (default = true).
