@@ -51,7 +51,14 @@
       "default": "./config/sources"
     },
     "use_dashboard_configs": {
-      "type": "boolean",
+      "oneOf": [
+        {
+          "type": "boolean"
+        },
+        {
+          "type": "string"
+        }
+      ],
       "description": "If set to _true_, the gateway will try to connect to the dashboard using the credentials in _dashboard_config_ section and get the API configurations from there.",
       "default": false
     },
@@ -60,12 +67,26 @@
       "description": "Configuration of the connection to GraphQL Portal Dashboard."
     },
     "enable_control_api": {
-      "type": "boolean",
+      "oneOf": [
+        {
+          "type": "boolean"
+        },
+        {
+          "type": "string"
+        }
+      ],
       "description": "Enables or disables the Control API which is used to update GraphQL Schema definitions.",
       "default": false
     },
     "enable_metrics_recording": {
-      "type": "boolean",
+      "oneOf": [
+        {
+          "type": "boolean"
+        },
+        {
+          "type": "string"
+        }
+      ],
       "description": "Enable or disable metrics recording to Redis",
       "default": false
     },
@@ -122,7 +143,14 @@
           "type": "object",
           "properties": {
             "is_cluster": {
-              "type": "boolean",
+              "oneOf": [
+                {
+                  "type": "boolean"
+                },
+                {
+                  "type": "string"
+                }
+              ],
               "default": false,
               "description": "Is connection to cluster"
             },
@@ -212,7 +240,14 @@
       "additionalProperties": false,
       "properties": {
         "enabled": {
-          "type": "boolean",
+          "oneOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "string"
+            }
+          ],
           "default": false,
           "description": "Enables CORS requests for all APIs. CORS requests from Dashboard are enabled by default."
         },
@@ -247,7 +282,14 @@
           }
         },
         "credentials": {
-          "type": "boolean",
+          "oneOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "string"
+            }
+          ],
           "description": "Configures the Access-Control-Allow-Credentials CORS header."
         },
         "maxAge": {
@@ -266,7 +308,14 @@
       "additionalProperties": false,
       "properties": {
         "enabled": {
-          "type": "boolean",
+          "oneOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "string"
+            }
+          ],
           "description": "Enable or disable logging to Datadog. Defaults to false.",
           "default": false
         },
@@ -302,7 +351,14 @@
       "additionalProperties": false,
       "properties": {
         "enabled": {
-          "type": "boolean",
+          "oneOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "string"
+            }
+          ],
           "description": "Enable or disable logging to Redis. Defaults to false.",
           "default": false
         },
