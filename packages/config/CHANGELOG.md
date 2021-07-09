@@ -1,5 +1,18 @@
 # @graphql-portal/config
 
+## 0.12.0
+
+### Minor Changes
+
+- 74ea83f: useEnv added boolean support, schema updated
+
+### Patch Changes
+
+- Updated dependencies [b39cc29]
+- Updated dependencies [74ea83f]
+  - @graphql-portal/types@1.2.0
+  - @graphql-portal/logger@0.7.14
+
 ## 0.11.9
 
 ### Patch Changes
