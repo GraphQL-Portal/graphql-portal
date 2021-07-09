@@ -1,7 +1,16 @@
 diff --git a/node_modules/@graphql-mesh/json-schema/index.cjs.js b/node_modules/@graphql-mesh/json-schema/index.cjs.js
-index 731a664..19c3dd6 100644
+index 731a664..ad8418b 100644
 --- a/node_modules/@graphql-mesh/json-schema/index.cjs.js
 +++ b/node_modules/@graphql-mesh/json-schema/index.cjs.js
+@@ -423,7 +423,7 @@ class JsonSchemaHandler {
+         var _a, _b;
+         this.config.disableTimestampScalar =
+             typeof this.config.disableTimestampScalar !== 'undefined' ? this.config.disableTimestampScalar : true;
+-        const fetch = utils.getCachedFetch(this.cache);
++        const fetch = utils.getCachedFetch(this.cache, this.config.rejectUnauthorized);
+         const schemaComposer = this.schemaComposer;
+         schemaComposer.add(graphqlScalars.GraphQLJSON);
+         schemaComposer.add(graphqlScalars.GraphQLVoid);
 @@ -649,6 +649,7 @@ class JsonSchemaHandler {
          };
      }

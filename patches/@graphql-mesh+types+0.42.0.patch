@@ -1,12 +1,55 @@
 diff --git a/node_modules/@graphql-mesh/types/config-schema.json b/node_modules/@graphql-mesh/types/config-schema.json
-index 9285ed8..270458f 100644
+index 9285ed8..94b694a 100644
 --- a/node_modules/@graphql-mesh/types/config-schema.json
 +++ b/node_modules/@graphql-mesh/types/config-schema.json
-@@ -730,6 +730,7 @@
+@@ -718,6 +718,7 @@
+       "type": "object",
+       "title": "FhirHandler",
+       "properties": {
++        "rejectUnauthorized": { "type": "boolean", "default": false, "description": "Ignore self-signed certificate error" },
+         "endpoint": {
+           "type": "string"
+         }
+@@ -730,8 +731,10 @@
        "properties": {
          "endpoint": {
            "type": "string",
 +          "pattern": "^https?://.*$",
            "description": "A url or file path to your remote GraphQL endpoint.\nIf you provide a path to a code file(js or ts),\nother options will be ignored and the schema exported from the file will be used directly."
          },
++        "rejectUnauthorized": { "type": "boolean", "default": false, "description": "Ignore self-signed certificate error" },
          "schemaHeaders": {
+           "anyOf": [
+             {
+@@ -931,6 +934,7 @@
+           "type": "object",
+           "properties": {}
+         },
++        "rejectUnauthorized": { "type": "boolean", "default": false, "description": "Ignore self-signed certificate error" },
+         "operations": {
+           "type": "array",
+           "items": {
+@@ -1554,6 +1558,7 @@
+           "type": "string",
+           "description": "Custom $metadata File or URL"
+         },
++        "rejectUnauthorized": { "type": "boolean", "default": false, "description": "Ignore self-signed certificate error" },
+         "operationHeaders": {
+           "type": "object",
+           "properties": {},
+@@ -1597,6 +1602,7 @@
+       "type": "object",
+       "title": "OpenapiHandler",
+       "properties": {
++        "rejectUnauthorized": { "type": "boolean", "default": false, "description": "Ignore self-signed certificate error" },
+         "source": {
+           "anyOf": [
+             {
+@@ -1788,6 +1794,7 @@
+           "$ref": "#/definitions/SoapSecurityCertificateConfig",
+           "description": "SSL Certificate Based Authentication Configuration\nIncluding public key, private key and password fields"
+         },
++        "rejectUnauthorized": { "type": "boolean", "default": false, "description": "Ignore self-signed certificate error" },
+         "schemaHeaders": {
+           "anyOf": [
+             {
