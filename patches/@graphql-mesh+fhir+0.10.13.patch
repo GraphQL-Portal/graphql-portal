@@ -1,0 +1,13 @@
+diff --git a/node_modules/@graphql-mesh/fhir/index.cjs.js b/node_modules/@graphql-mesh/fhir/index.cjs.js
+index 024d3e0..3ab28cb 100644
+--- a/node_modules/@graphql-mesh/fhir/index.cjs.js
++++ b/node_modules/@graphql-mesh/fhir/index.cjs.js
+@@ -62,7 +62,7 @@ class FhirHandler extends JsonSchemaHandler {
+     async getMeshSource() {
+         const source = await super.getMeshSource();
+         const ReferenceOTS = this.schemaComposer.getOTC('Reference');
+-        const fetch = utils.getCachedFetch(this.cache);
++        const fetch = utils.getCachedFetch(this.cache, this.config.rejectUnauthorized);
+         ReferenceOTS.addFields({
+             resource: {
+                 type: 'ResourceList',

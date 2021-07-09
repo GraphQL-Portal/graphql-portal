@@ -1,0 +1,13 @@
+diff --git a/node_modules/@graphql-mesh/soap/index.cjs.js b/node_modules/@graphql-mesh/soap/index.cjs.js
+index 86dfc78..0b90dc9 100644
+--- a/node_modules/@graphql-mesh/soap/index.cjs.js
++++ b/node_modules/@graphql-mesh/soap/index.cjs.js
+@@ -20,7 +20,7 @@ class SoapHandler {
+         if (schemaHeaders && 'then' in schemaHeaders) {
+             schemaHeaders = await schemaHeaders;
+         }
+-        const fetch = utils.getCachedFetch(this.cache);
++        const fetch = utils.getCachedFetch(this.cache, this.config.rejectUnauthorized);
+         const soapClient = await soapGraphql.createSoapClient(this.config.wsdl, {
+             basicAuth: this.config.basicAuth,
+             options: {

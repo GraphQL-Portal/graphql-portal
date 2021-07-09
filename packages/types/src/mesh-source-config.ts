@@ -42,6 +42,10 @@ export interface Handler {
   [k: string]: unknown;
 }
 export interface FhirHandler {
+  /**
+   * Ignore self-signed certificate error
+   */
+  rejectUnauthorized?: boolean;
   endpoint?: string;
 }
 /**
@@ -54,6 +58,10 @@ export interface GraphQLHandler {
    * other options will be ignored and the schema exported from the file will be used directly.
    */
   endpoint: string;
+  /**
+   * Ignore self-signed certificate error
+   */
+  rejectUnauthorized?: boolean;
   /**
    * JSON object representing the Headers to add to the runtime of the API calls only for schema introspection
    * You can also provide `.js` or `.ts` file path that exports schemaHeaders as an object
@@ -187,6 +195,10 @@ export interface JsonSchemaHandler {
   schemaHeaders?: {
     [k: string]: unknown;
   };
+  /**
+   * Ignore self-signed certificate error
+   */
+  rejectUnauthorized?: boolean;
   operations: JsonSchemaOperation[];
   disableTimestampScalar?: boolean;
   baseSchema?:
@@ -436,6 +448,10 @@ export interface ODataHandler {
    */
   metadata?: string;
   /**
+   * Ignore self-signed certificate error
+   */
+  rejectUnauthorized?: boolean;
+  /**
    * Headers to be used with the operation requests
    */
   operationHeaders?: {
@@ -469,6 +485,10 @@ export interface ODataHandler {
  * Handler for Swagger / OpenAPI 2/3 specification. Source could be a local json/swagger file, or a url to it.
  */
 export interface OpenapiHandler {
+  /**
+   * Ignore self-signed certificate error
+   */
+  rejectUnauthorized?: boolean;
   /**
    * A pointer to your API source - could be a local file, remote file or url endpoint
    */
@@ -605,6 +625,10 @@ export interface SoapHandler {
   wsdl: string;
   basicAuth?: SoapSecurityBasicAuthConfig;
   securityCert?: SoapSecurityCertificateConfig;
+  /**
+   * Ignore self-signed certificate error
+   */
+  rejectUnauthorized?: boolean;
   /**
    * JSON object representing the Headers to add to the runtime of the API calls only for schema introspection
    * You can also provide `.js` or `.ts` file path that exports schemaHeaders as an object

@@ -424,7 +424,14 @@
       "additionalProperties": false,
       "type": "object",
       "title": "FhirHandler",
-      "properties": { "endpoint": { "type": "string" } }
+      "properties": {
+        "rejectUnauthorized": {
+          "type": "boolean",
+          "default": false,
+          "description": "Ignore self-signed certificate error"
+        },
+        "endpoint": { "type": "string" }
+      }
     },
     "GraphQLHandler": {
       "additionalProperties": false,
@@ -435,6 +442,11 @@
           "type": "string",
           "pattern": "^https?://.*$",
           "description": "A url or file path to your remote GraphQL endpoint.\nIf you provide a path to a code file(js or ts),\nother options will be ignored and the schema exported from the file will be used directly."
+        },
+        "rejectUnauthorized": {
+          "type": "boolean",
+          "default": false,
+          "description": "Ignore self-signed certificate error"
         },
         "schemaHeaders": {
           "anyOf": [
@@ -542,6 +554,11 @@
         "baseUrl": { "type": "string" },
         "operationHeaders": { "type": "object", "properties": {} },
         "schemaHeaders": { "type": "object", "properties": {} },
+        "rejectUnauthorized": {
+          "type": "boolean",
+          "default": false,
+          "description": "Ignore self-signed certificate error"
+        },
         "operations": {
           "type": "array",
           "items": { "$ref": "#/definitions/JsonSchemaOperation" },
@@ -842,6 +859,11 @@
       "properties": {
         "baseUrl": { "type": "string", "description": "Base URL for OData API" },
         "metadata": { "type": "string", "description": "Custom $metadata File or URL" },
+        "rejectUnauthorized": {
+          "type": "boolean",
+          "default": false,
+          "description": "Ignore self-signed certificate error"
+        },
         "operationHeaders": {
           "type": "object",
           "properties": {},
@@ -877,6 +899,11 @@
       "type": "object",
       "title": "OpenapiHandler",
       "properties": {
+        "rejectUnauthorized": {
+          "type": "boolean",
+          "default": false,
+          "description": "Ignore self-signed certificate error"
+        },
         "source": {
           "anyOf": [
             { "type": "object", "additionalProperties": true },
@@ -1012,6 +1039,11 @@
         "securityCert": {
           "$ref": "#/definitions/SoapSecurityCertificateConfig",
           "description": "SSL Certificate Based Authentication Configuration\nIncluding public key, private key and password fields"
+        },
+        "rejectUnauthorized": {
+          "type": "boolean",
+          "default": false,
+          "description": "Ignore self-signed certificate error"
         },
         "schemaHeaders": {
           "anyOf": [

@@ -1,0 +1,46 @@
+diff --git a/node_modules/@graphql-mesh/utils/index.cjs.js b/node_modules/@graphql-mesh/utils/index.cjs.js
+index 7d2a036..b8804e4 100644
+--- a/node_modules/@graphql-mesh/utils/index.cjs.js
++++ b/node_modules/@graphql-mesh/utils/index.cjs.js
+@@ -38,11 +38,19 @@ const flatstr = _interopDefault(require('flatstr'));
+ const lru = _interopDefault(require('tiny-lru'));
+ const graphqlJit = require('graphql-jit');
+ const delegate = require('@graphql-tools/delegate');
++const https = require('https');
+ 
+ const { readFile, stat } = fs.promises || {};
+-function getCachedFetch(cache) {
++function getCachedFetch(cache, rejectUnauthorized = false) {
+     return fetchache.fetchFactory({
+-        fetch: crossFetch.fetch,
++        fetch: async (request) => {
++            if (rejectUnauthorized) {
++                request.agent = new https.Agent({
++                    rejectUnauthorized: false,
++                });
++            }
++            return crossFetch.fetch(request)
++        },
+         Request: crossFetch.Request,
+         Response: crossFetch.Response,
+         cache,
+diff --git a/node_modules/@graphql-mesh/utils/index.esm.js b/node_modules/@graphql-mesh/utils/index.esm.js
+index 8fa6380..f957d5d 100644
+--- a/node_modules/@graphql-mesh/utils/index.esm.js
++++ b/node_modules/@graphql-mesh/utils/index.esm.js
+@@ -18,7 +18,14 @@ import { delegateToSchema } from '@graphql-tools/delegate';
+ const { readFile, stat } = promises || {};
+ function getCachedFetch(cache) {
+     return fetchFactory({
+-        fetch,
++        fetch: async (request, rejectUnauthorized = false) => {
++            if (rejectUnauthorized) {
++                request.agent = new https.Agent({
++                    rejectUnauthorized: false,
++                });
++            }
++            return fetch(request)
++        },
+         Request,
+         Response,
+         cache,
