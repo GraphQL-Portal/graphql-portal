@@ -212,6 +212,10 @@ vim packages/backend/config/env/production.json
       "email": "@@DEFAULT_ADMIN_EMAIL",
       "password": "@@DEFAULT_ADMIN_PASSWORD"
     },
+    "sendgrid": {
+      "senderEmail": "@@SENDGRID_SENDER_EMAIL", // Deprecated, use config:application:mail:from instead
+      "apiKey": "@@SENDGRID_API_KEY" // Deprecated, use config:application:sendgrid:apiKey instead
+    },
     "mail": {
       "driver": "@@MAIL_DRIVER",
       "from": "@@MAIL_FROM",
