@@ -38,7 +38,7 @@ export interface GatewayConfig {
   /**
    * If set to _true_, the gateway will try to connect to the dashboard using the credentials in _dashboard_config_ section and get the API configurations from there.
    */
-  use_dashboard_configs?: boolean;
+  use_dashboard_configs?: boolean | string;
   /**
    * Configuration of the connection to GraphQL Portal Dashboard.
    */
@@ -49,11 +49,11 @@ export interface GatewayConfig {
   /**
    * Enables or disables the Control API which is used to update GraphQL Schema definitions.
    */
-  enable_control_api?: boolean;
+  enable_control_api?: boolean | string;
   /**
    * Enable or disable metrics recording to Redis
    */
-  enable_metrics_recording?: boolean;
+  enable_metrics_recording?: boolean | string;
   /**
    * Configuration of the Control API
    */
@@ -67,7 +67,7 @@ export interface GatewayConfig {
     /**
      * Enables CORS requests for all APIs. CORS requests from Dashboard are enabled by default.
      */
-    enabled?: boolean;
+    enabled?: boolean | string;
     /**
      * Configures the Access-Control-Allow-Origin CORS header. Expects an Array of valid origins.
      */
@@ -87,7 +87,7 @@ export interface GatewayConfig {
     /**
      * Configures the Access-Control-Allow-Credentials CORS header.
      */
-    credentials?: boolean;
+    credentials?: boolean | string;
     /**
      * Configures the Access-Control-Max-Age CORS header.
      */
@@ -116,7 +116,7 @@ export interface GatewayConfig {
     /**
      * Enable or disable logging to Datadog. Defaults to false.
      */
-    enabled: boolean;
+    enabled: boolean | string;
     /**
      * Datadog API key of your application
      */
@@ -145,7 +145,7 @@ export interface GatewayConfig {
     /**
      * Enable or disable logging to Redis. Defaults to false.
      */
-    enabled: boolean;
+    enabled: boolean | string;
     /**
      * After the timeout has expired, the log will automatically be deleted (in seconds)
      */
@@ -173,7 +173,7 @@ export interface GatewayConfig {
         /**
          * Is connection to cluster
          */
-        is_cluster?: boolean;
+        is_cluster?: boolean | string;
         cluster_nodes?: string[];
       };
   /**
