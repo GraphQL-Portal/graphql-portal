@@ -92,7 +92,7 @@
     "access": "public"
   },
   "devDependencies": {
-    "@types/bytes": "3.1.0",
+    "@types/bytes": "3.1.1",
     "@types/cors": "2.8.10",
     "@types/jaeger-client": "3.18.1",
     "@types/request-ip": "0.0.36",
