@@ -1318,18 +1318,16 @@
     mysql "2.18.1"
     mysql-utilities "1.1.3"
 
-"@graphql-mesh/neo4j@^0.11.0":
-  version "0.11.6"
-  resolved "https://registry.yarnpkg.com/@graphql-mesh/neo4j/-/neo4j-0.11.6.tgz#db7a03ca7cbdbcf4c63bfb2e4d6b858bfbb5ca92"
-  integrity sha512-1/zbAv2+sI8aUwUIRjS9ZFbUn3tT/C5Iw6oeRWoHvgHuiT1ngBKz9TJn7bUjUFcUJriKRKeCRQ6oRvxSUsDe8Q==
+"@graphql-mesh/neo4j@^0.12.0":
+  version "0.12.0"
+  resolved "https://registry.yarnpkg.com/@graphql-mesh/neo4j/-/neo4j-0.12.0.tgz#c79065116f499a79f9f584d71d520da45baf62f9"
+  integrity sha512-eGOOB04SX1U18uEIjAtAa5WJIiOWBaccHZ4xZKpMfV8e4HE183YMpGr5BouNa+OeuEh4GeAsvtWa6Qf0mM8n3A==
   dependencies:
-    "@graphql-mesh/types" "0.42.0"
-    "@graphql-tools/code-file-loader" "6.3.1"
-    "@graphql-tools/graphql-file-loader" "6.2.7"
-    "@graphql-tools/load" "6.2.8"
-    "@graphql-tools/merge" "6.2.13"
-    neo4j-driver "4.2.3"
-    neo4j-graphql-js "2.19.2"
+    "@graphql-mesh/store" "0.1.0"
+    "@graphql-mesh/types" "0.43.0"
+    "@graphql-mesh/utils" "0.13.0"
+    neo4j-driver "4.3.1"
+    neo4j-graphql-js "2.19.4"
 
 "@graphql-mesh/odata@^0.11.0":
   version "0.11.8"
@@ -1932,15 +1930,6 @@
     import-from "4.0.0"
     p-limit "3.1.0"
     tslib "~2.3.0"
-
-"@graphql-tools/merge@6.2.13":
-  version "6.2.13"
-  resolved "https://registry.yarnpkg.com/@graphql-tools/merge/-/merge-6.2.13.tgz#4603fac8fc44daff0a4704055634d95ca7fa62b2"
-  integrity sha512-Qjlki0fp+bBQPinhdv7rv24eurvThZ5oIFvGMpLxMZplbw/ovJ2c6llwXr5PCuWAk9HGZsyM9NxxDgtTRfq3dQ==
-  dependencies:
-    "@graphql-tools/schema" "^7.0.0"
-    "@graphql-tools/utils" "^7.7.0"
-    tslib "~2.2.0"
 
 "@graphql-tools/merge@6.2.14", "@graphql-tools/merge@^6.2.11", "@graphql-tools/merge@^6.2.12", "@graphql-tools/merge@^6.2.14":
   version "6.2.14"
@@ -8310,17 +8299,7 @@ neo4j-driver-core@^4.3.1:
   resolved "https://registry.yarnpkg.com/neo4j-driver-core/-/neo4j-driver-core-4.3.1.tgz#5d92ae3f9ee48e3af2b4a085503368b15a195a98"
   integrity sha512-FV194GxpPvgNpettGUMit6hxbMOkBR42j1K6xwfLvm25XYaZJMJzE0ezqS0Vp0G6etUqhUQChh7WYLdTMIztpQ==
 
-neo4j-driver@4.2.3:
-  version "4.2.3"
-  resolved "https://registry.yarnpkg.com/neo4j-driver/-/neo4j-driver-4.2.3.tgz#238c98cef329ff0fb11f9884360c4ff4650b2409"
-  integrity sha512-HCJ7+J5V/5yhP+b6G2zTb7SKlAN/oLYaMkD8Bo8L9veScDtgDHBlbkbYEHf1YSAd67OfjZKeF9l84J8Kjdw91g==
-  dependencies:
-    "@babel/runtime" "^7.5.5"
-    rxjs "^6.6.3"
-    text-encoding-utf-8 "^1.0.2"
-    uri-js "^4.4.0"
-
-neo4j-driver@^4.2.1:
+neo4j-driver@4.3.1, neo4j-driver@^4.2.1:
   version "4.3.1"
   resolved "https://registry.yarnpkg.com/neo4j-driver/-/neo4j-driver-4.3.1.tgz#897c812abf631b5a520162bb1d71d6a1b320d231"
   integrity sha512-7MguiDpGWoj10wfQvi7HRLBif39Sz67w5zOyhaDG8OcHfJbU+onlnGfE81AOlOlYSj/JSv196K1RcFXuJMZv8Q==
@@ -8330,10 +8309,10 @@ neo4j-driver@^4.2.1:
     neo4j-driver-core "^4.3.1"
     rxjs "^6.6.3"
 
-neo4j-graphql-js@2.19.2:
-  version "2.19.2"
-  resolved "https://registry.yarnpkg.com/neo4j-graphql-js/-/neo4j-graphql-js-2.19.2.tgz#0f2d14317646ee8cdb52822723c9dff857a5d43f"
-  integrity sha512-V6RVPt+4fNS6rr2FQY0YWq9de/WFNI8fL0+6hVBBY8TUZaDzioBVML73/M6UOOh/+idLKTPT0opXAam33y305Q==
+neo4j-graphql-js@2.19.4:
+  version "2.19.4"
+  resolved "https://registry.yarnpkg.com/neo4j-graphql-js/-/neo4j-graphql-js-2.19.4.tgz#0d721cb32227e8f2083631bd16efd60aebfd3060"
+  integrity sha512-Na7c4yMLco+2WhgbWlRIGH/sa2C8rwWOS/5BHVqv0AM1lwaf83pu1m5dwxo6nKse4Q9YJKGFUovMJW5ZASTTYg==
   dependencies:
     "@babel/runtime" "^7.5.5"
     "@babel/runtime-corejs2" "^7.5.5"
@@ -10846,7 +10825,7 @@ upper-case@2.0.2, upper-case@^2.0.2:
   dependencies:
     tslib "^2.0.3"
 
-uri-js@^4.2.2, uri-js@^4.4.0:
+uri-js@^4.2.2:
   version "4.4.1"
   resolved "https://registry.yarnpkg.com/uri-js/-/uri-js-4.4.1.tgz#9b1a52595225859e55f669d928f88c6c57f2a77e"
   integrity sha512-7rKUyy33Q1yc98pQ1DAmLtwX109F7TIfWlW1Ydo8Wl1ii1SeHieeh0HHfPeL2fMXK6z0s8ecKs9frCuLJvndBg==
