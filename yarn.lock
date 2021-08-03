@@ -118,6 +118,11 @@
   dependencies:
     tslib "~2.0.1"
 
+"@ardatan/fetch-event-source@2.0.2":
+  version "2.0.2"
+  resolved "https://registry.yarnpkg.com/@ardatan/fetch-event-source/-/fetch-event-source-2.0.2.tgz#734aa3eaa0da456453d24d8dc7c14d5e366a8d21"
+  integrity sha512-mcpz/wJ7s50PJIVz4OQ1Yim3w/AAchtYtIg0QMWiMR2cZZoI9t23hRyqeumtD5EmyJu0fxtjmQ5WY8GI86V4rQ==
+
 "@ardatan/string-interpolation@1.2.11":
   version "1.2.11"
   resolved "https://registry.yarnpkg.com/@ardatan/string-interpolation/-/string-interpolation-1.2.11.tgz#5a0ea807e55f1faf79a0ec7b809953d6e1e31c81"
@@ -1208,15 +1213,17 @@
     "@graphql-mesh/utils" "0.12.0"
     url-join "4.0.1"
 
-"@graphql-mesh/graphql@^0.17.0":
-  version "0.17.10"
-  resolved "https://registry.yarnpkg.com/@graphql-mesh/graphql/-/graphql-0.17.10.tgz#3b436f69eb106a52fb976a69e08d68d08e3c5187"
-  integrity sha512-9G8ll1mVPMbobf3vzJH73alyH+W1vd85cwtQC622aNCNSMEIZegMXjK4sc+Lq2wjBK9gLfRwhnK9EhDwrj/VXQ==
+"@graphql-mesh/graphql@^0.18.0":
+  version "0.18.0"
+  resolved "https://registry.yarnpkg.com/@graphql-mesh/graphql/-/graphql-0.18.0.tgz#9679fd8f255b2ba5b5aaa01db6debd9cad505a10"
+  integrity sha512-ZPkPAaXIe+OmQwzjF0bs4rqpn88ofe5bbh/92jR+pbEyyYqM9IiApcatmdevFSCJSdCQpe0ynvveS3At+qG8hQ==
   dependencies:
-    "@graphql-mesh/types" "0.42.0"
-    "@graphql-mesh/utils" "0.12.0"
-    "@graphql-tools/url-loader" "6.10.1"
-    "@graphql-tools/wrap" "7.0.8"
+    "@graphql-mesh/store" "0.1.0"
+    "@graphql-mesh/types" "0.43.0"
+    "@graphql-mesh/utils" "0.13.0"
+    "@graphql-tools/delegate" "8.0.2"
+    "@graphql-tools/url-loader" "7.0.2"
+    "@graphql-tools/wrap" "8.0.2"
 
 "@graphql-mesh/grpc@^0.15.0":
   version "0.15.0"
@@ -2107,7 +2114,34 @@
     "@graphql-tools/utils" "^8.0.0"
     tslib "~2.3.0"
 
-"@graphql-tools/url-loader@6.10.1", "@graphql-tools/url-loader@^6.3.2":
+"@graphql-tools/url-loader@7.0.2":
+  version "7.0.2"
+  resolved "https://registry.yarnpkg.com/@graphql-tools/url-loader/-/url-loader-7.0.2.tgz#ceee5a5d36e3b028adc7605bc5eda0270357e265"
+  integrity sha512-RVy6lCOXq2QPAli/59il4jJZmERaGhJQDw6OsqJUYrdU3Hn6tGiBJxnKSWE0teFAE+PWUyX2/zIaBSdOgE7phw==
+  dependencies:
+    "@ardatan/fetch-event-source" "2.0.2"
+    "@graphql-tools/delegate" "8.0.2"
+    "@graphql-tools/utils" "^8.0.0"
+    "@graphql-tools/wrap" "^8.0.2"
+    "@n1ru4l/graphql-live-query" "0.7.1"
+    "@types/websocket" "1.0.4"
+    abort-controller "3.0.0"
+    cross-fetch "3.1.4"
+    extract-files "11.0.0"
+    form-data "4.0.0"
+    graphql-ws "^5.0.0"
+    is-promise "4.0.0"
+    isomorphic-ws "4.0.1"
+    lodash "4.17.21"
+    meros "1.1.4"
+    subscriptions-transport-ws "^0.10.0"
+    sync-fetch "0.3.0"
+    tslib "~2.3.0"
+    valid-url "1.0.9"
+    value-or-promise "1.0.10"
+    ws "7.5.3"
+
+"@graphql-tools/url-loader@^6.3.2":
   version "6.10.1"
   resolved "https://registry.yarnpkg.com/@graphql-tools/url-loader/-/url-loader-6.10.1.tgz#dc741e4299e0e7ddf435eba50a1f713b3e763b33"
   integrity sha512-DSDrbhQIv7fheQ60pfDpGD256ixUQIR6Hhf9Z5bRjVkXOCvO5XrkwoWLiU7iHL81GB1r0Ba31bf+sl+D4nyyfw==
@@ -3074,6 +3108,13 @@
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/@types/websocket/-/websocket-1.0.2.tgz#d2855c6a312b7da73ed16ba6781815bf30c6187a"
   integrity sha512-B5m9aq7cbbD/5/jThEr33nUY8WEfVi6A2YKCTOvw5Ldy7mtsOkqRvGjnzy6g7iMMDsgu7xREuCzqATLDLQVKcQ==
+  dependencies:
+    "@types/node" "*"
+
+"@types/websocket@1.0.4":
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/@types/websocket/-/websocket-1.0.4.tgz#1dc497280d8049a5450854dd698ee7e6ea9e60b8"
+  integrity sha512-qn1LkcFEKK8RPp459jkjzsfpbsx36BBt3oC3pITYtkoBw/aVX+EZFa5j3ThCRTNpLFvIMr5dSTD4RaMdilIOpA==
   dependencies:
     "@types/node" "*"
 
@@ -5401,6 +5442,11 @@ external-editor@^3.1.0:
     iconv-lite "^0.4.24"
     tmp "^0.0.33"
 
+extract-files@11.0.0:
+  version "11.0.0"
+  resolved "https://registry.yarnpkg.com/extract-files/-/extract-files-11.0.0.tgz#b72d428712f787eef1f5193aff8ab5351ca8469a"
+  integrity sha512-FuoE1qtbJ4bBVvv94CC7s0oTnKUGvQs+Rjf1L2SJFfS+HTVVjhPFtehPdQ0JiGPqVNfSSZvL5yzHHQq2Z4WNhQ==
+
 extract-files@9.0.0, extract-files@^9.0.0:
   version "9.0.0"
   resolved "https://registry.yarnpkg.com/extract-files/-/extract-files-9.0.0.tgz#8a7744f2437f81f5ed3250ed9f1550de902fe54a"
@@ -6167,7 +6213,7 @@ graphql-upload@12.0.0, graphql-upload@^12.0.0:
     isobject "^4.0.0"
     object-path "^0.11.5"
 
-graphql-ws@5.3.0:
+graphql-ws@5.3.0, graphql-ws@^5.0.0:
   version "5.3.0"
   resolved "https://registry.yarnpkg.com/graphql-ws/-/graphql-ws-5.3.0.tgz#345f73686b639735f1f4ef0b9ea28e17c7f6a745"
   integrity sha512-53MbSTOmgx5i6hf3DHVD5PrXix1drDmt2ja8MW7NG+aTpKGzkXVLyNcyNpxme4SK8jVtIV6ZIHkiwirqN0efpw==
@@ -10224,6 +10270,17 @@ strip-json-comments@^3.1.0, strip-json-comments@^3.1.1:
   resolved "https://registry.yarnpkg.com/strip-json-comments/-/strip-json-comments-3.1.1.tgz#31f1281b3832630434831c310c01cccda8cbe006"
   integrity sha512-6fPc+R4ihwqP6N/aIv2f1gMH8lOVtWQHoqC4yK6oSDVVocumAsfCqjkXnqiYMhmMwS/mEHLp7Vehlt3ql6lEig==
 
+subscriptions-transport-ws@^0.10.0:
+  version "0.10.0"
+  resolved "https://registry.yarnpkg.com/subscriptions-transport-ws/-/subscriptions-transport-ws-0.10.0.tgz#91fce775b31935e4ca995895a40942268877d23f"
+  integrity sha512-k28LhLn3abJ1mowFW+LP4QGggE0e3hrk55zXbMHyAeZkCUYtC0owepiwqMD3zX8DglQVaxnhE760pESrNSEzpg==
+  dependencies:
+    backo2 "^1.0.2"
+    eventemitter3 "^3.1.0"
+    iterall "^1.2.1"
+    symbol-observable "^1.0.4"
+    ws "^5.2.0 || ^6.0.0 || ^7.0.0"
+
 subscriptions-transport-ws@^0.9.18, subscriptions-transport-ws@^0.9.19:
   version "0.9.19"
   resolved "https://registry.yarnpkg.com/subscriptions-transport-ws/-/subscriptions-transport-ws-0.9.19.tgz#10ca32f7e291d5ee8eb728b9c02e43c52606cdcf"
@@ -11139,6 +11196,11 @@ ws@7.4.5:
   version "7.4.5"
   resolved "https://registry.yarnpkg.com/ws/-/ws-7.4.5.tgz#a484dd851e9beb6fdb420027e3885e8ce48986c1"
   integrity sha512-xzyu3hFvomRfXKH8vOFMU3OguG6oOvhXMo3xsGy3xWExqaM2dxBbVxuD99O7m3ZUFMvvscsZDqxfgMaRr/Nr1g==
+
+ws@7.5.3:
+  version "7.5.3"
+  resolved "https://registry.yarnpkg.com/ws/-/ws-7.5.3.tgz#160835b63c7d97bfab418fc1b8a9fced2ac01a74"
+  integrity sha512-kQ/dHIzuLrS6Je9+uv81ueZomEwH0qVYstcAQ4/Z93K8zeko9gtAbttJWzoC5ukqXY1PpoouV3+VSOqEAFt5wg==
 
 ws@8.0.0, ws@^8.0.0:
   version "8.0.0"
