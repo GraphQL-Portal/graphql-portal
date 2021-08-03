@@ -1236,7 +1236,7 @@
     long "4.0.0"
     protobufjs "6.11.2"
 
-"@graphql-mesh/json-schema@0.16.1", "@graphql-mesh/json-schema@^0.16.0":
+"@graphql-mesh/json-schema@0.16.1":
   version "0.16.1"
   resolved "https://registry.yarnpkg.com/@graphql-mesh/json-schema/-/json-schema-0.16.1.tgz#ff0b94fa28369639a89a8fe3d0f9a81abde837b1"
   integrity sha512-d8NyfzklgpDe6vIiSZZipy5AIzVqhm6LZG1pIlYTDvGuRmrILRXd7hu8Iee1LOJmcJlecHz6RiOliGaMEbdE1w==
@@ -1248,6 +1248,25 @@
     graphql-compose "8.1.0"
     graphql-scalars "1.9.3"
     lodash "4.17.21"
+    pascal-case "3.1.2"
+    qs "6.10.1"
+    to-json-schema "0.2.5"
+    url-join "4.0.1"
+
+"@graphql-mesh/json-schema@^0.17.0":
+  version "0.17.0"
+  resolved "https://registry.yarnpkg.com/@graphql-mesh/json-schema/-/json-schema-0.17.0.tgz#c3225e20e1cce00fc8bc4a5e6da5f125ea1b3442"
+  integrity sha512-9OWZ6Yjcc3SloO3MmPutBJErpTWhBGQaVUn57nYyRpCFkWo8hpReAWhXGRGEYSlBvspEp0p5kXIu83aXTltdsQ==
+  dependencies:
+    "@graphql-mesh/store" "0.1.0"
+    "@graphql-mesh/types" "0.43.0"
+    "@graphql-mesh/utils" "0.13.0"
+    "@graphql-tools/utils" "8.0.0"
+    ajv "8.6.2"
+    ajv-formats "2.1.0"
+    graphql-compose "9.0.1"
+    graphql-scalars "1.10.0"
+    json-machete "0.0.1"
     pascal-case "3.1.2"
     qs "6.10.1"
     to-json-schema "0.2.5"
@@ -2469,6 +2488,11 @@
   resolved "https://registry.yarnpkg.com/@jsdevtools/ono/-/ono-7.1.3.tgz#9df03bbd7c696a5c58885c34aa06da41c8543796"
   integrity sha512-4JQNk+3mVzK3xh2rqd6RB4J46qUR19azEHBneZyTZM+c456qOrbbM/5xcR8huNCCcbVt7+UmizG6GuUvPvKUYg==
 
+"@json-schema-tools/meta-schema@1.6.19":
+  version "1.6.19"
+  resolved "https://registry.yarnpkg.com/@json-schema-tools/meta-schema/-/meta-schema-1.6.19.tgz#295301c2d4a0c01eb2eafbf605aca8ebc0dfbbb6"
+  integrity sha512-55zuWFW7tr4tf/G5AYmybcPdGOkVAreQbt2JdnogX4I2r/zkxZiimYPJESDf5je9BI2oRveak2p296HzDppeaA==
+
 "@manypkg/find-root@^1.1.0":
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/@manypkg/find-root/-/find-root-1.1.0.tgz#a62d8ed1cd7e7d4c11d9d52a8397460b5d4ad29f"
@@ -3282,6 +3306,13 @@ aggregate-error@^3.0.0:
     clean-stack "^2.0.0"
     indent-string "^4.0.0"
 
+ajv-formats@2.1.0:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/ajv-formats/-/ajv-formats-2.1.0.tgz#96eaf83e38d32108b66d82a9cb0cfa24886cdfeb"
+  integrity sha512-USH2jBb+C/hIpwD2iRjp0pe0k+MvzG0mlSn/FIdCgQhUb9ALPRjt2KIQdfZDS9r0ZIeUAg7gOu9KL0PFqGqr5Q==
+  dependencies:
+    ajv "^8.0.0"
+
 ajv@8.5.0:
   version "8.5.0"
   resolved "https://registry.yarnpkg.com/ajv/-/ajv-8.5.0.tgz#695528274bcb5afc865446aa275484049a18ae4b"
@@ -3302,7 +3333,7 @@ ajv@8.6.0, ajv@^8.0.1:
     require-from-string "^2.0.2"
     uri-js "^4.2.2"
 
-ajv@8.6.2:
+ajv@8.6.2, ajv@^8.0.0:
   version "8.6.2"
   resolved "https://registry.yarnpkg.com/ajv/-/ajv-8.6.2.tgz#2fb45e0e5fcbc0813326c1c3da535d1881bb0571"
   integrity sha512-9807RlWAgT564wT+DjeyU5OFMPjmzxVobvDFmNAhY+5zD6A2ly3jDp6sgnfyDtlIQ+7H97oc/DGCzzfu9rjw9w==
@@ -5973,6 +6004,15 @@ graphql-compose@8.1.0:
     graphql-type-json "0.3.2"
     object-path "0.11.5"
 
+graphql-compose@9.0.1:
+  version "9.0.1"
+  resolved "https://registry.yarnpkg.com/graphql-compose/-/graphql-compose-9.0.1.tgz#e28e7c34bd954dda4b0eddf0eb288b7a58bfb7de"
+  integrity sha512-EMo8+lcA8GJpEJB+hWYak21EwZmzzf/woIYvVQHFi/gU+2jbLEVdBB7cHd0M9fIrMswHqDpxYM8JwjIrFphpcA==
+  dependencies:
+    "@types/object-path" "^0.11.0"
+    graphql-type-json "0.3.2"
+    object-path "0.11.5"
+
 graphql-compose@9.0.2:
   version "9.0.2"
   resolved "https://registry.yarnpkg.com/graphql-compose/-/graphql-compose-9.0.2.tgz#f029ff1ceaec65655a847521996109ac0e0a076e"
@@ -7446,6 +7486,15 @@ json-bigint-patch@0.0.4:
   version "0.0.4"
   resolved "https://registry.yarnpkg.com/json-bigint-patch/-/json-bigint-patch-0.0.4.tgz#9c1cb80ec364fa685061e1afb7abcc9a7fb6f6f0"
   integrity sha512-OCmozd929JDOvIfik3lObvbAWpEQl1lVYJbBf0iWJzqlEeRgf3VnVJZXUR4RB206tZIROnEGiCng+62UVWu8Iw==
+
+json-machete@0.0.1:
+  version "0.0.1"
+  resolved "https://registry.yarnpkg.com/json-machete/-/json-machete-0.0.1.tgz#aaa8e8d30ce00f7be8ae2c686fad7783b470402a"
+  integrity sha512-mkJl0RlznNPZUJ0+5fbG0uhsRxfqOD7YFudMWo4RD2JxUYQPowNenFlhjmZeVBhZL5ySLtVDHorjUipq0oZU0g==
+  dependencies:
+    "@graphql-mesh/utils" "0.13.0"
+    "@json-schema-tools/meta-schema" "1.6.19"
+    json-ptr "2.2.0"
 
 json-parse-better-errors@^1.0.1:
   version "1.0.2"
