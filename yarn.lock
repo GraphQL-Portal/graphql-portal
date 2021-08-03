@@ -1621,7 +1621,7 @@
     object-hash "2.1.1"
     tiny-lru "7.0.6"
 
-"@graphql-mesh/utils@0.12.0", "@graphql-mesh/utils@^0.12.0":
+"@graphql-mesh/utils@0.12.0":
   version "0.12.0"
   resolved "https://registry.yarnpkg.com/@graphql-mesh/utils/-/utils-0.12.0.tgz#ff7d7924ac711ccbcc0e2cbfccc76bf375a63eb7"
   integrity sha512-4J6QDfhqpRsFNlGdHlOTeJUxx3SFDN4Aalb4zrX7wUU6lddxYU8UeKAfKhiklysVkVr0opyUAFmWmDZ5U1zIOQ==
@@ -1640,7 +1640,7 @@
     object-hash "2.2.0"
     tiny-lru "7.0.6"
 
-"@graphql-mesh/utils@0.13.0":
+"@graphql-mesh/utils@0.13.0", "@graphql-mesh/utils@^0.13.0":
   version "0.13.0"
   resolved "https://registry.yarnpkg.com/@graphql-mesh/utils/-/utils-0.13.0.tgz#faa364d016089ae8623753ad9ac312de43b66840"
   integrity sha512-l2J5G8GeJTMwP8QKFNN5PicuG+JN2jzUyaGr4sAg/y6tro+tFGL4jG3WARm22JEi1AJClge2OtKTJ4SawJGJtQ==
