@@ -1603,6 +1603,16 @@
     "@graphql-typed-document-node/core" "3.1.0"
     fetchache "0.1.1"
 
+"@graphql-mesh/types@0.47.0":
+  version "0.47.0"
+  resolved "https://registry.yarnpkg.com/@graphql-mesh/types/-/types-0.47.0.tgz#2b188d987d9fde7132cc200a5c845ab9c448312d"
+  integrity sha512-VhIUghlVnWzAmHP29pqadrX6FAb8eCYnIJ7WY3eaZ4rNfLrfM/MCypJy/77l7G/n16ZzObQSRpmPRnRQ9HMpkg==
+  dependencies:
+    "@graphql-tools/delegate" "8.1.1"
+    "@graphql-tools/utils" "8.1.2"
+    "@graphql-typed-document-node/core" "3.1.0"
+    fetchache "0.1.1"
+
 "@graphql-mesh/utils@0.10.0":
   version "0.10.0"
   resolved "https://registry.yarnpkg.com/@graphql-mesh/utils/-/utils-0.10.0.tgz#d369dd405fc88078f1f987395437651095c806ba"
@@ -1712,6 +1722,16 @@
     tslib "~2.3.0"
     value-or-promise "1.0.10"
 
+"@graphql-tools/batch-execute@^8.0.5":
+  version "8.0.5"
+  resolved "https://registry.yarnpkg.com/@graphql-tools/batch-execute/-/batch-execute-8.0.5.tgz#a0f8a9ff2c61209974c626faf3dd922a5c68d2b0"
+  integrity sha512-Zx+zs12BLGNvrQtfESIhitzwIkrWnKyKOkAfcaMNuOLGOO2pDmhwIRzbHj+6Jtq9V1/JTaVkSnm/4ozaCRck5A==
+  dependencies:
+    "@graphql-tools/utils" "^8.1.1"
+    dataloader "2.0.0"
+    tslib "~2.3.0"
+    value-or-promise "1.0.10"
+
 "@graphql-tools/code-file-loader@6.3.1", "@graphql-tools/code-file-loader@^6.2.5":
   version "6.3.1"
   resolved "https://registry.yarnpkg.com/@graphql-tools/code-file-loader/-/code-file-loader-6.3.1.tgz#42dfd4db5b968acdb453382f172ec684fa0c34ed"
@@ -1792,6 +1812,18 @@
     "@graphql-tools/batch-execute" "^8.0.1"
     "@graphql-tools/schema" "^8.0.1"
     "@graphql-tools/utils" "8.0.1"
+    dataloader "2.0.0"
+    tslib "~2.3.0"
+    value-or-promise "1.0.10"
+
+"@graphql-tools/delegate@8.1.1":
+  version "8.1.1"
+  resolved "https://registry.yarnpkg.com/@graphql-tools/delegate/-/delegate-8.1.1.tgz#d20e6d81a2900b1c8a69c2c0a3a8a0df2f9030c2"
+  integrity sha512-Vttd0nfYTqRnRMKLvk8s4cIi9U+OMXGc9CMZAlKkHrBJ6dGXjdSM+4n3p9rfWZc/FtbVk1FnNS4IFyMeKwFuxA==
+  dependencies:
+    "@graphql-tools/batch-execute" "^8.0.5"
+    "@graphql-tools/schema" "^8.1.2"
+    "@graphql-tools/utils" "^8.1.2"
     dataloader "2.0.0"
     tslib "~2.3.0"
     value-or-promise "1.0.10"
@@ -1969,6 +2001,14 @@
     "@graphql-tools/utils" "8.0.1"
     tslib "~2.3.0"
 
+"@graphql-tools/merge@^8.0.2":
+  version "8.0.3"
+  resolved "https://registry.yarnpkg.com/@graphql-tools/merge/-/merge-8.0.3.tgz#56c844bc5d7d833456695c8e5eda4f1a0d5be873"
+  integrity sha512-lVMyW9cREs+nQYbUvMaaqSl+pRCezl2RafNMFi/04akjvOtjVefdi7n3pArpSqPhLHPJDyQRlI8CK8cmOZ9jTA==
+  dependencies:
+    "@graphql-tools/utils" "^8.1.2"
+    tslib "~2.3.0"
+
 "@graphql-tools/mock@8.1.4":
   version "8.1.4"
   resolved "https://registry.yarnpkg.com/@graphql-tools/mock/-/mock-8.1.4.tgz#4d2ef054f83bd71dfe294a9750c19f90b6dedb91"
@@ -2069,6 +2109,16 @@
   dependencies:
     "@graphql-tools/merge" "6.2.16"
     "@graphql-tools/utils" "8.0.1"
+    tslib "~2.3.0"
+    value-or-promise "1.0.10"
+
+"@graphql-tools/schema@^8.1.2":
+  version "8.1.2"
+  resolved "https://registry.yarnpkg.com/@graphql-tools/schema/-/schema-8.1.2.tgz#913879da1a7889a9488e9b7dc189e7c83eff74be"
+  integrity sha512-rX2pg42a0w7JLVYT+f/yeEKpnoZL5PpLq68TxC3iZ8slnNBNjfVfvzzOn8Q8Q6Xw3t17KP9QespmJEDfuQe4Rg==
+  dependencies:
+    "@graphql-tools/merge" "^8.0.2"
+    "@graphql-tools/utils" "^8.1.1"
     tslib "~2.3.0"
     value-or-promise "1.0.10"
 
@@ -2179,6 +2229,13 @@
   version "8.0.1"
   resolved "https://registry.yarnpkg.com/@graphql-tools/utils/-/utils-8.0.1.tgz#bf09e8d6d17c4a0830f0fbf2c69dd725de19058c"
   integrity sha512-gjQk6sht4b0/hcG+QEVxfMyO8bn5tuU1nIOVhQ4whgFaUmrnb3hx2mwzz1EJzfIOAuHKE8tY0lu6jt3bGTD4yg==
+  dependencies:
+    tslib "~2.3.0"
+
+"@graphql-tools/utils@8.1.2", "@graphql-tools/utils@^8.1.1", "@graphql-tools/utils@^8.1.2":
+  version "8.1.2"
+  resolved "https://registry.yarnpkg.com/@graphql-tools/utils/-/utils-8.1.2.tgz#a376259fafbca7532fda657e3abeec23b545e5d3"
+  integrity sha512-3G+NIBR5mHjPm78jAD0l07JRE0XH+lr9m7yL/wl69jAzK0Jr/H+/Ok4ljEolI70iglz+ZhIShVPAwyesF6rnFg==
   dependencies:
     tslib "~2.3.0"
 
