@@ -31,7 +31,16 @@
     tslib "^1.10.0"
     zen-observable "^0.8.14"
 
-"@apollo/federation@0.25.1", "@apollo/federation@^0.25.1":
+"@apollo/federation@0.29.0":
+  version "0.29.0"
+  resolved "https://registry.yarnpkg.com/@apollo/federation/-/federation-0.29.0.tgz#ef06e77fff639a7fb4a6c19caef604a2aef74f94"
+  integrity sha512-QxhomJbfaGk2zzXyJSzbRTtMVCrneo5Iuok8dN1Mklmhxx3XPdZhAq4cOWU4bSl90ZphRJCPIdrz4j9CIC0k4Q==
+  dependencies:
+    apollo-graphql "^0.9.3"
+    apollo-server-types "^3.0.2"
+    lodash.xorby "^4.7.0"
+
+"@apollo/federation@^0.25.1":
   version "0.25.1"
   resolved "https://registry.yarnpkg.com/@apollo/federation/-/federation-0.25.1.tgz#3605fa8cf8f7b699c482885820ae5baa04f610c4"
   integrity sha512-f/wQjQ2M7Mbsw/g/VTFu+bgICZD03DZaQ4rNjKbWL0HmjYb+CdSlvCP8N6TFLCdlKHwD6qIQpRsROP6qTpeicg==
@@ -1481,14 +1490,17 @@
     "@graphql-tools/load" "6.2.8"
     "@graphql-tools/merge" "6.2.14"
 
-"@graphql-mesh/transform-federation@^0.5.1":
-  version "0.5.15"
-  resolved "https://registry.yarnpkg.com/@graphql-mesh/transform-federation/-/transform-federation-0.5.15.tgz#67f94714322a92509e6605576950cc91a35ec24b"
-  integrity sha512-pnI0+wEvoMoU3KZR7IRd1r6QAyEpMifL0sONnk7S89u8dMplhYFCkd3l94dZpjnMcd/HPHCBC4zH5158S7Zh2g==
+"@graphql-mesh/transform-federation@^0.6.0":
+  version "0.6.2"
+  resolved "https://registry.yarnpkg.com/@graphql-mesh/transform-federation/-/transform-federation-0.6.2.tgz#45db6d32b2f47758594928dae579376d9c9b533c"
+  integrity sha512-6VrbCDyJs/mIeM/3Mz0V3h61m+Sh4nNi2k7WxKghpf5TEGLIpBsmtavLoj3PWaxHNZpq5FBs4hG0veW+fRFqEQ==
   dependencies:
-    "@apollo/federation" "0.25.1"
-    "@graphql-mesh/types" "0.42.0"
-    "@graphql-mesh/utils" "0.12.0"
+    "@apollo/federation" "0.29.0"
+    "@graphql-mesh/types" "0.47.0"
+    "@graphql-mesh/utils" "0.16.0"
+    "@graphql-tools/delegate" "8.1.1"
+    "@graphql-tools/stitching-directives" "2.0.11"
+    "@graphql-tools/utils" "8.1.2"
     graphql-transform-federation "2.2.0"
     lodash "4.17.21"
 
@@ -1603,6 +1615,16 @@
     "@graphql-typed-document-node/core" "3.1.0"
     fetchache "0.1.1"
 
+"@graphql-mesh/types@0.47.0":
+  version "0.47.0"
+  resolved "https://registry.yarnpkg.com/@graphql-mesh/types/-/types-0.47.0.tgz#2b188d987d9fde7132cc200a5c845ab9c448312d"
+  integrity sha512-VhIUghlVnWzAmHP29pqadrX6FAb8eCYnIJ7WY3eaZ4rNfLrfM/MCypJy/77l7G/n16ZzObQSRpmPRnRQ9HMpkg==
+  dependencies:
+    "@graphql-tools/delegate" "8.1.1"
+    "@graphql-tools/utils" "8.1.2"
+    "@graphql-typed-document-node/core" "3.1.0"
+    fetchache "0.1.1"
+
 "@graphql-mesh/utils@0.10.0":
   version "0.10.0"
   resolved "https://registry.yarnpkg.com/@graphql-mesh/utils/-/utils-0.10.0.tgz#d369dd405fc88078f1f987395437651095c806ba"
@@ -1663,6 +1685,29 @@
     object-hash "2.2.0"
     tiny-lru "7.0.6"
 
+"@graphql-mesh/utils@0.16.0":
+  version "0.16.0"
+  resolved "https://registry.yarnpkg.com/@graphql-mesh/utils/-/utils-0.16.0.tgz#854bf674339fca1b3428d884b233c26da6efecb4"
+  integrity sha512-8jj22BeI/KJMfeXOQw043g8k8lvPYc/5yvG2tP9qADI5DEjz6nGMZZqTFXFPHN0UoyegTVS6U3mydSNYGc9clQ==
+  dependencies:
+    "@ardatan/string-interpolation" "1.2.12"
+    "@graphql-mesh/types" "0.47.0"
+    "@graphql-tools/delegate" "8.1.1"
+    "@graphql-tools/utils" "8.1.2"
+    "@graphql-typed-document-node/core" "3.1.0"
+    chalk "4.1.2"
+    cross-fetch "3.1.4"
+    date-fns "2.23.0"
+    fetchache "0.1.1"
+    flatstr "1.0.12"
+    graphql-jit "0.5.2"
+    graphql-subscriptions "1.2.1"
+    is-url "1.2.4"
+    js-yaml "4.1.0"
+    lodash "4.17.21"
+    object-hash "2.2.0"
+    tiny-lru "7.0.6"
+
 "@graphql-tools/batch-delegate@8.0.2":
   version "8.0.2"
   resolved "https://registry.yarnpkg.com/@graphql-tools/batch-delegate/-/batch-delegate-8.0.2.tgz#f160d3b3ad3e700692faa3b56a1f24f8a1d29a5c"
@@ -1708,6 +1753,16 @@
   integrity sha512-39SpVo2BgcuFLp3ZNvnyPbyFBCCAQMsR/0BvSC8yQaq5AOMLU76fJCKY5RcmNY+9n6529eem8kzdN20qm2rq+g==
   dependencies:
     "@graphql-tools/utils" "8.0.1"
+    dataloader "2.0.0"
+    tslib "~2.3.0"
+    value-or-promise "1.0.10"
+
+"@graphql-tools/batch-execute@^8.0.5":
+  version "8.0.5"
+  resolved "https://registry.yarnpkg.com/@graphql-tools/batch-execute/-/batch-execute-8.0.5.tgz#a0f8a9ff2c61209974c626faf3dd922a5c68d2b0"
+  integrity sha512-Zx+zs12BLGNvrQtfESIhitzwIkrWnKyKOkAfcaMNuOLGOO2pDmhwIRzbHj+6Jtq9V1/JTaVkSnm/4ozaCRck5A==
+  dependencies:
+    "@graphql-tools/utils" "^8.1.1"
     dataloader "2.0.0"
     tslib "~2.3.0"
     value-or-promise "1.0.10"
@@ -1792,6 +1847,18 @@
     "@graphql-tools/batch-execute" "^8.0.1"
     "@graphql-tools/schema" "^8.0.1"
     "@graphql-tools/utils" "8.0.1"
+    dataloader "2.0.0"
+    tslib "~2.3.0"
+    value-or-promise "1.0.10"
+
+"@graphql-tools/delegate@8.1.1", "@graphql-tools/delegate@^8.1.0":
+  version "8.1.1"
+  resolved "https://registry.yarnpkg.com/@graphql-tools/delegate/-/delegate-8.1.1.tgz#d20e6d81a2900b1c8a69c2c0a3a8a0df2f9030c2"
+  integrity sha512-Vttd0nfYTqRnRMKLvk8s4cIi9U+OMXGc9CMZAlKkHrBJ6dGXjdSM+4n3p9rfWZc/FtbVk1FnNS4IFyMeKwFuxA==
+  dependencies:
+    "@graphql-tools/batch-execute" "^8.0.5"
+    "@graphql-tools/schema" "^8.1.2"
+    "@graphql-tools/utils" "^8.1.2"
     dataloader "2.0.0"
     tslib "~2.3.0"
     value-or-promise "1.0.10"
@@ -1969,6 +2036,14 @@
     "@graphql-tools/utils" "8.0.1"
     tslib "~2.3.0"
 
+"@graphql-tools/merge@^8.0.2":
+  version "8.0.3"
+  resolved "https://registry.yarnpkg.com/@graphql-tools/merge/-/merge-8.0.3.tgz#56c844bc5d7d833456695c8e5eda4f1a0d5be873"
+  integrity sha512-lVMyW9cREs+nQYbUvMaaqSl+pRCezl2RafNMFi/04akjvOtjVefdi7n3pArpSqPhLHPJDyQRlI8CK8cmOZ9jTA==
+  dependencies:
+    "@graphql-tools/utils" "^8.1.2"
+    tslib "~2.3.0"
+
 "@graphql-tools/mock@8.1.4":
   version "8.1.4"
   resolved "https://registry.yarnpkg.com/@graphql-tools/mock/-/mock-8.1.4.tgz#4d2ef054f83bd71dfe294a9750c19f90b6dedb91"
@@ -2072,6 +2147,16 @@
     tslib "~2.3.0"
     value-or-promise "1.0.10"
 
+"@graphql-tools/schema@^8.1.2":
+  version "8.1.2"
+  resolved "https://registry.yarnpkg.com/@graphql-tools/schema/-/schema-8.1.2.tgz#913879da1a7889a9488e9b7dc189e7c83eff74be"
+  integrity sha512-rX2pg42a0w7JLVYT+f/yeEKpnoZL5PpLq68TxC3iZ8slnNBNjfVfvzzOn8Q8Q6Xw3t17KP9QespmJEDfuQe4Rg==
+  dependencies:
+    "@graphql-tools/merge" "^8.0.2"
+    "@graphql-tools/utils" "^8.1.1"
+    tslib "~2.3.0"
+    value-or-promise "1.0.10"
+
 "@graphql-tools/stitch@7.5.3", "@graphql-tools/stitch@^7.3.0":
   version "7.5.3"
   resolved "https://registry.yarnpkg.com/@graphql-tools/stitch/-/stitch-7.5.3.tgz#1b339942ebb93ea4e9da248439b8cf06660688cc"
@@ -2096,6 +2181,15 @@
     "@graphql-tools/schema" "^8.0.0"
     "@graphql-tools/utils" "^8.0.0"
     "@graphql-tools/wrap" "^8.0.2"
+    tslib "~2.3.0"
+
+"@graphql-tools/stitching-directives@2.0.11":
+  version "2.0.11"
+  resolved "https://registry.yarnpkg.com/@graphql-tools/stitching-directives/-/stitching-directives-2.0.11.tgz#3cc89049270fd988d93775dd2bd677cfc58f7e7f"
+  integrity sha512-y1JChdbRijkRtj3KLravIUnvKUJU3VplN7AmejZvZNERJvps67RhW0LtnygOD3MdgJHRxguzMFWbWGcGPLzS6w==
+  dependencies:
+    "@graphql-tools/delegate" "^8.1.0"
+    "@graphql-tools/utils" "^8.1.1"
     tslib "~2.3.0"
 
 "@graphql-tools/stitching-directives@2.0.2":
@@ -2179,6 +2273,13 @@
   version "8.0.1"
   resolved "https://registry.yarnpkg.com/@graphql-tools/utils/-/utils-8.0.1.tgz#bf09e8d6d17c4a0830f0fbf2c69dd725de19058c"
   integrity sha512-gjQk6sht4b0/hcG+QEVxfMyO8bn5tuU1nIOVhQ4whgFaUmrnb3hx2mwzz1EJzfIOAuHKE8tY0lu6jt3bGTD4yg==
+  dependencies:
+    tslib "~2.3.0"
+
+"@graphql-tools/utils@8.1.2", "@graphql-tools/utils@^8.1.1", "@graphql-tools/utils@^8.1.2":
+  version "8.1.2"
+  resolved "https://registry.yarnpkg.com/@graphql-tools/utils/-/utils-8.1.2.tgz#a376259fafbca7532fda657e3abeec23b545e5d3"
+  integrity sha512-3G+NIBR5mHjPm78jAD0l07JRE0XH+lr9m7yL/wl69jAzK0Jr/H+/Ok4ljEolI70iglz+ZhIShVPAwyesF6rnFg==
   dependencies:
     tslib "~2.3.0"
 
@@ -3450,10 +3551,24 @@ apollo-reporting-protobuf@^0.8.0:
   dependencies:
     "@apollo/protobufjs" "1.2.2"
 
+apollo-reporting-protobuf@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/apollo-reporting-protobuf/-/apollo-reporting-protobuf-3.0.0.tgz#a53966b76a3f373d9336bc953f0bc6dede487270"
+  integrity sha512-jmCD+6gECt8KS7PxP460hztT/5URTbv2Kg0zgnR6iWPGce88IBmSUjcqf1Z6wJJq7Teb8Hu7WbyyMhn0vN5TxQ==
+  dependencies:
+    "@apollo/protobufjs" "1.2.2"
+
 apollo-server-caching@^0.7.0:
   version "0.7.0"
   resolved "https://registry.yarnpkg.com/apollo-server-caching/-/apollo-server-caching-0.7.0.tgz#e6d1e68e3bb571cba63a61f60b434fb771c6ff39"
   integrity sha512-MsVCuf/2FxuTFVhGLK13B+TZH9tBd2qkyoXKKILIiGcZ5CDUEBO14vIV63aNkMkS1xxvK2U4wBcuuNj/VH2Mkw==
+  dependencies:
+    lru-cache "^6.0.0"
+
+apollo-server-caching@^3.1.0:
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/apollo-server-caching/-/apollo-server-caching-3.1.0.tgz#c68f2159ad8a25a0bdbb18ad6bdbbde59cd4647d"
+  integrity sha512-bZ4bo0kSAsax9LbMQPlpuMTkQ657idF2ehOYe4Iw+8vj7vfAYa39Ii9IlaVAFMC1FxCYzLNFz+leZBm/Stn/NA==
   dependencies:
     lru-cache "^6.0.0"
 
@@ -3496,6 +3611,13 @@ apollo-server-env@^3.0.0, apollo-server-env@^3.1.0:
     node-fetch "^2.6.1"
     util.promisify "^1.0.0"
 
+apollo-server-env@^4.0.3:
+  version "4.0.3"
+  resolved "https://registry.yarnpkg.com/apollo-server-env/-/apollo-server-env-4.0.3.tgz#082a5c1dd4dfb3b34de5e1fa7dc170dd15a5062f"
+  integrity sha512-B32+RUOM4GUJAwnQqQE1mT1BG7+VfW3a0A87Bp3gv/q8iNnhY2BIWe74Qn03pX8n27g3EGVCt0kcBuHhjG5ltA==
+  dependencies:
+    node-fetch "^2.6.1"
+
 apollo-server-errors@^2.4.1, apollo-server-errors@^2.5.0:
   version "2.5.0"
   resolved "https://registry.yarnpkg.com/apollo-server-errors/-/apollo-server-errors-2.5.0.tgz#5d1024117c7496a2979e3e34908b5685fe112b68"
@@ -3525,6 +3647,15 @@ apollo-server-types@^0.9.0:
     apollo-reporting-protobuf "^0.8.0"
     apollo-server-caching "^0.7.0"
     apollo-server-env "^3.1.0"
+
+apollo-server-types@^3.0.2:
+  version "3.2.0"
+  resolved "https://registry.yarnpkg.com/apollo-server-types/-/apollo-server-types-3.2.0.tgz#6243b34d35fbb09ded2cc84bf7e5f59968ccfa21"
+  integrity sha512-Fh7QP84ufDZHbLzoLyyxyzznlW8cpgEZYYkGsS1i36zY4VaAt5OUOp1f+FxWdLGehq0Arwb6D1W7y712IoZ/JQ==
+  dependencies:
+    apollo-reporting-protobuf "^3.0.0"
+    apollo-server-caching "^3.1.0"
+    apollo-server-env "^4.0.3"
 
 apollo-tracing@^0.15.0:
   version "0.15.0"
