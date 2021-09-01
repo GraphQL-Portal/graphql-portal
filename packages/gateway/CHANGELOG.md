@@ -1,5 +1,11 @@
 # @graphql-portal/gateway
 
+## 0.23.5
+
+### Patch Changes
+
+- 1e55407: apollo-server-core 2.25.0
+
 ## 0.23.4
 
 ### Patch Changes
