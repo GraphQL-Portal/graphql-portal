@@ -1303,7 +1303,7 @@
     to-json-schema "0.2.5"
     url-join "4.0.1"
 
-"@graphql-mesh/merger-federation@~0.9.0":
+"@graphql-mesh/merger-federation@^0.9.0":
   version "0.9.11"
   resolved "https://registry.yarnpkg.com/@graphql-mesh/merger-federation/-/merger-federation-0.9.11.tgz#f4823ba499f626b318118cc7aaac88b37fb945a9"
   integrity sha512-V4Idn1u+muyAOKVL/mb2cDmn4h40tMB1reOu89EnDBl7KUkClJ+hfigwRHSdfuJzFtMTuIN8P2jD8MwFkgIq0Q==
@@ -1329,7 +1329,7 @@
     "@graphql-tools/wrap" "7.0.8"
     fetchache "0.1.1"
 
-"@graphql-mesh/mongoose@~0.8.0":
+"@graphql-mesh/mongoose@^0.8.0":
   version "0.8.10"
   resolved "https://registry.yarnpkg.com/@graphql-mesh/mongoose/-/mongoose-0.8.10.tgz#f31599c97b093216665231392719c9cd6bf5bd05"
   integrity sha512-7IOt7Uh8DKtCP6D188CY4OSfbi1TjF3u23DNDN0AR4DNLd7wx7okJKHhFe7f9HTACo7n60BrK7X9J+HUpZacbQ==
@@ -3572,10 +3572,10 @@ apollo-server-caching@^0.7.0:
   dependencies:
     lru-cache "^6.0.0"
 
-apollo-server-core@2.25.0, "apollo-server-core@^2.23.0 || ^3.0.0":
-  version "2.25.0"
-  resolved "https://registry.yarnpkg.com/apollo-server-core/-/apollo-server-core-2.25.0.tgz#a0841e57c3605d638809f541dfc87370386b7372"
-  integrity sha512-LqDmY+R5dcb6zj/RgM7P8NnURV2XdQFIF4rY7g80hD9mc2WSCKHF6eH+lHG0sFPW7f8iBr+lJ4LyETuWEVF0hg==
+"apollo-server-core@^2.23.0 || ^3.0.0":
+  version "2.25.2"
+  resolved "https://registry.yarnpkg.com/apollo-server-core/-/apollo-server-core-2.25.2.tgz#ff65da5e512d9b5ca54c8e5e8c78ee28b5987247"
+  integrity sha512-lrohEjde2TmmDTO7FlOs8x5QQbAS0Sd3/t0TaK2TWaodfzi92QAvIsq321Mol6p6oEqmjm8POIDHW1EuJd7XMA==
   dependencies:
     "@apollographql/apollo-tools" "^0.5.0"
     "@apollographql/graphql-playground-html" "1.6.27"
@@ -3600,9 +3600,8 @@ apollo-server-core@2.25.0, "apollo-server-core@^2.23.0 || ^3.0.0":
     loglevel "^1.6.7"
     lru-cache "^6.0.0"
     sha.js "^2.4.11"
-    subscriptions-transport-ws "^0.9.11"
+    subscriptions-transport-ws "^0.9.19"
     uuid "^8.0.0"
-    ws "^6.0.0"
 
 "apollo-server-env@^3.0.0 || ^4.0.0", apollo-server-env@^4.0.3:
   version "4.0.3"
@@ -10521,7 +10520,7 @@ strip-json-comments@^3.1.0, strip-json-comments@^3.1.1:
   resolved "https://registry.yarnpkg.com/strip-json-comments/-/strip-json-comments-3.1.1.tgz#31f1281b3832630434831c310c01cccda8cbe006"
   integrity sha512-6fPc+R4ihwqP6N/aIv2f1gMH8lOVtWQHoqC4yK6oSDVVocumAsfCqjkXnqiYMhmMwS/mEHLp7Vehlt3ql6lEig==
 
-subscriptions-transport-ws@^0.9.11, subscriptions-transport-ws@^0.9.18:
+subscriptions-transport-ws@^0.9.18, subscriptions-transport-ws@^0.9.19:
   version "0.9.19"
   resolved "https://registry.yarnpkg.com/subscriptions-transport-ws/-/subscriptions-transport-ws-0.9.19.tgz#10ca32f7e291d5ee8eb728b9c02e43c52606cdcf"
   integrity sha512-dxdemxFFB0ppCLg10FTtRqH/31FNRL1y1BQv8209MK5I4CwALb7iihQg+7p65lFcIl8MHatINWBLOqpgU4Kyyw==
@@ -11480,13 +11479,6 @@ ws@^5.2.2:
   version "5.2.3"
   resolved "https://registry.yarnpkg.com/ws/-/ws-5.2.3.tgz#05541053414921bc29c63bee14b8b0dd50b07b3d"
   integrity sha512-jZArVERrMsKUatIdnLzqvcfydI85dvd/Fp1u/VOpfdDWQ4c9qWXe+VIeAbQ5FrDwciAkr+lzofXLz3Kuf26AOA==
-  dependencies:
-    async-limiter "~1.0.0"
-
-ws@^6.0.0:
-  version "6.2.2"
-  resolved "https://registry.yarnpkg.com/ws/-/ws-6.2.2.tgz#dd5cdbd57a9979916097652d78f1cc5faea0c32e"
-  integrity sha512-zmhltoSR8u1cnDsD43TX59mzoMZsLKqUweyYBAIvTngR3shc0W6aOZylZmq/7hqyVxPdi+5Ud2QInblgyE72fw==
   dependencies:
     async-limiter "~1.0.0"
 
