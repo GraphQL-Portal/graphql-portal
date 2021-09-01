@@ -1,5 +1,23 @@
 # @graphql-portal/gateway
 
+## 0.23.6
+
+### Patch Changes
+
+- 27feb1a: graphql-mesh merger ^0.9.0
+
+## 0.23.5
+
+### Patch Changes
+
+- 1e55407: apollo-server-core 2.25.0
+
+## 0.23.4
+
+### Patch Changes
+
+- 873b97c: graphql-mash handlers versions changed to tilda from caret
+
 ## 0.23.3
 
 ### Patch Changes
