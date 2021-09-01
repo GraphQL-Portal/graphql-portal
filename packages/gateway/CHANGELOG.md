@@ -1,5 +1,11 @@
 # @graphql-portal/gateway
 
+## 0.23.4
+
+### Patch Changes
+
+- 873b97c: graphql-mash handlers versions changed to tilda from caret
+
 ## 0.23.3
 
 ### Patch Changes
