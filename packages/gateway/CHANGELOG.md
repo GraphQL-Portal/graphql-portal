@@ -1,5 +1,11 @@
 # @graphql-portal/gateway
 
+## 0.23.7
+
+### Patch Changes
+
+- 4a06992: revert handler versions
+
 ## 0.23.6
 
 ### Patch Changes
