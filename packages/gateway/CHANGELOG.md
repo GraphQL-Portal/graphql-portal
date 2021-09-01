@@ -1,5 +1,11 @@
 # @graphql-portal/gateway
 
+## 0.23.8
+
+### Patch Changes
+
+- ba4aa01: grpc, mysql versions
+
 ## 0.23.7
 
 ### Patch Changes
