@@ -1367,7 +1367,7 @@
     undici "3.3.6"
     url-join "4.0.1"
 
-"@graphql-mesh/openapi@^0.16.0":
+"@graphql-mesh/openapi@0.16.10":
   version "0.16.10"
   resolved "https://registry.yarnpkg.com/@graphql-mesh/openapi/-/openapi-0.16.10.tgz#8a0b3a366dccda5a5809b2242c64745e290f9d90"
   integrity sha512-JIQ4OZ2KO2Y96ju/ACbnvegOQXskne1tjtnd5U7ExWv5/AEMGnQGUosa5qxxnWFgbUcVuUgcFxvfUbvqOXgz1g==

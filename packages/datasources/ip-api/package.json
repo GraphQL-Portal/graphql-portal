@@ -7,7 +7,7 @@
     "build": "tsc -b"
   },
   "dependencies": {
-    "@graphql-mesh/openapi": "^0.16.0",
+    "@graphql-mesh/openapi": "0.16.10",
     "graphql": "^15.4.0"
   },
   "devDependencies": {
