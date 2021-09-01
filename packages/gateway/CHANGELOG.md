@@ -1,5 +1,11 @@
 # @graphql-portal/gateway
 
+## 0.23.6
+
+### Patch Changes
+
+- 27feb1a: graphql-mesh merger ^0.9.0
+
 ## 0.23.5
 
 ### Patch Changes
