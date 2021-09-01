@@ -1,5 +1,11 @@
 # @graphql-portal/gateway
 
+## 0.23.3
+
+### Patch Changes
+
+- cc11009: graphql-mesh/cli 0.30.2, graphql-mesh/config 0.17.0
+
 ## 0.23.2
 
 ### Patch Changes
