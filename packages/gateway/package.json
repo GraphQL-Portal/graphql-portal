@@ -1,6 +1,6 @@
 {
   "name": "@graphql-portal/gateway",
-  "version": "0.23.8",
+  "version": "0.23.9",
   "license": "MIT",
   "author": "code.store",
   "main": "dist/src/index.js",

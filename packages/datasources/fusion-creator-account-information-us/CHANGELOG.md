@@ -1,5 +1,11 @@
 # @graphql-portal/fusion-creator-account-information-us
 
+## 1.0.2
+
+### Patch Changes
+
+- 8647eb2: graphql-mesh/openapi 0.16.10
+
 ## 1.0.1
 
 ### Patch Changes
