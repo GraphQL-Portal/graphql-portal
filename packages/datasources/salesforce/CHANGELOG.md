@@ -1,5 +1,11 @@
 # @graphql-portal/salesforce
 
+## 0.1.5
+
+### Patch Changes
+
+- 8647eb2: graphql-mesh/openapi 0.16.10
+
 ## 0.1.4
 
 ### Patch Changes
