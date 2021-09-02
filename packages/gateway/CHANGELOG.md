@@ -1,5 +1,11 @@
 # @graphql-portal/gateway
 
+## 0.23.9
+
+### Patch Changes
+
+- 8647eb2: graphql-mesh/openapi 0.16.10
+
 ## 0.23.8
 
 ### Patch Changes

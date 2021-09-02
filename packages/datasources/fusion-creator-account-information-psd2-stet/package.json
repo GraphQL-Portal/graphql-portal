@@ -1,6 +1,6 @@
 {
   "name": "@graphql-portal/fusion-creator-account-information-psd2-stet",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "license": "MIT",
   "main": "dist/index.js",
   "scripts": {

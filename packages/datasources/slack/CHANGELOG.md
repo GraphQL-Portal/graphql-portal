@@ -1,5 +1,11 @@
 # @graphql-portal/slack
 
+## 0.2.4
+
+### Patch Changes
+
+- 8647eb2: graphql-mesh/openapi 0.16.10
+
 ## 0.2.3
 
 ### Patch Changes
