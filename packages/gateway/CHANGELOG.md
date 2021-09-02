@@ -1,5 +1,11 @@
 # @graphql-portal/gateway
 
+## 0.23.10
+
+### Patch Changes
+
+- 9c4922f: graphql-mesh/utils 0.13.0
+
 ## 0.23.9
 
 ### Patch Changes
