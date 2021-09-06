@@ -1,5 +1,11 @@
 # @graphql-portal/gateway
 
+## 0.23.11
+
+### Patch Changes
+
+- c61da4d: update graphql to 15.5.3
+
 ## 0.23.10
 
 ### Patch Changes
