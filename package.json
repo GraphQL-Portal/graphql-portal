@@ -59,7 +59,7 @@
     "jest": "27.1.0",
     "jest-runner-eslint": "0.10.1",
     "json-schema-to-typescript": "10.1.4",
-    "lint-staged": "11.1.2",
+    "lint-staged": "11.2.6",
     "pinst": "2.1.6",
     "prettier": "2.3.2",
     "ts-jest": "27.0.5",
