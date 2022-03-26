@@ -78,7 +78,7 @@
     "graphql-helix": "^1.6.1",
     "graphql-upload": "^12.0.0",
     "graphql-ws": "^5.1.2",
-    "ioredis": "^4.19.4",
+    "ioredis": "^5.0.0",
     "is-url": "^1.2.4",
     "jaeger-client": "^3.18.1",
     "opentracing": "^0.14.5",
