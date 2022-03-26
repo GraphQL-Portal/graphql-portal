@@ -49,7 +49,7 @@
     "@graphql-mesh/transform-resolvers-composition": "^0.10.0",
     "@graphql-mesh/transform-snapshot": "^0.10.0",
     "@graphql-mesh/types": "0.42.0",
-    "@graphql-mesh/utils": "0.13.0",
+    "@graphql-mesh/utils": "0.32.2",
     "@graphql-portal/config": "^0.12.0",
     "@graphql-portal/dashboard": "^0.1.14",
     "@graphql-portal/logger": "^0.7.14",
