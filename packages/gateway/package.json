@@ -76,7 +76,7 @@
     "graphql-cost-analysis": "^1.0.3",
     "graphql-depth-limit": "^1.1.0",
     "graphql-helix": "^1.6.1",
-    "graphql-upload": "^12.0.0",
+    "graphql-upload": "^15.0.0",
     "graphql-ws": "^5.1.2",
     "ioredis": "^4.19.4",
     "is-url": "^1.2.4",
