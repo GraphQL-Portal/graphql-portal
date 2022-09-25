@@ -83,7 +83,7 @@
     "jaeger-client": "^3.18.1",
     "opentracing": "^0.14.5",
     "range_check": "^2.0.4",
-    "request-ip": "^2.1.3",
+    "request-ip": "^3.0.0",
     "uuid": "^8.3.2",
     "ws": "^8.0.0",
     "yaml": "^1.10.0"
