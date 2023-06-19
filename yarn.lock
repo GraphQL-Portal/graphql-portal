@@ -1152,9 +1152,9 @@
     tslib "^2.0.0"
 
 "@graphql-inspector/core@^2.3.0":
-  version "2.6.1"
-  resolved "https://registry.yarnpkg.com/@graphql-inspector/core/-/core-2.6.1.tgz#2abd6db3da715081124a4313104e116effdb90b7"
-  integrity sha512-IwllJf0lsjOT9kInOY+kMv/+V77CrEoD6X0ZnUgIc+oZ9IDlq7RhMx1v4YuvM+HBUCkUBJXdS2/Ug1UOvk45WQ==
+  version "2.9.0"
+  resolved "https://registry.yarnpkg.com/@graphql-inspector/core/-/core-2.9.0.tgz#cb8a2fbad1a27431719e2eb2abd84e4b16b4ff83"
+  integrity sha512-smaYO7B4phd3Su/JXtku5OT6dG51vpChBJXxK7ou+sghKOPx8yZNiuGqJKapaDiYviLjT8VdUu485KrCa0ZCDQ==
   dependencies:
     dependency-graph "0.11.0"
     object-inspect "1.10.3"
