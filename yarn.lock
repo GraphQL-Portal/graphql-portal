@@ -1151,14 +1151,14 @@
     object-inspect "1.10.3"
     tslib "^2.0.0"
 
-"@graphql-inspector/core@^2.3.0":
-  version "2.6.1"
-  resolved "https://registry.yarnpkg.com/@graphql-inspector/core/-/core-2.6.1.tgz#2abd6db3da715081124a4313104e116effdb90b7"
-  integrity sha512-IwllJf0lsjOT9kInOY+kMv/+V77CrEoD6X0ZnUgIc+oZ9IDlq7RhMx1v4YuvM+HBUCkUBJXdS2/Ug1UOvk45WQ==
+"@graphql-inspector/core@^5.0.0":
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/@graphql-inspector/core/-/core-5.0.0.tgz#ae3cfcd9a156bd692622f06f503cf3c90c5e1a73"
+  integrity sha512-Pj5F03EdU8K3yfd5uo0BoxG1HSiZhqG5MvAdFDiA60vHfkD/t0UOXveR6vQnbThNrSzJY8vSt0NTwlSURw0kZQ==
   dependencies:
     dependency-graph "0.11.0"
-    object-inspect "1.10.3"
-    tslib "^2.0.0"
+    object-inspect "1.12.3"
+    tslib "2.5.3"
 
 "@graphql-mesh/cache-inmemory-lru@0.5.5":
   version "0.5.5"
@@ -8657,6 +8657,11 @@ object-inspect@1.10.3, object-inspect@^1.10.3, object-inspect@^1.9.0:
   resolved "https://registry.yarnpkg.com/object-inspect/-/object-inspect-1.10.3.tgz#c2aa7d2d09f50c99375704f7a0adf24c5782d369"
   integrity sha512-e5mCJlSH7poANfC8z8S9s9S2IN5/4Zb3aZ33f5s8YqoazCFzNLloLU8r5VCG+G7WoqLvAAZoVMcy3tp/3X0Plw==
 
+object-inspect@1.12.3:
+  version "1.12.3"
+  resolved "https://registry.yarnpkg.com/object-inspect/-/object-inspect-1.12.3.tgz#ba62dffd67ee256c8c086dfae69e016cd1f198b9"
+  integrity sha512-geUvdk7c+eizMNUDkRpW1wJwgfOiOeHbxBR/hLXK1aT6zmVSO0jsQcs7fj6MGw89jC/cjGfLcNOrtMYtGqm81g==
+
 object-is@^1.1.4:
   version "1.1.5"
   resolved "https://registry.yarnpkg.com/object-is/-/object-is-1.1.5.tgz#b9deeaa5fc7f1846a0faecdceec138e5778f53ac"
@@ -10790,6 +10795,11 @@ tsconfig-paths@^3.11.0:
     json5 "^1.0.1"
     minimist "^1.2.0"
     strip-bom "^3.0.0"
+
+tslib@2.5.3:
+  version "2.5.3"
+  resolved "https://registry.yarnpkg.com/tslib/-/tslib-2.5.3.tgz#24944ba2d990940e6e982c4bea147aba80209913"
+  integrity sha512-mSxlJJwl3BMEQCUNnxXBU9jP4JBktcEGhURcPR6VQVlnP0FdDEsIaz0C35dXNGLyRfrATNofF0F5p2KPxQgB+w==
 
 tslib@^1.10.0, tslib@^1.8.1, tslib@^1.9.0, tslib@^1.9.3:
   version "1.14.1"
