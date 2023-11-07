@@ -2880,14 +2880,14 @@
   dependencies:
     "@types/istanbul-lib-report" "*"
 
-"@types/jaeger-client@3.18.2":
-  version "3.18.2"
-  resolved "https://registry.yarnpkg.com/@types/jaeger-client/-/jaeger-client-3.18.2.tgz#d5f10c8b6e2507652159d480cb2d20addd62f9b1"
-  integrity sha512-HxN32IfZkG+zAW0geprNamroSdNl8DGrSvpN2gvJuAO/oDaJK4W+Z04fDHcWBvG4RbhwKBtBywfRNvx0z34Bag==
+"@types/jaeger-client@3.18.7":
+  version "3.18.7"
+  resolved "https://registry.yarnpkg.com/@types/jaeger-client/-/jaeger-client-3.18.7.tgz#19315eb1616d85b84210da5df01b4a62c219c5b0"
+  integrity sha512-ktEWbcM8faJY5UNEmffnvavjIJ9noNCD7clD9hAZIuQt6QMv0T97kiveH0mbvBNr9SPZXmkidOu/3UWgSy89tQ==
   dependencies:
     "@types/node" "*"
     opentracing "~0.14.3"
-    prom-client "~11.3.0 || ^12.0.0 || ^13.0.0"
+    prom-client "~11.3.0 || ^12.0.0 || ^13.0.0 || ^14.0.0"
 
 "@types/jest@27.0.1":
   version "27.0.1"
@@ -9313,10 +9313,10 @@ progress@^2.0.0:
   resolved "https://registry.yarnpkg.com/progress/-/progress-2.0.3.tgz#7e8cf8d8f5b8f239c1bc68beb4eb78567d572ef8"
   integrity sha512-7PiHtLll5LdnKIMw100I+8xJXR5gW2QwWYkT6iJva0bXitZKa/XMrSbdmg3r2Xnaidz9Qumd0VPaMrZlF9V9sA==
 
-"prom-client@~11.3.0 || ^12.0.0 || ^13.0.0":
-  version "13.1.0"
-  resolved "https://registry.yarnpkg.com/prom-client/-/prom-client-13.1.0.tgz#1185caffd8691e28d32e373972e662964e3dba45"
-  integrity sha512-jT9VccZCWrJWXdyEtQddCDszYsiuWj5T0ekrPszi/WEegj3IZy6Mm09iOOVM86A4IKMWq8hZkT2dD9MaSe+sng==
+"prom-client@~11.3.0 || ^12.0.0 || ^13.0.0 || ^14.0.0":
+  version "14.2.0"
+  resolved "https://registry.yarnpkg.com/prom-client/-/prom-client-14.2.0.tgz#ca94504e64156f6506574c25fb1c34df7812cf11"
+  integrity sha512-sF308EhTenb/pDRPakm+WgiN+VdM/T1RaHj1x+MvAuT8UiQP8JmOEbxVqtkbfR4LrvOg5n7ic01kRBDGXjYikA==
   dependencies:
     tdigest "^0.1.1"
 
