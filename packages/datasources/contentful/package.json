@@ -7,10 +7,10 @@
     "build": "tsc -b"
   },
   "dependencies": {
-    "@graphql-mesh/graphql": "^0.17.0"
+    "@graphql-mesh/graphql": "^0.96.0"
   },
   "devDependencies": {
-    "@graphql-mesh/types": "0.42.0"
+    "@graphql-mesh/types": "0.96.5"
   },
   "publishConfig": {
     "access": "public"

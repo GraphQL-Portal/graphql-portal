@@ -7,11 +7,11 @@
     "build": "tsc -b"
   },
   "dependencies": {
-    "@graphql-mesh/openapi": "0.16.10",
+    "@graphql-mesh/openapi": "0.98.1",
     "graphql": "^15.4.0"
   },
   "devDependencies": {
-    "@graphql-mesh/types": "0.42.0"
+    "@graphql-mesh/types": "0.96.5"
   },
   "publishConfig": {
     "access": "public"
