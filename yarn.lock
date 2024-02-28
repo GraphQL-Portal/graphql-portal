@@ -1307,18 +1307,16 @@
     "@graphql-tools/wrap" "7.0.8"
     fetchache "0.1.1"
 
-"@graphql-mesh/mongoose@^0.8.0":
-  version "0.8.10"
-  resolved "https://registry.yarnpkg.com/@graphql-mesh/mongoose/-/mongoose-0.8.10.tgz#f31599c97b093216665231392719c9cd6bf5bd05"
-  integrity sha512-7IOt7Uh8DKtCP6D188CY4OSfbi1TjF3u23DNDN0AR4DNLd7wx7okJKHhFe7f9HTACo7n60BrK7X9J+HUpZacbQ==
+"@graphql-mesh/mongoose@^0.97.0":
+  version "0.97.0"
+  resolved "https://registry.yarnpkg.com/@graphql-mesh/mongoose/-/mongoose-0.97.0.tgz#a08597a076db0bb8c21cfa89b40093bc434492d4"
+  integrity sha512-KHAvc7WwCFsYUZskoePFTBSoJQhtNinYqstivweEPzX25PXjr+IPTdKffhmYO3TzOXpqqZUtrZHTCoOcLNbsUg==
   dependencies:
-    "@graphql-mesh/types" "0.47.0"
-    "@graphql-mesh/utils" "0.16.0"
-    "@graphql-tools/stitching-directives" "2.0.11"
-    graphql-compose "9.0.2"
-    graphql-compose-connection "8.2.1"
-    graphql-compose-mongoose "9.5.4"
-    graphql-compose-pagination "8.3.0"
+    "@graphql-mesh/string-interpolation" "^0.5.3"
+    graphql-compose "^9.0.10"
+    graphql-compose-connection "^8.2.1"
+    graphql-compose-mongoose "^10.0.0"
+    graphql-compose-pagination "^8.3.0"
 
 "@graphql-mesh/mysql@^0.10.0":
   version "0.10.9"
@@ -1430,6 +1428,15 @@
     "@graphql-inspector/core" "2.7.0"
     "@graphql-mesh/utils" "0.16.0"
     "@graphql-tools/utils" "8.1.2"
+
+"@graphql-mesh/string-interpolation@^0.5.3":
+  version "0.5.3"
+  resolved "https://registry.yarnpkg.com/@graphql-mesh/string-interpolation/-/string-interpolation-0.5.3.tgz#e950012e46cdf354c34406222f3ecbaaeb1853fb"
+  integrity sha512-/R4kj3M1uqUie/7RZ58zgRrT8RBrDsCCR6ii00s62DbLsl+jZYOZFyTqHGsFbP7L7aHnl0fo1dwhEJIs+rjCLg==
+  dependencies:
+    dayjs "1.11.10"
+    json-pointer "0.6.2"
+    lodash.get "4.4.2"
 
 "@graphql-mesh/thrift@^0.7.0":
   version "0.7.21"
@@ -2128,15 +2135,6 @@
     "@graphql-tools/utils" "^7.7.0"
     "@graphql-tools/wrap" "^7.0.6"
     tslib "~2.2.0"
-
-"@graphql-tools/stitching-directives@2.0.11":
-  version "2.0.11"
-  resolved "https://registry.yarnpkg.com/@graphql-tools/stitching-directives/-/stitching-directives-2.0.11.tgz#3cc89049270fd988d93775dd2bd677cfc58f7e7f"
-  integrity sha512-y1JChdbRijkRtj3KLravIUnvKUJU3VplN7AmejZvZNERJvps67RhW0LtnygOD3MdgJHRxguzMFWbWGcGPLzS6w==
-  dependencies:
-    "@graphql-tools/delegate" "^8.1.0"
-    "@graphql-tools/utils" "^8.1.1"
-    tslib "~2.3.0"
 
 "@graphql-tools/url-loader@6.10.1", "@graphql-tools/url-loader@^6.3.2":
   version "6.10.1"
@@ -4726,15 +4724,25 @@ data-urls@^2.0.0:
     whatwg-mimetype "^2.3.0"
     whatwg-url "^8.0.0"
 
-dataloader@2.0.0, dataloader@^2.0.0:
+dataloader@2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/dataloader/-/dataloader-2.0.0.tgz#41eaf123db115987e21ca93c005cd7753c55fe6f"
   integrity sha512-YzhyDAwA4TaQIhM5go+vCLmU0UikghC/t9DTQYZR2M/UvZ1MdOhPezSDZcjj9uqQJOMqjLcpWtyW2iNINdlatQ==
+
+dataloader@^2.2.2:
+  version "2.2.2"
+  resolved "https://registry.yarnpkg.com/dataloader/-/dataloader-2.2.2.tgz#216dc509b5abe39d43a9b9d97e6e5e473dfbe3e0"
+  integrity sha512-8YnDaaf7N3k/q5HnTJVuzSyLETjoZjVmHc4AeKAzOvKHEFQKcn64OKBfzHYtE9zGjctNM7V9I0MfnUVLpi7M5g==
 
 date-fns@2.19.0, date-fns@2.21.3, date-fns@2.23.0:
   version "2.23.0"
   resolved "https://registry.yarnpkg.com/date-fns/-/date-fns-2.23.0.tgz#4e886c941659af0cf7b30fafdd1eaa37e88788a9"
   integrity sha512-5ycpauovVyAk0kXNZz6ZoB9AYMZB4DObse7P3BPWmyEjXNORTI8EJ6X0uaSAq4sCHzM1uajzrkr6HnsLQpxGXA==
+
+dayjs@1.11.10:
+  version "1.11.10"
+  resolved "https://registry.yarnpkg.com/dayjs/-/dayjs-1.11.10.tgz#68acea85317a6e164457d6d6947564029a6a16a0"
+  integrity sha512-vjAczensTgRcqDERK0SR2XMwsF/tSvnvlv6VcF2GIhg6Sx4yOIt/irsr1RDJsKiIyBzJDpCoXiWWq28MqH2cnQ==
 
 dd-trace@^1.0.0:
   version "1.0.0"
@@ -5737,6 +5745,11 @@ for-each@^0.3.3:
   dependencies:
     is-callable "^1.1.3"
 
+foreach@^2.0.4:
+  version "2.0.6"
+  resolved "https://registry.yarnpkg.com/foreach/-/foreach-2.0.6.tgz#87bcc8a1a0e74000ff2bf9802110708cfb02eb6e"
+  integrity sha512-k6GAGDyqLe9JaebCsFCoudPPWfihKu8pylYXRlqP1J7ms39iPoTtk2fviNglIeQEwdh0bQeKJ01ZPyuyQvKzwg==
+
 foreach@^2.0.5:
   version "2.0.5"
   resolved "https://registry.yarnpkg.com/foreach/-/foreach-2.0.5.tgz#0bee005018aeb260d0a3af3ae658dd0136ec1b99"
@@ -6051,26 +6064,21 @@ graphql-auth-directives@^2.2.2:
     graphql-tools "^4.0.7"
     jsonwebtoken "^8.3.0"
 
-graphql-compose-connection@8.2.1:
+graphql-compose-connection@8.2.1, graphql-compose-connection@^8.2.1:
   version "8.2.1"
   resolved "https://registry.yarnpkg.com/graphql-compose-connection/-/graphql-compose-connection-8.2.1.tgz#ca78363f4f94a209e31d9dc8905de2e26bcb8b81"
   integrity sha512-75QOx1HusfkLzDlF+RMGoC0UowbZ2R7/xFRIMfbQf1gc6eeRqiGmTWFxHaUYk2WjTAB4dGO7p/gllfwqO0W/TA==
 
-graphql-compose-mongoose@9.5.4:
-  version "9.5.4"
-  resolved "https://registry.yarnpkg.com/graphql-compose-mongoose/-/graphql-compose-mongoose-9.5.4.tgz#985a9fa203bdd0521acf6234c138680ab6565ece"
-  integrity sha512-Wz50T/zU+IGYqxBLvD9BvvqSQg9x2g65xfSCI8koHvaIH1+7L8oxcXDRef0SMnQsfBES14rrmiMceX5n5Jwcuw==
+graphql-compose-mongoose@^10.0.0:
+  version "10.0.0"
+  resolved "https://registry.yarnpkg.com/graphql-compose-mongoose/-/graphql-compose-mongoose-10.0.0.tgz#b28a33318bc1d58247e6428bd28c8fa6c68a7b42"
+  integrity sha512-nYjSCtjhoeFACvQUjLP+W5llSpQkmCrj+huVW3hyRmLTm5QN6DwddyEsCAlNFr7FQ/sOUJL9Rx90YCEMdVVMcg==
   dependencies:
-    dataloader "^2.0.0"
+    dataloader "^2.2.2"
     graphql-compose-connection "8.2.1"
-    graphql-compose-pagination "8.2.1"
+    graphql-compose-pagination "8.3.0"
 
-graphql-compose-pagination@8.2.1:
-  version "8.2.1"
-  resolved "https://registry.yarnpkg.com/graphql-compose-pagination/-/graphql-compose-pagination-8.2.1.tgz#cd1e8637a1b3d9246378e222200204412c5a863e"
-  integrity sha512-jV+nD76MWLugNO2M2xRt1yXw7VWF7XpRZri4WhMFUgRuqRMVx4k9yna0QEKo70SDKsGkC+2YUbSWdf8V8TQVWQ==
-
-graphql-compose-pagination@8.3.0:
+graphql-compose-pagination@8.3.0, graphql-compose-pagination@^8.3.0:
   version "8.3.0"
   resolved "https://registry.yarnpkg.com/graphql-compose-pagination/-/graphql-compose-pagination-8.3.0.tgz#a58c786256b4dba1843d495ae81cb0fc67ac1369"
   integrity sha512-zZoBhlWD9KnAJ9AUOeFNeoE4Q/zMxZaxg0tR+HFMVNFnw7ENUnIChMWnD2uvmvik+k8Yv304hMF4n81okGVsJw==
@@ -6092,14 +6100,12 @@ graphql-compose@8.1.0:
     graphql-type-json "0.3.2"
     object-path "0.11.5"
 
-graphql-compose@9.0.2:
-  version "9.0.2"
-  resolved "https://registry.yarnpkg.com/graphql-compose/-/graphql-compose-9.0.2.tgz#f029ff1ceaec65655a847521996109ac0e0a076e"
-  integrity sha512-K6tyyoPQ/UGM2nol0avooh95UMI8DxLv7PaM4JL3ZDaTzbocrUDwzAl3UUYeBucovn9ZNntctUNU7pTrvxViMA==
+graphql-compose@^9.0.10:
+  version "9.0.10"
+  resolved "https://registry.yarnpkg.com/graphql-compose/-/graphql-compose-9.0.10.tgz#1e870166deb1785761865fe742dea0601d2c77f2"
+  integrity sha512-UsVoxfi2+c8WbHl2pEB+teoRRZoY4mbWBoijeLDGpAZBSPChnqtSRjp+T9UcouLCwGr5ooNyOQLoI3OVzU1bPQ==
   dependencies:
-    "@types/object-path" "^0.11.0"
     graphql-type-json "0.3.2"
-    object-path "0.11.5"
 
 graphql-cost-analysis@^1.0.3:
   version "1.0.3"
@@ -7583,6 +7589,13 @@ json-parse-even-better-errors@^2.3.0:
   resolved "https://registry.yarnpkg.com/json-parse-even-better-errors/-/json-parse-even-better-errors-2.3.1.tgz#7c47805a94319928e05777405dc12e1f7a4ee02d"
   integrity sha512-xyFwyhro/JEof6Ghe2iz2NcXoj2sloNsWr/XsERDK/oiPCfaNhl5ONfp+jQdAZRQQ0IJWNzH9zIZF7li91kh2w==
 
+json-pointer@0.6.2:
+  version "0.6.2"
+  resolved "https://registry.yarnpkg.com/json-pointer/-/json-pointer-0.6.2.tgz#f97bd7550be5e9ea901f8c9264c9d436a22a93cd"
+  integrity sha512-vLWcKbOaXlO+jvRy4qNd+TI1QUPZzfJj1tpJ3vAXDych5XJf93ftpUKe5pKCrzyIIwgBJcOcCVRUfqQP25afBw==
+  dependencies:
+    foreach "^2.0.4"
+
 json-ptr@2.2.0:
   version "2.2.0"
   resolved "https://registry.yarnpkg.com/json-ptr/-/json-ptr-2.2.0.tgz#a4de4ed638cb23ae4cd4b51f8bf972a1c2293f1e"
@@ -7869,6 +7882,11 @@ lodash.flatten@^4.4.0:
   version "4.4.0"
   resolved "https://registry.yarnpkg.com/lodash.flatten/-/lodash.flatten-4.4.0.tgz#f31c22225a9632d2bbf8e4addbef240aa765a61f"
   integrity sha1-8xwiIlqWMtK7+OSt2+8kCqdlph8=
+
+lodash.get@4.4.2:
+  version "4.4.2"
+  resolved "https://registry.yarnpkg.com/lodash.get/-/lodash.get-4.4.2.tgz#2d177f652fa31e939b4438d5341499dfa3825e99"
+  integrity sha512-z+Uw/vLuy6gQe8cfaFWD7p0wVv8fJl3mbzXh33RS+0oW2wvUqiRXiQ69gLWSLpgB5/6sU+r6BlQR0MBILadqTQ==
 
 lodash.includes@^4.3.0:
   version "4.3.0"
