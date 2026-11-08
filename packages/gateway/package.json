@@ -96,9 +96,9 @@
     "@types/cors": "2.8.12",
     "@types/jaeger-client": "3.18.2",
     "@types/request-ip": "0.0.37",
-    "@types/supertest": "2.0.11",
+    "@types/supertest": "7.2.1",
     "ioredis-mock": "5.6.0",
-    "supertest": "6.1.6"
+    "supertest": "7.3.2"
   },
   "homepage": "https://github.com/graphql-portal/graphql-portal#readme",
   "bugs": {
