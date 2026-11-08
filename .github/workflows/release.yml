@@ -23,7 +23,7 @@ jobs:
       - name: Setup Node@14.x
         uses: actions/setup-node@master
         with:
-          node-version: 14
+          node-version: 26
           registry-url: 'https://registry.npmjs.org'
 
       - name: Get Yarn cache
