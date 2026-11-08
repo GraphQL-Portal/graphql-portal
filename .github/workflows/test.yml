@@ -22,7 +22,7 @@ jobs:
       - name: Use Node 14
         uses: actions/setup-node@master
         with:
-          node-version: 14
+          node-version: 26
 
       - name: Get Yarn cache
         id: yarn-cache-dir-path
