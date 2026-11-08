@@ -1151,14 +1151,14 @@
     object-inspect "1.10.3"
     tslib "^2.0.0"
 
-"@graphql-inspector/core@^2.3.0":
-  version "2.6.1"
-  resolved "https://registry.yarnpkg.com/@graphql-inspector/core/-/core-2.6.1.tgz#2abd6db3da715081124a4313104e116effdb90b7"
-  integrity sha512-IwllJf0lsjOT9kInOY+kMv/+V77CrEoD6X0ZnUgIc+oZ9IDlq7RhMx1v4YuvM+HBUCkUBJXdS2/Ug1UOvk45WQ==
+"@graphql-inspector/core@^8.0.0":
+  version "8.0.1"
+  resolved "https://registry.yarnpkg.com/@graphql-inspector/core/-/core-8.0.1.tgz#b92ccaec9c7641c1708f61570acb94227673569a"
+  integrity sha512-0inTtDb7TDp9QTK8PtVMy14FCZu1yvacoZPFo0NnKcY1e+kyeTdndet/NtfApzo5hopJZ6nWzI7MUvft9pdxpg==
   dependencies:
-    dependency-graph "0.11.0"
-    object-inspect "1.10.3"
-    tslib "^2.0.0"
+    dependency-graph "^1.0.0"
+    object-inspect "^1.13.2"
+    tslib "~2.6.2"
 
 "@graphql-mesh/cache-inmemory-lru@0.5.5":
   version "0.5.5"
@@ -4878,6 +4878,11 @@ dependency-graph@0.11.0, dependency-graph@^0.11.0:
   version "0.11.0"
   resolved "https://registry.yarnpkg.com/dependency-graph/-/dependency-graph-0.11.0.tgz#ac0ce7ed68a54da22165a85e97a01d53f5eb2e27"
   integrity sha512-JeMq7fEshyepOWDfcfHK06N3MhyPhz++vtqWhMT5O9A3K42rdsEDpfdVqjaqaAhsw6a+ZqeDvQVtD0hFHQWrzg==
+
+dependency-graph@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/dependency-graph/-/dependency-graph-1.0.0.tgz#bb5e85aec1310bc13b22dbd76e3196c4ee4c10d2"
+  integrity sha512-cW3gggJ28HZ/LExwxP2B++aiKxhJXMSIt9K48FOXQkm+vuG5gyatXnLsONRJdzO/7VfjDIiaOOa/bs4l464Lwg==
 
 deprecated-decorator@^0.1.6:
   version "0.1.6"
@@ -8657,6 +8662,11 @@ object-inspect@1.10.3, object-inspect@^1.10.3, object-inspect@^1.9.0:
   resolved "https://registry.yarnpkg.com/object-inspect/-/object-inspect-1.10.3.tgz#c2aa7d2d09f50c99375704f7a0adf24c5782d369"
   integrity sha512-e5mCJlSH7poANfC8z8S9s9S2IN5/4Zb3aZ33f5s8YqoazCFzNLloLU8r5VCG+G7WoqLvAAZoVMcy3tp/3X0Plw==
 
+object-inspect@^1.13.2:
+  version "1.13.4"
+  resolved "https://registry.yarnpkg.com/object-inspect/-/object-inspect-1.13.4.tgz#8375265e21bc20d0fa582c22e1b13485d6e00213"
+  integrity sha512-W67iLl4J2EXEGTbfeHCffrjDfitvLANg0UlX3wFUUSTx92KXRFegMHUVgSqE+wvhAbi4WqjGg9czysTV2Epbew==
+
 object-is@^1.1.4:
   version "1.1.5"
   resolved "https://registry.yarnpkg.com/object-is/-/object-is-1.1.5.tgz#b9deeaa5fc7f1846a0faecdceec138e5778f53ac"
@@ -10815,6 +10825,11 @@ tslib@~2.2.0:
   version "2.2.0"
   resolved "https://registry.yarnpkg.com/tslib/-/tslib-2.2.0.tgz#fb2c475977e35e241311ede2693cee1ec6698f5c"
   integrity sha512-gS9GVHRU+RGn5KQM2rllAlR3dU6m7AcpJKdtH8gFvQiC4Otgk98XnmMU+nZenHt/+VhnBPWwgrJsyrdcw6i23w==
+
+tslib@~2.6.2:
+  version "2.6.3"
+  resolved "https://registry.yarnpkg.com/tslib/-/tslib-2.6.3.tgz#0438f810ad7a9edcde7a241c3d80db693c8cbfe0"
+  integrity sha512-xNvxJEOUiWPGhUuUdQgAJPKOOJfGnIyKySOc09XkKsgdUV/3E2zvwZYdejjmRgPCgcym1juLH3226yA7sEFJKQ==
 
 tsutils@^3.21.0:
   version "3.21.0"
