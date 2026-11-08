@@ -6651,20 +6651,25 @@ ioredis@^4.19.4, ioredis@^4.23.0:
     redis-parser "^3.0.0"
     standard-as-callback "^2.1.0"
 
-ip6@^0.2.0:
-  version "0.2.7"
-  resolved "https://registry.yarnpkg.com/ip6/-/ip6-0.2.7.tgz#9c5fb37a247d4b4a234e5b904c13af640167db3c"
-  integrity sha512-zEzGsxn4Uw33TByv0DdX/RRh+VsGfEctOp7CvJq/b4JEjY9OvPB58dsMYiEwIVLsIWHZSJPn3XG8mP9Qv3TG3g==
+ip6@^0.2.11:
+  version "0.2.13"
+  resolved "https://registry.yarnpkg.com/ip6/-/ip6-0.2.13.tgz#be0c03a09a71600a4632bc4dd86a867a191a4834"
+  integrity sha512-Q0LtzYkknxpieAmlrKgB/R4uTpa9Ej3tpdzPSRydcMaonN96g97b+WsM2LMvUqXwoFUnpzawsQppdcR0LbPujQ==
 
 ip@^1.1.5:
   version "1.1.5"
   resolved "https://registry.yarnpkg.com/ip/-/ip-1.1.5.tgz#bdded70114290828c0a039e72ef25f5aaec4354a"
   integrity sha1-vd7XARQpCCjAoDnnLvJfWq7ENUo=
 
-ipaddr.js@1.9.1, ipaddr.js@^1.9.1:
+ipaddr.js@1.9.1:
   version "1.9.1"
   resolved "https://registry.yarnpkg.com/ipaddr.js/-/ipaddr.js-1.9.1.tgz#bff38543eeb8984825079ff3a2a8e6cbd46781b3"
   integrity sha512-0KI/607xoxSToH7GjN1FfSbLoU0+btTicjsQSWQlh/hZykN8KpmMf7uYwPW3R+akZ6R/w18ZlXSHBYXiYUPO3g==
+
+ipaddr.js@^2.2.0:
+  version "2.5.0"
+  resolved "https://registry.yarnpkg.com/ipaddr.js/-/ipaddr.js-2.5.0.tgz#7d4b6c39f9392fb61cf807de6e425e22c10e061f"
+  integrity sha512-aq+t5NAc+cS6rZQQVWC2x98CPqGtKKTMDd4Gaodv0wShnItdKg/51djkGJ1hqH+Oy0ivDftCbSLCQob8zso01w==
 
 is-absolute@^1.0.0:
   version "1.0.0"
@@ -9455,13 +9460,13 @@ range-parser@~1.2.1:
   resolved "https://registry.yarnpkg.com/range-parser/-/range-parser-1.2.1.tgz#3cf37023d199e1c24d1a55b84800c2f3e6468031"
   integrity sha512-Hrgsx+orqoygnmhFbKaHE6c296J+HTAQXoxEF6gNupROmmGJRoyzfG3ccAveqCBrwr/2yxQ5BVd/GTl5agOwSg==
 
-range_check@^2.0.4:
-  version "2.0.4"
-  resolved "https://registry.yarnpkg.com/range_check/-/range_check-2.0.4.tgz#6682e9ed16da5e84089a553028ceb5920f1111a5"
-  integrity sha512-aed0ocXXj+SIiNNN9b+mZWA3Ow2GXHtftOGk2xQwshK5GbEZAvUcPWNQBLTx/lPcdFRIUFlFCRtHTQNIFMqynQ==
+range_check@^4.0.0:
+  version "4.1.0"
+  resolved "https://registry.yarnpkg.com/range_check/-/range_check-4.1.0.tgz#6fb2688b5edee18d7be3b737191489acb4261084"
+  integrity sha512-qyWcVNa9GVtyK0lKcQ49lFuV2QTRL5XlagrdH2U5UWDhTUnCnrPrjqph0stBdAE3h4hs1gZSxtpJEksn1rSeNA==
   dependencies:
-    ip6 "^0.2.0"
-    ipaddr.js "^1.9.1"
+    ip6 "^0.2.11"
+    ipaddr.js "^2.2.0"
 
 raw-body@2.4.0:
   version "2.4.0"
